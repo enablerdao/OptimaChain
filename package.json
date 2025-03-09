@@ -1,0 +1,12 @@
+{
+  "name": "optimachain",
+  "version": "1.0.0",
+  "description": "OptimaChain - 次世代型分散型ブロックチェーンプラットフォーム",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

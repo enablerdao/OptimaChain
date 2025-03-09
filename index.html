@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaChain - 次世代型分散型ブロックチェーンプラットフォーム</title>
+    <meta name="description" content="革新的なスケーリング技術と高度なセキュリティを統合した次世代型分散型ブロックチェーンプラットフォーム">
+    
+    <!-- ファビコン -->
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    
+    <!-- フォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- スタイルシート -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- 通知バー -->
+    <div class="notification-bar">
+        <div class="wrapper">
+            🚀 OptimaChainテストネットが公開されました！<a href="#testnet">今すぐ参加する</a>
+            <button class="notification-close">×</button>
+        </div>
+    </div>
+    
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="wrapper">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <div class="logo-mark">
+                        <div class="logo-hexagon"></div>
+                        <div class="logo-circle"></div>
+                    </div>
+                    OptimaChain
+                </a>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#features" class="active">特徴</a></li>
+                        <li><a href="#technology">技術</a></li>
+                        <li><a href="#ecosystem">エコシステム</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle">開発者</a>
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item">
+                                    <div class="item-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="item-content">
+                                        <h4>スマートコントラクト</h4>
+                                        <p>WASMベースの多言語対応コントラクト</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="item-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20 7H4C2.89543 7 2 7.89543 2 9V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V9C22 7.89543 21.1046 7 20 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M16 21V5C16 3.89543 15.1046 3 14 3H10C8.89543 3 8 3.89543 8 5V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="item-content">
+                                        <h4>SDK & API</h4>
+                                        <p>包括的な開発ツールキット</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="item-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M18 8H19C20.1046 8 21 8.89543 21 10V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V10C3 8.89543 3.89543 8 5 8H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M15 5L12 2L9 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M12 2V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="item-content">
+                                        <h4>テストネット</h4>
+                                        <p>開発環境とフォーセット</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li><a href="#community">コミュニティ</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="theme-toggle" id="theme-toggle">
+                        <div class="toggle-track">
+                            <div class="toggle-sun"></div>
+                            <div class="toggle-moon"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="language-selector">
+                        <button class="language-toggle">
+                            <span class="current-language">JP</span>
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                        <div class="language-dropdown">
+                            <a href="#" class="language-option" data-lang="en">
+                                <div class="language-flag en"></div>
+                                <span class="language-name">English</span>
+                            </a>
+                            <a href="#" class="language-option active" data-lang="jp">
+                                <div class="language-flag jp"></div>
+                                <span class="language-name">日本語</span>
+                            </a>
+                            <a href="#" class="language-option" data-lang="zh">
+                                <div class="language-flag zh"></div>
+                                <span class="language-name">中文</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <button class="connect-wallet-btn">
+                        <span class="btn-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <span>ウォレット接続</span>
+                    </button>
+                    
+                    <button class="mobile-menu-btn">
+                        <div class="menu-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- モバイルメニュー -->
+    <div class="mobile-menu">
+        <nav>
+            <ul>
+                <li><a href="#features">特徴</a></li>
+                <li><a href="#technology">技術</a></li>
+                <li><a href="#ecosystem">エコシステム</a></li>
+                <li><a href="#developers">開発者</a></li>
+                <li><a href="#community">コミュニティ</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <!-- ヒーローセクション -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="gradient-sphere"></div>
+            <div class="floating-particles"></div>
+            <div class="grid-overlay"></div>
+        </div>
+        
+        <div class="wrapper">
+            <div class="hero-content animate-fade-in">
+                <h1 class="glitch-text" data-text="OptimaChain">OptimaChain</h1>
+                <p class="hero-subtitle animate-fade-in delay-1">
+                    革新的な<span class="highlight">スケーリング技術</span>と<span class="highlight">高度なセキュリティ</span>を統合した次世代型分散型ブロックチェーンプラットフォーム
+                </p>
+                
+                <div class="hero-stats animate-fade-in delay-2">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-value" id="tps-counter">50,000</div>
+                        <div class="stat-label">TPS</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-value">1</div>
+                        <div class="stat-label">秒以下のファイナリティ</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-value">99.9<span class="unit">%</span></div>
+                        <div class="stat-label">アップタイム</div>
+                    </div>
+                </div>
+                
+                <div class="hero-cta animate-fade-in delay-3">
+                    <a href="#features" class="primary-button">
+                        <span>詳細を見る</span>
+                        <span class="button-icon">→</span>
+                    </a>
+                    <a href="exchange.html" class="secondary-button">
+                        <span>トークン交換</span>
+                        <span class="button-icon">↓</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-visual animate-fade-in delay-4">
+                <div class="blockchain-model">
+                    <canvas id="blockchain-canvas" width="800" height="600"></canvas>
+                    <div class="model-overlay">
+                        <div class="pulse-circle"></div>
+                        <div class="data-stream"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="mouse-icon"></div>
+            <span>スクロールして詳細を見る</span>
+        </div>
+    </section>
+    
+    <!-- 特徴セクション -->
+    <section class="tech-section" id="features">
+        <div class="wrapper">
+            <div class="section-header">
+                <div class="section-tag">FEATURES</div>
+                <h2 class="section-title">革新的な<span class="gradient-text">ブロックチェーン技術</span></h2>
+                <p class="section-subtitle">OptimaChainは最先端のテクノロジーを駆使し、スケーラビリティ、セキュリティ、使いやすさを兼ね備えた次世代プラットフォームを実現します。</p>
+            </div>
+            
+            <div class="tech-cards">
+                <div class="tech-card animate-on-scroll">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="tech-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 16V8C20.9996 7.64927 20.9071 7.30481 20.7315 7.00116C20.556 6.69751 20.3037 6.44536 20 6.27L13 2.27C12.696 2.09446 12.3511 2.00205 12 2.00205C11.6489 2.00205 11.304 2.09446 11 2.27L4 6.27C3.69626 6.44536 3.44398 6.69751 3.26846 7.00116C3.09294 7.30481 3.00036 7.64927 3 8V16C3.00036 16.3507 3.09294 16.6952 3.26846 16.9988C3.44398 17.3025 3.69626 17.5546 4 17.73L11 21.73C11.304 21.9055 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9055 13 21.73L20 17.73C20.3037 17.5546 20.556 17.3025 20.7315 16.9988C20.9071 16.6952 20.9996 16.3507 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M3.27 6.96L12 12.01L20.73 6.96" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 22.08V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>AI-Adaptive Hybrid PoS</h3>
+                        <p>信頼性指標に基づくバリデータ選出システム。過去の行動履歴とトランザクション成功率を分析し、98%のエネルギー効率と95%のセキュリティレベルを実現。</p>
+                        <div class="tech-detail">
+                            <div class="detail-item">
+                                <span class="detail-label">エネルギー効率</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 98%"></div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">セキュリティ</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="card-link">
+                            <span>詳細を見る</span>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="tech-card animate-on-scroll">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="tech-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H10V10H4V4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 4H20V10H14V4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 14H10V20H4V14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 14H20V20H14V14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Adaptive Recursive Sharding</h3>
+                        <p>需要予測に基づく動的シャーディング技術。負荷に応じて自動調整し、96%のスケーラビリティと92%の効率性を実現。ピーク時の高速処理と平常時の資源節約を両立。</p>
+                        <div class="tech-detail">
+                            <div class="detail-item">
+                                <span class="detail-label">スケーラビリティ</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 96%"></div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">効率性</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="card-link">
+                            <span>詳細を見る</span>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="tech-card animate-on-scroll">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="tech-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 16V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>zk-STARK & zkML</h3>
+                        <p>量子耐性を持つゼロ知識証明技術。97%のプライバシー保護と94%の検証可能性を両立。データ秘匿性を保ちながら完全な検証を実現する次世代プライバシー基盤。</p>
+                        <div class="tech-detail">
+                            <div class="detail-item">
+                                <span class="detail-label">プライバシー</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 97%"></div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">検証可能性</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 94%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="card-link">
+                            <span>詳細を見る</span>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="tech-card animate-on-scroll">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="tech-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M19.4 15C19.2669 15.3016 19.2272 15.6362 19.286 15.9606C19.3448 16.285 19.4995 16.5843 19.73 16.82L19.79 16.88C19.976 17.0657 20.1235 17.2863 20.2241 17.5291C20.3248 17.7719 20.3766 18.0322 20.3766 18.295C20.3766 18.5578 20.3248 18.8181 20.2241 19.0609C20.1235 19.3037 19.976 19.5243 19.79 19.71C19.6043 19.896 19.3837 20.0435 19.1409 20.1441C18.8981 20.2448 18.6378 20.2966 18.375 20.2966C18.1122 20.2966 17.8519 20.2448 17.6091 20.1441C17.3663 20.0435 17.1457 19.896 16.96 19.71L16.9 19.65C16.6643 19.4195 16.365 19.2648 16.0406 19.206C15.7162 19.1472 15.3816 19.1869 15.08 19.32C14.7842 19.4468 14.532 19.6572 14.3543 19.9255C14.1766 20.1938 14.0813 20.5082 14.08 20.83V21C14.08 21.5304 13.8693 22.0391 13.4942 22.4142C13.1191 22.7893 12.6104 23 12.08 23C11.5496 23 11.0409 22.7893 10.6658 22.4142C10.2907 22.0391 10.08 21.5304 10.08 21V20.91C10.0723 20.579 9.96512 20.258 9.77251 19.9887C9.5799 19.7194 9.31074 19.5143 9 19.4C8.69838 19.2669 8.36381 19.2272 8.03941 19.286C7.71502 19.3448 7.41568 19.4995 7.18 19.73L7.12 19.79C6.93425 19.976 6.71368 20.1235 6.47088 20.2241C6.22808 20.3248 5.96783 20.3766 5.705 20.3766C5.44217 20.3766 5.18192 20.3248 4.93912 20.2241C4.69632 20.1235 4.47575 19.976 4.29 19.79C4.10405 19.6043 3.95653 19.3837 3.85588 19.1409C3.75523 18.8981 3.70343 18.6378 3.70343 18.375C3.70343 18.1122 3.75523 17.8519 3.85588 17.6091C3.95653 17.3663 4.10405 17.1457 4.29 16.96L4.35 16.9C4.58054 16.6643 4.73519 16.365 4.794 16.0406C4.85282 15.7162 4.81312 15.3816 4.68 15.08C4.55324 14.7842 4.34276 14.532 4.07447 14.3543C3.80618 14.1766 3.49179 14.0813 3.17 14.08H3C2.46957 14.08 1.96086 13.8693 1.58579 13.4942C1.21071 13.1191 1 12.6104 1 12.08C1 11.5496 1.21071 11.0409 1.58579 10.6658C1.96086 10.2907 2.46957 10.08 3 10.08H3.09C3.42099 10.0723 3.742 9.96512 4.0113 9.77251C4.28059 9.5799 4.48572 9.31074 4.6 9C4.73312 8.69838 4.77282 8.36381 4.714 8.03941C4.65519 7.71502 4.50054 7.41568 4.27 7.18L4.21 7.12C4.02405 6.93425 3.87653 6.71368 3.77588 6.47088C3.67523 6.22808 3.62343 5.96783 3.62343 5.705C3.62343 5.44217 3.67523 5.18192 3.77588 4.93912C3.87653 4.69632 4.02405 4.47575 4.21 4.29C4.39575 4.10405 4.61632 3.95653 4.85912 3.85588C5.10192 3.75523 5.36217 3.70343 5.625 3.70343C5.88783 3.70343 6.14808 3.75523 6.39088 3.85588C6.63368 3.95653 6.85425 4.10405 7.04 4.29L7.1 4.35C7.33568 4.58054 7.63502 4.73519 7.95941 4.794C8.28381 4.85282 8.61838 4.81312 8.92 4.68H9C9.29577 4.55324 9.54802 4.34276 9.72569 4.07447C9.90337 3.80618 9.99872 3.49179 10 3.17V3C10 2.46957 10.2107 1.96086 10.5858 1.58579C10.9609 1.21071 11.4696 1 12 1C12.5304 1 13.0391 1.21071 13.4142 1.58579C13.7893 1.96086 14 2.46957 14 3V3.09C14.0013 3.41179 14.0966 3.72618 14.2743 3.99447C14.452 4.26276 14.7042 4.47324 15 4.6C15.3016 4.73312 15.6362 4.77282 15.9606 4.714C16.285 4.65519 16.5843 4.50054 16.82 4.27L16.88 4.21C17.0657 4.02405 17.2863 3.87653 17.5291 3.77588C17.7719 3.67523 18.0322 3.62343 18.295 3.62343C18.5578 3.62343 18.8181 3.67523 19.0609 3.77588C19.3037 3.87653 19.5243 4.02405 19.71 4.21C19.896 4.39575 20.0435 4.61632 20.1441 4.85912C20.2448 5.10192 20.2966 5.36217 20.2966 5.625C20.2966 5.88783 20.2448 6.14808 20.1441 6.39088C20.0435 6.63368 19.896 6.85425 19.71 7.04L19.65 7.1C19.4195 7.33568 19.2648 7.63502 19.206 7.95941C19.1472 8.28381 19.1869 8.61838 19.32 8.92V9C19.4468 9.29577 19.6572 9.54802 19.9255 9.72569C20.1938 9.90337 20.5082 9.99872 20.83 10H21C21.5304 10 22.0391 10.2107 22.4142 10.5858C22.7893 10.9609 23 11.4696 23 12C23 12.5304 22.7893 13.0391 22.4142 13.4142C22.0391 13.7893 21.5304 14 21 14H20.91C20.5882 14.0013 20.2738 14.0966 20.0055 14.2743C19.7372 14.452 19.5268 14.7042 19.4 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>AI強化セキュリティ</h3>
+                        <p>AIによる高精度不正検知システム。99.7%の攻撃検出率と3%未満の誤検出率を実現。異常パターンを即時検出し、自動防御機能でネットワークの完全性を維持。</p>
+                        <div class="tech-detail">
+                            <div class="detail-item">
+                                <span class="detail-label">攻撃検出率</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 99%"></div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">誤検出率</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 3%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="card-link">
+                            <span>詳細を見る</span>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="tech-card animate-on-scroll">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="tech-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 4H9C7.93913 4 6.92172 4.42143 6.17157 5.17157C5.42143 5.92172 5 6.93913 5 8C5 9.06087 5.42143 10.0783 6.17157 10.8284C6.92172 11.5786 7.93913 12 9 12H15C16.0609 12 17.0783 12.4214 17.8284 13.1716C18.5786 13.9217 19 14.9391 19 16C19 17.0609 18.5786 18.0783 17.8284 18.8284C17.0783 19.5786 16.0609 20 15 20H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 2V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Intelligent Bridge Protocol</h3>
+                        <p>最適化アルゴリズムによる高速クロスチェーン通信。90%の互換性と85%のトランザクション速度を実現。主要ブロックチェーン間の資産移動を最小コストで実行。</p>
+                        <div class="tech-detail">
+                            <div class="detail-item">
+                                <span class="detail-label">互換性</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">トランザクション速度</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="card-link">
+                            <span>詳細を見る</span>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="tech-card animate-on-scroll">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="tech-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 9L12 5L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 15L12 19L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>マルチ言語 WASM VM</h3>
+                        <p>WASMベースの超高速実行エンジンを採用したスマートコントラクト環境。Rust、TypeScript、Solidity、Python、Goなど多様な言語をサポートし、開発者が習得済みの言語をそのまま利用可能にします。</p>
+                        <div class="tech-detail">
+                            <div class="detail-item">
+                                <span class="detail-label">言語サポート</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">実行効率</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="card-link">
+                            <span>詳細を見る</span>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tech-visual animate-on-scroll">
+                <div class="visual-tabs">
+                    <button class="tab-button active" data-target="apos-visual">Adaptive PoS</button>
+                    <button class="tab-button" data-target="sharding-visual">ダイナミックシャーディング</button>
+                    <button class="tab-button" data-target="tx-visual">トランザクション処理</button>
+                </div>
+                
+                <div class="visual-content">
+                    <div class="visual-item active" id="apos-visual">
+                        <canvas id="apos-canvas" width="800" height="400"></canvas>
+                        <div class="visual-controls">
+                            <label for="network-load">ネットワーク負荷:</label>
+                            <input type="range" id="network-load" min="0" max="100" value="50">
+                            <span id="network-load-value">50%</span>
+                            <button id="apply-network-load" class="primary-button">適用</button>
+                        </div>
+                    </div>
+                    
+                    <div class="visual-item" id="sharding-visual">
+                        <canvas id="sharding-canvas" width="800" height="400"></canvas>
+                        <div class="visual-controls">
+                            <label for="traffic-load">トラフィック負荷:</label>
+                            <input type="range" id="traffic-load" min="0" max="100" value="50">
+                            <span id="traffic-load-value">50%</span>
+                            <button id="apply-load" class="primary-button">適用</button>
+                        </div>
+                    </div>
+                    
+                    <div class="visual-item" id="tx-visual">
+                        <canvas id="tx-canvas" width="800" height="400"></canvas>
+                        <div class="visual-controls">
+                            <label for="tx-count">トランザクション数:</label>
+                            <input type="range" id="tx-count" min="100" max="10000" value="1000" step="100">
+                            <span id="tx-count-value">1,000</span>
+                            
+                            <label for="tx-type">タイプ:</label>
+                            <select id="tx-type">
+                                <option value="transfer">送金</option>
+                                <option value="swap">スワップ</option>
+                                <option value="nft">NFT</option>
+                            </select>
+                            
+                            <button id="start-demo" class="primary-button">
+                                <span class="button-text">シミュレーション開始</span>
+                                <span class="button-icon">▶</span>
+                            </button>
+                        </div>
+                        
+                        <div class="demo-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">処理済みトランザクション</div>
+                                <div class="stat-value" id="processed-tx">0</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">現在のTPS</div>
+                                <div class="stat-value" id="current-tps">0</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">平均処理時間</div>
+                                <div class="stat-value" id="avg-time">0 ms</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- パフォーマンスセクション -->
+    <section class="performance-section" id="technology">
+        <div class="wrapper">
+            <div class="section-header">
+                <div class="section-tag">PERFORMANCE</div>
+                <h2 class="section-title">圧倒的な<span class="gradient-text">パフォーマンス</span></h2>
+                <p class="section-subtitle">OptimaChainは従来のブロックチェーンの限界を超え、高速・低コスト・高セキュリティを実現します。</p>
+            </div>
+            
+            <div class="performance-comparison animate-on-scroll">
+                <div class="comparison-header">
+                    <h3>主要ブロックチェーンとの比較</h3>
+                    <div class="comparison-legend">
+                        <div class="legend-item">
+                            <div class="legend-color optimachain"></div>
+                            <span>OptimaChain</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color ethereum"></div>
+                            <span>Ethereum</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color solana"></div>
+                            <span>Solana</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comparison-chart">
+                    <canvas id="performance-chart"></canvas>
+                </div>
+            </div>
+            
+            <div class="performance-cards">
+                <div class="performance-card animate-on-scroll">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>高速トランザクション</h3>
+                    </div>
+                    <p>革新的なシャーディング技術と最適化されたコンセンサスアルゴリズムにより、業界最高レベルの処理速度を実現。</p>
+                    <div class="card-value">50,000<span class="unit">TPS</span></div>
+                    <div class="card-comparison">
+                        <div class="comparison-item">
+                            <span class="comparison-label">Ethereum</span>
+                            <div class="comparison-bar">
+                                <div class="comparison-progress" style="width: 0.03%"></div>
+                            </div>
+                            <span class="comparison-value">15 TPS</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="comparison-label">Solana</span>
+                            <div class="comparison-bar">
+                                <div class="comparison-progress" style="width: 65%"></div>
+                            </div>
+                            <span class="comparison-value">65,000 TPS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="performance-card animate-on-scroll">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>即時ファイナリティ</h3>
+                    </div>
+                    <p>トランザクションの確定が1秒以下で完了し、リアルタイムのアプリケーションやサービスに最適な環境を提供。</p>
+                    <div class="card-value">&lt; 1<span class="unit">秒</span></div>
+                    <div class="card-comparison">
+                        <div class="comparison-item">
+                            <span class="comparison-label">Ethereum</span>
+                            <div class="comparison-bar">
+                                <div class="comparison-progress" style="width: 60%"></div>
+                            </div>
+                            <span class="comparison-value">60 秒</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="comparison-label">Solana</span>
+                            <div class="comparison-bar">
+                                <div class="comparison-progress" style="width: 0.4%"></div>
+                            </div>
+                            <span class="comparison-value">0.4 秒</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="performance-card animate-on-scroll">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 1V23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M17 5H9.5C8.57174 5 7.6815 5.36875 7.02513 6.02513C6.36875 6.6815 6 7.57174 6 8.5C6 9.42826 6.36875 10.3185 7.02513 10.9749C7.6815 11.6313 8.57174 12 9.5 12H14.5C15.4283 12 16.3185 12.3687 16.9749 13.0251C17.6313 13.6815 18 14.5717 18 15.5C18 16.4283 17.6313 17.3185 16.9749 17.9749C16.3185 18.6313 15.4283 19 14.5 19H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>低ガス費用</h3>
+                    </div>
+                    <p>効率的なリソース管理と最適化されたトランザクション処理により、極めて低いガス費用を実現。</p>
+                    <div class="card-value">0.001<span class="unit">USD</span></div>
+                    <div class="card-comparison">
+                        <div class="comparison-item">
+                            <span class="comparison-label">Ethereum</span>
+                            <div class="comparison-bar">
+                                <div class="comparison-progress" style="width: 100%"></div>
+                            </div>
+                            <span class="comparison-value">5+ USD</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="comparison-label">Solana</span>
+                            <div class="comparison-bar">
+                                <div class="comparison-progress" style="width: 0.01%"></div>
+                            </div>
+                            <span class="comparison-value">0.0001 USD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="performance-demo animate-on-scroll">
+                <h3>リアルタイムデモ</h3>
+                <p>OptimaChainの高速トランザクション処理をリアルタイムで体験してください。</p>
+                
+                <div class="demo-controls">
+                    <div class="control-group">
+                        <label for="shard-count">現在のシャード数:</label>
+                        <span id="shard-count" class="count-up" data-count="4">4</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="validator-count">アクティブバリデータ:</label>
+                        <span id="validator-count" class="count-up" data-count="100">100</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="network-tps">ネットワークTPS:</label>
+                        <span id="network-tps" class="count-up" data-count="42500">42,500</span>
+                    </div>
+                </div>
+                
+                <div class="demo-visualization">
+                    <canvas id="blockchain-demo" width="800" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ウォレット接続モーダル -->
+    <div class="wallet-modal" id="wallet-modal">
+        <div class="modal-content">
+            <button class="close-modal">×</button>
+            <h3>ウォレットを接続</h3>
+            <p>以下のウォレットから選択して接続してください。</p>
+            
+            <div class="wallet-options">
+                <div class="wallet-option" data-wallet="metamask">
+                    <div class="wallet-icon">
+                        <img src="img/metamask.svg" alt="MetaMask">
+                    </div>
+                    <div class="wallet-info">
+                        <h4>MetaMask</h4>
+                        <p>最も人気のあるウォレット</p>
+                    </div>
+                    <div class="wallet-status">接続</div>
+                </div>
+                
+                <div class="wallet-option" data-wallet="walletconnect">
+                    <div class="wallet-icon">
+                        <img src="img/walletconnect.svg" alt="WalletConnect">
+                    </div>
+                    <div class="wallet-info">
+                        <h4>WalletConnect</h4>
+                        <p>モバイルウォレット接続</p>
+                    </div>
+                    <div class="wallet-status">接続</div>
+                </div>
+                
+                <div class="wallet-option" data-wallet="coinbase">
+                    <div class="wallet-icon">
+                        <img src="img/coinbase.svg" alt="Coinbase Wallet">
+                    </div>
+                    <div class="wallet-info">
+                        <h4>Coinbase Wallet</h4>
+                        <p>Coinbase公式ウォレット</p>
+                    </div>
+                    <div class="wallet-status">接続</div>
+                </div>
+            </div>
+            
+            <div class="wallet-note">
+                <p>ウォレットを接続することで、<a href="#">利用規約</a>と<a href="#">プライバシーポリシー</a>に同意したことになります。</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="wrapper">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo-mark">
+                        <div class="logo-hexagon"></div>
+                        <div class="logo-circle"></div>
+                    </div>
+                    <h3>OptimaChain</h3>
+                    <p>革新的なブロックチェーンプラットフォーム</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>製品</h4>
+                        <ul>
+                            <li><a href="#">特徴</a></li>
+                            <li><a href="#">テクノロジー</a></li>
+                            <li><a href="#">ロードマップ</a></li>
+                            <li><a href="#">テストネット</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>開発者</h4>
+                        <ul>
+                            <li><a href="#">ドキュメント</a></li>
+                            <li><a href="#">API</a></li>
+                            <li><a href="#">SDK</a></li>
+                            <li><a href="#">チュートリアル</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>コミュニティ</h4>
+                        <ul>
+                            <li><a href="#">Discord</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">GitHub</a></li>
+                            <li><a href="#">ブログ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>会社情報</h4>
+                        <ul>
+                            <li><a href="#">チーム</a></li>
+                            <li><a href="#">採用情報</a></li>
+                            <li><a href="#">プレス</a></li>
+                            <li><a href="#">お問い合わせ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2023 OptimaChain. All rights reserved.
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 3.01006C22.0424 3.68553 20.9821 4.20217 19.86 4.54006C19.2577 3.84757 18.4573 3.35675 17.567 3.13398C16.6767 2.91122 15.7395 2.96725 14.8821 3.29451C14.0247 3.62177 13.2884 4.20446 12.773 4.96377C12.2575 5.72309 11.9877 6.62239 12 7.54006V8.54006C10.2426 8.58562 8.50127 8.19587 6.93101 7.4055C5.36074 6.61513 4.01032 5.44869 3 4.01006C3 4.01006 -1 13.0101 8 17.0101C5.94053 18.408 3.48716 19.109 1 19.0101C10 24.0101 21 19.0101 21 7.51006C20.9991 7.23151 20.9723 6.95365 20.92 6.68006C21.9406 5.67355 22.6608 4.40277 23 3.01006Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6 9H2V21H6V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5229 6.47715 22 12 22C17.5229 22 22 17.5229 22 12C22 6.47715 17.5229 2 12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9.09 9C9.3251 8.33167 9.78915 7.76811 10.4 7.40913C11.0108 7.05016 11.7289 6.91894 12.4272 7.03871C13.1255 7.15849 13.7588 7.52152 14.2151 8.06353C14.6713 8.60553 14.9211 9.29152 14.92 10C14.92 12 11.92 13 11.92 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 17H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="js/theme-manager.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/blockchain-3d.js"></script>
+    <script src="js/apos-visual.js"></script>
+    <script src="js/sharding-visual.js"></script>
+    <script src="js/transaction-simulator.js"></script>
+</body>
+</html>障害点を排除しながら高度な予測能力を維持します。</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>コミュニティ主導ガバナンス</h2>
+                <ul>
+                    <li>コミュニティ主導のDAO型分散ガバナンス</li>
+                    <li>AIによる提案支援と透明な意思決定プロセス</li>
+                </ul>
+                <button class="toggle-btn" data-target="gov-details">詳細を表示</button>
+                <div id="gov-details" class="toggle-content">
+                    <p>OptimaChainのガバナンスは完全にコミュニティ主導。AIは複雑な提案の分析と最適化案を提示するサポート役に徹し、最終決定権は常にコミュニティが保持します。</p>
+                    <p>すべての投票と決定はブロックチェーン上に記録され、完全な透明性を確保。提案から実装までのプロセスも明確に定義されています。</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>スマートコントラクト</h2>
+                <ul>
+                    <li>WASMベースのスマートコントラクトを標準採用</li>
+                    <li>Rust、TypeScript、Solidity、Pythonなど多言語対応</li>
+                </ul>
+                <button class="toggle-btn" data-target="contract-details">詳細を表示</button>
+                <div id="contract-details" class="toggle-content">
+                    <p>WebAssembly（WASM）ベースのスマートコントラクト実行環境により、高速な実行と多言語サポートを実現しています。</p>
+                    <p>開発者は好みの言語でスマートコントラクトを記述でき、OptimaChainのコンパイラがWASMバイトコードに変換します。これにより、学習曲線を低減しながら、高いパフォーマンスを実現しています。</p>
+                    <p>形式検証ツールも提供され、スマートコントラクトの安全性を開発段階から確保できます。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>環境配慮</h2>
+                <ul>
+                    <li>PoSベースでエネルギー消費を抑え、持続可能性を重視</li>
+                    <li>AIによるネットワーク効率化とエネルギー最適化</li>
+                </ul>
+                <button class="toggle-btn" data-target="env-details">詳細を表示</button>
+                <div id="env-details" class="toggle-content">
+                    <p>OptimaChainは、Proof-of-Stakeコンセンサスメカニズムを採用することで、従来のProof-of-Workシステムと比較してエネルギー消費を99.9%以上削減しています。</p>
+                    <p>さらに、AIによるネットワークリソースの最適化により、必要最小限のコンピューティングリソースで最大のパフォーマンスを実現し、環境負荷を最小限に抑えています。</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>応用領域</h2>
+                <ul>
+                    <li>分散型金融（DeFi）</li>
+                    <li>高速NFTプラットフォーム</li>
+                    <li>ゲームおよびメタバースアプリケーション</li>
+                    <li>安全なデータマーケットプレイス</li>
+                </ul>
+                <button class="toggle-btn" data-target="app-details">詳細を表示</button>
+                <div id="app-details" class="toggle-content">
+                    <p>OptimaChainの高速処理能力と低コストは、特にDeFiアプリケーションに適しています。複雑な金融取引も低遅延で実行でき、ユーザーエクスペリエンスを大幅に向上させます。</p>
+                    <p>NFTプラットフォームでは、メタデータのオンチェーン保存と高速な取引処理により、クリエイターとコレクターに優れた体験を提供します。</p>
+                    <p>ゲームやメタバースアプリケーションでは、リアルタイムのインタラクションとマイクロトランザクションをシームレスに処理できます。</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>今後のロードマップ</h2>
+                <ul>
+                    <li>開発者向けSDKおよび包括的なAPIの提供</li>
+                    <li>オープンソースコミュニティの構築と継続的な改善</li>
+                    <li>AIモデルおよびシャーディング機能のコミュニティドリブンなアップデートと改善</li>
+                </ul>
+                <button class="toggle-btn" data-target="roadmap-details">詳細を表示</button>
+                <div id="roadmap-details" class="toggle-content">
+                    <p><strong>Q1 2024:</strong> テストネットの立ち上げと初期開発者向けSDKのリリース</p>
+                    <p><strong>Q2 2024:</strong> メインネットのローンチと主要DeFiプロトコルとの統合</p>
+                    <p><strong>Q3 2024:</strong> クロスチェーンブリッジの拡張と開発者エコシステムの拡大</p>
+                    <p><strong>Q4 2024:</strong> AIモデルの強化とガバナンス機能の完全分散化</p>
+                    <p><strong>2025以降:</strong> エンタープライズ向けソリューションの開発とグローバル展開</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <p>この仕様により、「OptimaChain」はスケーラビリティ、セキュリティ、持続可能性を実現した革新的なブロックチェーン環境を提供します。</p>
+        </div>
+
+        <div class="footer">
+            <p>© 2023 OptimaChain - 次世代型分散型ブロックチェーンプラットフォーム</p>
+        </div>
+    </div>
+
+    <script src="blockchain-visual.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

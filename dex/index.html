@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaDEX - 分散型取引所</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="notification-bar">
+        OptimaDEX はプロトタイプ版です。実際の資産は使用しないでください。
+        <button class="notification-close">×</button>
+    </div>
+
+    <header>
+        <div class="wrapper">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <div class="logo-icon"></div>
+                    OptimaDEX
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="../wallet/index.html">ウォレット</a></li>
+                        <li><a href="#" class="active">取引所</a></li>
+                        <li><a href="#">流動性提供</a></li>
+                        <li><a href="#">ファーム</a></li>
+                    </ul>
+                </nav>
+                <div class="wallet-connect">
+                    <button class="connect-btn" id="connect-wallet">ウォレット接続</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <div class="dex-container">
+            <div class="sidebar">
+                <div class="market-search">
+                    <input type="text" placeholder="トークンを検索..." id="token-search">
+                </div>
+                
+                <div class="market-tabs">
+                    <button class="tab-btn active" data-tab="all">すべて</button>
+                    <button class="tab-btn" data-tab="favorites">お気に入り</button>
+                </div>
+                
+                <div class="market-list" id="market-list">
+                    <!-- マーケットリストはJavaScriptで動的に生成 -->
+                </div>
+            </div>
+            
+            <div class="main-content">
+                <div class="trading-view">
+                    <div class="trading-header">
+                        <div class="trading-pair">
+                            <div class="pair-icon">
+                                <div class="token-icon" style="background-color: #0071e3;"></div>
+                                <div class="token-icon second" style="background-color: #26a17b;"></div>
+                            </div>
+                            <h2>OPT / USDT</h2>
+                        </div>
+                        <div class="price-info">
+                            <div class="current-price">$0.00</div>
+                            <div class="price-change negative">0.00%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container" id="price-chart">
+                        <!-- チャートはJavaScriptで生成 -->
+                    </div>
+                </div>
+                
+                <div class="trading-panel">
+                    <div class="panel-tabs">
+                        <button class="panel-tab active" data-panel="swap">スワップ</button>
+                        <button class="panel-tab" data-panel="limit">指値注文</button>
+                        <button class="panel-tab" data-panel="market">成行注文</button>
+                    </div>
+                    
+                    <div class="panel-content active" id="swap-panel">
+                        <div class="swap-container">
+                            <div class="swap-input-container">
+                                <div class="swap-input">
+                                    <div class="token-selector">
+                                        <div class="token-icon" style="background-color: #0071e3;"></div>
+                                        <span class="token-symbol">OPT</span>
+                                        <span class="dropdown-icon">▼</span>
+                                    </div>
+                                    <input type="number" placeholder="0.00" class="amount-input">
+                                    <div class="max-btn">最大</div>
+                                </div>
+                                <div class="balance-info">残高: 1,250.00 OPT</div>
+                            </div>
+                            
+                            <div class="swap-arrow">
+                                <button class="swap-direction-btn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="swap-input-container">
+                                <div class="swap-input">
+                                    <div class="token-selector">
+                                        <div class="token-icon" style="background-color: #26a17b;"></div>
+                                        <span class="token-symbol">USDT</span>
+                                        <span class="dropdown-icon">▼</span>
+                                    </div>
+                                    <input type="number" placeholder="0.00" class="amount-input">
+                                </div>
+                                <div class="balance-info">残高: 0.00 USDT</div>
+                            </div>
+                            
+                            <div class="swap-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">レート</span>
+                                    <span class="detail-value">1 OPT = 0.00 USDT</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">スリッページ許容度</span>
+                                    <span class="detail-value">0.5%</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">最小受取額</span>
+                                    <span class="detail-value">0.00 USDT</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">手数料</span>
+                                    <span class="detail-value">0.00 OPT</span>
+                                </div>
+                            </div>
+                            
+                            <button class="swap-btn" id="swap-button">スワップ</button>
+                        </div>
+                    </div>
+                    
+                    <div class="panel-content" id="limit-panel">
+                        <div class="order-form">
+                            <div class="form-group">
+                                <label>注文タイプ</label>
+                                <div class="order-type-selector">
+                                    <button class="order-type-btn active" data-type="buy">買い</button>
+                                    <button class="order-type-btn" data-type="sell">売り</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>価格 (USDT)</label>
+                                <input type="number" placeholder="0.00" class="form-input">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>数量 (OPT)</label>
+                                <input type="number" placeholder="0.00" class="form-input">
+                                <div class="percentage-selector">
+                                    <button class="percentage-btn" data-percentage="25">25%</button>
+                                    <button class="percentage-btn" data-percentage="50">50%</button>
+                                    <button class="percentage-btn" data-percentage="75">75%</button>
+                                    <button class="percentage-btn" data-percentage="100">100%</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>合計 (USDT)</label>
+                                <input type="number" placeholder="0.00" class="form-input" readonly>
+                            </div>
+                            
+                            <button class="order-btn buy-btn">買い注文を出す</button>
+                        </div>
+                    </div>
+                    
+                    <div class="panel-content" id="market-panel">
+                        <div class="order-form">
+                            <div class="form-group">
+                                <label>注文タイプ</label>
+                                <div class="order-type-selector">
+                                    <button class="order-type-btn active" data-type="buy">買い</button>
+                                    <button class="order-type-btn" data-type="sell">売り</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>数量 (OPT)</label>
+                                <input type="number" placeholder="0.00" class="form-input">
+                                <div class="percentage-selector">
+                                    <button class="percentage-btn" data-percentage="25">25%</button>
+                                    <button class="percentage-btn" data-percentage="50">50%</button>
+                                    <button class="percentage-btn" data-percentage="75">75%</button>
+                                    <button class="percentage-btn" data-percentage="100">100%</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>概算合計 (USDT)</label>
+                                <input type="number" placeholder="0.00" class="form-input" readonly>
+                            </div>
+                            
+                            <button class="order-btn buy-btn">成行買い注文を出す</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="orderbook-container">
+                <h3>注文板</h3>
+                
+                <div class="orderbook-header">
+                    <div class="col">価格 (USDT)</div>
+                    <div class="col">数量 (OPT)</div>
+                    <div class="col">合計</div>
+                </div>
+                
+                <div class="sell-orders" id="sell-orders">
+                    <!-- 売り注文はJavaScriptで動的に生成 -->
+                </div>
+                
+                <div class="price-indicator">
+                    <div class="current-price">$0.00</div>
+                </div>
+                
+                <div class="buy-orders" id="buy-orders">
+                    <!-- 買い注文はJavaScriptで動的に生成 -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="trades-container">
+            <div class="trades-header">
+                <h3>最近の取引</h3>
+            </div>
+            
+            <div class="trades-list" id="trades-list">
+                <!-- 取引履歴はJavaScriptで動的に生成 -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- モーダル: トークン選択 -->
+    <div class="modal" id="token-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>トークンを選択</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="token-search">
+                    <input type="text" placeholder="名前またはアドレスで検索..." id="modal-token-search">
+                </div>
+                
+                <div class="token-list" id="token-list">
+                    <!-- トークンリストはJavaScriptで動的に生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- モーダル: ウォレット接続 -->
+    <div class="modal" id="wallet-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ウォレットを接続</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="wallet-options">
+                    <div class="wallet-option" data-wallet="optimawallet">
+                        <div class="wallet-icon" style="background-color: #0071e3;"></div>
+                        <div class="wallet-name">OptimaWallet</div>
+                    </div>
+                    <div class="wallet-option" data-wallet="metamask">
+                        <div class="wallet-icon" style="background-color: #f6851b;"></div>
+                        <div class="wallet-name">MetaMask</div>
+                    </div>
+                    <div class="wallet-option" data-wallet="walletconnect">
+                        <div class="wallet-icon" style="background-color: #3b99fc;"></div>
+                        <div class="wallet-name">WalletConnect</div>
+                    </div>
+                </div>
+                
+                <div class="wallet-note">
+                    <p>これはプロトタイプ版です。実際のウォレット接続機能はまだ実装されていません。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="wrapper">
+            <p>© 2023 OptimaDEX - プロトタイプ版 - 実際の資産は使用しないでください</p>
+        </div>
+    </footer>
+
+    <script src="js/chart.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/dex.js"></script>
+</body>
+</html>

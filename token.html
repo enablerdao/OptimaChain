@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaChain Token - OPT</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #0071e3;
+            --secondary-color: #86b9ff;
+            --accent-color: #5e5ce6;
+            --background-color: #f5f5f7;
+            --card-color: #ffffff;
+            --text-color: #1d1d1f;
+            --text-secondary: #86868b;
+            --border-radius: 12px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 6px;
+            margin-right: 8px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin: 0 16px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+
+        nav a:hover {
+            opacity: 1;
+            color: var(--primary-color);
+        }
+
+        nav a.active {
+            color: var(--primary-color);
+            opacity: 1;
+        }
+
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(94, 92, 230, 0.1) 0%, rgba(0, 113, 227, 0.05) 50%, rgba(245, 245, 247, 0) 100%);
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 40px;
+            font-weight: 400;
+        }
+
+        .notification-bar {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .notification-bar a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .notification-close {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .notification-close:hover {
+            opacity: 1;
+        }
+
+        .section {
+            background: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 24px 0 12px;
+            color: var(--text-color);
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .token-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .info-card {
+            background: rgba(0, 113, 227, 0.03);
+            padding: 24px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            background: rgba(0, 113, 227, 0.06);
+        }
+
+        .info-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 8px 0;
+            line-height: 1.2;
+        }
+
+        .token-chart {
+            width: 100%;
+            height: 300px;
+            background: rgba(0, 113, 227, 0.03);
+            border-radius: var(--border-radius);
+            margin: 32px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 300"><path fill="none" stroke="rgba(0,113,227,0.5)" stroke-width="3" d="M0,150 C50,120 100,180 150,160 C200,140 250,100 300,120 C350,140 400,180 450,170 C500,160 550,140 600,130 C650,120 700,100 750,90 C800,80 850,100 900,80 C950,60 1000,50 1000,50"/></svg>');
+            background-size: cover;
+        }
+
+        .chart-area {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70%;
+            background: linear-gradient(to bottom, rgba(0, 113, 227, 0.1) 0%, rgba(0, 113, 227, 0) 100%);
+        }
+
+        .allocation {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .allocation-item {
+            padding: 24px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            background: rgba(0, 113, 227, 0.03);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .allocation-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-sm);
+            background: rgba(0, 113, 227, 0.06);
+        }
+
+        .allocation-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 8px 0;
+            line-height: 1.2;
+        }
+
+        .icon-container {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 64px 0 32px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 64px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-top: 24px;
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            background: #0062c3;
+        }
+
+        .roadmap {
+            margin: 32px 0;
+            position: relative;
+        }
+
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 24px;
+            width: 2px;
+            background: rgba(0, 113, 227, 0.2);
+        }
+
+        .roadmap-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 40px;
+        }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            z-index: 1;
+        }
+
+        .roadmap-date {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .roadmap-content {
+            background: rgba(0, 113, 227, 0.03);
+            padding: 16px;
+            border-radius: var(--border-radius);
+        }
+
+        .roadmap-content p {
+            margin-bottom: 8px;
+        }
+
+        .roadmap-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .utility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .utility-item {
+            background: rgba(0, 113, 227, 0.03);
+            padding: 24px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .utility-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-sm);
+            background: rgba(0, 113, 227, 0.06);
+        }
+
+        .utility-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                height: auto;
+                padding: 16px 0;
+            }
+            
+            nav ul {
+                margin-top: 16px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav li {
+                margin: 8px;
+            }
+            
+            .roadmap::before {
+                left: 18px;
+            }
+            
+            .roadmap-item {
+                padding-left: 50px;
+            }
+            
+            .roadmap-item::before {
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification-bar">
+        OptimaChain プロジェクトが始動しました。開発ロードマップを公開中。<a href="#">詳細はこちら</a>
+        <button class="notification-close">×</button>
+    </div>
+
+    <header>
+        <div class="wrapper">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"></div>
+                    OptimaChain
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">ホーム</a></li>
+                        <li><a href="token.html" class="active">トークン</a></li>
+                        <li><a href="ecosystem.html">エコシステム</a></li>
+                        <li><a href="developers.html">開発者</a></li>
+                        <li><a href="wallet/index.html">ウォレット</a></li>
+                        <li><a href="dex/index.html">取引所</a></li>
+                        <li><a href="community.html">コミュニティ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="wrapper">
+            <h1>OptimaChain Token (OPT)</h1>
+            <p>OptimaChainエコシステムの中核となるユーティリティトークン</p>
+        </div>
+    </section>
+
+    <div class="wrapper">
+        <div class="section">
+            <h2>OPTトークン概要</h2>
+            <p>OPTトークンは、OptimaChainエコシステム全体の価値を支える中核的な役割を果たします。ネットワークのセキュリティ、ガバナンス参加、トランザクション手数料の支払い、そしてDAppsとのインタラクションに使用されます。</p>
+            
+            <div class="token-info">
+                <div class="info-card">
+                    <h3>計画総供給量</h3>
+                    <div class="info-value">1,000,000,000</div>
+                    <p>OPT（予定）</p>
+                </div>
+                <div class="info-card">
+                    <h3>初期配布予定</h3>
+                    <div class="info-value">未定</div>
+                    <p>開発中</p>
+                </div>
+                <div class="info-card">
+                    <h3>ステーキング報酬</h3>
+                    <div class="info-value">設計中</div>
+                    <p>詳細は今後発表</p>
+                </div>
+                <div class="info-card">
+                    <h3>ローンチ予定</h3>
+                    <div class="info-value">2026年</div>
+                    <p>第1四半期</p>
+                </div>
+            </div>
+            
+            <div class="token-chart">
+                <div class="chart-area"></div>
+                <div class="chart-line"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>トークン配分</h2>
+            <p>OPTトークンは、エコシステムの持続可能な成長と分散化を促進するために、戦略的に配分されています。</p>
+            
+            <div class="allocation">
+                <div class="allocation-item">
+                    <div class="icon-container" data-icon="ecosystem"></div>
+                    <h3>エコシステム開発</h3>
+                    <div class="allocation-value">30%</div>
+                    <p>DApps開発、パートナーシップ、助成金</p>
+                </div>
+                <div class="allocation-item">
+                    <div class="icon-container" data-icon="community"></div>
+                    <h3>コミュニティ報酬</h3>
+                    <div class="allocation-value">25%</div>
+                    <p>ステーキング報酬、流動性マイニング</p>
+                </div>
+                <div class="allocation-item">
+                    <div class="icon-container" data-icon="team"></div>
+                    <h3>チーム・アドバイザー</h3>
+                    <div class="allocation-value">20%</div>
+                    <p>4年間のベスティングスケジュール</p>
+                </div>
+                <div class="allocation-item">
+                    <div class="icon-container" data-icon="reserve"></div>
+                    <h3>リザーブ</h3>
+                    <div class="allocation-value">15%</div>
+                    <p>将来の開発とネットワーク安定化</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>ユーティリティ</h2>
+            <p>OPTトークンは、OptimaChainエコシステム内で多様な用途を持ち、ネットワークの価値を高めます。</p>
+            
+            <div class="utility-grid">
+                <div class="utility-item">
+                    <div class="utility-icon" data-icon="staking"></div>
+                    <h3>ステーキング</h3>
+                    <p>OPTトークンをステーキングすることで、ネットワークのセキュリティに貢献し、報酬を獲得できます。ステーキング参加者は、トランザクション手数料の一部を報酬として受け取ります。</p>
+                </div>
+                
+                <div class="utility-item">
+                    <div class="utility-icon" data-icon="governance"></div>
+                    <h3>ガバナンス</h3>
+                    <p>OPT保有者は、プロトコルのアップグレード、パラメータ変更、資金配分などの重要な決定に投票する権利を持ちます。トークン保有量に応じた投票力が付与されます。</p>
+                </div>
+                
+                <div class="utility-item">
+                    <div class="utility-icon" data-icon="transaction"></div>
+                    <h3>トランザクション手数料</h3>
+                    <p>OptimaChainネットワーク上のすべてのトランザクションとスマートコントラクトの実行には、OPTトークンが手数料として使用されます。</p>
+                </div>
+                
+                <div class="utility-item">
+                    <div class="utility-icon" data-icon="access"></div>
+                    <h3>DAppsアクセス</h3>
+                    <p>多くのDAppsでは、特定の機能やプレミアムサービスにアクセスするためにOPTトークンが必要です。</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="#" class="cta-button">OPTトークンを入手する</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>ロードマップ</h2>
+            <p>OPTトークンの展開と成長に関する今後の計画です。</p>
+            
+            <div class="roadmap">
+                <div class="roadmap-item">
+                    <div class="roadmap-date">2025年3月 - 6月</div>
+                    <div class="roadmap-content">
+                        <p>• コンセプト設計と技術仕様の策定（現在進行中）</p>
+                        <p>• コアチームの結成とコミュニティ構築の開始</p>
+                        <p>• ホワイトペーパーの公開（5月予定）</p>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-date">2025年7月 - 9月</div>
+                    <div class="roadmap-content">
+                        <p>• プロトタイプ開発の開始</p>
+                        <p>• 初期投資家向けシードラウンド</p>
+                        <p>• 開発者コミュニティの構築</p>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-date">2025年10月 - 12月</div>
+                    <div class="roadmap-content">
+                        <p>• アルファ版テストネットの公開</p>
+                        <p>• 初期パートナーシップの発表</p>
+                        <p>• 開発者向けドキュメントとSDKの公開</p>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-date">2026年1月 - 3月</div>
+                    <div class="roadmap-content">
+                        <p>• ベータ版テストネットのローンチ</p>
+                        <p>• コミュニティテストプログラムの開始</p>
+                        <p>• トークン経済モデルの最終決定</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2023 OptimaChain - 次世代型分散型ブロックチェーンプラットフォーム</p>
+        </div>
+    </div>
+
+    <script src="icons.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // アニメーション効果
+            const sections = document.querySelectorAll('.section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // 通知バーの閉じるボタン
+            const notificationBar = document.querySelector('.notification-bar');
+            const closeButton = document.querySelector('.notification-close');
+            
+            if (closeButton && notificationBar) {
+                closeButton.addEventListener('click', function() {
+                    notificationBar.style.display = 'none';
+                });
+            }
+            
+            // スティッキーヘッダー効果
+            const header = document.querySelector('header');
+            let lastScrollTop = 0;
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > lastScrollTop) {
+                    // スクロールダウン時
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    // スクロールアップ時
+                    header.style.transform = 'translateY(0)';
+                }
+                
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            }, { passive: true });
+            
+            // ヘッダーにトランジション追加
+            header.style.transition = 'transform 0.3s ease';
+        });
+    </script>
+</body>
+</html>
