@@ -1,0 +1,54 @@
+[package]
+name = "optimachain-core"
+version = "0.1.0"
+edition = "2021"
+authors = ["OptimaChain Team"]
+description = "Core implementation of the OptimaChain blockchain"
+license = "MIT"
+
+[dependencies]
+# Networking
+libp2p = "0.52.4"
+
+# Async Runtime
+tokio = { version = "1.44.0", features = ["full"] }
+
+# Storage
+rocksdb = "0.22.0"
+
+# Cryptography
+ed25519-dalek = "2.1.1"
+x25519-dalek = "2.0.0"
+sha3 = "0.10.8"
+zeroize = "1.6.0"
+
+# Serialization
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.107"
+bincode = "1.3.3"
+
+# WASM
+wasmer = "4.0.0"
+wasmtime = "16.0.0"
+
+# Utilities
+log = "0.4.20"
+env_logger = "0.10.1"
+thiserror = "1.0.50"
+anyhow = "1.0.75"
+clap = { version = "4.4.7", features = ["derive"] }
+rand = "0.8.5"
+hex = "0.4.3"
+
+[dev-dependencies]
+criterion = "0.5.1"
+proptest = "1.2.0"
+tempfile = "3.8.1"
+
+[[bin]]
+name = "optimachain"
+path = "src/main.rs"
+
+[lib]
+name = "optimachain"
+path = "src/lib.rs"
