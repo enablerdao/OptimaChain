@@ -18,9 +18,9 @@ OptimaChainは以下の特徴を持つブロックチェーンプラットフォ
 このリポジトリには以下のコンポーネントが含まれています：
 
 - **ウェブサイト**: プロジェクト紹介と情報提供のためのウェブサイト
-- **OptimaWallet**: ブロックチェーン資産管理のためのウォレットプロトタイプ
-- **OptimaDEX**: 分散型取引所のプロトタイプ
-- **ドキュメント**: 技術仕様書と開発者向けガイド
+- **[OptimaWallet](#optimawallet-プロトタイプ)**: ブロックチェーン資産管理のためのウォレットプロトタイプ
+- **[OptimaDEX](#optimadex-プロトタイプ)**: 分散型取引所のプロトタイプ
+- **ドキュメント**: 技術仕様書と開発者向けガイド（[バリデータガイド](validator-guide.md)を含む）
 
 ## 開発状況
 
@@ -52,7 +52,7 @@ npm start
 
 ### バックエンドAPI
 
-```bash
+```javascript
 cd backend
 npm install
 npm start
@@ -60,7 +60,7 @@ npm start
 
 ### OptimaWallet プロトタイプ
 
-```bash
+```javascript
 cd wallet
 npm install
 npm start
@@ -68,7 +68,7 @@ npm start
 
 ### OptimaDEX プロトタイプ
 
-```bash
+```javascript
 cd dex
 npm install
 npm start
@@ -80,8 +80,8 @@ OptimaChainプロジェクトは以下のコンポーネントで構成されて
 
 1. **フロントエンド**
    - ウェブサイト: プロジェクト紹介と情報提供
-   - OptimaWallet: ブロックチェーン資産管理ウォレット
-   - OptimaDEX: 分散型取引所
+   - [OptimaWallet](#optimawallet-プロトタイプ): ブロックチェーン資産管理ウォレット
+   - [OptimaDEX](#optimadex-プロトタイプ): 分散型取引所
 
 2. **バックエンド**
    - RESTful API: ウォレット、取引所、ブロックチェーン機能を提供
@@ -96,13 +96,13 @@ OptimaChainプロジェクトは以下のコンポーネントで構成されて
 OptimaChainプロジェクトへの貢献に興味をお持ちの方は、以下の方法で参加できます：
 
 1. **開発者コミュニティに参加**: 近日公開予定のDiscordサーバーにご参加ください
-2. **イシューの報告**: バグや機能リクエストはGitHubイシューでご報告ください
-3. **プルリクエスト**: コードの改善や新機能の追加はプルリクエストでご提案ください
+2. **イシューの報告**: バグや機能リクエストは[GitHubイシュー](https://github.com/enablerdao/OptimaChain/issues)でご報告ください
+3. **プルリクエスト**: コードの改善や新機能の追加は[プルリクエスト](https://github.com/enablerdao/OptimaChain/pulls)でご提案ください
 4. **ドキュメント**: ドキュメントの改善や翻訳にご協力ください
 
 ## ライセンス
 
-OptimaChainは[MIT License](LICENSE)の下で公開されています。
+OptimaChainはMITライセンスの下で公開されています。
 
 ## 連絡先
 
