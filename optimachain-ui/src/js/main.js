@@ -6,6 +6,7 @@ import '../css/language-switcher.css';
 import '../css/modern-design.css';
 import '../css/branding.css';
 import '../css/minimalist.css';
+import '../css/tech-specs.css';
 
 // 外部ライブラリのインポート
 import * as THREE from 'three';
