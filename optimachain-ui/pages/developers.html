@@ -509,11 +509,11 @@
         self.balances.<span class="code-function">insert</span>(ctx.sender(), total_supply);
     }
     
-    <span class="code-keyword">fn</span> <span class="code-function">transfer</span>(&<span class="code-keyword">mut</span> self, to: <span class="code-function">Address</span>, amount: u64) -> <span class="code-function">Result</span>&lt;(), <span class="code-function">ContractError</span>&gt; {
+    <span class="code-keyword">fn</span> <span class="code-function">transfer</span>(&<span class="code-keyword">mut</span> self, to: <span class="code-function">Address</span>, amount: u64) -&gt; <span class="code-function">Result</span>&lt;(), <span class="code-function">ContractError</span>&gt; {
         <span class="code-keyword">let</span> sender = ctx.sender();
         <span class="code-keyword">let</span> sender_balance = self.balances.<span class="code-function">get</span>(&sender).<span class="code-function">unwrap_or</span>(0);
         
-        <span class="code-keyword">if</span> sender_balance < amount {
+        <span class="code-keyword">if</span> sender_balance &lt; amount {
             <span class="code-keyword">return</span> <span class="code-function">Err</span>(<span class="code-function">ContractError::InsufficientFunds</span>);
         }
         
