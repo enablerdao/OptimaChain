@@ -1,0 +1,185 @@
+{
+  "nav": {
+    "features": "Features",
+    "technology": "Technology",
+    "ecosystem": "Ecosystem",
+    "developers": "Developers",
+    "community": "Community",
+    "token": "Token",
+    "roadmap": "Roadmap"
+  },
+  "dropdown": {
+    "smartContracts": {
+      "title": "Smart Contracts",
+      "desc": "WASM-based multi-language contracts"
+    },
+    "sdkApi": {
+      "title": "SDK & API",
+      "desc": "Comprehensive development toolkit"
+    },
+    "testnet": {
+      "title": "Testnet",
+      "desc": "Development environment and faucet"
+    },
+    "whitepaper": {
+      "title": "Whitepaper",
+      "desc": "Technical specifications and design"
+    }
+  },
+  "hero": {
+    "title": "Next-Generation Decentralized Blockchain Platform",
+    "subtitle": "Integrating innovative scaling technology with advanced security",
+    "cta": "Join Testnet",
+    "secondary": "Developer Documentation",
+    "wallet": "Connect Wallet"
+  },
+  "features": {
+    "title": "OptimaChain Features",
+    "scalability": {
+      "title": "High Scalability",
+      "desc": "Achieve up to 50,000 TPS with dynamic sharding technology"
+    },
+    "security": {
+      "title": "Advanced Security",
+      "desc": "Decentralized validation and fraud prevention with Adaptive Proof-of-Stake"
+    },
+    "interoperability": {
+      "title": "Interoperability",
+      "desc": "Seamless integration with multiple blockchains"
+    },
+    "aiOptimization": {
+      "title": "AI Optimization",
+      "desc": "Automatic network performance optimization through machine learning"
+    }
+  },
+  "stats": {
+    "tps": "Transactions/sec",
+    "finality": "Finality",
+    "validators": "Validators",
+    "applications": "Applications"
+  },
+  "cta": {
+    "join": "Join Community",
+    "start": "Start Building"
+  },
+  "footer": {
+    "resources": "Resources",
+    "developers": "Developers",
+    "community": "Community",
+    "about": "About",
+    "copyright": "© 2025 OptimaChain by Enabler DAO. All rights reserved."
+  },
+  "notification": {
+    "testnet": "OptimaChain testnet is now live!",
+    "join": "Join Now",
+    "close": "Close"
+  },
+  "buttons": {
+    "showMore": "Show More",
+    "close": "Close",
+    "readMore": "Read More"
+  },
+  "wallet": {
+    "connect": "Connect Wallet",
+    "disconnect": "Disconnect",
+    "connected": "Connected",
+    "balance": "Balance",
+    "address": "Address",
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "technology": {
+    "title": "OptimaChain Technology",
+    "subtitle": "Details of our innovative blockchain technology",
+    "consensus": {
+      "title": "Adaptive Proof-of-Stake",
+      "desc": "Consensus mechanism that automatically adjusts based on network conditions"
+    },
+    "sharding": {
+      "title": "Dynamic Sharding",
+      "desc": "Sharding technology that automatically scales based on transaction volume"
+    },
+    "execution": {
+      "title": "Parallel Execution Engine",
+      "desc": "High-performance engine that processes multiple transactions simultaneously"
+    },
+    "privacy": {
+      "title": "Privacy Protection",
+      "desc": "Privacy features utilizing zero-knowledge proofs"
+    }
+  },
+  "whitepaper": {
+    "title": "OptimaChain Whitepaper",
+    "subtitle": "Technical specifications and detailed design",
+    "download": "Download PDF",
+    "sections": {
+      "intro": "Introduction",
+      "architecture": "Architecture",
+      "consensus": "Consensus Mechanism",
+      "scaling": "Scaling Solutions",
+      "security": "Security Model",
+      "tokenomics": "Tokenomics",
+      "roadmap": "Roadmap",
+      "conclusion": "Conclusion"
+    }
+  },
+  "developers": {
+    "title": "Developer Resources",
+    "subtitle": "Tools and resources for building on OptimaChain",
+    "getStarted": "Get Started",
+    "documentation": "Documentation",
+    "tutorials": "Tutorials",
+    "github": "GitHub",
+    "discord": "Discord",
+    "faucet": "Testnet Faucet"
+  },
+  "ecosystem": {
+    "title": "OptimaChain Ecosystem",
+    "subtitle": "Projects and applications built on OptimaChain",
+    "defi": "DeFi",
+    "nft": "NFT",
+    "gaming": "Gaming",
+    "social": "Social",
+    "infrastructure": "Infrastructure",
+    "join": "Join the Ecosystem"
+  },
+  "roadmap": {
+    "title": "Development Roadmap",
+    "subtitle": "OptimaChain's development plan and upcoming milestones",
+    "q4_2024": {
+      "title": "Q4 2024",
+      "items": [
+        "Testnet Launch",
+        "Core Protocol Development",
+        "Developer Documentation Release"
+      ]
+    },
+    "q1_q2_2025": {
+      "title": "Q1-Q2 2025",
+      "items": [
+        "AI-Predictive Smart Contracts Implementation",
+        "Self-Optimizing Sharding Development",
+        "Security Audit"
+      ]
+    },
+    "q3_2025": {
+      "title": "Q3 2025",
+      "items": [
+        "Mainnet Launch",
+        "Token Generation Event",
+        "Ecosystem Expansion Program"
+      ]
+    },
+    "q4_2025": {
+      "title": "Q4 2025 and Beyond",
+      "items": [
+        "On-chain AI with zk-STARKs Implementation",
+        "Real-World Asset Integration Framework",
+        "Enhanced Cross-Chain Interoperability"
+      ]
+    }
+  },
+  "home": {
+    "funFact": "Science fact: Our network processes more transactions in one minute than the number of times you blink in a day (approximately 28,800 times)."
+  }
+}

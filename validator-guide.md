@@ -41,8 +41,8 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ```bash
 # リポジトリのクローン
-git clone https://github.com/optimachain/node.git
-cd node
+git clone https://github.com/enablerdao/OptimaChain-node.git
+cd OptimaChain-node
 
 # 最新のリリースに切り替え
 git checkout $(git describe --tags $(git rev-list --tags --max-count=1))
@@ -86,7 +86,7 @@ docker-compose logs -f
 
 ### 6. ステーキングとバリデータ登録
 
-OptimaChainのウェブウォレットにアクセスし、以下の手順でバリデータを登録します:
+OptimaChainの[ウェブウォレット](https://wallet.optimachain.network)にアクセスし、以下の手順でバリデータを登録します:
 
 1. ウォレットを作成または復元
 2. 必要な量のOPTトークンを入金
@@ -152,7 +152,7 @@ Prometheusとgrafanaを使用したモニタリング設定:
 docker-compose -f docker-compose.monitoring.yml up -d
 ```
 
-Grafanaダッシュボードは http://your-server-ip:3000 でアクセス可能です。
+Grafanaダッシュボードは `http://your-server-ip:3000` でアクセス可能です。
 
 ## トラブルシューティング
 
@@ -187,7 +187,7 @@ docker-compose exec node optima-cli tendermint show-node-id
 
 - [公式ドキュメント](https://docs.optimachain.network)
 - [Discord コミュニティ](https://discord.gg/optimachain)
-- [GitHub リポジトリ](https://github.com/optimachain)
+- [GitHub リポジトリ](https://github.com/enablerdao/OptimaChain)
 - [ブロックエクスプローラー](https://explorer.optimachain.network)
 
-問題が解決しない場合は、Discordの #validator-support チャンネルでサポートを受けてください。
+問題が解決しない場合は、Discordの `#validator-support` チャンネルでサポートを受けてください。

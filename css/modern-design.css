@@ -1,46 +1,57 @@
 /* ジョナサン・アイブ風のモダンでシンプルなデザイン */
 
 :root {
-  /* カラーパレット */
-  --primary-color: #3a86ff;
-  --primary-light: #61a0ff;
-  --primary-dark: #2563eb;
-  --accent-color: #ff006e;
-  --success-color: #10b981;
-  --warning-color: #f59e0b;
-  --error-color: #ef4444;
+  /* カラーパレット - よりシンプルで洗練された配色 */
+  --primary-color: #0066ff;
+  --primary-light: #4d94ff;
+  --primary-dark: #0047b3;
+  --accent-color: #ff3366;
+  --success-color: #00c07f;
+  --warning-color: #ffaa00;
+  --error-color: #ff3b30;
   
-  /* 背景色 */
-  --bg-color: #f8fafc;
-  --bg-color-alt: #f1f5f9;
-  --dark-bg-color: #0f172a;
-  --dark-bg-color-alt: #1e293b;
+  /* 背景色 - よりクリーンな背景 */
+  --bg-color: #ffffff;
+  --bg-color-alt: #f7f9fc;
+  --dark-bg-color: #121212;
+  --dark-bg-color-alt: #1e1e1e;
   
-  /* テキスト色 */
-  --text-color: #1e293b;
-  --text-color-light: #f8fafc;
-  --text-color-muted: #64748b;
+  /* テキスト色 - 高コントラストで読みやすく */
+  --text-color: #111827;
+  --text-color-light: #ffffff;
+  --text-color-muted: #6b7280;
   
-  /* 影とエフェクト */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  /* 影とエフェクト - より繊細で自然な影 */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
   
-  /* 角丸 */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 1rem;
+  /* 角丸 - 一貫性のある丸み */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
   --radius-full: 9999px;
   
-  /* トランジション */
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.3s ease;
-  --transition-slow: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  /* トランジション - 滑らかな動き */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   
-  /* フォント */
+  /* フォント - 読みやすさ重視 */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-mono: 'Space Mono', monospace;
+  
+  /* スペーシング - 一貫性のある余白 */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
 }
 
 /* ベーススタイル */
@@ -124,59 +135,143 @@ a:hover {
   gap: 2rem;
 }
 
-/* カード */
+/* カード - よりシンプルで洗練されたデザイン */
 .card {
   background: white;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  padding: var(--space-6);
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(0, 102, 255, 0.1);
 }
 
 .dark-mode .card {
   background: var(--dark-bg-color-alt);
+  border-color: rgba(255, 255, 255, 0.05);
 }
 
-/* ボタン */
+.card-header {
+  margin-bottom: var(--space-4);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.card-content {
+  color: var(--text-color-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ボタン - よりシンプルで魅力的なデザイン */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-md);
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-full);
   font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
   transition: all var(--transition-normal);
   cursor: pointer;
   border: none;
   outline: none;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.btn:focus {
+  outline: 2px solid var(--primary-light);
+  outline-offset: 2px;
 }
 
 .primary-btn {
   background: var(--primary-color);
   color: white;
-  box-shadow: 0 4px 14px rgba(58, 134, 255, 0.4);
+  box-shadow: 0 2px 10px rgba(0, 102, 255, 0.2);
 }
 
 .primary-btn:hover {
   background: var(--primary-dark);
-  box-shadow: 0 6px 20px rgba(58, 134, 255, 0.6);
-  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 102, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.primary-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 5px rgba(0, 102, 255, 0.2);
 }
 
 .secondary-btn {
   background: transparent;
   color: var(--primary-color);
-  border: 2px solid var(--primary-color);
+  border: 1px solid var(--primary-color);
+  box-shadow: none;
 }
 
 .secondary-btn:hover {
-  background: rgba(58, 134, 255, 0.1);
-  transform: translateY(-2px);
+  background: rgba(0, 102, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+.secondary-btn:active {
+  transform: translateY(0);
+  background: rgba(0, 102, 255, 0.1);
+}
+
+.btn .button-icon {
+  margin-left: var(--space-2);
+  transition: transform var(--transition-fast);
+}
+
+.btn:hover .button-icon {
+  transform: translateX(3px);
+}
+
+/* CTAボタン - 特に目立つデザイン */
+.cta-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: white;
+  padding: 0.875rem 2rem;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  border-radius: var(--radius-full);
+}
+
+.cta-btn:hover::before {
+  opacity: 1;
+}
+
+.cta-btn:hover {
+  box-shadow: 0 6px 25px rgba(0, 102, 255, 0.4);
+  transform: translateY(-2px) scale(1.02);
 }
 
 /* フォーム要素 */
@@ -201,19 +296,100 @@ input:focus, textarea:focus, select:focus {
   color: var(--text-color-light);
 }
 
-/* ヒーローセクション */
+/* ヒーローセクション - よりシンプルで魅力的なデザイン */
 .hero {
   position: relative;
   min-height: 90vh;
   display: flex;
   align-items: center;
   overflow: hidden;
+  padding: var(--space-16) 0;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 700px;
+  max-width: 650px;
+}
+
+.hero-subtitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: var(--space-4);
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--text-color-muted);
+  margin-bottom: var(--space-8);
+}
+
+.hero-cta {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.cta-subtext {
+  font-size: 0.95rem;
+  color: var(--text-color-muted);
+  margin-top: var(--space-4);
+  display: flex;
+  align-items: center;
+}
+
+.users-count {
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-right: var(--space-1);
+}
+
+.trusted-by {
+  margin-top: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trusted-label {
+  font-size: 0.85rem;
+  color: var(--text-color-muted);
+  margin-bottom: var(--space-4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.partner-logos {
+  display: flex;
+  gap: var(--space-6);
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.partner-logo {
+  height: 40px;
+  opacity: 0.8;
+  transition: all var(--transition-normal);
+  filter: grayscale(100%);
+}
+
+.partner-logo:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+.btn.large {
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
 }
 
 .hero-background {
@@ -228,26 +404,26 @@ input:focus, textarea:focus, select:focus {
 .gradient-sphere {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.6;
+  filter: blur(100px);
+  opacity: 0.5;
 }
 
 .gradient-sphere:nth-child(1) {
-  width: 60vw;
-  height: 60vw;
-  background: radial-gradient(circle, rgba(58, 134, 255, 0.3) 0%, rgba(58, 134, 255, 0) 70%);
-  top: -20%;
-  right: -20%;
-  animation: float 20s ease-in-out infinite;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.2) 0%, rgba(0, 102, 255, 0) 70%);
+  top: -10%;
+  right: -10%;
+  animation: float 25s ease-in-out infinite;
 }
 
 .gradient-sphere:nth-child(2) {
-  width: 40vw;
-  height: 40vw;
-  background: radial-gradient(circle, rgba(255, 0, 110, 0.2) 0%, rgba(255, 0, 110, 0) 70%);
-  bottom: -10%;
-  left: -10%;
-  animation: float 15s ease-in-out infinite reverse;
+  width: 35vw;
+  height: 35vw;
+  background: radial-gradient(circle, rgba(255, 51, 102, 0.15) 0%, rgba(255, 51, 102, 0) 70%);
+  bottom: -5%;
+  left: -5%;
+  animation: float 20s ease-in-out infinite reverse;
 }
 
 @keyframes float {
@@ -255,7 +431,7 @@ input:focus, textarea:focus, select:focus {
     transform: translate(0, 0);
   }
   50% {
-    transform: translate(5%, 5%);
+    transform: translate(3%, 3%);
   }
   100% {
     transform: translate(0, 0);
@@ -269,28 +445,72 @@ input:focus, textarea:focus, select:focus {
   width: 100%;
   height: 100%;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  opacity: 0.3;
+    linear-gradient(to right, rgba(0, 102, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 102, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.5;
 }
 
 .dark-mode .grid-overlay {
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
-/* 特徴カード */
-.feature-card {
-  padding: 2rem;
-  border-radius: var(--radius-lg);
-  background: white;
+/* ヒーロー統計 */
+.hero-stats {
+  display: flex;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: center;
+  flex: 1;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  transition: all var(--transition-normal);
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
+}
+
+.dark-mode .stat-card {
+  background: rgba(30, 30, 30, 0.7);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-color-muted);
+  margin-top: var(--space-1);
+}
+
+/* 特徴カード - よりシンプルで洗練されたデザイン */
+.feature-card {
+  padding: var(--space-8);
+  border-radius: var(--radius-md);
+  background: white;
+  box-shadow: var(--shadow-sm);
   transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
   z-index: 1;
+  border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .feature-card::before {
@@ -298,31 +518,88 @@ input:focus, textarea:focus, select:focus {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  width: 4px;
+  height: 40px;
+  background: var(--primary-color);
+  border-radius: 0 2px 2px 0;
   z-index: 2;
+  transition: height var(--transition-normal);
 }
 
 .feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-xl);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(0, 102, 255, 0.1);
+}
+
+.feature-card:hover::before {
+  height: 60px;
 }
 
 .dark-mode .feature-card {
   background: var(--dark-bg-color-alt);
+  border-color: rgba(255, 255, 255, 0.05);
 }
 
 .feature-icon {
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-md);
-  background: rgba(58, 134, 255, 0.1);
+  background: rgba(0, 102, 255, 0.08);
   color: var(--primary-color);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-4);
+  transition: all var(--transition-normal);
+}
+
+.feature-card:hover .feature-icon {
+  background: rgba(0, 102, 255, 0.12);
+  transform: scale(1.05);
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-3);
+  font-weight: 600;
+}
+
+.feature-card p {
+  color: var(--text-color-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-4);
+}
+
+.feature-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  margin-top: var(--space-4);
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.2);
+}
+
+.feature-cta-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+}
+
+.feature-cta-btn .button-icon {
+  margin-left: var(--space-2);
+  transition: transform var(--transition-fast);
+}
+
+.feature-cta-btn:hover .button-icon {
+  transform: translateX(3px);
 }
 
 /* 統計カード */
