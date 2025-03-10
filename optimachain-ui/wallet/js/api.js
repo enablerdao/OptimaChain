@@ -144,8 +144,10 @@ const API = {
 
 // For development, we'll use mock data instead of actual API calls
 // In a real application, you would use the API services above
-const useMockData = true;
+const useMockData = false;
 
 if (useMockData) {
   console.log('Using mock data instead of API calls');
+} else {
+  console.log('Using real API calls');
 }
