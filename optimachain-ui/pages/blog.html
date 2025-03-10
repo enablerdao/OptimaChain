@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaChain - 技術ブログ</title>
+    <meta name="description" content="OptimaChainの技術ブログ。最新の開発状況、技術解説、研究成果などを定期的に発信しています。">
+    <meta name="keywords" content="ブロックチェーン, OptimaChain, 技術ブログ, 開発, 研究, Adaptive PoS, シャーディング">
+    <meta name="author" content="OptimaChain Team">
+    <meta name="theme-color" content="#0066ff">
+    
+    <!-- OGP設定 -->
+    <meta property="og:title" content="OptimaChain - 技術ブログ">
+    <meta property="og:description" content="OptimaChainの技術ブログ。最新の開発状況、技術解説、研究成果などを定期的に発信しています。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://optimachain.org/pages/blog.html">
+    <meta property="og:image" content="/img/og-image.svg">
+    <meta property="og:site_name" content="OptimaChain">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:locale:alternate" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@OptimaChain">
+    <meta name="twitter:title" content="OptimaChain - 技術ブログ">
+    <meta name="twitter:description" content="OptimaChainの技術ブログ。最新の開発状況、技術解説、研究成果などを定期的に発信しています。">
+    <meta name="twitter:image" content="/img/twitter-card.svg">
+    
+    <!-- ファビコン -->
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/img/favicon.svg">
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.socket.io/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' http://localhost:3000 wss://localhost:3000; media-src 'self' blob:;">
+    
+    <!-- フォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- スタイル -->
+    <link rel="stylesheet" href="/src/css/styles.css">
+    <link rel="stylesheet" href="/src/css/header-footer.css">
+    <link rel="stylesheet" href="/src/css/minimalist.css">
+    <link rel="stylesheet" href="/src/css/blog.css">
+    
+    <!-- スクリプト -->
+    <script type="module" src="/src/js/main.js"></script>
+</head>
+<body>
+    <!-- ヘッダーとモバイルメニューはJavaScriptで挿入されます -->
+    
+    <!-- ブログヒーローセクション -->
+    <section class="blog-hero">
+        <div class="wrapper">
+            <h1>OptimaChain 技術ブログ</h1>
+            <p>最新の開発状況、技術解説、研究成果などを定期的に発信しています。</p>
+        </div>
+    </section>
+    
+    <!-- ブログコンテンツ -->
+    <div class="blog-container">
+        <!-- フィルターセクション -->
+        <div class="blog-filter">
+            <div class="filter-categories">
+                <button class="filter-button active">すべて</button>
+                <button class="filter-button">開発アップデート</button>
+                <button class="filter-button">技術解説</button>
+                <button class="filter-button">研究成果</button>
+                <button class="filter-button">チュートリアル</button>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="ブログ記事を検索...">
+            </div>
+        </div>
+        
+        <!-- 注目記事 -->
+        <div class="featured-post">
+            <div class="featured-image">
+                <img src="/img/blog/adaptive-pos-explained.jpg" alt="Adaptive PoSの詳細解説">
+            </div>
+            <div class="featured-content">
+                <span class="featured-tag">注目記事</span>
+                <h2 class="featured-title">Adaptive Proof-of-Stakeの詳細解説：次世代コンセンサスメカニズム</h2>
+                <p class="featured-excerpt">OptimaChainの中核技術であるAdaptive Proof-of-Stake（aPoS）の詳細な解説。従来のPoSとの違い、動的調整メカニズム、セキュリティ保証などについて詳しく解説します。</p>
+                <a href="/blog/adaptive-pos-explained.html" class="blog-link">
+                    続きを読む <span class="arrow">→</span>
+                </a>
+                <div class="featured-meta">
+                    <div class="author-avatar">
+                        <img src="/img/team/satoshi-yamamoto.jpg" alt="山本 聡">
+                    </div>
+                    <div class="author-info">
+                        <div class="author-name">山本 聡</div>
+                        <div class="post-date">2025年3月5日</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ブログ記事グリッド -->
+        <div class="blog-grid">
+            <!-- 記事1 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="/img/blog/testnet-launch.jpg" alt="OptimaChainテストネット公開">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">開発アップデート</span>
+                        <span class="blog-date">2025年3月1日</span>
+                    </div>
+                    <h3 class="blog-title">OptimaChainテストネット「Aurora」公開のお知らせ</h3>
+                    <p class="blog-excerpt">OptimaChainの最初のパブリックテストネット「Aurora」を公開しました。バリデータの参加方法、テスト内容、報酬プログラムなどについて解説します。</p>
+                    <a href="/blog/testnet-launch.html" class="blog-link">
+                        続きを読む <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 記事2 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="/img/blog/sharding-performance.jpg" alt="シャーディングパフォーマンス">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">研究成果</span>
+                        <span class="blog-date">2025年2月20日</span>
+                    </div>
+                    <h3 class="blog-title">自己最適化シャーディングのパフォーマンス評価結果</h3>
+                    <p class="blog-excerpt">OptimaChainの自己最適化シャーディング技術のパフォーマンス評価結果を公開。従来のシャーディング手法と比較して、どのような優位性があるのかを解説します。</p>
+                    <a href="/blog/sharding-performance.html" class="blog-link">
+                        続きを読む <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 記事3 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="/img/blog/validator-setup.jpg" alt="バリデータセットアップ">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">チュートリアル</span>
+                        <span class="blog-date">2025年2月15日</span>
+                    </div>
+                    <h3 class="blog-title">OptimaChainバリデータノードのセットアップ方法</h3>
+                    <p class="blog-excerpt">OptimaChainのバリデータノードをセットアップする方法を詳しく解説。必要なハードウェア要件、インストール手順、設定方法などを紹介します。</p>
+                    <a href="/blog/validator-setup.html" class="blog-link">
+                        続きを読む <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 記事4 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="/img/blog/smart-contract-dev.jpg" alt="スマートコントラクト開発">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">技術解説</span>
+                        <span class="blog-date">2025年2月10日</span>
+                    </div>
+                    <h3 class="blog-title">OptimaChainでのスマートコントラクト開発入門</h3>
+                    <p class="blog-excerpt">OptimaChainでのスマートコントラクト開発の基本を解説。対応言語、開発環境のセットアップ、デプロイ方法などを紹介します。</p>
+                    <a href="/blog/smart-contract-dev.html" class="blog-link">
+                        続きを読む <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 記事5 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="/img/blog/parallel-execution.jpg" alt="並列実行エンジン">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">技術解説</span>
+                        <span class="blog-date">2025年2月5日</span>
+                    </div>
+                    <h3 class="blog-title">OptimaChainの並列実行エンジンの仕組み</h3>
+                    <p class="blog-excerpt">OptimaChainの高速トランザクション処理を支える並列実行エンジンの仕組みを解説。依存関係の検出、並列処理の最適化などについて詳しく紹介します。</p>
+                    <a href="/blog/parallel-execution.html" class="blog-link">
+                        続きを読む <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 記事6 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="/img/blog/roadmap-2025.jpg" alt="ロードマップ2025">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">開発アップデート</span>
+                        <span class="blog-date">2025年1月15日</span>
+                    </div>
+                    <h3 class="blog-title">OptimaChain 2025年ロードマップ発表</h3>
+                    <p class="blog-excerpt">OptimaChainの2025年の開発ロードマップを発表。テストネット、メインネット、主要機能のリリーススケジュールなどを紹介します。</p>
+                    <a href="/blog/roadmap-2025.html" class="blog-link">
+                        続きを読む <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ページネーション -->
+        <div class="pagination">
+            <button class="page-button prev">←</button>
+            <button class="page-button active">1</button>
+            <button class="page-button">2</button>
+            <button class="page-button">3</button>
+            <button class="page-button">4</button>
+            <button class="page-button">5</button>
+            <button class="page-button next">→</button>
+        </div>
+        
+        <!-- ニュースレターセクション -->
+        <div class="newsletter-section">
+            <div class="newsletter-content">
+                <h2 class="newsletter-title">最新情報をメールで受け取る</h2>
+                <p class="newsletter-description">OptimaChainの最新開発情報、技術記事、イベント情報などをメールでお届けします。</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="メールアドレスを入力" required>
+                    <button type="submit" class="newsletter-button">登録する</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- フッターはJavaScriptで挿入されます -->
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // フィルターボタンの切り替え
+            const filterButtons = document.querySelectorAll('.filter-button');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    // ここにフィルタリングロジックを追加
+                });
+            });
+            
+            // 検索機能
+            const searchInput = document.querySelector('.search-box input');
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                // ここに検索ロジックを追加
+            });
+            
+            // ページネーション
+            const pageButtons = document.querySelectorAll('.pagination .page-button:not(.prev):not(.next)');
+            pageButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    pageButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    // ここにページ切り替えロジックを追加
+                });
+            });
+        });
+    </script>
+</body>
+</html>
