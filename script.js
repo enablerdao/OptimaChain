@@ -1,4 +1,49 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // モバイルメニュートグル
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+    
+    if (mobileMenuToggle && mainNav) {
+        mobileMenuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mainNav.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        });
+    }
+    
+    // ドロップダウンメニューのモバイル対応
+    const dropdowns = document.querySelectorAll('.dropdown');
+    
+    dropdowns.forEach(dropdown => {
+        const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+        
+        if (dropdownToggle && window.innerWidth <= 768) {
+            dropdownToggle.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                }
+            });
+        }
+    });
+    
+    // ウィンドウリサイズ時の処理
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            // モバイルメニューを閉じる
+            if (mobileMenuToggle && mainNav) {
+                mobileMenuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+            
+            // ドロップダウンをリセット
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+    
     // Animation for sections
     const sections = document.querySelectorAll('.section');
     

@@ -1,0 +1,80 @@
+{
+  "nav": {
+    "features": "Features",
+    "technology": "Technology",
+    "ecosystem": "Ecosystem",
+    "developers": "Developers",
+    "community": "Community",
+    "token": "Token"
+  },
+  "dropdown": {
+    "smartContracts": {
+      "title": "Smart Contracts",
+      "desc": "WASM-based multi-language contracts"
+    },
+    "sdkApi": {
+      "title": "SDK & API",
+      "desc": "Comprehensive development toolkit"
+    },
+    "testnet": {
+      "title": "Testnet",
+      "desc": "Development environment and faucet"
+    },
+    "whitepaper": {
+      "title": "Whitepaper",
+      "desc": "Technical specifications and design"
+    }
+  },
+  "hero": {
+    "title": "Next-Generation Decentralized Blockchain Platform",
+    "subtitle": "Integrating innovative scaling technology with advanced security",
+    "cta": "Learn More",
+    "secondary": "Developer Documentation"
+  },
+  "features": {
+    "title": "OptimaChain Features",
+    "scalability": {
+      "title": "High Scalability",
+      "desc": "Achieve up to 50,000 TPS with dynamic sharding technology"
+    },
+    "security": {
+      "title": "Advanced Security",
+      "desc": "Decentralized validation and fraud prevention with Adaptive Proof-of-Stake"
+    },
+    "interoperability": {
+      "title": "Interoperability",
+      "desc": "Seamless integration with multiple blockchains"
+    },
+    "aiOptimization": {
+      "title": "AI Optimization",
+      "desc": "Automatic network performance optimization through machine learning"
+    }
+  },
+  "stats": {
+    "tps": "Transactions/sec",
+    "finality": "Finality",
+    "validators": "Validators",
+    "applications": "Applications"
+  },
+  "cta": {
+    "join": "Join Community",
+    "start": "Start Building"
+  },
+  "footer": {
+    "resources": "Resources",
+    "developers": "Developers",
+    "community": "Community",
+    "about": "About",
+    "copyright": "© 2025 OptimaChain. All rights reserved."
+  },
+  "notification": {
+    "testnet": "OptimaChain testnet is now live!",
+    "join": "Join Now",
+    "close": "Close"
+  },
+  "buttons": {
+    "showMore": "Show More",
+    "close": "Close",
+    "readMore": "Read More"
+  }
+}
