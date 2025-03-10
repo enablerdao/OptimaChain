@@ -1,0 +1,231 @@
+/* OptimaChain - ユースケースセクションスタイル */
+
+.use-cases-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, rgba(240, 247, 255, 0.9) 0%, rgba(230, 240, 255, 0.9) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.use-cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.use-case-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.use-case-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.use-case-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #0066ff, #00a3ff);
+    z-index: 1;
+}
+
+.use-case-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f0f7ff, #e6eeff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.use-case-icon::before {
+    font-size: 24px;
+    color: #0066ff;
+}
+
+.use-case-icon[data-icon="defi"]::before {
+    content: '💰';
+}
+
+.use-case-icon[data-icon="nft"]::before {
+    content: '🎨';
+}
+
+.use-case-icon[data-icon="gaming"]::before {
+    content: '🎮';
+}
+
+.use-case-icon[data-icon="ai"]::before {
+    content: '🧠';
+}
+
+.use-case-card h3 {
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #0066ff;
+}
+
+.use-case-card p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.use-case-examples {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+}
+
+.use-case-examples li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    font-size: 0.95em;
+    color: #666;
+}
+
+.use-case-examples li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #0066ff;
+    font-weight: bold;
+}
+
+.use-case-project {
+    background: #f5f9ff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.use-case-project h4 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    color: #0066ff;
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+}
+
+.project-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    margin-right: 15px;
+    object-fit: contain;
+}
+
+.project-info {
+    flex: 1;
+}
+
+.project-info h5 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+    color: #333;
+}
+
+.project-info p {
+    font-size: 0.9em;
+    margin: 0 0 8px 0;
+    color: #666;
+}
+
+.project-info a {
+    font-size: 0.9em;
+    color: #0066ff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.project-info a:hover {
+    color: #0052cc;
+    text-decoration: underline;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .use-cases-section {
+        background: linear-gradient(135deg, rgba(20, 30, 48, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%);
+    }
+    
+    .use-case-card {
+        background: #1a2133;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .use-case-icon {
+        background: linear-gradient(135deg, #1a2133, #2a3344);
+    }
+    
+    .use-case-card h3 {
+        color: #4a9eff;
+    }
+    
+    .use-case-card p {
+        color: #ccc;
+    }
+    
+    .use-case-examples li {
+        color: #aaa;
+    }
+    
+    .use-case-examples li::before {
+        color: #4a9eff;
+    }
+    
+    .use-case-project {
+        background: #2a3344;
+    }
+    
+    .use-case-project h4 {
+        color: #4a9eff;
+    }
+    
+    .project-info h5 {
+        color: #ddd;
+    }
+    
+    .project-info p {
+        color: #aaa;
+    }
+    
+    .project-info a {
+        color: #4a9eff;
+    }
+    
+    .project-info a:hover {
+        color: #6ab0ff;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .use-cases-grid {
+        grid-template-columns: 1fr;
+    }
+}

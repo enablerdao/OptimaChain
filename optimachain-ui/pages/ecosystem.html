@@ -4,301 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OptimaChain エコシステム</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: white;
-            border-radius: 8px;
-            position: relative;
-            overflow: hidden;
-        }
-        .header-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="none" width="100" height="100"/><path fill="rgba(255,255,255,0.1)" d="M30,20 L70,20 L80,30 L80,70 L70,80 L30,80 L20,70 L20,30 Z"/></svg>');
-            background-size: 80px;
-            opacity: 0.3;
-        }
-        nav {
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        nav ul {
-            display: flex;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            justify-content: center;
-        }
-        nav li {
-            margin: 0 15px;
-        }
-        nav a {
-            text-decoration: none;
-            color: #5469d4;
-            font-weight: bold;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
-        nav a:hover {
-            background: #f0f7ff;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            position: relative;
-        }
-        h2 {
-            color: #5469d4;
-            border-bottom: 2px solid #5469d4;
-            padding-bottom: 5px;
-            margin-top: 30px;
-        }
-        h3 {
-            color: #7b68ee;
-        }
-        .section {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        .ecosystem-map {
-            width: 100%;
-            height: 500px;
-            background: #f0f7ff;
-            border-radius: 8px;
-            margin: 20px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        .map-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        .map-node {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            z-index: 2;
-        }
-        .map-node:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            z-index: 3;
-        }
-        .map-node.defi {
-            background: linear-gradient(135deg, #6e8efb, #5469d4);
-            top: 50px;
-            left: 200px;
-        }
-        .map-node.nft {
-            background: linear-gradient(135deg, #a777e3, #7b68ee);
-            top: 150px;
-            right: 200px;
-        }
-        .map-node.gaming {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            bottom: 100px;
-            left: 300px;
-        }
-        .map-node.data {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            bottom: 150px;
-            right: 300px;
-        }
-        .map-node.enterprise {
-            background: linear-gradient(135deg, #43e97b, #38f9d7);
-            top: 250px;
-            left: 500px;
-        }
-        .map-center {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            z-index: 1;
-            box-shadow: 0 0 30px rgba(0,0,0,0.2);
-        }
-        .map-line {
-            position: absolute;
-            background: rgba(84,105,212,0.2);
-            z-index: 0;
-        }
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-        .project-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .project-image {
-            width: 100%;
-            height: 150px;
-            background: linear-gradient(135deg, #f0f7ff, #e6eeff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3em;
-            color: #5469d4;
-        }
-        .project-content {
-            padding: 15px;
-        }
-        .project-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #5469d4;
-        }
-        .project-category {
-            display: inline-block;
-            background: #f0f7ff;
-            color: #5469d4;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.8em;
-            margin-bottom: 10px;
-        }
-        .stats-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 30px 0;
-        }
-        .stat-box {
-            text-align: center;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            flex: 1 1 200px;
-            margin: 10px;
-        }
-        .stat-number {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #5469d4;
-            margin: 10px 0;
-        }
-        .stat-label {
-            font-size: 1em;
-            color: #666;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #666;
-            font-size: 0.9em;
-        }
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .partner-logos {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin: 30px 0;
-        }
-        .partner-logo {
-            width: 120px;
-            height: 80px;
-            background: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            font-weight: bold;
-            color: #5469d4;
-        }
-    </style>
+    <meta name="description" content="OptimaChainエコシステムの概要。革新的なプロジェクトと強力なパートナーシップで構成される成長中のエコシステムについて解説します。">
+    <meta name="keywords" content="ブロックチェーン, OptimaChain, エコシステム, DeFi, NFT, ゲーム, メタバース">
+    <meta name="author" content="OptimaChain Team">
+    <meta name="theme-color" content="#0066ff">
+    
+    <!-- OGP設定 -->
+    <meta property="og:title" content="OptimaChain エコシステム">
+    <meta property="og:description" content="OptimaChainエコシステムの概要。革新的なプロジェクトと強力なパートナーシップで構成される成長中のエコシステムについて解説します。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://optimachain.org/ecosystem.html">
+    <meta property="og:image" content="/img/og-image.svg">
+    <meta property="og:site_name" content="OptimaChain">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:locale:alternate" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@OptimaChain">
+    <meta name="twitter:title" content="OptimaChain エコシステム">
+    <meta name="twitter:description" content="OptimaChainエコシステムの概要。革新的なプロジェクトと強力なパートナーシップで構成される成長中のエコシステムについて解説します。">
+    <meta name="twitter:image" content="/img/twitter-card.svg">
+    
+    <!-- ファビコン -->
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/img/favicon.svg">
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.socket.io/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' http://localhost:3000 wss://localhost:3000; media-src 'self' blob:;">
+    
+    <!-- フォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- スタイル -->
+    <link rel="stylesheet" href="/src/css/styles.css">
+    <link rel="stylesheet" href="/src/css/header-footer.css">
+    <link rel="stylesheet" href="/src/css/minimalist.css">
+    <link rel="stylesheet" href="/src/css/ecosystem.css">
+    
+    <!-- スクリプト -->
+    <script type="module" src="/src/js/main.js"></script>
 </head>
 <body>
-    <header>
-        <div class="header-bg"></div>
-        <h1>OptimaChain エコシステム</h1>
-        <p>革新的なプロジェクトと強力なパートナーシップで構成される成長中のエコシステム</p>
-    </header>
+    <!-- ヘッダーとモバイルメニューはJavaScriptで挿入されます -->
+    
+    <div class="page-content">
+        <div class="hero-section">
+            <h1>OptimaChain エコシステム</h1>
+            <p>革新的なプロジェクトと強力なパートナーシップで構成される成長中のエコシステム</p>
+        </div>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">ホーム</a></li>
-            <li><a href="token.html">トークン</a></li>
-            <li><a href="ecosystem.html">エコシステム</a></li>
-            <li><a href="developers.html">開発者</a></li>
-            <li><a href="community.html">コミュニティ</a></li>
-        </ul>
-    </nav>
+    <!-- ユースケースセクション -->
+    <section class="use-cases-section">
+        <div class="wrapper">
+            <div class="section-header">
+                <div class="section-tag">USE CASES</div>
+                <h2 class="section-title">OptimaChainの活用事例</h2>
+                <p class="section-subtitle">
+                    OptimaChainの革新的な技術を活用した具体的なユースケースをご紹介します。
+                </p>
+            </div>
+            
+            <div class="use-cases-grid">
+                <div class="use-case-card">
+                    <div class="use-case-icon" data-icon="defi"></div>
+                    <h3>DeFi（分散型金融）</h3>
+                    <p>高速トランザクション処理と低コストを活かした次世代DeFiプラットフォーム</p>
+                    <ul class="use-case-examples">
+                        <li>高速ステーブルコイン取引（&lt;0.1秒決済）</li>
+                        <li>分散型取引所（DEX）の高速マッチング</li>
+                        <li>リアルタイム流動性プール最適化</li>
+                        <li>クロスチェーンDeFiプロトコル</li>
+                    </ul>
+                    <div class="use-case-project">
+                        <h4>注目プロジェクト</h4>
+                        <div class="project-item">
+                            <img src="/img/projects/optimadex.svg" alt="OptimaDEX Logo">
+                            <div class="project-info">
+                                <h5>OptimaDEX</h5>
+                                <p>1秒未満の高速取引を実現する分散型取引所</p>
+                                <a href="https://optimadex.io" target="_blank">詳細を見る →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <div class="use-case-icon" data-icon="nft"></div>
+                    <h3>NFT・デジタル資産</h3>
+                    <p>高速トランザクションとガスフリー体験を提供するNFTプラットフォーム</p>
+                    <ul class="use-case-examples">
+                        <li>ガスフリーNFTミンティング</li>
+                        <li>リアルタイムNFTマーケットプレイス</li>
+                        <li>フラクショナルNFT（共同所有）</li>
+                        <li>クロスチェーンNFT相互運用性</li>
+                    </ul>
+                    <div class="use-case-project">
+                        <h4>注目プロジェクト</h4>
+                        <div class="project-item">
+                            <img src="/img/projects/infinityart.svg" alt="InfinityArt Logo">
+                            <div class="project-info">
+                                <h5>InfinityArt</h5>
+                                <p>ガスフリーでクリエイターフレンドリーなNFTプラットフォーム</p>
+                                <a href="https://infinityart.io" target="_blank">詳細を見る →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <div class="use-case-icon" data-icon="gaming"></div>
+                    <h3>ブロックチェーンゲーム</h3>
+                    <p>リアルタイム処理を可能にする高TPS環境でのゲーム体験</p>
+                    <ul class="use-case-examples">
+                        <li>リアルタイムオンチェーンゲームメカニクス</li>
+                        <li>大規模マルチプレイヤーゲーム</li>
+                        <li>ゲーム内資産のシームレスな取引</li>
+                        <li>プレイヤー主導型ゲームエコノミー</li>
+                    </ul>
+                    <div class="use-case-project">
+                        <h4>注目プロジェクト</h4>
+                        <div class="project-item">
+                            <img src="/img/projects/cryptorealms.svg" alt="CryptoRealms Logo">
+                            <div class="project-info">
+                                <h5>CryptoRealms</h5>
+                                <p>完全オンチェーンのMMORPGゲーム</p>
+                                <a href="https://cryptorealms.io" target="_blank">詳細を見る →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="use-case-card">
+                    <div class="use-case-icon" data-icon="ai"></div>
+                    <h3>AI統合型スマートコントラクト</h3>
+                    <p>AIと連携した高度なスマートコントラクト機能</p>
+                    <ul class="use-case-examples">
+                        <li>AI駆動型予測市場</li>
+                        <li>オンチェーンデータ分析と自動最適化</li>
+                        <li>AIガバナンスシステム</li>
+                        <li>自己学習型スマートコントラクト</li>
+                    </ul>
+                    <div class="use-case-project">
+                        <h4>注目プロジェクト</h4>
+                        <div class="project-item">
+                            <img src="/img/projects/neuralcontract.svg" alt="NeuralContract Logo">
+                            <div class="project-info">
+                                <h5>NeuralContract</h5>
+                                <p>AI駆動型の自己最適化スマートコントラクトプラットフォーム</p>
+                                <a href="https://neuralcontract.ai" target="_blank">詳細を見る →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <div class="section">
         <h2>エコシステム概要</h2>
