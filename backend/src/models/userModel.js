@@ -49,8 +49,8 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-// For development purposes, we'll create a mock User model
-// In a real application, you would use mongoose.model
+// Comment out mock User model
+/*
 const User = {
   findById: (id) => {
     // Mock user data
@@ -88,8 +88,9 @@ const User = {
     });
   },
 };
+*/
 
-// Uncomment the following line to use the real mongoose model
-// const User = mongoose.model('User', userSchema);
+// Use real mongoose model
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

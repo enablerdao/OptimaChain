@@ -40,8 +40,8 @@ const walletSchema = mongoose.Schema(
   }
 );
 
-// For development purposes, we'll create a mock Wallet model
-// In a real application, you would use mongoose.model
+// Comment out mock Wallet model
+/*
 const Wallet = {
   findById: (id) => {
     // Mock wallet data
@@ -99,8 +99,9 @@ const Wallet = {
     });
   },
 };
+*/
 
-// Uncomment the following line to use the real mongoose model
-// const Wallet = mongoose.model('Wallet', walletSchema);
+// Use real mongoose model
+const Wallet = mongoose.model('Wallet', walletSchema);
 
 module.exports = Wallet;

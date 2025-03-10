@@ -8,18 +8,19 @@ const {
   getUsers,
 } = require('../controllers/userController');
 const { protect, admin, mockProtect } = require('../middleware/authMiddleware');
+const { validateUserRegistration, validateUserLogin } = require('../middleware/validationMiddleware');
 
 // Public routes
-router.post('/login', loginUser);
-router.post('/register', registerUser);
+router.post('/login', validateUserLogin, loginUser);
+router.post('/register', validateUserRegistration, registerUser);
 
 // Protected routes
 router.route('/profile')
-  .get(mockProtect, getUserProfile) // Use mockProtect for development
-  .put(mockProtect, updateUserProfile);
+  .get(protect, getUserProfile)
+  .put(protect, updateUserProfile);
 
 // Admin routes
 router.route('/')
-  .get(mockProtect, admin, getUsers);
+  .get(protect, admin, getUsers);
 
 module.exports = router;

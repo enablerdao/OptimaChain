@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const Wallet = require('../models/walletModel');
+const { v4: uuidv4 } = require('uuid');
 
 // Generate JWT token
 const generateToken = (id) => {
@@ -57,10 +58,17 @@ const registerUser = async (req, res) => {
       password,
     });
 
-    // Create a wallet for the user
+    // Create a wallet for the user with generated address and private key
     const wallet = await Wallet.create({
       user: user._id,
       name: 'Main Wallet',
+      address: `0x${uuidv4().replace(/-/g, '').substring(0, 40)}`,
+      privateKey: uuidv4(),
+      balances: [
+        { token: 'OPT', amount: 1000 },
+        { token: 'USDT', amount: 0 },
+        { token: 'ETH', amount: 0 },
+      ],
     });
 
     if (user) {
