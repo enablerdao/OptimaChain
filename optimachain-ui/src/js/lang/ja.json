@@ -1,0 +1,185 @@
+{
+  "nav": {
+    "features": "特徴",
+    "technology": "技術",
+    "ecosystem": "エコシステム",
+    "developers": "開発者",
+    "community": "コミュニティ",
+    "token": "トークン",
+    "roadmap": "ロードマップ"
+  },
+  "dropdown": {
+    "smartContracts": {
+      "title": "スマートコントラクト",
+      "desc": "WASM対応マルチ言語コントラクト"
+    },
+    "sdkApi": {
+      "title": "SDK & API",
+      "desc": "包括的な開発ツールキット"
+    },
+    "testnet": {
+      "title": "テストネット",
+      "desc": "開発環境とフォーセット"
+    },
+    "whitepaper": {
+      "title": "ホワイトペーパー",
+      "desc": "技術仕様と詳細設計"
+    }
+  },
+  "hero": {
+    "title": "次世代型分散型ブロックチェーンプラットフォーム",
+    "subtitle": "革新的なスケーリング技術と高度なセキュリティを統合",
+    "cta": "テストネットに参加する",
+    "secondary": "開発者向けドキュメント",
+    "wallet": "ウォレット接続"
+  },
+  "features": {
+    "title": "OptimaChainの特徴",
+    "scalability": {
+      "title": "高いスケーラビリティ",
+      "desc": "動的シャーディング技術により最大50,000 TPSを実現"
+    },
+    "security": {
+      "title": "高度なセキュリティ",
+      "desc": "Adaptive Proof-of-Stakeによる分散型検証と不正防止"
+    },
+    "interoperability": {
+      "title": "相互運用性",
+      "desc": "複数のブロックチェーンとのシームレスな統合"
+    },
+    "aiOptimization": {
+      "title": "AI最適化",
+      "desc": "機械学習によるネットワークパフォーマンスの自動最適化"
+    }
+  },
+  "stats": {
+    "tps": "トランザクション/秒",
+    "finality": "ファイナリティ",
+    "validators": "バリデーター",
+    "applications": "アプリケーション"
+  },
+  "cta": {
+    "join": "コミュニティに参加",
+    "start": "開発を始める"
+  },
+  "footer": {
+    "resources": "リソース",
+    "developers": "開発者",
+    "community": "コミュニティ",
+    "about": "会社情報",
+    "copyright": "© 2025 OptimaChain by Enabler DAO. All rights reserved."
+  },
+  "notification": {
+    "testnet": "OptimaChainテストネットが公開されました！",
+    "join": "今すぐ参加",
+    "close": "閉じる"
+  },
+  "buttons": {
+    "showMore": "詳細を表示",
+    "close": "閉じる",
+    "readMore": "詳細を見る"
+  },
+  "wallet": {
+    "connect": "ウォレット接続",
+    "disconnect": "切断",
+    "connected": "接続済み",
+    "balance": "残高",
+    "address": "アドレス",
+    "copy": "コピー",
+    "copied": "コピーしました"
+  },
+  "technology": {
+    "title": "OptimaChain技術",
+    "subtitle": "革新的なブロックチェーン技術の詳細",
+    "consensus": {
+      "title": "Adaptive Proof-of-Stake",
+      "desc": "ネットワーク状況に応じて自動調整するコンセンサスメカニズム"
+    },
+    "sharding": {
+      "title": "動的シャーディング",
+      "desc": "トランザクション量に応じて自動的にスケールするシャーディング技術"
+    },
+    "execution": {
+      "title": "並列実行エンジン",
+      "desc": "複数のトランザクションを同時に処理する高性能エンジン"
+    },
+    "privacy": {
+      "title": "プライバシー保護",
+      "desc": "ゼロ知識証明を活用したプライバシー保護機能"
+    }
+  },
+  "whitepaper": {
+    "title": "OptimaChainホワイトペーパー",
+    "subtitle": "技術仕様と詳細設計",
+    "download": "PDFをダウンロード",
+    "sections": {
+      "intro": "はじめに",
+      "architecture": "アーキテクチャ",
+      "consensus": "コンセンサスメカニズム",
+      "scaling": "スケーリングソリューション",
+      "security": "セキュリティモデル",
+      "tokenomics": "トークノミクス",
+      "roadmap": "ロードマップ",
+      "conclusion": "結論"
+    }
+  },
+  "developers": {
+    "title": "開発者リソース",
+    "subtitle": "OptimaChainでの開発に必要なツールとリソース",
+    "getStarted": "始めましょう",
+    "documentation": "ドキュメント",
+    "tutorials": "チュートリアル",
+    "github": "GitHub",
+    "discord": "Discord",
+    "faucet": "テストネットフォーセット"
+  },
+  "ecosystem": {
+    "title": "OptimaChainエコシステム",
+    "subtitle": "OptimaChain上に構築されたプロジェクトとアプリケーション",
+    "defi": "DeFi",
+    "nft": "NFT",
+    "gaming": "ゲーム",
+    "social": "ソーシャル",
+    "infrastructure": "インフラストラクチャ",
+    "join": "エコシステムに参加"
+  },
+  "roadmap": {
+    "title": "開発ロードマップ",
+    "subtitle": "OptimaChainの開発計画と今後のマイルストーン",
+    "q4_2024": {
+      "title": "2024年第4四半期",
+      "items": [
+        "テストネット立ち上げ",
+        "コアプロトコル開発",
+        "開発者ドキュメント公開"
+      ]
+    },
+    "q1_q2_2025": {
+      "title": "2025年第1-2四半期",
+      "items": [
+        "AI予測型スマートコントラクト実装",
+        "自己最適化型シャーディング開発",
+        "セキュリティ監査実施"
+      ]
+    },
+    "q3_2025": {
+      "title": "2025年第3四半期",
+      "items": [
+        "メインネット公開",
+        "トークン生成イベント",
+        "エコシステム拡大プログラム開始"
+      ]
+    },
+    "q4_2025": {
+      "title": "2025年第4四半期以降",
+      "items": [
+        "zk-STARKを活用したオンチェーンAI実装",
+        "リアルワールド資産統合フレームワーク展開",
+        "クロスチェーン相互運用性強化"
+      ]
+    }
+  },
+  "home": {
+    "funFact": "サイエンス豆知識：私たちのネットワークは、あなたが1日に瞬きする回数（約28,800回）よりも多くのトランザクションを1分間で処理します。"
+  }
+}

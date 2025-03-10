@@ -51,6 +51,20 @@ npm install
 npm run dev
 ```
 
+### モダンUI (OptimaChain UI)
+
+```bash
+# リポジトリをクローン
+git clone https://github.com/enablerdao/OptimaChain.git
+cd OptimaChain/optimachain-ui
+
+# 依存関係のインストール
+npm install
+
+# 開発サーバーの起動
+npm run dev
+```
+
 ### バックエンドAPI
 
 ```bash
@@ -62,7 +76,7 @@ npm start
 ### OptimaWallet プロトタイプ
 
 ```bash
-cd wallet
+cd optimachain-ui/wallet
 npm install
 npm start
 ```
@@ -70,7 +84,7 @@ npm start
 ### OptimaDEX プロトタイプ
 
 ```bash
-cd dex
+cd optimachain-ui/dex
 npm install
 npm start
 ```
@@ -81,6 +95,7 @@ OptimaChainプロジェクトは以下のコンポーネントで構成されて
 
 1. **フロントエンド**
    - ウェブサイト: プロジェクト紹介と情報提供
+   - OptimaChain UI: モダンなフロントエンドフレームワークを使用したウェブサイト
    - [OptimaWallet](#optimawallet-プロトタイプ): ブロックチェーン資産管理ウォレット
    - [OptimaDEX](#optimadex-プロトタイプ): 分散型取引所
 
