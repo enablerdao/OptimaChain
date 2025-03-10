@@ -1,0 +1,399 @@
+/* OptimaChain - アニメーションスタイル */
+
+/* ===== フェードインアニメーション ===== */
+.animate-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 遅延付きフェードイン */
+.delay-1 {
+  transition-delay: 0.1s;
+}
+
+.delay-2 {
+  transition-delay: 0.2s;
+}
+
+.delay-3 {
+  transition-delay: 0.3s;
+}
+
+.delay-4 {
+  transition-delay: 0.4s;
+}
+
+.delay-5 {
+  transition-delay: 0.5s;
+}
+
+/* ===== スクロールアニメーション ===== */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== グリッチエフェクト ===== */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text.glitching {
+  animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+.glitch-text.glitching::before,
+.glitch-text.glitching::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text.glitching::before {
+  left: 2px;
+  text-shadow: -1px 0 #ff3366;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch-text.glitching::after {
+  left: -2px;
+  text-shadow: -1px 0 #0066ff;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(31px, 9999px, 94px, 0);
+  }
+  10% {
+    clip: rect(112px, 9999px, 76px, 0);
+  }
+  20% {
+    clip: rect(85px, 9999px, 77px, 0);
+  }
+  30% {
+    clip: rect(27px, 9999px, 97px, 0);
+  }
+  40% {
+    clip: rect(64px, 9999px, 98px, 0);
+  }
+  50% {
+    clip: rect(61px, 9999px, 85px, 0);
+  }
+  60% {
+    clip: rect(99px, 9999px, 114px, 0);
+  }
+  70% {
+    clip: rect(34px, 9999px, 115px, 0);
+  }
+  80% {
+    clip: rect(98px, 9999px, 129px, 0);
+  }
+  90% {
+    clip: rect(43px, 9999px, 96px, 0);
+  }
+  100% {
+    clip: rect(82px, 9999px, 64px, 0);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    clip: rect(125px, 9999px, 162px, 0);
+  }
+  10% {
+    clip: rect(120px, 9999px, 147px, 0);
+  }
+  20% {
+    clip: rect(113px, 9999px, 171px, 0);
+  }
+  30% {
+    clip: rect(123px, 9999px, 153px, 0);
+  }
+  40% {
+    clip: rect(140px, 9999px, 176px, 0);
+  }
+  50% {
+    clip: rect(129px, 9999px, 168px, 0);
+  }
+  60% {
+    clip: rect(132px, 9999px, 151px, 0);
+  }
+  70% {
+    clip: rect(142px, 9999px, 161px, 0);
+  }
+  80% {
+    clip: rect(136px, 9999px, 156px, 0);
+  }
+  90% {
+    clip: rect(146px, 9999px, 165px, 0);
+  }
+  100% {
+    clip: rect(133px, 9999px, 172px, 0);
+  }
+}
+
+/* ===== タイピングアニメーション ===== */
+.typing-animation {
+  visibility: hidden;
+  position: relative;
+  display: inline-block;
+}
+
+.typing-animation::after {
+  content: '|';
+  position: absolute;
+  right: -4px;
+  animation: blink 0.7s infinite;
+}
+
+.typing-animation.typing-complete::after {
+  display: none;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ===== ホバーエフェクト ===== */
+.hover-scale {
+  transition: transform var(--transition-normal);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-lift {
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hover-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s;
+}
+
+.hover-glow:hover::before {
+  left: 100%;
+}
+
+/* ===== ローディングアニメーション ===== */
+.loading-spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 102, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-dots {
+  display: inline-flex;
+  align-items: center;
+}
+
+.loading-dots span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  margin: 0 2px;
+  animation: dots 1.4s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dots {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ===== カウントアップアニメーション ===== */
+.count-up {
+  display: inline-block;
+  font-weight: 700;
+}
+
+/* ===== パルスアニメーション ===== */
+.pulse {
+  animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 102, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 102, 255, 0);
+  }
+}
+
+/* ===== フロートアニメーション ===== */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* ===== シェイクアニメーション ===== */
+.shake {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+/* ===== ボタンクリックエフェクト ===== */
+.btn-click-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-click-effect::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.btn-click-effect:active::after {
+  opacity: 0.3;
+  transform: scale(50, 50) translate(-50%, -50%);
+  transition: all 0.5s;
+}
+
+/* ===== ページトランジション ===== */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s, transform 0.5s;
+}
