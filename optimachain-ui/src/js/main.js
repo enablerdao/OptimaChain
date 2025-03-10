@@ -6,6 +6,12 @@ import '../css/language-switcher.css';
 import '../css/modern-design.css';
 import '../css/branding.css';
 import '../css/minimalist.css';
+import '../css/tech-specs.css';
+import '../css/dev-quickstart.css';
+import '../css/research-papers.css';
+import '../css/use-cases.css';
+import '../css/partners.css';
+import '../css/blog.css';
 
 // 外部ライブラリのインポート
 import * as THREE from 'three';
@@ -40,6 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initLanguageSwitcher();
   initAnimations();
   initValidatorSetup();
+  
+  // OS切り替え機能の初期化
+  initOSSelector();
   
   // ブロックチェーンビジュアルの初期化（存在する場合）
   const blockchainCanvas = document.getElementById('blockchain-canvas');
@@ -157,4 +166,87 @@ function optimizePerformance() {
       document.body.appendChild(scriptEl);
     });
   }, 2000);
+}
+
+// OS切り替え機能
+function initOSSelector() {
+  const osButtons = document.querySelectorAll('.os-button');
+  if (!osButtons.length) return;
+  
+  osButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // アクティブクラスを切り替え
+      osButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      
+      const os = button.getAttribute('data-os');
+      
+      // ターミナルコマンドを更新
+      const terminalContent = document.querySelector('.terminal-content pre code');
+      if (!terminalContent) return;
+      
+      let commands = '';
+      
+      if (os === 'linux') {
+        commands = `<span class="comment"># OptimaChainをクローン</span>
+<span class="command">git clone https://github.com/enablerdao/OptimaChain</span>
+<span class="command">cd OptimaChain</span>
+
+<span class="comment"># バリデータノードをセットアップ</span>
+<span class="command">./scripts/validator-setup.sh</span>
+<span class="output">OptimaChain バリデータノードをセットアップしています...</span>
+<span class="output">依存関係をインストールしています...</span>
+<span class="output">設定ファイルを生成しています...</span>
+<span class="output">バリデータキーを生成しています...</span>
+<span class="output">テストネットに接続しています...</span>
+<span class="output">完了！バリデータノードが起動しました。</span>
+
+<span class="comment"># ステータス確認</span>
+<span class="command">optima-cli status</span>
+<span class="output">ステータス: アクティブ</span>
+<span class="output">ブロック高: 1,234,567</span>
+<span class="output">同期: 100%</span>`;
+      } else if (os === 'mac') {
+        commands = `<span class="comment"># OptimaChainをクローン</span>
+<span class="command">git clone https://github.com/enablerdao/OptimaChain</span>
+<span class="command">cd OptimaChain</span>
+
+<span class="comment"># Homebrewで依存関係をインストール</span>
+<span class="command">brew install rust node</span>
+
+<span class="comment"># バリデータノードをセットアップ</span>
+<span class="command">./scripts/validator-setup.sh</span>
+<span class="output">OptimaChain バリデータノードをセットアップしています...</span>
+<span class="output">依存関係をインストールしています...</span>
+<span class="output">設定ファイルを生成しています...</span>
+<span class="output">バリデータキーを生成しています...</span>
+<span class="output">テストネットに接続しています...</span>
+<span class="output">完了！バリデータノードが起動しました。</span>
+
+<span class="comment"># ステータス確認</span>
+<span class="command">optima-cli status</span>`;
+      } else if (os === 'windows') {
+        commands = `<span class="comment"># OptimaChainをクローン</span>
+<span class="command">git clone https://github.com/enablerdao/OptimaChain</span>
+<span class="command">cd OptimaChain</span>
+
+<span class="comment"># 依存関係をインストール</span>
+<span class="command">powershell -ExecutionPolicy Bypass -File scripts\\install-deps.ps1</span>
+
+<span class="comment"># バリデータノードをセットアップ</span>
+<span class="command">powershell -ExecutionPolicy Bypass -File scripts\\validator-setup.ps1</span>
+<span class="output">OptimaChain バリデータノードをセットアップしています...</span>
+<span class="output">依存関係をインストールしています...</span>
+<span class="output">設定ファイルを生成しています...</span>
+<span class="output">バリデータキーを生成しています...</span>
+<span class="output">テストネットに接続しています...</span>
+<span class="output">完了！バリデータノードが起動しました。</span>
+
+<span class="comment"># ステータス確認</span>
+<span class="command">optima-cli.exe status</span>`;
+      }
+      
+      terminalContent.innerHTML = commands;
+    });
+  });
 }

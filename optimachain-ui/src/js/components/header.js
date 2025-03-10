@@ -23,6 +23,8 @@ export function createHeader() {
             <li><a href="/community.html" data-i18n="nav.community">コミュニティ</a></li>
             <li><a href="/token.html" data-i18n="nav.token">トークン</a></li>
             <li><a href="/roadmap.html">ロードマップ</a></li>
+            <li><a href="/pages/blog.html">技術ブログ</a></li>
+            <li><a href="/whitepaper/OptimaChain_Whitepaper.html" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
           </ul>
         </nav>
         
