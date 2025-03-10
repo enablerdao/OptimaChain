@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OptimaChain - 次世代型分散型ブロックチェーンプラットフォーム</title>
     <meta name="description" content="革新的なスケーリング技術と高度なセキュリティを統合した次世代型分散型ブロックチェーンプラットフォーム">
+    <meta name="i18n-title" content="hero.title">
+    <meta name="i18n-description" content="hero.subtitle">
+    <meta name="theme-color" content="#3a86ff">
     
     <!-- ファビコン -->
     <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
@@ -19,6 +22,8 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/header-footer.css">
+    <link rel="stylesheet" href="css/language-switcher.css">
+    <link rel="stylesheet" href="css/modern-design.css">
     
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -211,8 +216,11 @@
         <div class="wrapper">
             <div class="hero-content animate-fade-in">
                 <h1 class="glitch-text" data-text="OptimaChain">OptimaChain</h1>
-                <p class="hero-subtitle animate-fade-in delay-1">
-                    革新的な<span class="highlight">スケーリング技術</span>と<span class="highlight">高度なセキュリティ</span>を統合した次世代型分散型ブロックチェーンプラットフォーム
+                <p class="hero-subtitle animate-fade-in delay-1" data-i18n="hero.title">
+                    次世代型分散型ブロックチェーンプラットフォーム
+                </p>
+                <p class="hero-description animate-fade-in delay-2" data-i18n="hero.subtitle">
+                    革新的な<span class="highlight-text">スケーリング技術</span>と<span class="highlight-text">高度なセキュリティ</span>を統合
                 </p>
                 
                 <div class="hero-stats animate-fade-in delay-2">
@@ -250,12 +258,12 @@
                 </div>
                 
                 <div class="hero-cta animate-fade-in delay-3">
-                    <a href="#features" class="primary-button">
-                        <span>詳細を見る</span>
+                    <a href="#features" class="primary-btn">
+                        <span data-i18n="hero.cta">詳細を見る</span>
                         <span class="button-icon">→</span>
                     </a>
-                    <a href="exchange.html" class="secondary-button">
-                        <span>トークン交換</span>
+                    <a href="developers.html" class="secondary-btn">
+                        <span data-i18n="hero.secondary">開発者向けドキュメント</span>
                         <span class="button-icon">↓</span>
                     </a>
                 </div>
@@ -269,12 +277,17 @@
                         <div class="data-stream"></div>
                     </div>
                 </div>
+                <div class="fun-fact animate-fade-in delay-5">
+                    <p data-i18n="home.funFact">
+                        サイエンス豆知識：私たちのネットワークは、あなたが1日に瞬きする回数（約28,800回）よりも多くのトランザクションを1分間で処理します。
+                    </p>
+                </div>
             </div>
         </div>
         
         <div class="scroll-indicator">
             <div class="mouse-icon"></div>
-            <span>スクロールして詳細を見る</span>
+            <span data-i18n="buttons.showMore">スクロールして詳細を見る</span>
         </div>
     </section>
     
@@ -283,7 +296,7 @@
         <div class="wrapper">
             <div class="section-header">
                 <div class="section-tag">FEATURES</div>
-                <h2 class="section-title">革新的な<span class="gradient-text">ブロックチェーン技術</span></h2>
+                <h2 class="section-title" data-i18n="features.title">OptimaChainの特徴</h2>
                 <p class="section-subtitle">OptimaChainは最先端のテクノロジーを駆使し、スケーラビリティ、セキュリティ、使いやすさを兼ね備えた次世代プラットフォームを実現します。</p>
             </div>
             
@@ -298,8 +311,8 @@
                                 <path d="M12 22.08V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <h3>AI-Adaptive Hybrid PoS</h3>
-                        <p>信頼性指標に基づくバリデータ選出システム。過去の行動履歴とトランザクション成功率を分析し、98%のエネルギー効率と95%のセキュリティレベルを実現。</p>
+                        <h3 data-i18n="features.security.title">高度なセキュリティ</h3>
+                        <p data-i18n="features.security.desc">Adaptive Proof-of-Stakeによる分散型検証と不正防止</p>
                         <div class="tech-detail">
                             <div class="detail-item">
                                 <span class="detail-label">エネルギー効率</span>
