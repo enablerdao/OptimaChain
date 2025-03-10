@@ -57,6 +57,7 @@
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     animation: pulse 3s infinite alternate;
+    box-shadow: 0 0 15px rgba(0, 113, 227, 0.6);
 }
 
 @keyframes pulse {
@@ -151,6 +152,30 @@
     border-radius: 30px;
     font-weight: 600;
     box-shadow: 0 4px 10px rgba(0, 113, 227, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.main-nav a.highlight-link::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+    pointer-events: none;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+    20%, 100% {
+        transform: translateX(100%) rotate(45deg);
+    }
 }
 
 .main-nav a.highlight-link:hover {
