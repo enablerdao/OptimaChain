@@ -66,7 +66,9 @@ const Market = {
   findOne: ({ pair }) => {
     // Mock market data
     const markets = getMarkets();
-    return Promise.resolve(markets.find(market => market.pair === pair) || null);
+    // Handle both formats: OPT/USDT and OPT-USDT
+    const normalizedPair = pair.replace('-', '/');
+    return Promise.resolve(markets.find(market => market.pair === normalizedPair) || null);
   },
   create: (marketData) => {
     // Mock market creation
