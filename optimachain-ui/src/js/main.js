@@ -10,6 +10,7 @@ import '../css/tech-specs.css';
 import '../css/dev-quickstart.css';
 import '../css/research-papers.css';
 import '../css/use-cases.css';
+import '../css/partners.css';
 
 // 外部ライブラリのインポート
 import * as THREE from 'three';
