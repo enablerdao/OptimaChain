@@ -1,0 +1,80 @@
+{
+  "nav": {
+    "features": "特点",
+    "technology": "技术",
+    "ecosystem": "生态系统",
+    "developers": "开发者",
+    "community": "社区",
+    "token": "代币"
+  },
+  "dropdown": {
+    "smartContracts": {
+      "title": "智能合约",
+      "desc": "基于WASM的多语言合约"
+    },
+    "sdkApi": {
+      "title": "SDK和API",
+      "desc": "全面的开发工具包"
+    },
+    "testnet": {
+      "title": "测试网",
+      "desc": "开发环境和水龙头"
+    },
+    "whitepaper": {
+      "title": "白皮书",
+      "desc": "技术规格和设计"
+    }
+  },
+  "hero": {
+    "title": "下一代去中心化区块链平台",
+    "subtitle": "将创新的扩展技术与先进的安全性相结合",
+    "cta": "了解更多",
+    "secondary": "开发者文档"
+  },
+  "features": {
+    "title": "OptimaChain特点",
+    "scalability": {
+      "title": "高扩展性",
+      "desc": "通过动态分片技术实现高达50,000 TPS"
+    },
+    "security": {
+      "title": "先进安全",
+      "desc": "自适应权益证明机制实现去中心化验证和防欺诈"
+    },
+    "interoperability": {
+      "title": "互操作性",
+      "desc": "与多个区块链无缝集成"
+    },
+    "aiOptimization": {
+      "title": "AI优化",
+      "desc": "通过机器学习自动优化网络性能"
+    }
+  },
+  "stats": {
+    "tps": "交易/秒",
+    "finality": "最终性",
+    "validators": "验证者",
+    "applications": "应用"
+  },
+  "cta": {
+    "join": "加入社区",
+    "start": "开始构建"
+  },
+  "footer": {
+    "resources": "资源",
+    "developers": "开发者",
+    "community": "社区",
+    "about": "关于我们",
+    "copyright": "© 2025 OptimaChain. 保留所有权利。"
+  },
+  "notification": {
+    "testnet": "OptimaChain测试网现已上线！",
+    "join": "立即加入",
+    "close": "关闭"
+  },
+  "buttons": {
+    "showMore": "显示更多",
+    "close": "关闭",
+    "readMore": "阅读更多"
+  }
+}

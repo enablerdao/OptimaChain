@@ -29,13 +29,16 @@
     
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- 言語切り替え -->
+    <script src="js/language-switcher.js" defer></script>
 </head>
 <body>
     <!-- 通知バー -->
     <div class="notification-bar">
         <div class="wrapper">
-            🚀 OptimaChainテストネットが公開されました！<a href="#testnet">今すぐ参加する</a>
-            <button class="notification-close">×</button>
+            🚀 <span data-i18n="notification.testnet">OptimaChainテストネットが公開されました！</span><a href="#testnet" data-i18n="notification.join">今すぐ参加する</a>
+            <button class="notification-close" data-i18n="notification.close">×</button>
         </div>
     </div>
     
@@ -59,11 +62,11 @@
                 
                 <nav class="main-nav" id="main-nav">
                     <ul>
-                        <li><a href="#features" class="active">特徴</a></li>
-                        <li><a href="technology.html">技術</a></li>
-                        <li><a href="ecosystem.html">エコシステム</a></li>
+                        <li><a href="#features" class="active" data-i18n="nav.features">特徴</a></li>
+                        <li><a href="technology.html" data-i18n="nav.technology">技術</a></li>
+                        <li><a href="ecosystem.html" data-i18n="nav.ecosystem">エコシステム</a></li>
                         <li class="dropdown">
-                            <a href="developers.html" class="dropdown-toggle">開発者</a>
+                            <a href="developers.html" class="dropdown-toggle" data-i18n="nav.developers">開発者</a>
                             <div class="dropdown-menu">
                                 <a href="developers.html#smart-contracts" class="dropdown-item">
                                     <div class="item-icon">
@@ -74,8 +77,8 @@
                                         </svg>
                                     </div>
                                     <div class="item-content">
-                                        <h4>スマートコントラクト</h4>
-                                        <p>WASMベースの多言語対応コントラクト</p>
+                                        <h4 data-i18n="dropdown.smartContracts.title">スマートコントラクト</h4>
+                                        <p data-i18n="dropdown.smartContracts.desc">WASMベースの多言語対応コントラクト</p>
                                     </div>
                                 </a>
                                 <a href="developers.html#sdk-api" class="dropdown-item">
@@ -86,8 +89,8 @@
                                         </svg>
                                     </div>
                                     <div class="item-content">
-                                        <h4>SDK & API</h4>
-                                        <p>包括的な開発ツールキット</p>
+                                        <h4 data-i18n="dropdown.sdkApi.title">SDK & API</h4>
+                                        <p data-i18n="dropdown.sdkApi.desc">包括的な開発ツールキット</p>
                                     </div>
                                 </a>
                                 <a href="developers.html#testnet" class="dropdown-item">
@@ -99,8 +102,8 @@
                                         </svg>
                                     </div>
                                     <div class="item-content">
-                                        <h4>テストネット</h4>
-                                        <p>開発環境とフォーセット</p>
+                                        <h4 data-i18n="dropdown.testnet.title">テストネット</h4>
+                                        <p data-i18n="dropdown.testnet.desc">開発環境とフォーセット</p>
                                     </div>
                                 </a>
                                 <a href="whitepaper/OptimaChain_Whitepaper.html" class="dropdown-item">
@@ -114,14 +117,14 @@
                                         </svg>
                                     </div>
                                     <div class="item-content">
-                                        <h4>ホワイトペーパー</h4>
-                                        <p>技術仕様と詳細設計</p>
+                                        <h4 data-i18n="dropdown.whitepaper.title">ホワイトペーパー</h4>
+                                        <p data-i18n="dropdown.whitepaper.desc">技術仕様と詳細設計</p>
                                     </div>
                                 </a>
                             </div>
                         </li>
-                        <li><a href="community.html">コミュニティ</a></li>
-                        <li><a href="token.html" class="highlight-link">トークン</a></li>
+                        <li><a href="community.html" data-i18n="nav.community">コミュニティ</a></li>
+                        <li><a href="token.html" class="highlight-link" data-i18n="nav.token">トークン</a></li>
                     </ul>
                 </nav>
                 
@@ -135,7 +138,7 @@
                     
                     <div class="language-selector">
                         <button class="language-toggle" aria-label="言語選択">
-                            <span class="current-language">JP</span>
+                            <span class="current-language">JA</span>
                             <span class="toggle-icon">▼</span>
                         </button>
                         <div class="language-dropdown">
@@ -143,13 +146,17 @@
                                 <div class="language-flag en"></div>
                                 <span class="language-name">English</span>
                             </a>
-                            <a href="#" class="language-option active" data-lang="jp">
-                                <div class="language-flag jp"></div>
+                            <a href="#" class="language-option active" data-lang="ja">
+                                <div class="language-flag ja"></div>
                                 <span class="language-name">日本語</span>
                             </a>
                             <a href="#" class="language-option" data-lang="zh">
                                 <div class="language-flag zh"></div>
                                 <span class="language-name">中文</span>
+                            </a>
+                            <a href="#" class="language-option" data-lang="ko">
+                                <div class="language-flag ko"></div>
+                                <span class="language-name">한국어</span>
                             </a>
                         </div>
                     </div>
@@ -161,7 +168,7 @@
                                 <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </span>
-                        <span>ウォレット接続</span>
+                        <span data-i18n="wallet.connect">ウォレット接続</span>
                     </button>
                     
                     <button class="mobile-menu-btn">
@@ -180,11 +187,14 @@
     <div class="mobile-menu">
         <nav>
             <ul>
-                <li><a href="#features">特徴</a></li>
-                <li><a href="#technology">技術</a></li>
-                <li><a href="#ecosystem">エコシステム</a></li>
-                <li><a href="#developers">開発者</a></li>
-                <li><a href="#community">コミュニティ</a></li>
+                <li><a href="#features" data-i18n="nav.features">特徴</a></li>
+                <li><a href="technology.html" data-i18n="nav.technology">技術</a></li>
+                <li><a href="ecosystem.html" data-i18n="nav.ecosystem">エコシステム</a></li>
+                <li><a href="developers.html" data-i18n="nav.developers">開発者</a></li>
+                <li><a href="community.html" data-i18n="nav.community">コミュニティ</a></li>
+                <li><a href="token.html" data-i18n="nav.token">トークン</a></li>
+                <li><a href="roadmap.html">ロードマップ</a></li>
+                <li><a href="whitepaper/OptimaChain_Whitepaper.html" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
             </ul>
         </nav>
     </div>
@@ -928,10 +938,84 @@
             <p>この仕様により、「OptimaChain」はスケーラビリティ、セキュリティ、持続可能性を実現した革新的なブロックチェーン環境を提供します。</p>
         </div>
 
-        <div class="footer">
-            <p>© 2023 OptimaChain - 次世代型分散型ブロックチェーンプラットフォーム</p>
         </div>
     </div>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="wrapper">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" class="logo">
+                        <div class="logo-mark">
+                            <div class="logo-hexagon"></div>
+                            <div class="logo-circle"></div>
+                        </div>
+                        OptimaChain
+                    </a>
+                    <p>革新的なスケーリング技術と高度なセキュリティを統合した次世代型分散型ブロックチェーンプラットフォーム</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-links-column">
+                        <h4 data-i18n="footer.resources">リソース</h4>
+                        <ul>
+                            <li><a href="whitepaper/OptimaChain_Whitepaper.html">ホワイトペーパー</a></li>
+                            <li><a href="roadmap.html">ロードマップ</a></li>
+                            <li><a href="token.html">トークン</a></li>
+                            <li><a href="ecosystem.html">エコシステム</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-column">
+                        <h4 data-i18n="footer.developers">開発者</h4>
+                        <ul>
+                            <li><a href="developers.html">開発者ポータル</a></li>
+                            <li><a href="developers.html#smart-contracts">スマートコントラクト</a></li>
+                            <li><a href="developers.html#sdk-api">SDK & API</a></li>
+                            <li><a href="developers.html#testnet">テストネット</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-column">
+                        <h4 data-i18n="footer.community">コミュニティ</h4>
+                        <ul>
+                            <li><a href="https://discord.gg/optimachain">Discord</a></li>
+                            <li><a href="https://t.me/optimachain">Telegram</a></li>
+                            <li><a href="https://twitter.com/OptimaChain">Twitter</a></li>
+                            <li><a href="https://github.com/enablerdao/OptimaChain">GitHub</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-column">
+                        <h4 data-i18n="footer.about">会社概要</h4>
+                        <ul>
+                            <li><a href="about.html">チーム</a></li>
+                            <li><a href="careers.html">採用情報</a></li>
+                            <li><a href="press.html">プレス</a></li>
+                            <li><a href="contact.html">お問い合わせ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">© 2025 OptimaChain. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://twitter.com/OptimaChain" class="social-icon twitter">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 3.00005C22.0424 3.67552 20.9821 4.19216 19.86 4.53005C19.2577 3.83756 18.4573 3.34674 17.567 3.12397C16.6767 2.90121 15.7395 2.95724 14.8821 3.2845C14.0247 3.61176 13.2884 4.19445 12.773 4.95376C12.2575 5.71308 11.9877 6.61238 12 7.53005V8.53005C10.2426 8.57561 8.50127 8.18586 6.93101 7.39549C5.36074 6.60513 4.01032 5.43868 3 4.00005C3 4.00005 -1 13 8 17C5.94053 18.398 3.48716 19.099 1 19C10 24 21 19 21 7.50005C20.9991 7.2215 20.9723 6.94364 20.92 6.67005C21.9406 5.66354 22.6608 4.39276 23 3.00005Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="https://discord.gg/optimachain" class="social-icon discord">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" stroke="currentColor" stroke-width="0.5" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/enablerdao/OptimaChain" class="social-icon github">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="blockchain-visual.js"></script>
     <script src="script.js"></script>
