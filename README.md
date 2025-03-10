@@ -51,6 +51,20 @@ npm install
 npm run dev
 ```
 
+### Viteアプリケーション
+
+```bash
+# リポジトリをクローン
+git clone https://github.com/enablerdao/OptimaChain.git
+cd OptimaChain/vite-app
+
+# 依存関係のインストール
+npm install
+
+# 開発サーバーの起動
+npm run dev
+```
+
 ### バックエンドAPI
 
 ```bash
@@ -81,6 +95,7 @@ OptimaChainプロジェクトは以下のコンポーネントで構成されて
 
 1. **フロントエンド**
    - ウェブサイト: プロジェクト紹介と情報提供
+   - Viteアプリケーション: モダンなフロントエンドフレームワークを使用したウェブサイト
    - [OptimaWallet](#optimawallet-プロトタイプ): ブロックチェーン資産管理ウォレット
    - [OptimaDEX](#optimadex-プロトタイプ): 分散型取引所
 
