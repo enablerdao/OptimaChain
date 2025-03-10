@@ -27,14 +27,26 @@ import { initLanguageSwitcher } from './language-switcher.js';
 import { initAnimations } from './animations.js';
 import { initNavigation } from './navigation.js';
 import { initValidatorSetup } from './validator-setup.js';
+import { initHeader, initNotificationBar, loadHeader } from './header.js';
 
 // ページ読み込み時の初期化
 document.addEventListener('DOMContentLoaded', () => {
   console.log('OptimaChain - アプリケーション初期化');
   
   // ヘッダーとフッターの挿入（index.htmlに直接記述されていない場合）
-  if (!document.querySelector('.main-header')) {
-    insertHeader();
+  if (!document.querySelector('header')) {
+    // 新しいヘッダーシステムを使用
+    const headerContainer = document.getElementById('header-container');
+    if (headerContainer) {
+      loadHeader('header-container');
+    } else {
+      // 従来のヘッダー挿入を使用
+      insertHeader();
+    }
+  } else {
+    // すでにヘッダーが存在する場合は初期化のみ
+    initHeader();
+    initNotificationBar();
   }
   
   if (!document.querySelector('.main-footer')) {
