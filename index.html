@@ -43,7 +43,7 @@
     <header class="header">
         <div class="wrapper">
             <div class="header-content">
-                <a href="#" class="logo">
+                <a href="index.html" class="logo">
                     <div class="logo-mark">
                         <div class="logo-hexagon"></div>
                         <div class="logo-circle"></div>
@@ -51,15 +51,21 @@
                     OptimaChain
                 </a>
                 
-                <nav class="main-nav">
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="メニュー">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <nav class="main-nav" id="main-nav">
                     <ul>
                         <li><a href="#features" class="active">特徴</a></li>
-                        <li><a href="#technology">技術</a></li>
-                        <li><a href="#ecosystem">エコシステム</a></li>
+                        <li><a href="technology.html">技術</a></li>
+                        <li><a href="ecosystem.html">エコシステム</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle">開発者</a>
+                            <a href="developers.html" class="dropdown-toggle">開発者</a>
                             <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">
+                                <a href="developers.html#smart-contracts" class="dropdown-item">
                                     <div class="item-icon">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -72,7 +78,7 @@
                                         <p>WASMベースの多言語対応コントラクト</p>
                                     </div>
                                 </a>
-                                <a href="#" class="dropdown-item">
+                                <a href="developers.html#sdk-api" class="dropdown-item">
                                     <div class="item-icon">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M20 7H4C2.89543 7 2 7.89543 2 9V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V9C22 7.89543 21.1046 7 20 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -84,7 +90,7 @@
                                         <p>包括的な開発ツールキット</p>
                                     </div>
                                 </a>
-                                <a href="#" class="dropdown-item">
+                                <a href="developers.html#testnet" class="dropdown-item">
                                     <div class="item-icon">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M18 8H19C20.1046 8 21 8.89543 21 10V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V10C3 8.89543 3.89543 8 5 8H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -97,14 +103,30 @@
                                         <p>開発環境とフォーセット</p>
                                     </div>
                                 </a>
+                                <a href="whitepaper/OptimaChain_Whitepaper.html" class="dropdown-item">
+                                    <div class="item-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M10 9H9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="item-content">
+                                        <h4>ホワイトペーパー</h4>
+                                        <p>技術仕様と詳細設計</p>
+                                    </div>
+                                </a>
                             </div>
                         </li>
-                        <li><a href="#community">コミュニティ</a></li>
+                        <li><a href="community.html">コミュニティ</a></li>
+                        <li><a href="token.html" class="highlight-link">トークン</a></li>
                     </ul>
                 </nav>
                 
                 <div class="header-actions">
-                    <div class="theme-toggle" id="theme-toggle">
+                    <div class="theme-toggle" id="theme-toggle" aria-label="テーマ切替">
                         <div class="toggle-track">
                             <div class="toggle-sun"></div>
                             <div class="toggle-moon"></div>
@@ -112,7 +134,7 @@
                     </div>
                     
                     <div class="language-selector">
-                        <button class="language-toggle">
+                        <button class="language-toggle" aria-label="言語選択">
                             <span class="current-language">JP</span>
                             <span class="toggle-icon">▼</span>
                         </button>
