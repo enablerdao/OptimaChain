@@ -23,5 +23,12 @@ export default defineConfig({
         dex_index: resolve(__dirname, 'dex/index.html'),
       },
     },
+    sourcemap: false,
+    minify: 'terser',
+    terserOptions: {
+      format: {
+        comments: false
+      }
+    }
   },
 });

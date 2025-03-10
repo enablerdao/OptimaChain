@@ -5,6 +5,7 @@ import '../css/header-footer.css';
 import '../css/language-switcher.css';
 import '../css/modern-design.css';
 import '../css/branding.css';
+import '../css/minimalist.css';
 
 // 外部ライブラリのインポート
 import * as THREE from 'three';
@@ -19,6 +20,7 @@ import { initBlockchainVisual } from './blockchain-visual.js';
 import { initLanguageSwitcher } from './language-switcher.js';
 import { initAnimations } from './animations.js';
 import { initNavigation } from './navigation.js';
+import { initValidatorSetup } from './validator-setup.js';
 
 // ページ読み込み時の初期化
 document.addEventListener('DOMContentLoaded', () => {
@@ -37,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initLanguageSwitcher();
   initAnimations();
+  initValidatorSetup();
   
   // ブロックチェーンビジュアルの初期化（存在する場合）
   const blockchainCanvas = document.getElementById('blockchain-canvas');
