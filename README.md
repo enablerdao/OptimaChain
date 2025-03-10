@@ -106,7 +106,7 @@ OptimaChainはMITライセンスの下で公開されています。
 
 ## 連絡先
 
-- **ウェブサイト**: [https://optimachain.network](https://optimachain.network)
-- **メール**: info@optimachain.network
+- **ウェブサイト**: [https://optimachain.org](https://optimachain.org)
+- **メール**: info@optimachain.org
 - **Twitter**: [@OptimaChain](https://twitter.com/OptimaChain)
-- **GitHub**: [github.com/optimachain](https://github.com/optimachain)
+- **GitHub**: [github.com/enablerdao/OptimaChain](https://github.com/enablerdao/OptimaChain)
