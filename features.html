@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaChain - 主要機能と技術詳細</title>
+    <meta name="description" content="OptimaChainの革新的な技術と主要機能の詳細。動的シャーディング、Adaptive Proof-of-Stake、AI最適化など、次世代ブロックチェーンの核となる技術を解説。">
+    <meta name="keywords" content="ブロックチェーン, OptimaChain, シャーディング, PoS, AI, スケーラビリティ, セキュリティ, Web3">
+    <meta name="author" content="OptimaChain Team">
+    
+    <!-- OGP設定 -->
+    <meta property="og:title" content="OptimaChain - 主要機能と技術詳細">
+    <meta property="og:description" content="OptimaChainの革新的な技術と主要機能の詳細。動的シャーディング、Adaptive Proof-of-Stake、AI最適化など、次世代ブロックチェーンの核となる技術を解説。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://optimachain.io/features.html">
+    <meta property="og:image" content="https://optimachain.io/img/og-image.jpg">
+    <meta property="og:site_name" content="OptimaChain">
+    
+    <!-- ファビコン -->
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="img/favicon.svg">
+    
+    <!-- スタイルシート -->
+    <link rel="stylesheet" href="css/modern-design.css">
+    <link rel="stylesheet" href="css/header-footer.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/language-switcher.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/logo.svg" alt="OptimaChain Logo">
+                </a>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="features.html" class="active">機能</a></li>
+                    <li><a href="technology.html">技術</a></li>
+                    <li><a href="ecosystem.html">エコシステム</a></li>
+                    <li><a href="developers.html">開発者</a></li>
+                    <li><a href="community.html">コミュニティ</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-right">
+                <div class="language-switcher">
+                    <button class="current-lang">JP</button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">EN</a></li>
+                        <li><a href="#" data-lang="ja" class="active">JP</a></li>
+                        <li><a href="#" data-lang="fr">FR</a></li>
+                    </ul>
+                </div>
+                
+                <a href="wallet.html" class="wallet-btn">ウォレット接続</a>
+                
+                <button class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <!-- ヒーローセクション -->
+        <section class="hero features-hero">
+            <div class="hero-background">
+                <div class="gradient-sphere"></div>
+                <div class="gradient-sphere"></div>
+                <div class="floating-particles"></div>
+                <div class="grid-overlay"></div>
+            </div>
+            
+            <div class="wrapper">
+                <div class="hero-content animate-fade-in">
+                    <div class="section-tag">FEATURES</div>
+                    <h1 class="glitch-text" data-text="Core Features">Core Features</h1>
+                    <p class="hero-subtitle animate-fade-in delay-1">
+                        OptimaChainの革新的な機能
+                    </p>
+                    <p class="hero-description animate-fade-in delay-2">
+                        次世代ブロックチェーンを実現する革新的な技術と機能
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 主要機能セクション -->
+        <section class="features-section">
+            <div class="wrapper">
+                <div class="section-header">
+                    <div class="section-tag">TECHNOLOGY</div>
+                    <h2 class="section-title">革新的な技術</h2>
+                    <p class="section-subtitle">
+                        OptimaChainは、ブロックチェーン技術の限界を超えるために設計された革新的な機能を備えています。
+                    </p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 4L4 14L24 24L44 14L24 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 34L24 44L44 34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 24L24 34L44 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">動的シャーディング</h3>
+                        <p class="feature-description">
+                            ネットワーク負荷に応じて自動的にシャード（断片）の数を調整し、最大50,000TPSの処理能力を実現します。クロスシャードトランザクションの効率的な処理により、スケーラビリティの問題を解決します。
+                        </p>
+                        <a href="technology.html#sharding" class="feature-link">詳細を見る →</a>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M24 12L24 24L32 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Adaptive Proof-of-Stake</h3>
+                        <p class="feature-description">
+                            ネットワークの状態に応じて自動的にパラメータを調整するコンセンサスメカニズム。エネルギー効率が高く、1秒未満のファイナリティを実現します。パフォーマンスベースの報酬システムとスラッシングによる不正防止機能を備えています。
+                        </p>
+                        <a href="technology.html#consensus" class="feature-link">詳細を見る →</a>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 32C28.4183 32 32 28.4183 32 24C32 19.5817 28.4183 16 24 16C19.5817 16 16 19.5817 16 24C16 28.4183 19.5817 32 24 32Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M38.6901 9.31L30.8101 17.19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M17.1899 30.81L9.30994 38.69" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M30.8101 30.81L38.6901 38.69" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9.30994 9.31L17.1899 17.19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M24 4V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M44 24H40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M24 44V40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 24H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">AI最適化</h3>
+                        <p class="feature-description">
+                            機械学習アルゴリズムを活用してネットワークのパフォーマンスを継続的に監視・最適化。リアルタイムネットワーク分析、予測型リソース割り当て、異常検出と自動対応機能により、常に最高のパフォーマンスを発揮します。
+                        </p>
+                        <a href="technology.html#ai-adaptive" class="feature-link">詳細を見る →</a>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M32 32L44 44" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 20C4 28.8366 11.1634 36 20 36C24.4183 36 28.4183 34.2091 31.3137 31.3137C34.2091 28.4183 36 24.4183 36 20C36 11.1634 28.8366 4 20 4C11.1634 4 4 11.1634 4 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M20 14V26" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 20H26" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">プライバシー保護</h3>
+                        <p class="feature-description">
+                            ゼロ知識証明（ZKP）技術を活用したプライバシー保護機能。トランザクションの詳細を公開せずに検証可能にし、企業や個人のプライバシーを確保しながらブロックチェーンの透明性と監査可能性を維持します。
+                        </p>
+                        <a href="technology.html#privacy" class="feature-link">詳細を見る →</a>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M32 8L40 16L32 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 24L8 16L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M40 16H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M24 24V44" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">クロスチェーン相互運用性</h3>
+                        <p class="feature-description">
+                            他のブロックチェーンとのシームレスな連携を実現するクロスチェーンブリッジ。異なるブロックチェーン間でのアセットやデータの移動を可能にし、分断されたブロックチェーンエコシステムを統合します。
+                        </p>
+                        <a href="technology.html#interoperability" class="feature-link">詳細を見る →</a>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M24 16V32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 24H32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">スマートコントラクト2.0</h3>
+                        <p class="feature-description">
+                            高度な機能を備えた次世代スマートコントラクトプラットフォーム。複数言語対応、並列実行、形式検証、自動最適化機能により、安全で効率的なdAppの開発を可能にします。
+                        </p>
+                        <a href="technology.html#smart-contracts" class="feature-link">詳細を見る →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ユースケースセクション -->
+        <section class="use-cases-section">
+            <div class="wrapper">
+                <div class="section-header">
+                    <div class="section-tag">USE CASES</div>
+                    <h2 class="section-title">ユースケース</h2>
+                    <p class="section-subtitle">
+                        OptimaChainは様々な産業や用途に適用可能な柔軟なプラットフォームです。
+                    </p>
+                </div>
+                
+                <div class="use-cases-grid">
+                    <div class="use-case-card">
+                        <div class="use-case-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M40 16H8C5.79086 16 4 17.7909 4 20V40C4 42.2091 5.79086 44 8 44H40C42.2091 44 44 42.2091 44 40V20C44 17.7909 42.2091 16 40 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 16V8C16 6.93913 16.4214 5.92172 17.1716 5.17157C17.9217 4.42143 18.9391 4 20 4H28C29.0609 4 30.0783 4.42143 30.8284 5.17157C31.5786 5.92172 32 6.93913 32 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M24 28V32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M24 28C26.2091 28 28 26.2091 28 24C28 21.7909 26.2091 20 24 20C21.7909 20 20 21.7909 20 24C20 26.2091 21.7909 28 24 28Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-title">DeFi（分散型金融）</h3>
+                        <p class="use-case-description">
+                            高速トランザクション処理と低コストで、DEX、レンディング、ステーキング、シンセティックアセットなどの金融サービスを提供。機関投資家向けのコンプライアンス機能も備えています。
+                        </p>
+                    </div>
+                    
+                    <div class="use-case-card">
+                        <div class="use-case-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M40 12H8C5.79086 12 4 13.7909 4 16V40C4 42.2091 5.79086 44 8 44H40C42.2091 44 44 42.2091 44 40V16C44 13.7909 42.2091 12 40 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 12V8C16 5.79086 17.7909 4 20 4H28C30.2091 4 32 5.79086 32 8V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M24 20V36" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 28H32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-title">NFTとメタバース</h3>
+                        <p class="use-case-description">
+                            高性能なNFTプラットフォームとメタバース基盤。動的NFT、フラクショナルNFT、クロスプラットフォーム相互運用性を実現し、次世代デジタル資産エコシステムを構築します。
+                        </p>
+                    </div>
+                    
+                    <div class="use-case-card">
+                        <div class="use-case-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M44 24H36L32 36L16 12L12 24H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-title">エンタープライズソリューション</h3>
+                        <p class="use-case-description">
+                            企業向けのプライベート/コンソーシアムブロックチェーンソリューション。プライバシー保護、高スループット、コンプライアンス機能を備え、サプライチェーン、ヘルスケア、金融機関向けに最適化されています。
+                        </p>
+                    </div>
+                    
+                    <div class="use-case-card">
+                        <div class="use-case-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 24H44" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M24 4C29.5228 4 34 12.9543 34 24C34 35.0457 29.5228 44 24 44C18.4772 44 14 35.0457 14 24C14 12.9543 18.4772 4 24 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-title">Web3アプリケーション</h3>
+                        <p class="use-case-description">
+                            分散型ソーシャルメディア、ストレージ、コンピューティングなどのWeb3アプリケーション開発基盤。ユーザー中心のインターネットを実現するための高性能インフラストラクチャを提供します。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 比較セクション -->
+        <section class="comparison-section">
+            <div class="wrapper">
+                <div class="section-header">
+                    <div class="section-tag">COMPARISON</div>
+                    <h2 class="section-title">他のブロックチェーンとの比較</h2>
+                    <p class="section-subtitle">
+                        OptimaChainは既存のブロックチェーンプラットフォームと比較して、多くの点で優位性を持っています。
+                    </p>
+                </div>
+                
+                <div class="comparison-table-container">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>機能</th>
+                                <th>OptimaChain</th>
+                                <th>Ethereum</th>
+                                <th>Solana</th>
+                                <th>Polkadot</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>トランザクション処理速度</td>
+                                <td>50,000 TPS</td>
+                                <td>15-30 TPS</td>
+                                <td>65,000 TPS</td>
+                                <td>1,000 TPS</td>
+                            </tr>
+                            <tr>
+                                <td>ファイナリティ</td>
+                                <td>&lt;1秒</td>
+                                <td>~6分</td>
+                                <td>~2秒</td>
+                                <td>~60秒</td>
+                            </tr>
+                            <tr>
+                                <td>コンセンサスメカニズム</td>
+                                <td>Adaptive PoS</td>
+                                <td>PoS</td>
+                                <td>PoH/PoS</td>
+                                <td>NPoS</td>
+                            </tr>
+                            <tr>
+                                <td>シャーディング</td>
+                                <td>動的シャーディング</td>
+                                <td>計画中</td>
+                                <td>なし</td>
+                                <td>パラチェーン</td>
+                            </tr>
+                            <tr>
+                                <td>AI最適化</td>
+                                <td>あり</td>
+                                <td>なし</td>
+                                <td>なし</td>
+                                <td>なし</td>
+                            </tr>
+                            <tr>
+                                <td>プライバシー保護</td>
+                                <td>ZKP内蔵</td>
+                                <td>L2のみ</td>
+                                <td>限定的</td>
+                                <td>限定的</td>
+                            </tr>
+                            <tr>
+                                <td>トランザクションコスト</td>
+                                <td>超低コスト</td>
+                                <td>高コスト</td>
+                                <td>低コスト</td>
+                                <td>中程度</td>
+                            </tr>
+                            <tr>
+                                <td>エネルギー効率</td>
+                                <td>非常に高い</td>
+                                <td>高い</td>
+                                <td>高い</td>
+                                <td>高い</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTAセクション -->
+        <section class="cta-section">
+            <div class="wrapper">
+                <div class="cta-container">
+                    <h2 class="cta-title">OptimaChainで未来を構築しましょう</h2>
+                    <p class="cta-text">革新的なブロックチェーン技術を活用して、次世代のアプリケーションを開発しませんか？</p>
+                    <div class="cta-buttons">
+                        <a href="developers.html" class="cta-btn">
+                            <span>開発を始める</span>
+                            <span class="button-icon">→</span>
+                        </a>
+                        <a href="community.html" class="secondary-btn">
+                            <span>コミュニティに参加</span>
+                            <span class="button-icon">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <img src="img/logo-white.svg" alt="OptimaChain Logo">
+                    <p>革新的なスケーリング技術と高度なセキュリティを統合した次世代型分散型ブロックチェーンプラットフォーム</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-links-column">
+                        <h3>プロダクト</h3>
+                        <ul>
+                            <li><a href="features.html">機能</a></li>
+                            <li><a href="technology.html">技術</a></li>
+                            <li><a href="token.html">トークン</a></li>
+                            <li><a href="roadmap.html">ロードマップ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-links-column">
+                        <h3>開発者</h3>
+                        <ul>
+                            <li><a href="developers.html">ドキュメント</a></li>
+                            <li><a href="https://github.com/enablerdao/OptimaChain">GitHub</a></li>
+                            <li><a href="validator-guide.html">バリデータガイド</a></li>
+                            <li><a href="developers.html#grants">助成金プログラム</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-links-column">
+                        <h3>コミュニティ</h3>
+                        <ul>
+                            <li><a href="https://discord.gg/optimachain">Discord</a></li>
+                            <li><a href="https://twitter.com/OptimaChain">Twitter</a></li>
+                            <li><a href="https://t.me/optimachain">Telegram</a></li>
+                            <li><a href="community.html#events">イベント</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-links-column">
+                        <h3>会社情報</h3>
+                        <ul>
+                            <li><a href="about.html">私たちについて</a></li>
+                            <li><a href="careers.html">採用情報</a></li>
+                            <li><a href="press.html">プレスキット</a></li>
+                            <li><a href="contact.html">お問い合わせ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-social">
+                    <a href="https://twitter.com/OptimaChain" class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 3.00005C22.0424 3.67552 20.9821 4.19216 19.86 4.53005C19.2577 3.83756 18.4573 3.34674 17.567 3.12397C16.6767 2.90121 15.7395 2.95724 14.8821 3.2845C14.0247 3.61176 13.2884 4.19445 12.773 4.95376C12.2575 5.71308 11.9877 6.61238 12 7.53005V8.53005C10.2426 8.57561 8.50127 8.18586 6.93101 7.39549C5.36074 6.60513 4.01032 5.43868 3 4.00005C3 4.00005 -1 13 8 17C5.94053 18.398 3.48716 19.099 1 19C10 24 21 19 21 7.50005C20.9991 7.2215 20.9723 6.94364 20.92 6.67005C21.9406 5.66354 22.6608 4.39276 23 3.00005Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/enablerdao/OptimaChain" class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 22V18.13C16.0375 17.6532 15.9731 17.1738 15.811 16.7238C15.6489 16.2738 15.3929 15.8634 15.06 15.52C18.2 15.17 21.5 13.98 21.5 8.52C21.4997 7.12383 20.9627 5.7812 20 4.77C20.4559 3.54851 20.4236 2.19835 19.91 0.999999C19.91 0.999999 18.73 0.649999 16 2.48C13.708 1.85882 11.292 1.85882 9 2.48C6.27 0.649999 5.09 0.999999 5.09 0.999999C4.57638 2.19835 4.54414 3.54851 5 4.77C4.03013 5.7887 3.49252 7.14346 3.5 8.55C3.5 13.97 6.8 15.16 9.94 15.55C9.611 15.89 9.35726 16.2954 9.19531 16.7399C9.03335 17.1844 8.96681 17.6581 9 18.13V22M9 19C4 20.5 4 16.5 2 16L9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="https://discord.gg/optimachain" class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.317 4.3698C18.7873 3.6876 17.147 3.1978 15.4319 2.9305C15.4007 2.9249 15.3695 2.9388 15.3534 2.9676C15.1424 3.3417 14.9087 3.8357 14.7451 4.2261C12.9004 3.9782 11.0652 3.9782 9.25832 4.2261C9.09465 3.8251 8.85248 3.3417 8.64057 2.9676C8.62448 2.9397 8.59328 2.9258 8.56205 2.9305C6.84791 3.1969 5.20746 3.6876 3.67783 4.3698C3.66467 4.3754 3.65338 4.3847 3.64686 4.3968C0.533392 9.0943 -0.31895 13.6736 0.0991801 18.1915C0.101072 18.2127 0.11337 18.2329 0.130398 18.2459C2.18863 19.7704 4.17543 20.6932 6.12429 21.2928C6.15552 21.3028 6.18861 21.2917 6.20748 21.2644C6.66913 20.6351 7.08064 19.9695 7.43348 19.2682C7.4543 19.2277 7.43442 19.1807 7.39186 19.1651C6.73913 18.9258 6.1148 18.6377 5.51573 18.3131C5.46649 18.2831 5.46278 18.2113 5.50999 18.1767C5.64053 18.0763 5.77106 17.9705 5.89604 17.8646C5.91682 17.8464 5.94616 17.8417 5.97179 17.8535C9.89474 19.6925 14.1058 19.6925 18.0043 17.8535C18.0299 17.8408 18.0593 17.8455 18.081 17.8637C18.206 17.9696 18.3365 18.0763 18.4679 18.1767C18.5151 18.2113 18.5123 18.2831 18.463 18.3131C17.864 18.6433 17.2396 18.9258 16.586 19.1642C16.5435 19.1798 16.5245 19.2277 16.5453 19.2682C16.9037 19.9686 17.3152 20.6342 17.7704 21.2635C17.7884 21.2917 17.8224 21.3028 17.8536 21.2928C19.8115 20.6932 21.7983 19.7704 23.8565 18.2459C23.8745 18.2329 23.8858 18.2136 23.8877 18.1924C24.3919 12.9462 23.0585 8.40681 20.3482 4.3977C20.3426 4.3847 20.3313 4.3754 20.3181 4.3698H20.317ZM8.02002 15.3312C6.8375 15.3312 5.86313 14.2514 5.86313 12.9246C5.86313 11.5979 6.8186 10.518 8.02002 10.518C9.23087 10.518 10.1958 11.6077 10.1769 12.9246C10.1769 14.2514 9.22141 15.3312 8.02002 15.3312ZM15.9947 15.3312C14.8123 15.3312 13.8379 14.2514 13.8379 12.9246C13.8379 11.5979 14.7933 10.518 15.9947 10.518C17.2056 10.518 18.1705 11.6077 18.1516 12.9246C18.1516 14.2514 17.2056 15.3312 15.9947 15.3312Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <a href="https://t.me/optimachain" class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="footer-copyright">
+                    <p>&copy; 2025 OptimaChain. All rights reserved.</p>
+                </div>
+                
+                <div class="footer-legal">
+                    <a href="privacy.html">プライバシーポリシー</a>
+                    <a href="terms.html">利用規約</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/language-switcher.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>
