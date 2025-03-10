@@ -1,0 +1,94 @@
+{
+  "nav": {
+    "features": "Fonctionnalités",
+    "technology": "Technologie",
+    "ecosystem": "Écosystème",
+    "developers": "Développeurs",
+    "community": "Communauté",
+    "token": "Token"
+  },
+  "dropdown": {
+    "smartContracts": {
+      "title": "Contrats Intelligents",
+      "desc": "Contrats multi-langages basés sur WASM"
+    },
+    "sdkApi": {
+      "title": "SDK & API",
+      "desc": "Kit de développement complet"
+    },
+    "testnet": {
+      "title": "Testnet",
+      "desc": "Environnement de développement et faucet"
+    },
+    "whitepaper": {
+      "title": "Livre Blanc",
+      "desc": "Spécifications techniques et conception"
+    }
+  },
+  "hero": {
+    "title": "Plateforme Blockchain Décentralisée de Nouvelle Génération",
+    "subtitle": "Intégration de technologies de mise à l'échelle innovantes avec une sécurité avancée",
+    "cta": "Découvrez l'Avenir de la Blockchain",
+    "secondary": "Documentation Développeur"
+  },
+  "features": {
+    "title": "Fonctionnalités OptimaChain",
+    "scalability": {
+      "title": "Haute Évolutivité",
+      "desc": "Atteignez jusqu'à 50 000 TPS avec la technologie de sharding dynamique"
+    },
+    "security": {
+      "title": "Sécurité Avancée",
+      "desc": "Validation décentralisée et prévention des fraudes avec Adaptive Proof-of-Stake"
+    },
+    "interoperability": {
+      "title": "Interopérabilité",
+      "desc": "Intégration transparente avec plusieurs blockchains"
+    },
+    "aiOptimization": {
+      "title": "Optimisation IA",
+      "desc": "Optimisation automatique des performances du réseau grâce à l'apprentissage automatique"
+    }
+  },
+  "stats": {
+    "tps": "Transactions/sec",
+    "finality": "Finalité",
+    "validators": "Validateurs",
+    "applications": "Applications"
+  },
+  "cta": {
+    "join": "Rejoindre la Communauté",
+    "start": "Commencer à Développer"
+  },
+  "footer": {
+    "resources": "Ressources",
+    "developers": "Développeurs",
+    "community": "Communauté",
+    "about": "À Propos",
+    "copyright": "© 2025 OptimaChain. Tous droits réservés."
+  },
+  "notification": {
+    "testnet": "Le testnet OptimaChain est maintenant en ligne !",
+    "join": "Rejoindre Maintenant",
+    "close": "Fermer"
+  },
+  "buttons": {
+    "showMore": "Afficher Plus",
+    "close": "Fermer",
+    "readMore": "Lire Plus"
+  },
+  "wallet": {
+    "connect": "Connecter Portefeuille"
+  },
+  "home": {
+    "welcome": "Bienvenue sur OptimaChain",
+    "intro": "Découvrez la prochaine évolution de la technologie blockchain",
+    "aiTitle": "IA Prédictive Intégrée",
+    "aiDesc": "Notre technologie d'IA analyse en permanence le réseau pour optimiser les performances et prédire les besoins futurs",
+    "shardingTitle": "Sharding Auto-Optimisant",
+    "shardingDesc": "Architecture de sharding dynamique qui s'adapte automatiquement aux conditions du réseau",
+    "zkTitle": "Confidentialité zk-STARK",
+    "zkDesc": "Transactions privées et sécurisées avec preuves à connaissance zéro",
+    "funFact": "Saviez-vous que notre réseau traite plus de transactions en une minute que vous ne clignez des yeux en une journée ? C'est environ 28 800 clignements, pour info."
+  }
+}

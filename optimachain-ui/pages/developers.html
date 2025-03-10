@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaChain 開発者ポータル</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #0071e3;
+            --secondary-color: #86b9ff;
+            --accent-color: #5e5ce6;
+            --background-color: #f5f5f7;
+            --card-color: #ffffff;
+            --text-color: #1d1d1f;
+            --text-secondary: #86868b;
+            --border-radius: 12px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 6px;
+            margin-right: 8px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin: 0 16px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+
+        nav a:hover {
+            opacity: 1;
+            color: var(--primary-color);
+        }
+
+        nav a.active {
+            color: var(--primary-color);
+            opacity: 1;
+        }
+
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(94, 92, 230, 0.1) 0%, rgba(0, 113, 227, 0.05) 50%, rgba(245, 245, 247, 0) 100%);
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 40px;
+            font-weight: 400;
+        }
+
+        .notification-bar {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .notification-bar a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .notification-close {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .notification-close:hover {
+            opacity: 1;
+        }
+
+        .section {
+            background: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 24px 0 12px;
+            color: var(--text-color);
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .card {
+            background: rgba(0, 113, 227, 0.03);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-sm);
+            background: rgba(0, 113, 227, 0.06);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 24px;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+            margin: 24px 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        .code-function {
+            color: #dcdcaa;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 64px 0 32px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 64px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-top: 16px;
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            background: #0062c3;
+        }
+
+        .tab-container {
+            margin: 32px 0;
+        }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 24px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-button {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .steps-container {
+            margin: 24px 0;
+        }
+
+        .step-item {
+            display: flex;
+            margin-bottom: 16px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                height: auto;
+                padding: 16px 0;
+            }
+            
+            nav ul {
+                margin-top: 16px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav li {
+                margin: 8px;
+            }
+            
+            .tab-buttons {
+                padding-bottom: 8px;
+            }
+            
+            .tab-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification-bar">
+        OptimaChain プロジェクトが始動しました。開発者コミュニティへの参加を募集中。<a href="#">詳細はこちら</a>
+        <button class="notification-close">×</button>
+    </div>
+
+    <header>
+        <div class="wrapper">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"></div>
+                    OptimaChain
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">ホーム</a></li>
+                        <li><a href="token.html">トークン</a></li>
+                        <li><a href="ecosystem.html">エコシステム</a></li>
+                        <li><a href="developers.html" class="active">開発者</a></li>
+                        <li><a href="wallet/index.html">ウォレット</a></li>
+                        <li><a href="dex/index.html">取引所</a></li>
+                        <li><a href="community.html">コミュニティ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="wrapper">
+            <h1>OptimaChain 開発者ポータル</h1>
+            <p>次世代ブロックチェーンプラットフォームで革新的なDAppsを構築しよう</p>
+        </div>
+    </section>
+
+    <div class="wrapper">
+        <div class="section">
+            <h2>開発者リソース</h2>
+            <p>OptimaChainは、開発者が革新的な分散型アプリケーションを簡単に構築できるよう、包括的なツールとリソースを提供しています。</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon" data-icon="document"></div>
+                    <h3>ドキュメント</h3>
+                    <p>包括的なガイド、チュートリアル、APIリファレンスで開発をスムーズに進めましょう。</p>
+                    <a href="#" class="cta-button">ドキュメントを見る</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon" data-icon="toolkit"></div>
+                    <h3>SDK & ツール</h3>
+                    <p>多言語対応のSDK、開発ツール、テスト環境を活用して開発を加速させましょう。</p>
+                    <a href="#" class="cta-button">SDKをダウンロード</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon" data-icon="explorer"></div>
+                    <h3>エクスプローラー</h3>
+                    <p>ブロックチェーンデータをリアルタイムで探索し、トランザクションやコントラクトを分析できます。</p>
+                    <a href="#" class="cta-button">エクスプローラーを開く</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon" data-icon="grant"></div>
+                    <h3>助成金プログラム</h3>
+                    <p>革新的なプロジェクトに対する資金提供と技術サポートを受けることができます。</p>
+                    <a href="#" class="cta-button">申請する</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>スマートコントラクト開発</h2>
+            <p>OptimaChainは、WASMベースのスマートコントラクト実行環境を採用し、複数のプログラミング言語をサポートしています。</p>
+            
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="rust">Rust</button>
+                    <button class="tab-button" data-tab="typescript">TypeScript</button>
+                    <button class="tab-button" data-tab="solidity">Solidity</button>
+                    <button class="tab-button" data-tab="python">Python</button>
+                </div>
+                
+                <div id="rust" class="tab-content active">
+                    <h3>Rustでのスマートコントラクト例</h3>
+                    <div class="code-block">
+<span class="code-keyword">use</span> optima_sdk::prelude::*;
+
+<span class="code-comment">// トークン転送のためのシンプルなコントラクト</span>
+<span class="code-keyword">pub struct</span> <span class="code-function">TokenContract</span> {
+    balances: <span class="code-function">Map</span>&lt;Address, u64&gt;,
+    total_supply: u64,
+}
+
+<span class="code-keyword">impl</span> <span class="code-function">Contract</span> <span class="code-keyword">for</span> <span class="code-function">TokenContract</span> {
+    <span class="code-keyword">fn</span> <span class="code-function">init</span>(&<span class="code-keyword">mut</span> self, ctx: &<span class="code-function">InitContext</span>) {
+        <span class="code-keyword">let</span> total_supply = 1_000_000;
+        self.total_supply = total_supply;
+        self.balances.<span class="code-function">insert</span>(ctx.sender(), total_supply);
+    }
+    
+    <span class="code-keyword">fn</span> <span class="code-function">transfer</span>(&<span class="code-keyword">mut</span> self, to: <span class="code-function">Address</span>, amount: u64) -> <span class="code-function">Result</span>&lt;(), <span class="code-function">ContractError</span>&gt; {
+        <span class="code-keyword">let</span> sender = ctx.sender();
+        <span class="code-keyword">let</span> sender_balance = self.balances.<span class="code-function">get</span>(&sender).<span class="code-function">unwrap_or</span>(0);
+        
+        <span class="code-keyword">if</span> sender_balance < amount {
+            <span class="code-keyword">return</span> <span class="code-function">Err</span>(<span class="code-function">ContractError::InsufficientFunds</span>);
+        }
+        
+        self.balances.<span class="code-function">insert</span>(sender, sender_balance - amount);
+        <span class="code-keyword">let</span> receiver_balance = self.balances.<span class="code-function">get</span>(&to).<span class="code-function">unwrap_or</span>(0);
+        self.balances.<span class="code-function">insert</span>(to, receiver_balance + amount);
+        
+        <span class="code-function">Ok</span>(())
+    }
+}
+                    </div>
+                </div>
+                
+                <div id="typescript" class="tab-content">
+                    <h3>TypeScriptでのスマートコントラクト例</h3>
+                    <div class="code-block">
+<span class="code-keyword">import</span> { Contract, Address, Storage } <span class="code-keyword">from</span> <span class="code-string">'optima-sdk'</span>;
+
+<span class="code-comment">// シンプルなNFTコントラクト</span>
+<span class="code-keyword">export class</span> <span class="code-function">NFTContract</span> <span class="code-keyword">extends</span> <span class="code-function">Contract</span> {
+  <span class="code-keyword">private</span> owners = <span class="code-keyword">new</span> <span class="code-function">Storage</span>.Map&lt;number, Address&gt;();
+  <span class="code-keyword">private</span> balances = <span class="code-keyword">new</span> <span class="code-function">Storage</span>.Map&lt;Address, number&gt;();
+  <span class="code-keyword">private</span> tokenCount: number = 0;
+  
+  <span class="code-function">mint</span>(): number {
+    <span class="code-keyword">const</span> sender = <span class="code-keyword">this</span>.context.sender;
+    <span class="code-keyword">const</span> tokenId = <span class="code-keyword">this</span>.tokenCount++;
+    
+    <span class="code-keyword">this</span>.owners.set(tokenId, sender);
+    <span class="code-keyword">const</span> currentBalance = <span class="code-keyword">this</span>.balances.get(sender) || 0;
+    <span class="code-keyword">this</span>.balances.set(sender, currentBalance + 1);
+    
+    <span class="code-keyword">return</span> tokenId;
+  }
+  
+  <span class="code-function">transfer</span>(to: Address, tokenId: number): <span class="code-keyword">boolean</span> {
+    <span class="code-keyword">const</span> sender = <span class="code-keyword">this</span>.context.sender;
+    <span class="code-keyword">const</span> owner = <span class="code-keyword">this</span>.owners.get(tokenId);
+    
+    <span class="code-keyword">if</span> (!owner || owner !== sender) {
+      <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+    }
+    
+    <span class="code-keyword">this</span>.owners.set(tokenId, to);
+    <span class="code-keyword">const</span> fromBalance = <span class="code-keyword">this</span>.balances.get(sender) || 0;
+    <span class="code-keyword">const</span> toBalance = <span class="code-keyword">this</span>.balances.get(to) || 0;
+    
+    <span class="code-keyword">this</span>.balances.set(sender, fromBalance - 1);
+    <span class="code-keyword">this</span>.balances.set(to, toBalance + 1);
+    
+    <span class="code-keyword">return</span> <span class="code-keyword">true</span>;
+  }
+}
+                    </div>
+                </div>
+                
+                <div id="solidity" class="tab-content">
+                    <h3>Solidityでのスマートコントラクト例</h3>
+                    <div class="code-block">
+<span class="code-comment">// SPDX-License-Identifier: MIT</span>
+<span class="code-keyword">pragma solidity</span> ^0.8.0;
+
+<span class="code-comment">// シンプルなDAO投票コントラクト</span>
+<span class="code-keyword">contract</span> <span class="code-function">VotingDAO</span> {
+    <span class="code-keyword">struct</span> <span class="code-function">Proposal</span> {
+        <span class="code-keyword">string</span> description;
+        <span class="code-keyword">uint</span> yesVotes;
+        <span class="code-keyword">uint</span> noVotes;
+        <span class="code-keyword">bool</span> executed;
+        <span class="code-keyword">mapping</span>(<span class="code-keyword">address</span> => <span class="code-keyword">bool</span>) hasVoted;
+    }
+    
+    <span class="code-keyword">mapping</span>(<span class="code-keyword">uint</span> => <span class="code-function">Proposal</span>) <span class="code-keyword">public</span> proposals;
+    <span class="code-keyword">uint public</span> proposalCount;
+    
+    <span class="code-keyword">function</span> <span class="code-function">createProposal</span>(<span class="code-keyword">string memory</span> _description) <span class="code-keyword">public returns</span> (<span class="code-keyword">uint</span>) {
+        <span class="code-function">Proposal</span> <span class="code-keyword">storage</span> p = proposals[proposalCount++];
+        p.description = _description;
+        p.yesVotes = 0;
+        p.noVotes = 0;
+        p.executed = <span class="code-keyword">false</span>;
+        
+        <span class="code-keyword">return</span> proposalCount - 1;
+    }
+    
+    <span class="code-keyword">function</span> <span class="code-function">vote</span>(<span class="code-keyword">uint</span> _proposalId, <span class="code-keyword">bool</span> _support) <span class="code-keyword">public</span> {
+        <span class="code-function">Proposal</span> <span class="code-keyword">storage</span> p = proposals[_proposalId];
+        <span class="code-keyword">require</span>(!p.hasVoted[msg.sender], <span class="code-string">"Already voted"</span>);
+        <span class="code-keyword">require</span>(!p.executed, <span class="code-string">"Proposal already executed"</span>);
+        
+        p.hasVoted[msg.sender] = <span class="code-keyword">true</span>;
+        
+        <span class="code-keyword">if</span> (_support) {
+            p.yesVotes += 1;
+        } <span class="code-keyword">else</span> {
+            p.noVotes += 1;
+        }
+    }
+    
+    <span class="code-keyword">function</span> <span class="code-function">executeProposal</span>(<span class="code-keyword">uint</span> _proposalId) <span class="code-keyword">public</span> {
+        <span class="code-function">Proposal</span> <span class="code-keyword">storage</span> p = proposals[_proposalId];
+        <span class="code-keyword">require</span>(!p.executed, <span class="code-string">"Proposal already executed"</span>);
+        <span class="code-keyword">require</span>(p.yesVotes > p.noVotes, <span class="code-string">"Proposal did not pass"</span>);
+        
+        p.executed = <span class="code-keyword">true</span>;
+        
+        <span class="code-comment">// 提案の実行ロジックをここに実装</span>
+    }
+}
+                    </div>
+                </div>
+                
+                <div id="python" class="tab-content">
+                    <h3>Pythonでのスマートコントラクト例</h3>
+                    <div class="code-block">
+<span class="code-keyword">from</span> optima_sdk <span class="code-keyword">import</span> Contract, Address, Map
+
+<span class="code-comment"># シンプルな分散型マーケットプレイス</span>
+<span class="code-keyword">class</span> <span class="code-function">Marketplace</span>(Contract):
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self):
+        self.items = Map(int, dict)
+        self.item_count = 0
+    
+    <span class="code-keyword">def</span> <span class="code-function">list_item</span>(self, name: str, description: str, price: int) -> int:
+        sender = self.context.sender
+        
+        item = {
+            <span class="code-string">"id"</span>: self.item_count,
+            <span class="code-string">"name"</span>: name,
+            <span class="code-string">"description"</span>: description,
+            <span class="code-string">"price"</span>: price,
+            <span class="code-string">"seller"</span>: sender,
+            <span class="code-string">"active"</span>: True
+        }
+        
+        self.items[self.item_count] = item
+        self.item_count += 1
+        
+        <span class="code-keyword">return</span> self.item_count - 1
+    
+    <span class="code-keyword">def</span> <span class="code-function">buy_item</span>(self, item_id: int) -> bool:
+        buyer = self.context.sender
+        value = self.context.value
+        
+        <span class="code-keyword">if</span> item_id >= self.item_count:
+            <span class="code-keyword">return</span> False
+        
+        item = self.items[item_id]
+        
+        <span class="code-keyword">if</span> not item[<span class="code-string">"active"</span>] or value < item[<span class="code-string">"price"</span>]:
+            <span class="code-keyword">return</span> False
+        
+        <span class="code-comment"># 販売者に代金を送金</span>
+        self.send(item[<span class="code-string">"seller"</span>], value)
+        
+        <span class="code-comment"># アイテムを非アクティブに設定</span>
+        item[<span class="code-string">"active"</span>] = False
+        self.items[item_id] = item
+        
+        <span class="code-keyword">return</span> True
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>開発ロードマップ</h2>
+            <p>OptimaChainは現在開発の初期段階にあります。以下は今後の開発計画の概要です。</p>
+            
+            <h3>開発者向けリソース（予定）</h3>
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <p>技術仕様書とアーキテクチャドキュメントの公開</p>
+                        <p>2025年5月頃に、OptimaChainの詳細な技術仕様とアーキテクチャドキュメントを公開予定です。</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <p>開発者コミュニティの構築</p>
+                        <p>Discordサーバーを立ち上げ、開発者コミュニティの構築を開始します。技術的な議論や貢献の場を提供します。</p>
+                        <div class="code-block">
+<span class="code-comment"># 開発者コミュニティは現在準備中です</span>
+<span class="code-comment"># 参加登録はウェブサイトで近日受付開始予定</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <p>プロトタイプSDKの開発</p>
+                        <p>2025年第3四半期に、初期のプロトタイプSDKを開発し、限定的なテスト環境を提供する予定です。</p>
+                        <a href="#" class="cta-button">開発者メーリングリストに登録</a>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <p>アルファ版テストネットのローンチ</p>
+                        <p>2025年末頃に、初期のアルファ版テストネットをローンチし、基本的なスマートコントラクト機能をテストする予定です。</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <p>開発者助成金プログラムの開始</p>
+                        <p>2026年初頭に、革新的なプロジェクトを支援するための開発者助成金プログラムを開始する予定です。</p>
+                        <a href="#" class="cta-button">最新情報を受け取る</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>開発者コミュニティ（準備中）</h2>
+            <p>OptimaChainは現在、開発者コミュニティの構築を開始しています。以下のチャネルを通じて、プロジェクトの最新情報を入手し、初期段階から参加することができます。</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon" data-icon="community"></div>
+                    <h3>Discord（近日公開）</h3>
+                    <p>開発者向けDiscordサーバーを準備中です。最新情報やディスカッションにご参加ください。</p>
+                    <a href="#" class="cta-button">事前登録する</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon" data-icon="document"></div>
+                    <h3>メーリングリスト</h3>
+                    <p>開発の進捗や重要なアップデートを定期的にお知らせします。</p>
+                    <a href="#" class="cta-button">登録する</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon" data-icon="toolkit"></div>
+                    <h3>GitHub（準備中）</h3>
+                    <p>技術仕様書やプロトタイプコードは、準備が整い次第公開予定です。</p>
+                    <a href="#" class="cta-button">通知を受け取る</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon" data-icon="grant"></div>
+                    <h3>初期貢献者プログラム</h3>
+                    <p>プロジェクトの初期段階から貢献したい開発者向けの特別プログラムを計画中です。</p>
+                    <a href="#" class="cta-button">詳細を確認する</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2023 OptimaChain - 次世代型分散型ブロックチェーンプラットフォーム</p>
+        </div>
+    </div>
+
+    <script src="icons.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // タブ切り替え機能
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // すべてのタブコンテンツを非表示にする
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // すべてのタブボタンから active クラスを削除
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // クリックされたタブのコンテンツを表示
+                    document.getElementById(tabId).classList.add('active');
+                    
+                    // クリックされたボタンに active クラスを追加
+                    this.classList.add('active');
+                });
+            });
+            
+            // アニメーション効果
+            const sections = document.querySelectorAll('.section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // 通知バーの閉じるボタン
+            const notificationBar = document.querySelector('.notification-bar');
+            const closeButton = document.querySelector('.notification-close');
+            
+            if (closeButton && notificationBar) {
+                closeButton.addEventListener('click', function() {
+                    notificationBar.style.display = 'none';
+                });
+            }
+            
+            // スティッキーヘッダー効果
+            const header = document.querySelector('header');
+            let lastScrollTop = 0;
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > lastScrollTop) {
+                    // スクロールダウン時
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    // スクロールアップ時
+                    header.style.transform = 'translateY(0)';
+                }
+                
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            }, { passive: true });
+            
+            // ヘッダーにトランジション追加
+            header.style.transition = 'transform 0.3s ease';
+        });
+    </script>
+</body>
+</html>
