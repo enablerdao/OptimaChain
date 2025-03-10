@@ -1,4 +1,329 @@
+// Import blockchain interface
+import blockchain from '../../src/js/blockchain.js';
+
+// Initialize DEX state
+let dexState = {
+    isConnected: false,
+    address: '',
+    balance: {},
+    selectedPair: 'OPT/USDT',
+    pairs: [],
+    orderbook: {
+        asks: [],
+        bids: []
+    },
+    trades: []
+};
+
+// Initialize DEX
+async function initDEX() {
+    // Get trading pairs
+    const pairsResult = await blockchain.getTradingPairs();
+    if (pairsResult.success) {
+        dexState.pairs = pairsResult.pairs;
+        updatePairsUI();
+    }
+    
+    // Get orderbook for selected pair
+    await updateOrderbook();
+    
+    // Get recent trades for selected pair
+    await updateTrades();
+}
+
+// Update pairs UI
+function updatePairsUI() {
+    const pairsContainer = document.querySelector('.pairs-list');
+    if (!pairsContainer || dexState.pairs.length === 0) return;
+    
+    // Clear existing items
+    pairsContainer.innerHTML = '';
+    
+    // Add pairs
+    dexState.pairs.forEach(pair => {
+        const pairItem = document.createElement('div');
+        pairItem.className = 'pair-item';
+        if (`${pair.base}/${pair.quote}` === dexState.selectedPair) {
+            pairItem.classList.add('active');
+        }
+        
+        const changeClass = pair.change >= 0 ? 'positive' : 'negative';
+        const changeSign = pair.change >= 0 ? '+' : '';
+        
+        pairItem.innerHTML = `
+            <div class="pair-name">${pair.base}/${pair.quote}</div>
+            <div class="pair-price">${pair.price.toFixed(2)}</div>
+            <div class="pair-change ${changeClass}">${changeSign}${pair.change.toFixed(2)}%</div>
+        `;
+        
+        pairItem.addEventListener('click', () => {
+            dexState.selectedPair = `${pair.base}/${pair.quote}`;
+            updatePairsUI();
+            updateOrderbook();
+            updateTrades();
+            updatePairInfoUI();
+        });
+        
+        pairsContainer.appendChild(pairItem);
+    });
+    
+    // Update pair info
+    updatePairInfoUI();
+}
+
+// Update pair info UI
+function updatePairInfoUI() {
+    const pairTitle = document.querySelector('.pair-title');
+    const pairPrice = document.querySelector('.pair-price-value');
+    const pairChange = document.querySelector('.pair-price-change');
+    
+    if (!pairTitle || !pairPrice || !pairChange) return;
+    
+    const selectedPair = dexState.pairs.find(p => `${p.base}/${p.quote}` === dexState.selectedPair);
+    if (!selectedPair) return;
+    
+    pairTitle.textContent = dexState.selectedPair;
+    pairPrice.textContent = `$${selectedPair.price.toFixed(2)}`;
+    
+    const changeClass = selectedPair.change >= 0 ? 'positive' : 'negative';
+    const changeSign = selectedPair.change >= 0 ? '+' : '';
+    pairChange.textContent = `${changeSign}${selectedPair.change.toFixed(2)}%`;
+    pairChange.className = `pair-price-change ${changeClass}`;
+}
+
+// Update orderbook
+async function updateOrderbook() {
+    const result = await blockchain.getOrderbook(dexState.selectedPair);
+    if (result.success) {
+        dexState.orderbook = result.orderbook;
+        updateOrderbookUI();
+    }
+}
+
+// Update orderbook UI
+function updateOrderbookUI() {
+    const orderbookContainer = document.querySelector('.orderbook-list');
+    if (!orderbookContainer) return;
+    
+    // Clear existing items
+    orderbookContainer.innerHTML = '';
+    
+    // Add asks (sell orders) - sorted by price descending
+    const sortedAsks = [...dexState.orderbook.asks].sort((a, b) => b.price - a.price);
+    sortedAsks.forEach(ask => {
+        const orderItem = document.createElement('div');
+        orderItem.className = 'order-item ask';
+        
+        const total = (ask.price * ask.amount).toFixed(2);
+        
+        orderItem.innerHTML = `
+            <div class="order-price">${ask.price.toFixed(2)}</div>
+            <div class="order-amount">${ask.amount.toFixed(2)}</div>
+            <div class="order-total">${total}</div>
+        `;
+        
+        orderbookContainer.appendChild(orderItem);
+    });
+    
+    // Add spread indicator
+    const spreadItem = document.createElement('div');
+    spreadItem.className = 'spread-item';
+    
+    const highestBid = Math.max(...dexState.orderbook.bids.map(b => b.price));
+    const lowestAsk = Math.min(...dexState.orderbook.asks.map(a => a.price));
+    const spread = lowestAsk - highestBid;
+    const spreadPercent = (spread / lowestAsk * 100).toFixed(2);
+    
+    spreadItem.innerHTML = `
+        <div class="spread-price">$${lowestAsk.toFixed(2)}</div>
+        <div class="spread-value">${spread.toFixed(2)} (${spreadPercent}%)</div>
+        <div class="spread-label">スプレッド</div>
+    `;
+    
+    orderbookContainer.appendChild(spreadItem);
+    
+    // Add bids (buy orders) - sorted by price descending
+    const sortedBids = [...dexState.orderbook.bids].sort((a, b) => b.price - a.price);
+    sortedBids.forEach(bid => {
+        const orderItem = document.createElement('div');
+        orderItem.className = 'order-item bid';
+        
+        const total = (bid.price * bid.amount).toFixed(2);
+        
+        orderItem.innerHTML = `
+            <div class="order-price">${bid.price.toFixed(2)}</div>
+            <div class="order-amount">${bid.amount.toFixed(2)}</div>
+            <div class="order-total">${total}</div>
+        `;
+        
+        orderbookContainer.appendChild(orderItem);
+    });
+}
+
+// Update trades
+async function updateTrades() {
+    const result = await blockchain.getRecentTrades(dexState.selectedPair);
+    if (result.success) {
+        dexState.trades = result.trades;
+        updateTradesUI();
+    }
+}
+
+// Update trades UI
+function updateTradesUI() {
+    const tradesContainer = document.querySelector('.trades-list');
+    if (!tradesContainer || dexState.trades.length === 0) return;
+    
+    // Clear existing items
+    tradesContainer.innerHTML = '';
+    
+    // Add trades
+    dexState.trades.forEach(trade => {
+        const tradeItem = document.createElement('div');
+        tradeItem.className = `trade-item ${trade.type}`;
+        
+        const time = new Date(trade.timestamp).toLocaleTimeString('ja-JP', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+        
+        tradeItem.innerHTML = `
+            <div class="trade-type">${trade.type === 'buy' ? '買い' : '売り'}</div>
+            <div class="trade-price">${trade.price.toFixed(2)} USDT</div>
+            <div class="trade-amount">数量: ${trade.amount.toFixed(2)} OPT</div>
+            <div class="trade-time">${time}</div>
+        `;
+        
+        tradesContainer.appendChild(tradeItem);
+    });
+}
+
+// Connect wallet
+async function connectWallet() {
+    if (dexState.isConnected) return;
+    
+    const result = await blockchain.connectWallet('optimawallet');
+    if (result.success) {
+        dexState.isConnected = true;
+        dexState.address = result.address;
+        
+        // Update UI
+        updateWalletUI();
+        
+        // Get balance
+        const balanceResult = await blockchain.getBalance();
+        if (balanceResult.success) {
+            dexState.balance = balanceResult.balance;
+            updateBalanceUI();
+        }
+    }
+}
+
+// Update wallet UI
+function updateWalletUI() {
+    const connectButton = document.getElementById('connect-wallet');
+    if (connectButton) {
+        if (dexState.isConnected) {
+            connectButton.textContent = dexState.address.substring(0, 6) + '...' + dexState.address.substring(dexState.address.length - 4);
+            connectButton.classList.add('connected');
+        } else {
+            connectButton.textContent = 'ウォレット接続';
+            connectButton.classList.remove('connected');
+        }
+    }
+}
+
+// Update balance UI
+function updateBalanceUI() {
+    const balanceElements = document.querySelectorAll('.token-balance');
+    balanceElements.forEach(element => {
+        const token = element.getAttribute('data-token');
+        if (token && dexState.balance[token]) {
+            element.textContent = `残高: ${dexState.balance[token].toFixed(2)} ${token}`;
+        }
+    });
+}
+
+// Place limit order
+async function placeLimitOrder(side, price, amount) {
+    if (!dexState.isConnected) {
+        showToast('ウォレットを接続してください');
+        return { success: false, message: 'ウォレットが接続されていません' };
+    }
+    
+    const result = await blockchain.placeLimitOrder(dexState.selectedPair, side, price, amount);
+    if (result.success) {
+        // Update balance
+        const balanceResult = await blockchain.getBalance();
+        if (balanceResult.success) {
+            dexState.balance = balanceResult.balance;
+            updateBalanceUI();
+        }
+        
+        // Update orderbook
+        await updateOrderbook();
+        
+        return { success: true, message: '注文が出されました' };
+    } else {
+        return { success: false, message: result.message };
+    }
+}
+
+// Place market order
+async function placeMarketOrder(side, amount) {
+    if (!dexState.isConnected) {
+        showToast('ウォレットを接続してください');
+        return { success: false, message: 'ウォレットが接続されていません' };
+    }
+    
+    const result = await blockchain.placeMarketOrder(dexState.selectedPair, side, amount);
+    if (result.success) {
+        // Update balance
+        const balanceResult = await blockchain.getBalance();
+        if (balanceResult.success) {
+            dexState.balance = balanceResult.balance;
+            updateBalanceUI();
+        }
+        
+        // Update orderbook
+        await updateOrderbook();
+        
+        // Update trades
+        await updateTrades();
+        
+        return { success: true, message: '注文が約定しました' };
+    } else {
+        return { success: false, message: result.message };
+    }
+}
+
+// Swap tokens
+async function swapTokens(fromToken, toToken, amount) {
+    if (!dexState.isConnected) {
+        showToast('ウォレットを接続してください');
+        return { success: false, message: 'ウォレットが接続されていません' };
+    }
+    
+    const result = await blockchain.swapTokens(fromToken, toToken, amount);
+    if (result.success) {
+        // Update balance
+        const balanceResult = await blockchain.getBalance();
+        if (balanceResult.success) {
+            dexState.balance = balanceResult.balance;
+            updateBalanceUI();
+        }
+        
+        return { success: true, message: 'スワップが完了しました' };
+    } else {
+        return { success: false, message: result.message };
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize DEX
+    initDEX();
+    
     // 通知バーの閉じるボタン
     const notificationBar = document.querySelector('.notification-bar');
     const closeButton = document.querySelector('.notification-close');
@@ -13,9 +338,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const connectWalletBtn = document.getElementById('connect-wallet');
     const walletModal = document.getElementById('wallet-modal');
     
-    if (connectWalletBtn && walletModal) {
+    if (connectWalletBtn) {
         connectWalletBtn.addEventListener('click', function() {
-            walletModal.classList.add('active');
+            if (dexState.isConnected) {
+                // Already connected, do nothing
+                return;
+            }
+            
+            if (walletModal) {
+                walletModal.classList.add('active');
+            }
         });
     }
     
@@ -35,709 +367,278 @@ document.addEventListener('DOMContentLoaded', function() {
     const walletOptions = document.querySelectorAll('.wallet-option');
     
     walletOptions.forEach(option => {
-        option.addEventListener('click', function() {
+        option.addEventListener('click', async function() {
             const walletType = this.getAttribute('data-wallet');
             
-            // デモ用：OptimaWalletを選択した場合は自動接続
-            if (walletType === 'optimawallet') {
+            // Connect wallet
+            await connectWallet();
+            
+            // Close modal
+            if (walletModal) {
                 walletModal.classList.remove('active');
-                connectWalletBtn.textContent = '0x7a58...02e8';
-                showToast('OptimaWalletに接続しました（デモのみ）');
-            } else {
-                showToast('このウォレットタイプはデモでは利用できません');
+            }
+            
+            showToast('ウォレットに接続しました');
+        });
+    });
+    
+    // タブ切り替え
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // タブのアクティブ状態を切り替え
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // コンテンツの表示を切り替え
+            tabContents.forEach(content => {
+                if (content.id === tabId) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+        });
+    });
+    
+    // 注文タイプ切り替え
+    const orderTypeButtons = document.querySelectorAll('.order-type-button');
+    
+    orderTypeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const orderType = this.getAttribute('data-type');
+            const container = this.closest('.order-type-container');
+            
+            if (container) {
+                // ボタンのアクティブ状態を切り替え
+                container.querySelectorAll('.order-type-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // 入力フィールドの表示を切り替え
+                if (orderType === 'buy') {
+                    container.classList.remove('sell');
+                    container.classList.add('buy');
+                } else {
+                    container.classList.remove('buy');
+                    container.classList.add('sell');
+                }
             }
         });
     });
     
-    // トークンセレクタークリック
-    const tokenSelectors = document.querySelectorAll('.token-selector');
-    const tokenModal = document.getElementById('token-modal');
+    // 数量パーセンテージボタン
+    const percentButtons = document.querySelectorAll('.percent-button');
     
-    tokenSelectors.forEach(selector => {
-        selector.addEventListener('click', function() {
-            if (tokenModal) {
-                tokenModal.classList.add('active');
-                generateTokenList();
+    percentButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const percent = parseFloat(this.getAttribute('data-percent'));
+            const container = this.closest('.order-form');
+            
+            if (container) {
+                const amountInput = container.querySelector('.amount-input');
+                const orderType = container.querySelector('.order-type-button.active').getAttribute('data-type');
+                const [baseToken, quoteToken] = dexState.selectedPair.split('/');
+                
+                if (amountInput) {
+                    if (orderType === 'buy') {
+                        // 買い注文の場合はUSDT残高の割合
+                        const balance = dexState.balance[quoteToken] || 0;
+                        amountInput.value = (balance * percent / 100).toFixed(2);
+                    } else {
+                        // 売り注文の場合はOPT残高の割合
+                        const balance = dexState.balance[baseToken] || 0;
+                        amountInput.value = (balance * percent / 100).toFixed(2);
+                    }
+                    
+                    // 合計金額を更新
+                    updateTotalAmount(container);
+                }
             }
         });
     });
     
-    // スワップ方向ボタン
-    const swapDirectionBtn = document.querySelector('.swap-direction-btn');
+    // 価格・数量入力時に合計金額を更新
+    const priceInputs = document.querySelectorAll('.price-input');
+    const amountInputs = document.querySelectorAll('.amount-input');
     
-    if (swapDirectionBtn) {
-        swapDirectionBtn.addEventListener('click', function() {
-            const tokenSelectors = document.querySelectorAll('.token-selector');
-            const amountInputs = document.querySelectorAll('.amount-input');
-            
-            // トークンの入れ替え
-            const token1Symbol = tokenSelectors[0].querySelector('.token-symbol').textContent;
-            const token1Color = tokenSelectors[0].querySelector('.token-icon').style.backgroundColor;
-            const token2Symbol = tokenSelectors[1].querySelector('.token-symbol').textContent;
-            const token2Color = tokenSelectors[1].querySelector('.token-icon').style.backgroundColor;
-            
-            tokenSelectors[0].querySelector('.token-symbol').textContent = token2Symbol;
-            tokenSelectors[0].querySelector('.token-icon').style.backgroundColor = token2Color;
-            tokenSelectors[1].querySelector('.token-symbol').textContent = token1Symbol;
-            tokenSelectors[1].querySelector('.token-icon').style.backgroundColor = token1Color;
-            
-            // 金額の入れ替え
-            const amount1 = amountInputs[0].value;
-            const amount2 = amountInputs[1].value;
-            
-            amountInputs[0].value = amount2;
-            amountInputs[1].value = amount1;
-            
-            // 残高表示の更新
-            const balanceInfos = document.querySelectorAll('.balance-info');
-            balanceInfos[0].textContent = `残高: ${token2Symbol === 'OPT' ? '1,250.00' : '0.00'} ${token2Symbol}`;
-            balanceInfos[1].textContent = `残高: ${token1Symbol === 'OPT' ? '1,250.00' : '0.00'} ${token1Symbol}`;
+    [...priceInputs, ...amountInputs].forEach(input => {
+        input.addEventListener('input', function() {
+            const container = this.closest('.order-form');
+            if (container) {
+                updateTotalAmount(container);
+            }
         });
+    });
+    
+    // 合計金額の更新
+    function updateTotalAmount(container) {
+        const priceInput = container.querySelector('.price-input');
+        const amountInput = container.querySelector('.amount-input');
+        const totalElement = container.querySelector('.total-amount');
+        
+        if (priceInput && amountInput && totalElement) {
+            const price = parseFloat(priceInput.value) || 0;
+            const amount = parseFloat(amountInput.value) || 0;
+            const total = price * amount;
+            
+            totalElement.textContent = total.toFixed(2);
+        }
     }
     
-    // スワップボタン
-    const swapButton = document.getElementById('swap-button');
+    // 指値注文フォーム
+    const limitOrderForm = document.getElementById('limit-order-form');
     
-    if (swapButton) {
-        swapButton.addEventListener('click', function() {
-            const fromAmount = document.querySelectorAll('.amount-input')[0].value;
-            const fromToken = document.querySelectorAll('.token-symbol')[0].textContent;
-            const toToken = document.querySelectorAll('.token-symbol')[1].textContent;
+    if (limitOrderForm) {
+        limitOrderForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            if (!fromAmount || fromAmount <= 0) {
-                showToast('有効な金額を入力してください');
+            const orderType = this.querySelector('.order-type-button.active').getAttribute('data-type');
+            const price = parseFloat(this.querySelector('.price-input').value);
+            const amount = parseFloat(this.querySelector('.amount-input').value);
+            
+            // バリデーション
+            if (!price || !amount) {
+                showToast('価格と数量を入力してください');
                 return;
             }
             
-            showToast(`${fromAmount} ${fromToken}を${toToken}にスワップしました（デモのみ）`);
+            // 注文を出す
+            const result = await placeLimitOrder(orderType, price, amount);
             
-            // デモ用：取引履歴に追加
-            addTradeItem({
-                type: 'swap',
-                price: '0.00',
-                amount: fromAmount,
-                total: '0.00',
-                time: new Date()
-            });
+            // 結果メッセージ
+            if (result.success) {
+                showToast(result.message);
+                // フォームをリセット
+                this.reset();
+            } else {
+                showToast('エラー: ' + result.message);
+            }
         });
     }
     
-    // 注文タイプの切り替え
-    const orderTypeBtns = document.querySelectorAll('.order-type-btn');
+    // 成行注文フォーム
+    const marketOrderForm = document.getElementById('market-order-form');
     
-    orderTypeBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const parent = this.parentElement;
-            parent.querySelectorAll('.order-type-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
+    if (marketOrderForm) {
+        marketOrderForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            // 注文ボタンの更新
-            const orderForm = this.closest('.order-form');
-            const orderBtn = orderForm.querySelector('.order-btn');
-            const orderType = this.getAttribute('data-type');
+            const orderType = this.querySelector('.order-type-button.active').getAttribute('data-type');
+            const amount = parseFloat(this.querySelector('.amount-input').value);
             
-            if (orderBtn) {
-                if (orderType === 'buy') {
-                    orderBtn.className = 'order-btn buy-btn';
-                    orderBtn.textContent = orderForm.closest('#limit-panel') ? '買い注文を出す' : '成行買い注文を出す';
-                } else {
-                    orderBtn.className = 'order-btn sell-btn';
-                    orderBtn.textContent = orderForm.closest('#limit-panel') ? '売り注文を出す' : '成行売り注文を出す';
-                }
+            // バリデーション
+            if (!amount) {
+                showToast('数量を入力してください');
+                return;
+            }
+            
+            // 注文を出す
+            const result = await placeMarketOrder(orderType, amount);
+            
+            // 結果メッセージ
+            if (result.success) {
+                showToast(result.message);
+                // フォームをリセット
+                this.reset();
+            } else {
+                showToast('エラー: ' + result.message);
+            }
+        });
+    }
+    
+    // スワップフォーム
+    const swapForm = document.getElementById('swap-form');
+    
+    if (swapForm) {
+        swapForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const fromToken = this.querySelector('.from-token-select').value;
+            const toToken = this.querySelector('.to-token-select').value;
+            const amount = parseFloat(this.querySelector('.from-amount-input').value);
+            
+            // バリデーション
+            if (!amount) {
+                showToast('数量を入力してください');
+                return;
+            }
+            
+            // スワップを実行
+            const result = await swapTokens(fromToken, toToken, amount);
+            
+            // 結果メッセージ
+            if (result.success) {
+                showToast(result.message);
+                // フォームをリセット
+                this.reset();
+            } else {
+                showToast('エラー: ' + result.message);
+            }
+        });
+    }
+    
+    // トークン選択モーダル
+    const tokenSelectButtons = document.querySelectorAll('.token-select-button');
+    const tokenModal = document.getElementById('token-modal');
+    
+    tokenSelectButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            if (tokenModal) {
+                // 選択元を記録
+                tokenModal.setAttribute('data-source', this.getAttribute('id'));
+                tokenModal.classList.add('active');
             }
         });
     });
     
-    // パーセンテージボタン
-    const percentageBtns = document.querySelectorAll('.percentage-btn');
+    // トークン選択
+    const tokenOptions = document.querySelectorAll('.token-option');
     
-    percentageBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const parent = this.parentElement;
-            parent.querySelectorAll('.percentage-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
+    tokenOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const token = this.getAttribute('data-token');
+            const sourceId = tokenModal.getAttribute('data-source');
+            const sourceElement = document.getElementById(sourceId);
             
-            // デモ用：数量の更新
-            const percentage = parseInt(this.getAttribute('data-percentage'));
-            const orderForm = this.closest('.order-form');
-            const amountInput = orderForm.querySelector('input[placeholder="0.00"]');
-            
-            if (amountInput) {
-                // OPTの場合は最大1,250.00
-                const maxAmount = 1250;
-                amountInput.value = (maxAmount * percentage / 100).toFixed(2);
+            if (sourceElement) {
+                // トークンを選択
+                sourceElement.textContent = token;
                 
-                // 合計金額の更新
-                const totalInput = orderForm.querySelector('input[readonly]');
-                if (totalInput) {
-                    // デモ用：単価0.00 USD
-                    totalInput.value = '0.00';
+                // 残高を更新
+                const balanceElement = sourceElement.closest('.token-input-container').querySelector('.token-balance');
+                if (balanceElement && dexState.balance[token]) {
+                    balanceElement.textContent = `残高: ${dexState.balance[token].toFixed(2)} ${token}`;
                 }
             }
+            
+            // モーダルを閉じる
+            tokenModal.classList.remove('active');
         });
     });
-    
-    // 取引パネルのタブ切り替え
-    const panelTabs = document.querySelectorAll('.panel-tab');
-    
-    panelTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            const panelId = this.getAttribute('data-panel');
-            
-            // タブの切り替え
-            panelTabs.forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
-            
-            // パネルの切り替え
-            const panels = document.querySelectorAll('.panel-content');
-            panels.forEach(panel => panel.classList.remove('active'));
-            document.getElementById(`${panelId}-panel`).classList.add('active');
-        });
-    });
-    
-    // マーケットタブの切り替え
-    const marketTabs = document.querySelectorAll('.tab-btn');
-    
-    marketTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            const tabId = this.getAttribute('data-tab');
-            
-            // タブの切り替え
-            marketTabs.forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
-            
-            // マーケットリストのフィルタリング
-            filterMarketList(tabId);
-        });
-    });
-    
-    // マーケットリストの生成
-    generateMarketList();
-    
-    // 注文板の生成
-    generateOrderbook();
-    
-    // 取引履歴の生成
-    generateTradesList();
-    
-    // チャートの生成
-    generateChart();
 });
 
-// トースト通知を表示する関数
+// トースト通知
 function showToast(message) {
-    // 既存のトーストを削除
-    const existingToast = document.querySelector('.toast');
-    if (existingToast) {
-        existingToast.remove();
-    }
-    
-    // 新しいトーストを作成
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.textContent = message;
-    toast.style.position = 'fixed';
-    toast.style.bottom = '20px';
-    toast.style.left = '50%';
-    toast.style.transform = 'translateX(-50%)';
-    toast.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-    toast.style.color = 'white';
-    toast.style.padding = '10px 20px';
-    toast.style.borderRadius = '20px';
-    toast.style.zIndex = '1000';
     
     document.body.appendChild(toast);
     
-    // 3秒後に削除
     setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.5s ease';
+        toast.classList.add('show');
+    }, 10);
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
         setTimeout(() => {
-            toast.remove();
-        }, 500);
+            document.body.removeChild(toast);
+        }, 300);
     }, 3000);
-}
-
-// マーケットリストを生成する関数
-function generateMarketList() {
-    const marketList = document.getElementById('market-list');
-    
-    if (marketList) {
-        // デモ用のデータ
-        const markets = [
-            {
-                pair: 'OPT/USDT',
-                price: '0.00',
-                change: '0.00',
-                iconColor: '#0071e3',
-                favorite: true
-            },
-            {
-                pair: 'ETH/USDT',
-                price: '1,800.00',
-                change: '-2.50',
-                iconColor: '#627eea',
-                favorite: true
-            },
-            {
-                pair: 'BTC/USDT',
-                price: '30,000.00',
-                change: '+1.20',
-                iconColor: '#f7931a',
-                favorite: false
-            },
-            {
-                pair: 'SOL/USDT',
-                price: '20.00',
-                change: '+5.30',
-                iconColor: '#00ffbd',
-                favorite: false
-            },
-            {
-                pair: 'AVAX/USDT',
-                price: '10.50',
-                change: '-1.80',
-                iconColor: '#e84142',
-                favorite: false
-            }
-        ];
-        
-        markets.forEach(market => {
-            const marketItem = document.createElement('div');
-            marketItem.className = 'market-item';
-            marketItem.setAttribute('data-pair', market.pair);
-            marketItem.setAttribute('data-favorite', market.favorite);
-            
-            if (market.pair === 'OPT/USDT') {
-                marketItem.classList.add('active');
-            }
-            
-            marketItem.innerHTML = `
-                <div class="market-icon" style="background-color: ${market.iconColor}"></div>
-                <div class="market-details">
-                    <div class="market-pair">${market.pair}</div>
-                    <div class="market-price">${market.price}</div>
-                </div>
-                <div class="market-change ${parseFloat(market.change) >= 0 ? 'positive' : 'negative'}">
-                    ${market.change}%
-                </div>
-            `;
-            
-            marketItem.addEventListener('click', function() {
-                // マーケットアイテムの選択
-                document.querySelectorAll('.market-item').forEach(item => item.classList.remove('active'));
-                this.classList.add('active');
-                
-                // デモ用：トレーディングペアの更新
-                const pair = this.getAttribute('data-pair');
-                updateTradingPair(pair);
-            });
-            
-            marketList.appendChild(marketItem);
-        });
-    }
-}
-
-// マーケットリストをフィルタリングする関数
-function filterMarketList(filter) {
-    const marketItems = document.querySelectorAll('.market-item');
-    
-    marketItems.forEach(item => {
-        if (filter === 'all') {
-            item.style.display = 'flex';
-        } else if (filter === 'favorites') {
-            const isFavorite = item.getAttribute('data-favorite') === 'true';
-            item.style.display = isFavorite ? 'flex' : 'none';
-        }
-    });
-}
-
-// トレーディングペアを更新する関数
-function updateTradingPair(pair) {
-    const [base, quote] = pair.split('/');
-    
-    // ペア表示の更新
-    const pairTitle = document.querySelector('.trading-pair h2');
-    if (pairTitle) {
-        pairTitle.textContent = pair;
-    }
-    
-    // アイコンの更新
-    const icons = document.querySelectorAll('.pair-icon .token-icon');
-    if (icons.length >= 2) {
-        // デモ用：簡易的なカラーマッピング
-        const colorMap = {
-            'OPT': '#0071e3',
-            'USDT': '#26a17b',
-            'ETH': '#627eea',
-            'BTC': '#f7931a',
-            'SOL': '#00ffbd',
-            'AVAX': '#e84142'
-        };
-        
-        icons[0].style.backgroundColor = colorMap[base] || '#0071e3';
-        icons[1].style.backgroundColor = colorMap[quote] || '#26a17b';
-    }
-    
-    // スワップパネルの更新
-    const tokenSymbols = document.querySelectorAll('.token-symbol');
-    const tokenIcons = document.querySelectorAll('.swap-input .token-icon');
-    
-    if (tokenSymbols.length >= 2 && tokenIcons.length >= 2) {
-        tokenSymbols[0].textContent = base;
-        tokenSymbols[1].textContent = quote;
-        
-        const colorMap = {
-            'OPT': '#0071e3',
-            'USDT': '#26a17b',
-            'ETH': '#627eea',
-            'BTC': '#f7931a',
-            'SOL': '#00ffbd',
-            'AVAX': '#e84142'
-        };
-        
-        tokenIcons[0].style.backgroundColor = colorMap[base] || '#0071e3';
-        tokenIcons[1].style.backgroundColor = colorMap[quote] || '#26a17b';
-    }
-    
-    // 残高表示の更新
-    const balanceInfos = document.querySelectorAll('.balance-info');
-    if (balanceInfos.length >= 2) {
-        balanceInfos[0].textContent = `残高: ${base === 'OPT' ? '1,250.00' : '0.00'} ${base}`;
-        balanceInfos[1].textContent = `残高: ${quote === 'OPT' ? '1,250.00' : '0.00'} ${quote}`;
-    }
-    
-    // 注文パネルの更新
-    const limitPanel = document.getElementById('limit-panel');
-    const marketPanel = document.getElementById('market-panel');
-    
-    if (limitPanel) {
-        const priceLabel = limitPanel.querySelector('label:contains("価格")');
-        if (priceLabel) {
-            priceLabel.textContent = `価格 (${quote})`;
-        }
-        
-        const amountLabel = limitPanel.querySelector('label:contains("数量")');
-        if (amountLabel) {
-            amountLabel.textContent = `数量 (${base})`;
-        }
-        
-        const totalLabel = limitPanel.querySelector('label:contains("合計")');
-        if (totalLabel) {
-            totalLabel.textContent = `合計 (${quote})`;
-        }
-    }
-    
-    if (marketPanel) {
-        const amountLabel = marketPanel.querySelector('label:contains("数量")');
-        if (amountLabel) {
-            amountLabel.textContent = `数量 (${base})`;
-        }
-        
-        const totalLabel = marketPanel.querySelector('label:contains("概算合計")');
-        if (totalLabel) {
-            totalLabel.textContent = `概算合計 (${quote})`;
-        }
-    }
-    
-    // 注文板の更新
-    generateOrderbook();
-    
-    // チャートの更新
-    generateChart();
-    
-    showToast(`${pair}に切り替えました`);
-}
-
-// 注文板を生成する関数
-function generateOrderbook() {
-    const sellOrders = document.getElementById('sell-orders');
-    const buyOrders = document.getElementById('buy-orders');
-    
-    if (sellOrders && buyOrders) {
-        // 既存の注文をクリア
-        sellOrders.innerHTML = '';
-        buyOrders.innerHTML = '';
-        
-        // デモ用のデータ
-        const basePrice = 0.00;
-        
-        // 売り注文（高い順）
-        for (let i = 10; i > 0; i--) {
-            const price = (basePrice + i * 0.01).toFixed(2);
-            const amount = (Math.random() * 100 + 50).toFixed(2);
-            const total = (price * amount).toFixed(2);
-            const depth = Math.random() * 80 + 20;
-            
-            const orderRow = document.createElement('div');
-            orderRow.className = 'order-row sell-row';
-            orderRow.style.position = 'relative';
-            
-            orderRow.innerHTML = `
-                <div class="price">${price}</div>
-                <div class="amount">${amount}</div>
-                <div class="total">${total}</div>
-                <div class="depth-bar" style="width: ${depth}%"></div>
-            `;
-            
-            sellOrders.appendChild(orderRow);
-        }
-        
-        // 買い注文（高い順）
-        for (let i = 0; i < 10; i++) {
-            const price = Math.max(0, (basePrice - i * 0.01)).toFixed(2);
-            const amount = (Math.random() * 100 + 50).toFixed(2);
-            const total = (price * amount).toFixed(2);
-            const depth = Math.random() * 80 + 20;
-            
-            const orderRow = document.createElement('div');
-            orderRow.className = 'order-row buy-row';
-            orderRow.style.position = 'relative';
-            
-            orderRow.innerHTML = `
-                <div class="price">${price}</div>
-                <div class="amount">${amount}</div>
-                <div class="total">${total}</div>
-                <div class="depth-bar" style="width: ${depth}%"></div>
-            `;
-            
-            buyOrders.appendChild(orderRow);
-        }
-        
-        // 現在価格の更新
-        const currentPriceElements = document.querySelectorAll('.current-price');
-        currentPriceElements.forEach(element => {
-            element.textContent = `$${basePrice.toFixed(2)}`;
-        });
-        
-        // 価格変動の更新
-        const priceChangeElement = document.querySelector('.price-change');
-        if (priceChangeElement) {
-            priceChangeElement.textContent = '0.00%';
-            priceChangeElement.className = 'price-change';
-        }
-    }
-}
-
-// トークンリストを生成する関数
-function generateTokenList() {
-    const tokenList = document.getElementById('token-list');
-    
-    if (tokenList) {
-        // 既存のトークンをクリア
-        tokenList.innerHTML = '';
-        
-        // デモ用のデータ
-        const tokens = [
-            {
-                name: 'OptimaChain',
-                symbol: 'OPT',
-                balance: '1,250.00',
-                iconColor: '#0071e3'
-            },
-            {
-                name: 'Tether USD',
-                symbol: 'USDT',
-                balance: '0.00',
-                iconColor: '#26a17b'
-            },
-            {
-                name: 'Ethereum',
-                symbol: 'ETH',
-                balance: '0.00',
-                iconColor: '#627eea'
-            },
-            {
-                name: 'Bitcoin',
-                symbol: 'BTC',
-                balance: '0.00',
-                iconColor: '#f7931a'
-            },
-            {
-                name: 'Solana',
-                symbol: 'SOL',
-                balance: '0.00',
-                iconColor: '#00ffbd'
-            },
-            {
-                name: 'Avalanche',
-                symbol: 'AVAX',
-                balance: '0.00',
-                iconColor: '#e84142'
-            }
-        ];
-        
-        tokens.forEach(token => {
-            const tokenItem = document.createElement('div');
-            tokenItem.className = 'token-item';
-            
-            tokenItem.innerHTML = `
-                <div class="token-item-icon" style="background-color: ${token.iconColor}"></div>
-                <div class="token-item-details">
-                    <div class="token-item-name">${token.name}</div>
-                    <div class="token-item-symbol">${token.symbol}</div>
-                </div>
-                <div class="token-item-balance">${token.balance}</div>
-            `;
-            
-            tokenItem.addEventListener('click', function() {
-                // デモ用：トークン選択
-                const modalElement = document.getElementById('token-modal');
-                const activeInput = document.activeElement;
-                const swapInputs = document.querySelectorAll('.swap-input');
-                
-                let targetInput = null;
-                swapInputs.forEach((input, index) => {
-                    if (input.contains(activeInput)) {
-                        targetInput = index;
-                    }
-                });
-                
-                if (targetInput !== null) {
-                    const tokenSelectors = document.querySelectorAll('.token-selector');
-                    const balanceInfos = document.querySelectorAll('.balance-info');
-                    
-                    if (tokenSelectors.length > targetInput) {
-                        const tokenSymbol = tokenSelectors[targetInput].querySelector('.token-symbol');
-                        const tokenIcon = tokenSelectors[targetInput].querySelector('.token-icon');
-                        
-                        if (tokenSymbol && tokenIcon) {
-                            tokenSymbol.textContent = token.symbol;
-                            tokenIcon.style.backgroundColor = token.iconColor;
-                        }
-                    }
-                    
-                    if (balanceInfos.length > targetInput) {
-                        balanceInfos[targetInput].textContent = `残高: ${token.balance} ${token.symbol}`;
-                    }
-                }
-                
-                if (modalElement) {
-                    modalElement.classList.remove('active');
-                }
-                
-                showToast(`${token.symbol}を選択しました`);
-            });
-            
-            tokenList.appendChild(tokenItem);
-        });
-    }
-}
-
-// 取引履歴リストを生成する関数
-function generateTradesList() {
-    const tradesList = document.getElementById('trades-list');
-    
-    if (tradesList) {
-        // デモ用のデータ
-        const trades = [
-            {
-                type: 'buy',
-                price: '0.00',
-                amount: '100.00',
-                total: '0.00',
-                time: new Date(Date.now() - 60000) // 1分前
-            },
-            {
-                type: 'sell',
-                price: '0.00',
-                amount: '50.00',
-                total: '0.00',
-                time: new Date(Date.now() - 120000) // 2分前
-            },
-            {
-                type: 'buy',
-                price: '0.00',
-                amount: '200.00',
-                total: '0.00',
-                time: new Date(Date.now() - 180000) // 3分前
-            },
-            {
-                type: 'sell',
-                price: '0.00',
-                amount: '75.00',
-                total: '0.00',
-                time: new Date(Date.now() - 240000) // 4分前
-            }
-        ];
-        
-        trades.forEach(trade => {
-            addTradeItem(trade, tradesList);
-        });
-    }
-}
-
-// 取引アイテムを追加する関数
-function addTradeItem(trade, container = null) {
-    const tradesList = container || document.getElementById('trades-list');
-    
-    if (tradesList) {
-        const tradeItem = document.createElement('div');
-        tradeItem.className = 'trade-item';
-        
-        // 日付のフォーマット
-        const formattedTime = formatTime(trade.time);
-        
-        let typeText = '';
-        let typeClass = '';
-        
-        switch (trade.type) {
-            case 'buy':
-                typeText = '買い';
-                typeClass = 'buy';
-                break;
-            case 'sell':
-                typeText = '売り';
-                typeClass = 'sell';
-                break;
-            case 'swap':
-                typeText = 'スワップ';
-                typeClass = 'buy';
-                break;
-        }
-        
-        tradeItem.innerHTML = `
-            <div class="trade-type ${typeClass}">${typeText}</div>
-            <div class="trade-details">
-                <div class="trade-price">${trade.price} USDT</div>
-                <div class="trade-amount">数量: ${trade.amount} OPT</div>
-                <div class="trade-time">${formattedTime}</div>
-            </div>
-        `;
-        
-        // リストの先頭に追加
-        tradesList.insertBefore(tradeItem, tradesList.firstChild);
-        
-        // 最大表示数を制限
-        const maxTrades = 8;
-        while (tradesList.children.length > maxTrades) {
-            tradesList.removeChild(tradesList.lastChild);
-        }
-    }
-}
-
-// 時間をフォーマットする関数
-function formatTime(date) {
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    const seconds = date.getSeconds().toString().padStart(2, '0');
-    
-    return `${hours}:${minutes}:${seconds}`;
-}
-
-// チャートを生成する関数
-function generateChart() {
-    const chartContainer = document.getElementById('price-chart');
-    
-    if (chartContainer) {
-        // デモ用：簡易的なチャート表示
-        chartContainer.innerHTML = `
-            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
-                <div style="text-align: center;">
-                    <p>チャートデータは現在利用できません</p>
-                    <p style="font-size: 0.9rem; margin-top: 8px;">OptimaChainはまだ開発初期段階です</p>
-                </div>
-            </div>
-        `;
-    }
 }

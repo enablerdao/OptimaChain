@@ -1,4 +1,139 @@
+// Import blockchain interface
+import blockchain from '../../src/js/blockchain.js';
+
+// Initialize wallet state
+let walletState = {
+    isConnected: false,
+    address: '',
+    balance: {},
+    transactions: []
+};
+
+// Initialize wallet
+async function initWallet() {
+    // Auto-connect wallet for demo
+    const result = await blockchain.connectWallet('optimawallet');
+    if (result.success) {
+        walletState.isConnected = true;
+        walletState.address = result.address;
+        
+        // Update UI
+        updateWalletUI();
+        
+        // Get balance
+        const balanceResult = await blockchain.getBalance();
+        if (balanceResult.success) {
+            walletState.balance = balanceResult.balance;
+            updateBalanceUI();
+        }
+        
+        // Get transaction history
+        const txResult = await blockchain.getTransactionHistory();
+        if (txResult.success) {
+            walletState.transactions = txResult.transactions;
+            updateTransactionHistoryUI();
+        }
+    }
+}
+
+// Update wallet UI
+function updateWalletUI() {
+    const accountAddress = document.getElementById('account-address');
+    if (accountAddress) {
+        accountAddress.textContent = walletState.address;
+    }
+    
+    const walletAddress = document.getElementById('wallet-address');
+    if (walletAddress) {
+        walletAddress.value = walletState.address;
+    }
+}
+
+// Update balance UI
+function updateBalanceUI() {
+    const totalBalance = document.getElementById('total-balance');
+    if (totalBalance) {
+        totalBalance.textContent = walletState.balance.OPT.toFixed(2);
+    }
+    
+    // Update asset list
+    const assetList = document.querySelectorAll('.asset-item');
+    assetList.forEach(item => {
+        const symbol = item.querySelector('.asset-name').textContent.split(' ')[0];
+        const balance = item.querySelector('.asset-balance');
+        if (balance && walletState.balance[symbol]) {
+            balance.textContent = walletState.balance[symbol].toFixed(2) + ' ' + symbol;
+        }
+    });
+}
+
+// Update transaction history UI
+function updateTransactionHistoryUI() {
+    const activityContainer = document.querySelector('.activity-list');
+    if (!activityContainer || walletState.transactions.length === 0) return;
+    
+    // Clear existing items
+    activityContainer.innerHTML = '';
+    
+    // Add transactions
+    walletState.transactions.forEach(tx => {
+        const activityItem = document.createElement('div');
+        activityItem.className = 'activity-item';
+        
+        const direction = tx.type === 'receive' ? '↓' : '↑';
+        const timeAgo = getTimeAgo(tx.timestamp);
+        
+        activityItem.innerHTML = `
+            <div class="activity-direction ${tx.type}">${direction}</div>
+            <div class="activity-details">
+                <div class="activity-type">${tx.type === 'receive' ? '受取' : '送金'}</div>
+                <div class="activity-time">${timeAgo}</div>
+            </div>
+            <div class="activity-amount">${tx.type === 'receive' ? '+' : '-'}${tx.amount.toFixed(2)} ${tx.token}</div>
+        `;
+        
+        activityContainer.appendChild(activityItem);
+    });
+}
+
+// Helper function to format time ago
+function getTimeAgo(timestamp) {
+    const seconds = Math.floor((Date.now() - timestamp) / 1000);
+    
+    if (seconds < 60) return `${seconds}秒前`;
+    if (seconds < 3600) return `${Math.floor(seconds / 60)}分前`;
+    if (seconds < 86400) return `${Math.floor(seconds / 3600)}時間前`;
+    return `${Math.floor(seconds / 86400)}日前`;
+}
+
+// Send tokens
+async function sendTokens(to, token, amount, feeLevel) {
+    const result = await blockchain.sendTokens(to, token, amount, feeLevel);
+    if (result.success) {
+        // Update balance
+        const balanceResult = await blockchain.getBalance();
+        if (balanceResult.success) {
+            walletState.balance = balanceResult.balance;
+            updateBalanceUI();
+        }
+        
+        // Update transaction history
+        const txResult = await blockchain.getTransactionHistory();
+        if (txResult.success) {
+            walletState.transactions = txResult.transactions;
+            updateTransactionHistoryUI();
+        }
+        
+        return { success: true, message: '送金が完了しました' };
+    } else {
+        return { success: false, message: result.message };
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize wallet
+    initWallet();
+    
     // 通知バーの閉じるボタン
     const notificationBar = document.querySelector('.notification-bar');
     const closeButton = document.querySelector('.notification-close');
@@ -35,9 +170,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const refreshBalanceBtn = document.getElementById('refresh-balance');
     
     if (refreshBalanceBtn) {
-        refreshBalanceBtn.addEventListener('click', function() {
-            // 実際のアプリでは、ここでAPIリクエストを行い残高を更新
-            showToast('残高を更新しました');
+        refreshBalanceBtn.addEventListener('click', async function() {
+            const balanceResult = await blockchain.getBalance();
+            if (balanceResult.success) {
+                walletState.balance = balanceResult.balance;
+                updateBalanceUI();
+                showToast('残高を更新しました');
+            } else {
+                showToast('残高の更新に失敗しました');
+            }
         });
     }
     
@@ -85,39 +226,121 @@ document.addEventListener('DOMContentLoaded', function() {
     const confirmSendBtn = document.getElementById('confirm-send');
     
     if (confirmSendBtn) {
-        confirmSendBtn.addEventListener('click', function() {
-            // 実際のアプリでは、ここでトランザクションを送信
-            showToast('送金リクエストを送信しました（デモのみ）');
-            sendModal.classList.remove('active');
+        confirmSendBtn.addEventListener('click', async function() {
+            // フォームデータの取得
+            const to = document.getElementById('send-to').value;
+            const amount = parseFloat(document.getElementById('send-amount').value);
+            const asset = document.getElementById('send-asset').textContent || 'OPT';
             
-            // デモ用：アクティビティリストに追加
-            addActivityItem({
-                type: 'send',
-                asset: document.getElementById('send-asset').value.toUpperCase(),
-                amount: document.getElementById('send-amount').value,
-                date: new Date()
+            // 選択された手数料レベルを取得
+            let feeLevel = 'medium';
+            document.querySelectorAll('.fee-option').forEach(option => {
+                if (option.classList.contains('selected')) {
+                    feeLevel = option.getAttribute('data-fee');
+                }
             });
+            
+            // バリデーション
+            if (!to || !amount) {
+                showToast('送金先アドレスと金額を入力してください');
+                return;
+            }
+            
+            // 送金処理
+            const result = await sendTokens(to, asset, amount, feeLevel);
+            
+            // モーダルを閉じる
+            if (sendModal) {
+                sendModal.classList.remove('active');
+            }
+            
+            // 結果メッセージ
+            if (result.success) {
+                showToast(result.message);
+            } else {
+                showToast('エラー: ' + result.message);
+            }
         });
     }
     
-    // 手数料オプションの選択
-    const feeOptions = document.querySelectorAll('.fee-option');
+    // 資産タブ切り替え
+    const assetTabs = document.querySelectorAll('.asset-tab');
     
-    feeOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            feeOptions.forEach(opt => opt.classList.remove('active'));
+    assetTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const asset = this.getAttribute('data-asset');
+            
+            // タブのアクティブ状態を切り替え
+            assetTabs.forEach(t => t.classList.remove('active'));
             this.classList.add('active');
+            
+            // 選択された資産に応じてUIを更新
+            const assetElement = document.getElementById('send-asset');
+            if (assetElement) {
+                assetElement.textContent = asset;
+            }
         });
     });
     
-    // 資産リストの生成
-    generateAssetsList();
+    // 最大ボタン
+    const maxBtn = document.getElementById('max-amount');
     
-    // アクティビティリストの生成
-    generateActivityList();
+    if (maxBtn) {
+        maxBtn.addEventListener('click', function() {
+            const amountInput = document.getElementById('send-amount');
+            const asset = document.getElementById('send-asset').textContent || 'OPT';
+            
+            // 選択された資産の残高を取得
+            if (walletState.balance[asset]) {
+                amountInput.value = walletState.balance[asset].toFixed(2);
+            } else {
+                amountInput.value = '0.00';
+            }
+        });
+    }
+    
+    // QRコード生成
+    function generateQRCode() {
+        const qrContainer = document.getElementById('qr-code');
+        
+        if (qrContainer && typeof QRCode !== 'undefined') {
+            qrContainer.innerHTML = '';
+            new QRCode(qrContainer, {
+                text: walletState.address || '0x7a58c0d9b9ab3246a89e7d7c4a3e02e8',
+                width: 128,
+                height: 128,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+    }
+    
+    // ダッシュボード、送金、受取、履歴、スワップのタブ切り替え
+    const walletTabs = document.querySelectorAll('.wallet-tab');
+    const walletContents = document.querySelectorAll('.wallet-content');
+    
+    walletTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // タブのアクティブ状態を切り替え
+            walletTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // コンテンツの表示を切り替え
+            walletContents.forEach(content => {
+                if (content.id === tabId) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+        });
+    });
 });
 
-// クリップボードにコピーする関数
+// クリップボードにコピー
 function copyToClipboard(text) {
     const textarea = document.createElement('textarea');
     textarea.value = text;
@@ -127,222 +350,22 @@ function copyToClipboard(text) {
     document.body.removeChild(textarea);
 }
 
-// トースト通知を表示する関数
+// トースト通知
 function showToast(message) {
-    // 既存のトーストを削除
-    const existingToast = document.querySelector('.toast');
-    if (existingToast) {
-        existingToast.remove();
-    }
-    
-    // 新しいトーストを作成
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.textContent = message;
-    toast.style.position = 'fixed';
-    toast.style.bottom = '20px';
-    toast.style.left = '50%';
-    toast.style.transform = 'translateX(-50%)';
-    toast.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-    toast.style.color = 'white';
-    toast.style.padding = '10px 20px';
-    toast.style.borderRadius = '20px';
-    toast.style.zIndex = '1000';
     
     document.body.appendChild(toast);
     
-    // 3秒後に削除
     setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.5s ease';
+        toast.classList.add('show');
+    }, 10);
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
         setTimeout(() => {
-            toast.remove();
-        }, 500);
+            document.body.removeChild(toast);
+        }, 300);
     }, 3000);
-}
-
-// QRコードを生成する関数
-function generateQRCode() {
-    const qrContainer = document.getElementById('qr-code');
-    const walletAddress = document.getElementById('wallet-address').value;
-    
-    if (qrContainer && walletAddress) {
-        qrContainer.innerHTML = '';
-        
-        // QRコードライブラリがある場合は使用
-        if (typeof QRCode !== 'undefined') {
-            new QRCode(qrContainer, {
-                text: walletAddress,
-                width: 180,
-                height: 180,
-                colorDark: '#1d1d1f',
-                colorLight: '#ffffff',
-                correctLevel: QRCode.CorrectLevel.H
-            });
-        } else {
-            // ライブラリがない場合はプレースホルダーを表示
-            qrContainer.innerHTML = `
-                <div style="width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; border: 1px dashed #ccc;">
-                    <p style="text-align: center; color: #86868b;">QRコード<br>プレースホルダー</p>
-                </div>
-            `;
-        }
-    }
-}
-
-// 資産リストを生成する関数
-function generateAssetsList() {
-    const assetsList = document.getElementById('assets-list');
-    
-    if (assetsList) {
-        // デモ用のデータ
-        const assets = [
-            {
-                name: 'OptimaChain',
-                symbol: 'OPT',
-                network: 'OptimaChain',
-                balance: '1,250.00',
-                value: '$0.00',
-                iconColor: '#0071e3'
-            },
-            {
-                name: 'Tether USD',
-                symbol: 'USDT',
-                network: 'OptimaChain',
-                balance: '0.00',
-                value: '$0.00',
-                iconColor: '#26a17b'
-            },
-            {
-                name: 'Ethereum',
-                symbol: 'ETH',
-                network: 'OptimaChain (Wrapped)',
-                balance: '0.00',
-                value: '$0.00',
-                iconColor: '#627eea'
-            }
-        ];
-        
-        assets.forEach(asset => {
-            const assetItem = document.createElement('div');
-            assetItem.className = 'asset-item';
-            
-            assetItem.innerHTML = `
-                <div class="asset-icon" style="background-color: ${asset.iconColor}"></div>
-                <div class="asset-details">
-                    <div class="asset-name">${asset.name} (${asset.symbol})</div>
-                    <div class="asset-network">${asset.network}</div>
-                </div>
-                <div class="asset-balance">
-                    <div class="asset-amount">${asset.balance} ${asset.symbol}</div>
-                    <div class="asset-value">${asset.value} USD</div>
-                </div>
-            `;
-            
-            assetsList.appendChild(assetItem);
-        });
-    }
-}
-
-// アクティビティリストを生成する関数
-function generateActivityList() {
-    const activityList = document.getElementById('activity-list');
-    
-    if (activityList) {
-        // デモ用のデータ
-        const activities = [
-            {
-                type: 'receive',
-                asset: 'OPT',
-                amount: '1,250.00',
-                date: new Date(Date.now() - 3600000) // 1時間前
-            }
-        ];
-        
-        activities.forEach(activity => {
-            addActivityItemToDOM(activity, activityList);
-        });
-    }
-}
-
-// アクティビティアイテムを追加する関数
-function addActivityItem(activity) {
-    const activityList = document.getElementById('activity-list');
-    
-    if (activityList) {
-        addActivityItemToDOM(activity, activityList);
-    }
-}
-
-// アクティビティアイテムをDOMに追加する関数
-function addActivityItemToDOM(activity, container) {
-    const activityItem = document.createElement('div');
-    activityItem.className = 'activity-item';
-    
-    let iconClass = '';
-    let typeText = '';
-    let amountClass = '';
-    let amountPrefix = '';
-    
-    switch (activity.type) {
-        case 'send':
-            iconClass = 'send-activity';
-            typeText = '送金';
-            amountClass = 'negative';
-            amountPrefix = '-';
-            break;
-        case 'receive':
-            iconClass = 'receive-activity';
-            typeText = '受取';
-            amountClass = 'positive';
-            amountPrefix = '+';
-            break;
-        case 'swap':
-            iconClass = 'swap-activity';
-            typeText = 'スワップ';
-            amountClass = '';
-            amountPrefix = '';
-            break;
-    }
-    
-    // 日付のフォーマット
-    const formattedDate = formatDate(activity.date);
-    
-    activityItem.innerHTML = `
-        <div class="activity-icon ${iconClass}">
-            ${activity.type === 'send' ? '↑' : activity.type === 'receive' ? '↓' : '⇄'}
-        </div>
-        <div class="activity-details">
-            <div class="activity-type">${typeText}</div>
-            <div class="activity-date">${formattedDate}</div>
-        </div>
-        <div class="activity-amount ${amountClass}">${amountPrefix}${activity.amount} ${activity.asset}</div>
-    `;
-    
-    // リストの先頭に追加
-    container.insertBefore(activityItem, container.firstChild);
-}
-
-// 日付をフォーマットする関数
-function formatDate(date) {
-    const now = new Date();
-    const diff = now - date;
-    
-    // 1日以内
-    if (diff < 86400000) {
-        // 1時間以内
-        if (diff < 3600000) {
-            const minutes = Math.floor(diff / 60000);
-            return `${minutes}分前`;
-        }
-        // 1時間以上
-        const hours = Math.floor(diff / 3600000);
-        return `${hours}時間前`;
-    }
-    
-    // 日付を表示
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    return `${year}/${month}/${day}`;
 }
