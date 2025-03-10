@@ -1,0 +1,80 @@
+{
+  "nav": {
+    "features": "특징",
+    "technology": "기술",
+    "ecosystem": "생태계",
+    "developers": "개발자",
+    "community": "커뮤니티",
+    "token": "토큰"
+  },
+  "dropdown": {
+    "smartContracts": {
+      "title": "스마트 컨트랙트",
+      "desc": "WASM 기반 다중 언어 컨트랙트"
+    },
+    "sdkApi": {
+      "title": "SDK 및 API",
+      "desc": "종합적인 개발 도구 키트"
+    },
+    "testnet": {
+      "title": "테스트넷",
+      "desc": "개발 환경 및 수도꼭지"
+    },
+    "whitepaper": {
+      "title": "백서",
+      "desc": "기술 사양 및 설계"
+    }
+  },
+  "hero": {
+    "title": "차세대 분산형 블록체인 플랫폼",
+    "subtitle": "혁신적인 확장 기술과 고급 보안 통합",
+    "cta": "자세히 알아보기",
+    "secondary": "개발자 문서"
+  },
+  "features": {
+    "title": "OptimaChain 특징",
+    "scalability": {
+      "title": "높은 확장성",
+      "desc": "동적 샤딩 기술로 최대 50,000 TPS 달성"
+    },
+    "security": {
+      "title": "고급 보안",
+      "desc": "적응형 지분 증명을 통한 분산 검증 및 사기 방지"
+    },
+    "interoperability": {
+      "title": "상호 운용성",
+      "desc": "여러 블록체인과 원활한 통합"
+    },
+    "aiOptimization": {
+      "title": "AI 최적화",
+      "desc": "기계 학습을 통한 네트워크 성능 자동 최적화"
+    }
+  },
+  "stats": {
+    "tps": "트랜잭션/초",
+    "finality": "최종성",
+    "validators": "검증자",
+    "applications": "애플리케이션"
+  },
+  "cta": {
+    "join": "커뮤니티 참여",
+    "start": "개발 시작하기"
+  },
+  "footer": {
+    "resources": "리소스",
+    "developers": "개발자",
+    "community": "커뮤니티",
+    "about": "회사 소개",
+    "copyright": "© 2025 OptimaChain. 모든 권리 보유."
+  },
+  "notification": {
+    "testnet": "OptimaChain 테스트넷이 출시되었습니다!",
+    "join": "지금 참여하기",
+    "close": "닫기"
+  },
+  "buttons": {
+    "showMore": "더 보기",
+    "close": "닫기",
+    "readMore": "더 읽기"
+  }
+}
