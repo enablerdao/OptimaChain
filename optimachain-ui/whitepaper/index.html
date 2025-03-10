@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaChain ホワイトペーパー</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="../src/css/styles.css">
+    <link rel="stylesheet" href="../src/css/whitepaper.css">
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <div class="logo-icon"></div>
+                    OptimaChain
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="../index.html">ホーム</a></li>
+                        <li><a href="../technology.html">技術</a></li>
+                        <li><a href="../ecosystem.html">エコシステム</a></li>
+                        <li><a href="../developers.html">開発者</a></li>
+                        <li><a href="../community.html">コミュニティ</a></li>
+                        <li><a href="../token.html">トークン</a></li>
+                        <li><a href="../roadmap.html">ロードマップ</a></li>
+                    </ul>
+                </nav>
+                <a href="../wallet.html" class="wallet-btn">ウォレット接続</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="whitepaper-container">
+        <div class="whitepaper-sidebar">
+            <div class="sidebar-header">
+                <h3>目次</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#introduction">1. はじめに</a></li>
+                    <li>
+                        <a href="#technical-architecture">2. 技術アーキテクチャ</a>
+                        <ul>
+                            <li><a href="#consensus-mechanism">2.1 コンセンサスメカニズム</a></li>
+                            <li><a href="#dynamic-sharding">2.2 ダイナミックシャーディング</a></li>
+                            <li><a href="#cross-shard-communication">2.3 クロスシャードコミュニケーション</a></li>
+                            <li><a href="#state-management">2.4 ステートマネジメント</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#security-privacy">3. セキュリティとプライバシー</a>
+                        <ul>
+                            <li><a href="#zk-stark">3.1 zk-STARK技術</a></li>
+                            <li><a href="#ai-security">3.2 AI駆動セキュリティシステム</a></li>
+                            <li><a href="#quantum-resistance">3.3 量子耐性暗号</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#smart-contracts">4. スマートコントラクト</a>
+                        <ul>
+                            <li><a href="#wasm-environment">4.1 WASMベースの実行環境</a></li>
+                            <li><a href="#multi-language">4.2 多言語サポート</a></li>
+                            <li><a href="#formal-verification">4.3 形式検証</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#cross-chain">5. クロスチェーン相互運用性</a>
+                        <ul>
+                            <li><a href="#bridge-protocol">5.1 ブリッジプロトコル</a></li>
+                            <li><a href="#asset-transfer">5.2 アセット転送</a></li>
+                            <li><a href="#cross-chain-contracts">5.3 クロスチェーンスマートコントラクト</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#governance">6. ガバナンスモデル</a>
+                        <ul>
+                            <li><a href="#dao">6.1 分散型自律組織（DAO）</a></li>
+                            <li><a href="#proposal-voting">6.2 提案と投票メカニズム</a></li>
+                            <li><a href="#treasury">6.3 トレジャリー管理</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#tokenomics">7. トークノミクス</a>
+                        <ul>
+                            <li><a href="#opt-token">7.1 OPTトークン</a></li>
+                            <li><a href="#supply-distribution">7.2 供給と分配</a></li>
+                            <li><a href="#inflation">7.3 インフレーションモデル</a></li>
+                            <li><a href="#fee-structure">7.4 手数料構造</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#use-cases">8. ユースケースと応用</a>
+                        <ul>
+                            <li><a href="#defi">8.1 分散型金融（DeFi）</a></li>
+                            <li><a href="#nft-metaverse">8.2 NFTとメタバース</a></li>
+                            <li><a href="#enterprise">8.3 エンタープライズソリューション</a></li>
+                            <li><a href="#data-marketplace">8.4 データマーケットプレイス</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#roadmap">9. ロードマップ</a></li>
+                    <li><a href="#conclusion">10. 結論</a></li>
+                    <li><a href="#references">11. 参考文献</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="OptimaChain_Whitepaper.html" class="download-btn">完全版PDFをダウンロード</a>
+            </div>
+        </div>
+
+        <div class="whitepaper-content">
+            <div class="whitepaper-header">
+                <h1>OptimaChain ホワイトペーパー</h1>
+                <p class="whitepaper-subtitle">革新的なスケーリング技術と高度なセキュリティを統合した次世代型分散型ブロックチェーンプラットフォーム</p>
+                <p class="whitepaper-version">バージョン 1.0.0</p>
+            </div>
+
+            <div class="whitepaper-summary">
+                <h2>要約</h2>
+                <p>OptimaChainは、ブロックチェーン技術の主要な課題であるスケーラビリティ、セキュリティ、分散化のトリレンマを解決するために設計された革新的なブロックチェーンプラットフォームです。AI駆動の適応型シャーディング技術と高度なセキュリティメカニズムを組み合わせることで、高スループット、低レイテンシー、強固なセキュリティを実現します。本ホワイトペーパーでは、OptimaChainのアーキテクチャ、技術的特徴、およびエコシステムについて詳細に説明します。</p>
+            </div>
+
+            <section id="introduction" class="whitepaper-section">
+                <h2>1. はじめに</h2>
+                <div class="section-content" id="introduction-content">
+                    <!-- コンテンツはJavaScriptで読み込まれます -->
+                    <p>読み込み中...</p>
+                </div>
+            </section>
+
+            <section id="technical-architecture" class="whitepaper-section">
+                <h2>2. 技術アーキテクチャ</h2>
+                <div class="section-content" id="technical-architecture-content">
+                    <!-- コンテンツはJavaScriptで読み込まれます -->
+                    <p>読み込み中...</p>
+                </div>
+
+                <section id="consensus-mechanism" class="whitepaper-subsection">
+                    <h3>2.1 コンセンサスメカニズム: Adaptive Proof-of-Stake (aPoS)</h3>
+                    <div class="section-content" id="consensus-mechanism-content">
+                        <!-- コンテンツはJavaScriptで読み込まれます -->
+                        <p>読み込み中...</p>
+                    </div>
+                </section>
+
+                <section id="dynamic-sharding" class="whitepaper-subsection">
+                    <h3>2.2 ダイナミックシャーディング</h3>
+                    <div class="section-content" id="dynamic-sharding-content">
+                        <!-- コンテンツはJavaScriptで読み込まれます -->
+                        <p>読み込み中...</p>
+                    </div>
+                </section>
+
+                <section id="cross-shard-communication" class="whitepaper-subsection">
+                    <h3>2.3 クロスシャードコミュニケーション</h3>
+                    <div class="section-content" id="cross-shard-communication-content">
+                        <!-- コンテンツはJavaScriptで読み込まれます -->
+                        <p>読み込み中...</p>
+                    </div>
+                </section>
+
+                <section id="state-management" class="whitepaper-subsection">
+                    <h3>2.4 ステートマネジメント</h3>
+                    <div class="section-content" id="state-management-content">
+                        <!-- コンテンツはJavaScriptで読み込まれます -->
+                        <p>読み込み中...</p>
+                    </div>
+                </section>
+            </section>
+
+            <section id="security-privacy" class="whitepaper-section">
+                <h2>3. セキュリティとプライバシー</h2>
+                <div class="section-content" id="security-privacy-content">
+                    <!-- コンテンツはJavaScriptで読み込まれます -->
+                    <p>読み込み中...</p>
+                </div>
+                
+                <!-- 以下、セクション3のサブセクションが続きます -->
+            </section>
+
+            <!-- 以下、セクション4〜11が続きます -->
+
+            <div class="whitepaper-navigation">
+                <a href="#" class="prev-section">前のセクション</a>
+                <a href="#" class="next-section">次のセクション</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="wrapper">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="../index.html" class="logo">
+                        <div class="logo-icon"></div>
+                        OptimaChain
+                    </a>
+                    <p>革新的なスケーリング技術と高度なセキュリティを統合した次世代型分散型ブロックチェーンプラットフォーム</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-links-column">
+                        <h3>リソース</h3>
+                        <ul>
+                            <li><a href="OptimaChain_Whitepaper.html">ホワイトペーパー</a></li>
+                            <li><a href="../roadmap.html">ロードマップ</a></li>
+                            <li><a href="../faq.html">よくある質問</a></li>
+                            <li><a href="../blog">ブログ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-column">
+                        <h3>開発者</h3>
+                        <ul>
+                            <li><a href="../developers.html">開発者ポータル</a></li>
+                            <li><a href="../docs">ドキュメント</a></li>
+                            <li><a href="../developers.html#testnet">テストネット</a></li>
+                            <li><a href="https://github.com/enablerdao/OptimaChain">GitHub</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-column">
+                        <h3>コミュニティ</h3>
+                        <ul>
+                            <li><a href="https://twitter.com/OptimaChain">Twitter</a></li>
+                            <li><a href="https://discord.gg/optimachain">Discord</a></li>
+                            <li><a href="https://t.me/optimachain">Telegram</a></li>
+                            <li><a href="https://forum.optimachain.io">フォーラム</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-column">
+                        <h3>会社情報</h3>
+                        <ul>
+                            <li><a href="https://github.com/enablerdao/OptimaChain">私たちについて</a></li>
+                            <li><a href="https://github.com/enablerdao/OptimaChain/issues">採用情報</a></li>
+                            <li><a href="https://github.com/enablerdao/OptimaChain/blob/main/README.md">プレスキット</a></li>
+                            <li><a href="https://discord.gg/optimachain">お問い合わせ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OptimaChain by Enabler DAO. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="https://twitter.com/OptimaChain"><i class="icon-twitter"></i></a>
+                    <a href="https://github.com/enablerdao/OptimaChain"><i class="icon-github"></i></a>
+                    <a href="https://discord.gg/optimachain"><i class="icon-discord"></i></a>
+                    <a href="https://t.me/optimachain"><i class="icon-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // マークダウンファイルを読み込んでHTMLに変換する関数
+        async function loadMarkdownContent(sectionId, filePath) {
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const markdown = await response.text();
+                
+                // 簡易的なマークダウンからHTMLへの変換（実際の実装ではより堅牢なライブラリを使用することをお勧めします）
+                let html = markdown
+                    // 見出し
+                    .replace(/^# (.*$)/gm, '<h2>$1</h2>')
+                    .replace(/^## (.*$)/gm, '<h3>$1</h3>')
+                    .replace(/^### (.*$)/gm, '<h4>$1</h4>')
+                    
+                    // 太字
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    
+                    // イタリック
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    
+                    // リンク
+                    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+                    
+                    // 画像
+                    .replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" class="whitepaper-image">')
+                    
+                    // コードブロック
+                    .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+                    
+                    // 段落
+                    .replace(/^(?!<[h|p|u|o]|$)(.*$)/gm, '<p>$1</p>')
+                    
+                    // 空行を削除
+                    .replace(/<p><\/p>/g, '');
+                
+                document.getElementById(`${sectionId}-content`).innerHTML = html;
+            } catch (error) {
+                console.error('Error loading markdown content:', error);
+                document.getElementById(`${sectionId}-content`).innerHTML = `<p>コンテンツの読み込みに失敗しました。</p>`;
+            }
+        }
+
+        // ページ読み込み時に各セクションのコンテンツを読み込む
+        document.addEventListener('DOMContentLoaded', () => {
+            // 各セクションのマークダウンファイルを読み込む
+            loadMarkdownContent('introduction', 'sections/01_introduction.md');
+            loadMarkdownContent('technical-architecture', 'sections/02_technical_architecture.md');
+            loadMarkdownContent('consensus-mechanism', 'sections/02_1_consensus_mechanism.md');
+            loadMarkdownContent('dynamic-sharding', 'sections/02_2_dynamic_sharding.md');
+            loadMarkdownContent('cross-shard-communication', 'sections/02_3_cross_shard_communication.md');
+            loadMarkdownContent('state-management', 'sections/02_4_state_management.md');
+            loadMarkdownContent('security-privacy', 'sections/03_security_and_privacy.md');
+            // 他のセクションも同様に読み込む
+            
+            // サイドバーのナビゲーション機能
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // デフォルトのスクロール動作を維持
+                    // ただし、必要に応じてカスタムスクロール動作を実装できます
+                });
+            });
+            
+            // 前後のセクションへのナビゲーション
+            updateNavigationLinks();
+        });
+
+        // 前後のセクションへのナビゲーションリンクを更新する関数
+        function updateNavigationLinks() {
+            const sections = document.querySelectorAll('.whitepaper-section');
+            const currentSection = getCurrentSection();
+            const prevLink = document.querySelector('.prev-section');
+            const nextLink = document.querySelector('.next-section');
+            
+            // 現在のセクションのインデックスを取得
+            let currentIndex = -1;
+            sections.forEach((section, index) => {
+                if (section.id === currentSection) {
+                    currentIndex = index;
+                }
+            });
+            
+            // 前のセクションへのリンクを更新
+            if (currentIndex > 0) {
+                const prevSection = sections[currentIndex - 1];
+                prevLink.href = `#${prevSection.id}`;
+                prevLink.textContent = `← ${prevSection.querySelector('h2').textContent}`;
+                prevLink.style.display = 'block';
+            } else {
+                prevLink.style.display = 'none';
+            }
+            
+            // 次のセクションへのリンクを更新
+            if (currentIndex < sections.length - 1) {
+                const nextSection = sections[currentIndex + 1];
+                nextLink.href = `#${nextSection.id}`;
+                nextLink.textContent = `${nextSection.querySelector('h2').textContent} →`;
+                nextLink.style.display = 'block';
+            } else {
+                nextLink.style.display = 'none';
+            }
+        }
+
+        // 現在表示されているセクションのIDを取得する関数
+        function getCurrentSection() {
+            const sections = document.querySelectorAll('.whitepaper-section');
+            let currentSection = sections[0].id;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    currentSection = section.id;
+                }
+            });
+            
+            return currentSection;
+        }
+
+        // スクロール時にナビゲーションリンクを更新
+        window.addEventListener('scroll', () => {
+            updateNavigationLinks();
+        });
+    </script>
+</body>
+</html>
