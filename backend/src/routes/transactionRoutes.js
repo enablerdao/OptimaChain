@@ -13,12 +13,12 @@ router.get('/hash/:hash', getTransactionByHash);
 
 // Protected routes
 router.route('/')
-  .get(mockProtect, getTransactions); // Use mockProtect for development
+  .get(protect, getTransactions);
 
 router.route('/:id')
-  .get(mockProtect, getTransactionById);
+  .get(protect, getTransactionById);
 
 router.route('/swap')
-  .post(mockProtect, createSwapTransaction);
+  .post(protect, createSwapTransaction);
 
 module.exports = router;

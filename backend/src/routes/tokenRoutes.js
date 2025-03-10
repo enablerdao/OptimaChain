@@ -16,9 +16,9 @@ router.get('/symbol/:symbol', getTokenBySymbol);
 
 // Admin routes
 router.route('/')
-  .post(mockProtect, admin, createToken); // Use mockProtect for development
+  .post(protect, admin, createToken);
 
 router.route('/:id')
-  .put(mockProtect, admin, updateToken);
+  .put(protect, admin, updateToken);
 
 module.exports = router;

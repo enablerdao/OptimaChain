@@ -13,20 +13,20 @@ const { protect, mockProtect } = require('../middleware/authMiddleware');
 
 // All routes are protected
 router.route('/')
-  .get(mockProtect, getUserWallets) // Use mockProtect for development
-  .post(mockProtect, createWallet);
+  .get(protect, getUserWallets)
+  .post(protect, createWallet);
 
 router.route('/:id')
-  .get(mockProtect, getWalletById)
-  .put(mockProtect, updateWallet);
+  .get(protect, getWalletById)
+  .put(protect, updateWallet);
 
 router.route('/:id/transactions')
-  .get(mockProtect, getWalletTransactions);
+  .get(protect, getWalletTransactions);
 
 router.route('/:id/send')
-  .post(mockProtect, sendTokens);
+  .post(protect, sendTokens);
 
 router.route('/:id/balance')
-  .get(mockProtect, getWalletBalance);
+  .get(protect, getWalletBalance);
 
 module.exports = router;

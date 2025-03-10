@@ -3,6 +3,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const path = require('path');
+const connectDB = require('./config/db');
+const seedData = require('./config/seedData');
 
 // Load environment variables
 dotenv.config();
@@ -59,9 +61,17 @@ app.use((err, req, res, next) => {
 // Set port and start server
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV}`);
+// Connect to database before starting server
+connectDB().then(() => {
+  // Seed data if in development mode
+  if (process.env.NODE_ENV === 'development') {
+    seedData();
+  }
+  
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV}`);
+  });
 });
 
 // Handle unhandled promise rejections
