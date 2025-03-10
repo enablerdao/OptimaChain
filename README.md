@@ -76,7 +76,7 @@ npm start
 ### OptimaWallet プロトタイプ
 
 ```bash
-cd wallet
+cd optimachain-ui/wallet
 npm install
 npm start
 ```
@@ -84,7 +84,7 @@ npm start
 ### OptimaDEX プロトタイプ
 
 ```bash
-cd dex
+cd optimachain-ui/dex
 npm install
 npm start
 ```
