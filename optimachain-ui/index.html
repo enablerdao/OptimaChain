@@ -89,12 +89,22 @@
                 <nav class="main-nav">
                     <ul>
                         <li><a href="#features" data-i18n="nav.features">特徴</a></li>
-                        <li><a href="/technology.html" data-i18n="nav.technology">技術</a></li>
-                        <li><a href="/ecosystem.html" data-i18n="nav.ecosystem">エコシステム</a></li>
-                        <li><a href="/developers.html" data-i18n="nav.developers">開発者</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-i18n="nav.technology">技術</a>
+                            <div class="dropdown-menu">
+                                <a href="/technology.html" data-i18n="nav.technology">技術概要</a>
+                                <a href="/ecosystem.html" data-i18n="nav.ecosystem">エコシステム</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-i18n="nav.developers">開発者</a>
+                            <div class="dropdown-menu">
+                                <a href="/developers.html" data-i18n="nav.developers">開発者向け</a>
+                                <a href="/roadmap.html">ロードマップ</a>
+                            </div>
+                        </li>
                         <li><a href="/community.html" data-i18n="nav.community">コミュニティ</a></li>
                         <li><a href="/token.html" data-i18n="nav.token">トークン</a></li>
-                        <li><a href="/roadmap.html">ロードマップ</a></li>
                     </ul>
                 </nav>
                 
@@ -116,7 +126,7 @@
                     
                     <a href="/wallet.html" class="wallet-button" data-i18n="wallet.connect">ウォレット接続</a>
                     
-                    <button class="mobile-menu-toggle" aria-label="メニュー">
+                    <button class="mobile-menu-btn" aria-label="メニュー">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -131,12 +141,22 @@
         <nav>
             <ul>
                 <li><a href="#features" data-i18n="nav.features">特徴</a></li>
-                <li><a href="/technology.html" data-i18n="nav.technology">技術</a></li>
-                <li><a href="/ecosystem.html" data-i18n="nav.ecosystem">エコシステム</a></li>
-                <li><a href="/developers.html" data-i18n="nav.developers">開発者</a></li>
+                <li class="mobile-dropdown">
+                    <a href="#" class="mobile-dropdown-toggle" data-i18n="nav.technology">技術</a>
+                    <div class="mobile-dropdown-menu">
+                        <a href="/technology.html" data-i18n="nav.technology">技術概要</a>
+                        <a href="/ecosystem.html" data-i18n="nav.ecosystem">エコシステム</a>
+                    </div>
+                </li>
+                <li class="mobile-dropdown">
+                    <a href="#" class="mobile-dropdown-toggle" data-i18n="nav.developers">開発者</a>
+                    <div class="mobile-dropdown-menu">
+                        <a href="/developers.html" data-i18n="nav.developers">開発者向け</a>
+                        <a href="/roadmap.html">ロードマップ</a>
+                    </div>
+                </li>
                 <li><a href="/community.html" data-i18n="nav.community">コミュニティ</a></li>
                 <li><a href="/token.html" data-i18n="nav.token">トークン</a></li>
-                <li><a href="/roadmap.html">ロードマップ</a></li>
                 <li><a href="/whitepaper/OptimaChain_Whitepaper.html" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
             </ul>
         </nav>

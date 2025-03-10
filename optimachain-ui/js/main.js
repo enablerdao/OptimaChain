@@ -152,23 +152,29 @@ function initSmoothScroll() {
 function initStickyHeader() {
     const header = document.querySelector('header');
     let lastScrollTop = 0;
+    let scrollThreshold = 50; // スクロールしきい値
     
     window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        if (scrollTop > lastScrollTop) {
-            // 下スクロール
-            header.style.transform = 'translateY(-100%)';
+        // スクロール方向を検出
+        if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+            // 下スクロールで、しきい値を超えた場合
+            header.classList.add('header-hidden');
         } else {
-            // 上スクロール
-            header.style.transform = 'translateY(0)';
+            // 上スクロールまたはページ上部
+            header.classList.remove('header-hidden');
+        }
+        
+        // ヘッダーの背景色を調整
+        if (scrollTop > 10) {
+            header.classList.add('header-scrolled');
+        } else {
+            header.classList.remove('header-scrolled');
         }
         
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     }, { passive: true });
-    
-    // ヘッダーにトランジションを追加
-    header.style.transition = 'transform 0.3s ease';
 }
 
 // モバイルメニュー
@@ -182,6 +188,16 @@ function initMobileMenu() {
             mobileMenu.classList.toggle('open');
         });
     }
+    
+    // Mobile dropdown toggles
+    const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+    mobileDropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const parent = this.parentElement;
+            parent.classList.toggle('open');
+        });
+    });
 }
 
 // 3Dティルトエフェクト
