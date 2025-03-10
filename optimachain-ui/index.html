@@ -665,6 +665,98 @@ cd optimachain
     
     <!-- フッター -->
     <footer class="main-footer">
+    <!-- 開発者クイックスタートセクション -->
+    <section class="dev-quickstart-section">
+        <div class="wrapper">
+            <div class="section-header">
+                <div class="section-tag">DEVELOPERS</div>
+                <h2 class="section-title">3分で始めるOptimaChain</h2>
+                <p class="section-subtitle">
+                    OptimaChainの開発を始めるための簡単なステップをご紹介します。
+                </p>
+            </div>
+            
+            <div class="os-selector">
+                <button class="os-button active" data-os="linux">Linux</button>
+                <button class="os-button" data-os="mac">macOS</button>
+                <button class="os-button" data-os="windows">Windows</button>
+            </div>
+            
+            <div class="quickstart-container">
+                <div class="code-terminal">
+                    <div class="terminal-header">
+                        <span class="terminal-title">Terminal</span>
+                        <div class="terminal-buttons">
+                            <span class="terminal-button"></span>
+                            <span class="terminal-button"></span>
+                            <span class="terminal-button"></span>
+                        </div>
+                    </div>
+                    <div class="terminal-content">
+                        <pre><code><span class="comment"># OptimaChainをクローン</span>
+<span class="command">git clone https://github.com/enablerdao/OptimaChain</span>
+<span class="command">cd OptimaChain</span>
+
+<span class="comment"># バリデータノードをセットアップ</span>
+<span class="command">./scripts/validator-setup.sh</span>
+<span class="output">OptimaChain バリデータノードをセットアップしています...</span>
+<span class="output">依存関係をインストールしています...</span>
+<span class="output">設定ファイルを生成しています...</span>
+<span class="output">バリデータキーを生成しています...</span>
+<span class="output">テストネットに接続しています...</span>
+<span class="output">完了！バリデータノードが起動しました。</span>
+
+<span class="comment"># ステータス確認</span>
+<span class="command">optima-cli status</span>
+<span class="output">ステータス: アクティブ</span>
+<span class="output">ブロック高: 1,234,567</span>
+<span class="output">同期: 100%</span></code></pre>
+                    </div>
+                </div>
+                
+                <div class="quickstart-links">
+                    <a href="/developers.html" class="quickstart-link">
+                        <div class="link-icon" data-icon="docs"></div>
+                        <div class="link-content">
+                            <h3>開発者ポータル</h3>
+                            <p>SDKやAPIリファレンス、チュートリアルなど、開発に必要な情報を提供しています。</p>
+                        </div>
+                        <div class="link-arrow">→</div>
+                    </a>
+                    
+                    <a href="https://github.com/enablerdao/OptimaChain" class="quickstart-link">
+                        <div class="link-icon" data-icon="github"></div>
+                        <div class="link-content">
+                            <h3>GitHub リポジトリ</h3>
+                            <p>ソースコード、サンプルプロジェクト、開発ツールなどを公開しています。</p>
+                        </div>
+                        <div class="link-arrow">→</div>
+                    </a>
+                    
+                    <a href="/testnet.html" class="quickstart-link">
+                        <div class="link-icon" data-icon="testnet"></div>
+                        <div class="link-content">
+                            <h3>テストネット参加</h3>
+                            <p>テストネットに参加して、実際の環境でアプリケーションをテストしましょう。</p>
+                        </div>
+                        <div class="link-arrow">→</div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="tech-cta">
+                <a href="/developers.html" class="primary-btn">
+                    <span>開発者ドキュメントを見る</span>
+                    <span class="button-icon">→</span>
+                </a>
+                <a href="https://discord.gg/optimachain" class="secondary-btn">
+                    <span>開発者コミュニティに参加</span>
+                    <span class="button-icon">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
         <div class="wrapper">
             <div class="footer-top">
                 <div class="footer-logo">

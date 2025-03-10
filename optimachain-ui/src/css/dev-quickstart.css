@@ -1,0 +1,242 @@
+/* OptimaChain - 開発者クイックスタートセクションスタイル */
+
+.dev-quickstart-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, rgba(240, 247, 255, 0.9) 0%, rgba(230, 240, 255, 0.9) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.quickstart-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.code-terminal {
+    background: #1a1a1a;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.terminal-header {
+    background: #333;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.terminal-title {
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.terminal-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff5f56;
+}
+
+.terminal-button:nth-child(2) {
+    background: #ffbd2e;
+}
+
+.terminal-button:nth-child(3) {
+    background: #27c93f;
+}
+
+.terminal-content {
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.terminal-content pre {
+    margin: 0;
+    color: #f8f8f2;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+.terminal-content code {
+    display: block;
+    white-space: pre;
+}
+
+.terminal-content .comment {
+    color: #6272a4;
+}
+
+.terminal-content .command {
+    color: #50fa7b;
+}
+
+.terminal-content .output {
+    color: #f1fa8c;
+}
+
+.quickstart-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.quickstart-link {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quickstart-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.link-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f0f7ff, #e6eeff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.link-icon::before {
+    font-size: 24px;
+    color: #0066ff;
+}
+
+.link-icon[data-icon="docs"]::before {
+    content: '📚';
+}
+
+.link-icon[data-icon="github"]::before {
+    content: '🔧';
+}
+
+.link-icon[data-icon="testnet"]::before {
+    content: '🚀';
+}
+
+.link-content {
+    flex: 1;
+}
+
+.link-content h3 {
+    font-size: 1.2em;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+    color: #0066ff;
+}
+
+.link-content p {
+    font-size: 0.9em;
+    margin: 0;
+    color: #555;
+}
+
+.link-arrow {
+    font-size: 1.5em;
+    color: #0066ff;
+    margin-left: 15px;
+}
+
+.os-selector {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.os-button {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.os-button.active {
+    background: #0066ff;
+    color: white;
+    border-color: #0066ff;
+}
+
+.os-button:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .dev-quickstart-section {
+        background: linear-gradient(135deg, rgba(20, 30, 48, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%);
+    }
+    
+    .quickstart-link {
+        background: #1a2133;
+    }
+    
+    .link-icon {
+        background: linear-gradient(135deg, #1a2133, #2a3344);
+    }
+    
+    .link-content h3 {
+        color: #4a9eff;
+    }
+    
+    .link-content p {
+        color: #ccc;
+    }
+    
+    .link-arrow {
+        color: #4a9eff;
+    }
+    
+    .os-selector {
+        color: #ccc;
+    }
+    
+    .os-button {
+        background: rgba(30, 40, 60, 0.5);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #ccc;
+    }
+    
+    .os-button.active {
+        background: #4a9eff;
+        color: white;
+        border-color: #4a9eff;
+    }
+    
+    .os-button:hover:not(.active) {
+        background: rgba(30, 40, 60, 0.8);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .quickstart-container {
+        grid-template-columns: 1fr;
+    }
+}
