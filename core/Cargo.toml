@@ -8,7 +8,7 @@ license = "MIT"
 
 [dependencies]
 # Networking
-libp2p = "0.52.4"
+libp2p = { version = "0.52.4", features = ["tcp", "dns", "noise", "request-response", "identify", "ping", "kad", "yamux"] }
 
 # Async Runtime
 tokio = { version = "1.44.0", features = ["full"] }
@@ -17,7 +17,7 @@ tokio = { version = "1.44.0", features = ["full"] }
 rocksdb = "0.22.0"
 
 # Cryptography
-ed25519-dalek = "2.1.1"
+ed25519-dalek = { version = "2.1.1", features = ["rand_core"] }
 x25519-dalek = "2.0.0"
 sha3 = "0.10.8"
 zeroize = "1.6.0"
@@ -39,6 +39,8 @@ anyhow = "1.0.75"
 clap = { version = "4.4.7", features = ["derive"] }
 rand = "0.8.5"
 hex = "0.4.3"
+chrono = "0.4.31"
+colored = "2.0.4"
 
 [dev-dependencies]
 criterion = "0.5.1"

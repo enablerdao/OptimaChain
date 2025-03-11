@@ -155,12 +155,19 @@ impl Discovery {
         
         // If we still have too many peers, remove the oldest ones
         if self.peers.len() > self.config.max_peers {
+            // Collect peer IDs to remove
             let mut peers: Vec<_> = self.peers.iter().collect();
             peers.sort_by_key(|(_, info)| info.last_seen);
             
             let to_remove = peers.len() - self.config.max_peers;
-            for (peer_id, _) in peers.iter().take(to_remove) {
-                self.peers.remove(*peer_id);
+            let peers_to_remove: Vec<String> = peers.iter()
+                .take(to_remove)
+                .map(|(peer_id, _)| (*peer_id).clone())
+                .collect();
+            
+            // Remove the peers in a separate step
+            for peer_id in peers_to_remove {
+                self.peers.remove(&peer_id);
             }
         }
     }

@@ -139,12 +139,12 @@ impl BlockProducer {
     }
     
     /// Get the producer for the current time
-    pub fn get_producer(
+    pub fn get_producer<'a>(
         &self,
-        validators: &ValidatorSet,
+        validators: &'a ValidatorSet,
         parent_block: &Block,
         timestamp: u64,
-    ) -> Option<&Validator> {
+    ) -> Option<&'a Validator> {
         if let Some(schedule) = &self.current_schedule {
             if let Some(validator_key) = schedule.get_validator_for_time(timestamp) {
                 return validators.get(&validator_key);

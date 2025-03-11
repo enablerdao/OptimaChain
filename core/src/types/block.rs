@@ -1,6 +1,8 @@
 use crate::types::{TransactionId, StateRoot};
-use ed25519_dalek::{Signature, VerifyingKey};
-use serde::{Serialize, Deserialize};
+use crate::utils::crypto::Signature;
+use ed25519_dalek::VerifyingKey;
+use serde::{Serialize, Deserialize, Serializer, Deserializer};
+use serde::de::{Visitor, Error as DeError};
 use sha3::{Sha3_256, Digest};
 use std::time::{SystemTime, UNIX_EPOCH};
 
@@ -9,7 +11,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 pub struct BlockId(pub [u8; 32]);
 
 /// Header of a block containing metadata
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone)]
 pub struct BlockHeader {
     /// Version of the block format
     pub version: u32,
@@ -27,6 +29,62 @@ pub struct BlockHeader {
     pub validator: VerifyingKey,
     /// Signature of the validator
     pub signature: Signature,
+}
+
+// Implement custom serialization for BlockHeader
+impl Serialize for BlockHeader {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut state = serializer.serialize_struct("BlockHeader", 8)?;
+        state.serialize_field("version", &self.version)?;
+        state.serialize_field("height", &self.height)?;
+        state.serialize_field("timestamp", &self.timestamp)?;
+        state.serialize_field("prev_block", &self.prev_block)?;
+        state.serialize_field("transactions_root", &self.transactions_root)?;
+        state.serialize_field("state_root", &self.state_root)?;
+        state.serialize_field("validator", &self.validator.to_bytes())?;
+        state.serialize_field("signature", &self.signature)?;
+        state.end()
+    }
+}
+
+// Implement custom deserialization for BlockHeader
+impl<'de> Deserialize<'de> for BlockHeader {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        #[derive(Deserialize)]
+        struct BlockHeaderHelper {
+            version: u32,
+            height: u64,
+            timestamp: u64,
+            prev_block: BlockId,
+            transactions_root: [u8; 32],
+            state_root: StateRoot,
+            validator: [u8; 32],
+            signature: Signature,
+        }
+
+        let helper = BlockHeaderHelper::deserialize(deserializer)?;
+        
+        let validator = VerifyingKey::from_bytes(&helper.validator)
+            .map_err(|e| DeError::custom(format!("Invalid validator key: {}", e)))?;
+        
+        Ok(BlockHeader {
+            version: helper.version,
+            height: helper.height,
+            timestamp: helper.timestamp,
+            prev_block: helper.prev_block,
+            transactions_root: helper.transactions_root,
+            state_root: helper.state_root,
+            validator,
+            signature: helper.signature,
+        })
+    }
 }
 
 /// A block in the blockchain
@@ -67,7 +125,7 @@ impl Block {
             transactions_root,
             state_root,
             validator,
-            signature: Signature::from_bytes(&[0; 64]).unwrap(), // Placeholder, to be signed
+            signature: Signature::from_bytes([0; 64]), // Placeholder, to be signed
         };
         
         Block {
