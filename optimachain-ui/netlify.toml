@@ -1,0 +1,16 @@
+module.exports = {
+  siteUrl: 'https://optimachain.io',
+  netlify: {
+    headers: [
+      {
+        source: '/*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.socket.io/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' http://localhost:3000 wss://localhost:3000; media-src 'self' blob:; worker-src 'self' blob:;"
+          }
+        ]
+      }
+    ]
+  }
+};
