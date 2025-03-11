@@ -186,10 +186,10 @@
                     <p>OptimaChainの主要な技術コンポーネントは以下の通りです：</p>
                     
                     <ul>
-                        <li><a href="#consensus-mechanism"><strong>コンセンサスメカニズム: Adaptive Proof-of-Stake (aPoS)</strong></a>: ネットワークの状態に応じて動的にパラメータを調整し、最適なパフォーマンスとセキュリティを実現します。</li>
-                        <li><a href="#dynamic-sharding"><strong>ダイナミックシャーディング</strong></a>: AIアルゴリズムを使用して動的にシャードを割り当てるシャーディング技術により、ネットワークの負荷に応じてスケーラビリティを最適化します。</li>
-                        <li><a href="#cross-shard-communication"><strong>クロスシャードコミュニケーション</strong></a>: シャード間の効率的な通信を可能にする革新的なプロトコルにより、複数のシャードにまたがるトランザクションの原子性を保証します。</li>
-                        <li><a href="#state-management"><strong>ステートマネジメント</strong></a>: 効率的なステート管理技術により、高速なトランザクション処理と効率的なストレージ利用を実現します。</li>
+                        <li><a href="#consensus-mechanism"><strong>2.1 コンセンサスメカニズム: Adaptive Proof-of-Stake (aPoS)</strong></a>: ネットワークの状態に応じて動的にパラメータを調整し、最適なパフォーマンスとセキュリティを実現します。</li>
+                        <li><a href="#dynamic-sharding"><strong>2.2 ダイナミックシャーディング</strong></a>: AIアルゴリズムを使用して動的にシャードを割り当てるシャーディング技術により、ネットワークの負荷に応じてスケーラビリティを最適化します。</li>
+                        <li><a href="#cross-shard-communication"><strong>2.3 クロスシャードコミュニケーション</strong></a>: シャード間の効率的な通信を可能にする革新的なプロトコルにより、複数のシャードにまたがるトランザクションの原子性を保証します。</li>
+                        <li><a href="#state-management"><strong>2.4 ステートマネジメント</strong></a>: 効率的なステート管理技術により、高速なトランザクション処理と効率的なストレージ利用を実現します。</li>
                     </ul>
                 </div>
 
@@ -748,13 +748,7 @@
         // ページ読み込み時に各セクションのコンテンツを読み込む
         document.addEventListener('DOMContentLoaded', () => {
             // 各セクションのマークダウンファイルを読み込む
-            loadMarkdownContent('introduction', 'sections/01_introduction.md');
-            loadMarkdownContent('technical-architecture', 'sections/02_technical_architecture.md');
-            loadMarkdownContent('consensus-mechanism', 'sections/02_1_consensus_mechanism.md');
-            loadMarkdownContent('dynamic-sharding', 'sections/02_2_dynamic_sharding.md');
-            loadMarkdownContent('cross-shard-communication', 'sections/02_3_cross_shard_communication.md');
-            loadMarkdownContent('state-management', 'sections/02_4_state_management.md');
-            loadMarkdownContent('security-privacy', 'sections/03_security_and_privacy.md');
+            // コンテンツはHTMLに直接埋め込まれています
             // 他のセクションも同様に読み込む
             
             // サイドバーのナビゲーション機能
