@@ -20,7 +20,7 @@ const routes = {
 };
 
 // Initialize the router
-export function initRouter() {
+function initRouter() {
   // Handle clicks on links
   document.addEventListener('click', (e) => {
     // Find closest anchor tag
@@ -68,7 +68,7 @@ export function initRouter() {
 }
 
 // Navigate to a URL
-export function navigate(url) {
+function navigate(url) {
   // Remove .html extension if present
   url = url.replace(/\.html$/, '');
   
@@ -125,7 +125,7 @@ function getFilePath(url) {
 }
 
 // Update the active link in the navigation
-export function updateActiveNavLink(path) {
+function updateActiveNavLink(path) {
   // Remove leading slash if present
   path = path.startsWith('/') ? path : '/' + path;
   
@@ -153,7 +153,7 @@ export function updateActiveNavLink(path) {
 }
 
 // Load content for a route
-export async function loadRouteContent(url) {
+async function loadRouteContent(url) {
   // Get the file path for the route
   const filePath = getFilePath(url);
   
@@ -219,9 +219,7 @@ function initPageScripts(url) {
 }
 
 // Export the router functions
-export default {
-  initRouter,
-  navigate,
-  updateActiveNavLink,
-  loadRouteContent
-};
+export { initRouter, navigate, updateActiveNavLink, loadRouteContent };
+
+// Make router available globally
+window.router = { initRouter, navigate, updateActiveNavLink, loadRouteContent };

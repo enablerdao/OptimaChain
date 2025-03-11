@@ -1,0 +1,76 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="600" fill="#0F172A"/>
+  <rect x="0" y="0" width="1200" height="600" fill="url(#paint0_radial)"/>
+  
+  <!-- Grid Background -->
+  <path d="M0 0h1200v600H0z" fill="url(#grid)" opacity="0.1"/>
+  
+  <!-- Gradient Spheres -->
+  <circle cx="900" cy="150" r="300" fill="url(#sphere1)" opacity="0.3"/>
+  <circle cx="300" cy="450" r="250" fill="url(#sphere2)" opacity="0.2"/>
+  
+  <!-- Logo -->
+  <path d="M200 200L250 230V290L200 320L150 290V230L200 200Z" fill="url(#logo-gradient)"/>
+  <circle cx="200" cy="260" r="30" fill="white"/>
+  
+  <!-- Text -->
+  <text x="320" y="260" font-family="Inter, sans-serif" font-weight="800" font-size="64" fill="white">OptimaChain</text>
+  <text x="320" y="320" font-family="Inter, sans-serif" font-weight="400" font-size="28" fill="#94A3B8">革新的なスケーリング技術と高度なセキュリティを統合</text>
+  
+  <!-- Stats -->
+  <g transform="translate(320, 360)">
+    <rect width="180" height="70" rx="8" fill="rgba(255, 255, 255, 0.1)"/>
+    <text x="90" y="30" font-family="Inter, sans-serif" font-weight="700" font-size="24" fill="#0066FF" text-anchor="middle">50,000</text>
+    <text x="90" y="55" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94A3B8" text-anchor="middle">TPS</text>
+  </g>
+  
+  <g transform="translate(520, 360)">
+    <rect width="180" height="70" rx="8" fill="rgba(255, 255, 255, 0.1)"/>
+    <text x="90" y="30" font-family="Inter, sans-serif" font-weight="700" font-size="24" fill="#0066FF" text-anchor="middle">即時</text>
+    <text x="90" y="55" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94A3B8" text-anchor="middle">ファイナリティ</text>
+  </g>
+  
+  <g transform="translate(720, 360)">
+    <rect width="180" height="70" rx="8" fill="rgba(255, 255, 255, 0.1)"/>
+    <text x="90" y="30" font-family="Inter, sans-serif" font-weight="700" font-size="24" fill="#0066FF" text-anchor="middle">99.9%</text>
+    <text x="90" y="55" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94A3B8" text-anchor="middle">稼働率</text>
+  </g>
+  
+  <!-- CTA -->
+  <g transform="translate(320, 460)">
+    <rect width="300" height="60" rx="30" fill="url(#cta-gradient)"/>
+    <text x="150" y="38" font-family="Inter, sans-serif" font-weight="700" font-size="20" fill="white" text-anchor="middle">未来のブロックチェーンを体験する</text>
+  </g>
+  
+  <!-- Definitions -->
+  <defs>
+    <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 300) rotate(90) scale(500 950)">
+      <stop stop-color="#1E293B"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </radialGradient>
+    
+    <pattern id="grid" patternUnits="userSpaceOnUse" width="40" height="40">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5"/>
+    </pattern>
+    
+    <radialGradient id="sphere1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(900 150) rotate(90) scale(300)">
+      <stop stop-color="#0066FF"/>
+      <stop offset="1" stop-color="#0066FF" stop-opacity="0"/>
+    </radialGradient>
+    
+    <radialGradient id="sphere2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(300 450) rotate(90) scale(250)">
+      <stop stop-color="#FF3366"/>
+      <stop offset="1" stop-color="#FF3366" stop-opacity="0"/>
+    </radialGradient>
+    
+    <linearGradient id="logo-gradient" x1="150" y1="200" x2="250" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0066FF"/>
+      <stop offset="1" stop-color="#FF3366"/>
+    </linearGradient>
+    
+    <linearGradient id="cta-gradient" x1="0" y1="0" x2="300" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0066FF"/>
+      <stop offset="1" stop-color="#FF3366"/>
+    </linearGradient>
+  </defs>
+</svg>
