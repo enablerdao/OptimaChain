@@ -1,5 +1,5 @@
 // OptimaChain - ネットワーク統計ビジュアライゼーション
-import * as THREE from 'three';
+// Use global THREE object instead of importing to avoid duplicate instances
 
 // ネットワーク統計ビジュアライゼーションの初期化
 export function initNetworkStatsVisualization() {
