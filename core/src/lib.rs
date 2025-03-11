@@ -88,26 +88,27 @@ impl Blockchain {
         };
         
         let mut database = storage::Database::new(database_config);
-        database.open()?;
+        database.open().map_err(|e| utils::Error::database(e.to_string()))?;
         
         // Initialize network protocol
         let protocol_config = network::ProtocolConfig {
-            listen_address: config.network.listen_address.clone(),
-            external_address: config.network.external_address.clone(),
-            bootstrap_nodes: config.network.bootstrap_nodes.clone(),
-            max_peers: config.network.max_peers,
-            connection_timeout: config.network.connection_timeout,
-            enable_nat_traversal: config.network.enable_nat_traversal,
+            protocol_name: "/optimachain/1.0.0".to_string(),
+            protocol_version: "1.0.0".to_string(),
+            request_timeout: config.network.connection_timeout,
+            max_message_size: 10 * 1024 * 1024, // 10 MB
+            max_concurrent_requests: 100,
         };
         
         let protocol = network::Protocol::new(protocol_config);
         
         // Initialize consensus
         let consensus_config = consensus::APoSConfig {
-            block_time_ms: config.consensus.block_time_ms,
-            min_stake_amount: config.consensus.min_stake_amount,
+            min_stake: config.consensus.min_stake_amount,
             max_validators: config.consensus.max_validators,
-            validator_performance_threshold: config.consensus.validator_performance_threshold,
+            block_time_target_ms: config.consensus.block_time_ms,
+            epoch_length: 10_000, // ~3 hours with 1s blocks
+            block_reward: 100_000_000, // 100 tokens
+            validator_fee_percentage: 70, // 70%
         };
         
         let consensus = consensus::APoS::new(consensus_config);
@@ -158,10 +159,10 @@ impl Blockchain {
         log::info!("Starting OptimaChain blockchain");
         
         // Start network protocol
-        self.protocol.start()?;
+        self.protocol.start().map_err(|e| utils::Error::from(e))?;
         
         // Start consensus
-        self.consensus.start()?;
+        self.consensus.start().map_err(|e| utils::Error::from(e))?;
         
         log::info!("OptimaChain blockchain started");
         
@@ -173,10 +174,10 @@ impl Blockchain {
         log::info!("Stopping OptimaChain blockchain");
         
         // Stop consensus
-        self.consensus.stop()?;
+        self.consensus.stop().map_err(|e| utils::Error::from(e))?;
         
         // Stop network protocol
-        self.protocol.stop()?;
+        self.protocol.stop().map_err(|e| utils::Error::from(e))?;
         
         // Close database
         self.database.close();

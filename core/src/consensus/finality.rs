@@ -1,10 +1,11 @@
 use crate::types::{Block, BlockId};
-use ed25519_dalek::{Signature, VerifyingKey};
-use serde::{Serialize, Deserialize};
+use ed25519_dalek::VerifyingKey;
+use crate::utils::crypto::Signature;
+use serde::{Serialize, Deserialize, Deserializer};
 use std::collections::{HashMap, HashSet};
 
 /// Proof of finality for a block
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone)]
 pub struct FinalityProof {
     /// Block ID that is finalized
     pub block_id: BlockId,
@@ -13,7 +14,75 @@ pub struct FinalityProof {
     /// Signatures from validators confirming finality
     pub signatures: Vec<(VerifyingKey, Signature)>,
     /// Timestamp when finality was achieved
-    pub timestamp: u64,
+   pub timestamp: u64,
+}
+// Implement custom serialization for FinalityProof
+impl Serialize for FinalityProof {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut state = serializer.serialize_struct("FinalityProof", 4)?;
+        state.serialize_field("block_id", &self.block_id)?;
+        state.serialize_field("height", &self.height)?;
+        
+        // Serialize signatures as arrays of bytes
+        let signatures: Vec<(Vec<u8>, Vec<u8>)> = self.signatures
+            .iter()
+            .map(|(key, sig)| (key.to_bytes().to_vec(), sig.bytes.to_vec()))
+            .collect();
+        state.serialize_field("signatures", &signatures)?;
+        
+        state.serialize_field("timestamp", &self.timestamp)?;
+        state.end()
+    }
+}
+
+// Implement custom deserialization for FinalityProof
+impl<'de> Deserialize<'de> for FinalityProof {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        #[derive(Deserialize)]
+        struct FinalityProofHelper {
+            block_id: BlockId,
+            height: u64,
+            signatures: Vec<(Vec<u8>, Vec<u8>)>,
+            timestamp: u64,
+        }
+
+        let helper = FinalityProofHelper::deserialize(deserializer)?;
+        
+        // Convert signatures from bytes back to VerifyingKey and Signature
+        let mut signatures = Vec::new();
+        for (key_bytes, sig_bytes) in helper.signatures {
+            if key_bytes.len() != 32 || sig_bytes.len() != 64 {
+                return Err(serde::de::Error::custom("Invalid key or signature length"));
+            }
+            
+            let mut key_array = [0u8; 32];
+            key_array.copy_from_slice(&key_bytes);
+            
+            let mut sig_array = [0u8; 64];
+            sig_array.copy_from_slice(&sig_bytes);
+            
+            let key = VerifyingKey::from_bytes(&key_array)
+                .map_err(|e| serde::de::Error::custom(format!("Invalid key: {}", e)))?;
+            
+            let signature = Signature { bytes: sig_array };
+            
+            signatures.push((key, signature));
+        }
+        
+        Ok(FinalityProof {
+            block_id: helper.block_id,
+            height: helper.height,
+            signatures,
+            timestamp: helper.timestamp,
+        })
+    }
 }
 
 impl FinalityProof {
@@ -120,7 +189,7 @@ impl FinalityProvider {
                 // Add signatures to proof (in a real implementation, we would have actual signatures)
                 for validator in signatures {
                     // Create a dummy signature for now
-                    let signature = Signature::from_bytes(&[0; 64]).unwrap();
+                    let signature = Signature { bytes: [0; 64] };
                     proof.add_signature(*validator, signature);
                 }
                 

@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  optimachain-node:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "30333:30333"  # P2P port
+      - "9933:9933"    # RPC port
+      - "9944:9944"    # WebSocket port
+    volumes:
+      - optimachain-data:/app/data
+    command: run --data-dir /app/data --validator
+    restart: unless-stopped
+
+  optimachain-backend:
+    image: node:18-alpine
+    working_dir: /app
+    volumes:
+      - ../backend:/app
+    ports:
+      - "3000:3000"
+    command: sh -c "npm install && npm start"
+    depends_on:
+      - optimachain-node
+    restart: unless-stopped
+
+volumes:
+  optimachain-data:
