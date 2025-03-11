@@ -1,10 +1,12 @@
 // OptimaChain シミュレーション機能
+// Use global THREE object instead of importing to avoid duplicate instances
+// THREE is already loaded via CDN in the HTML
 
 /**
  * ブロックチェーンシミュレーションの初期化
  * @param {Object} options - シミュレーションオプション
  */
-export function initSimulation(options = {}) {
+window.initSimulation = function(options = {}) {
   const defaultOptions = {
     nodeCount: 100,
     tps: 5000,
@@ -549,7 +551,7 @@ function adjustSharding(shardCount, config) {
 }
 
 // シミュレーションUIコントロールの初期化
-export function initSimulationControls(simulation) {
+window.initSimulationControls = function(simulation) {
   document.addEventListener('DOMContentLoaded', () => {
     // TPSスライダー
     const tpsSlider = document.getElementById('tps-slider');

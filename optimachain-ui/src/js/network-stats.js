@@ -2,7 +2,7 @@
 // Use global THREE object instead of importing to avoid duplicate instances
 
 // ネットワーク統計ビジュアライゼーションの初期化
-export function initNetworkStatsVisualization() {
+window.initNetworkStatsVisualization = function() {
   // ネットワーク統計セクションが存在するか確認
   const container = document.getElementById('network-stats-container');
   if (!container) {

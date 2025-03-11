@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // Initialize network statistics visualization if we're on a page that has it
-  if (document.getElementById('network-stats-section')) {
-    initNetworkStatsVisualization();
+  if (document.getElementById('network-stats-section') && typeof window.initNetworkStatsVisualization === 'function') {
+    window.initNetworkStatsVisualization();
   }
   
   // Initialize performance monitoring

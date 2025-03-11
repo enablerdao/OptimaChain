@@ -875,23 +875,28 @@
         </div>
     </section>
     
-    <script type="module">
-        import { initSimulation, initSimulationControls } from '/src/js/simulation.js';
+    <script>
+        // Use global functions instead of imports to avoid class inheritance issues
+        function initSimulationOnLoad() {
         
         document.addEventListener('DOMContentLoaded', () => {
             // コンセンサスセクションが表示されたときにシミュレーションを初期化
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting && document.getElementById('simulation-canvas')) {
-                        const simulation = initSimulation({
-                            nodeCount: 100,
-                            tps: 5000,
-                            shardCount: 16,
-                            simulationSpeed: 1,
-                            visualize: true
-                        });
-                        
-                        initSimulationControls(simulation);
+                        if (typeof window.initSimulation === 'function') {
+                            const simulation = window.initSimulation({
+                                nodeCount: 100,
+                                tps: 5000,
+                                shardCount: 16,
+                                simulationSpeed: 1,
+                                visualize: true
+                            });
+                            
+                            if (typeof window.initSimulationControls === 'function') {
+                                window.initSimulationControls(simulation);
+                            }
+                        }
                         
                         // 一度初期化したら監視を停止
                         observer.disconnect();
@@ -904,6 +909,10 @@
                 observer.observe(consensusSection);
             }
         });
+    }
+    
+    // Initialize when the page loads
+    initSimulationOnLoad();
     </script>
 </body>
 </html>
