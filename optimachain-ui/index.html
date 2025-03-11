@@ -16,6 +16,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.socket.io/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://api.optimachain.io wss://api.optimachain.io; worker-src 'self' blob:;">
     <meta name="application-name" content="OptimaChain">
     <meta name="apple-mobile-web-app-title" content="OptimaChain">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=no">
@@ -118,7 +119,7 @@
     <!-- JavaScript -->
     <link rel="preload" href="/src/js/config.js" as="script">
     <link rel="preload" href="/js/main.js" as="script">
-    <link rel="preload" href="/src/js/router.js" as="script">
+    <link rel="preload" href="/src/js/router.js" as="script" crossorigin="anonymous">
     <script src="/src/js/config.js"></script>
     <script src="/js/main.js" defer></script>
     <script src="/src/js/router.js" type="module" defer></script>
