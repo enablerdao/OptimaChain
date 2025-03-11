@@ -1,0 +1,166 @@
+/* OptimaChain Error Handler Styles */
+
+/* エラー通知 */
+.error-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #ff3b30;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10000;
+  max-width: 400px;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.error-notification.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.error-notification .error-icon {
+  margin-right: 12px;
+  font-size: 20px;
+}
+
+.error-notification .error-message {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.error-notification .reload-btn {
+  margin-left: 12px;
+  padding: 6px 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.error-notification .reload-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.error-notification .close-btn {
+  margin-left: 8px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.error-notification .close-btn:hover {
+  opacity: 1;
+}
+
+/* エラーコンテナ（コンポーネントエラー用） */
+.error-container {
+  padding: 20px;
+  margin: 10px 0;
+  background-color: rgba(255, 59, 48, 0.1);
+  border-left: 4px solid #ff3b30;
+  border-radius: 4px;
+  color: #333;
+  text-align: center;
+}
+
+.error-container .error-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.error-container h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: #ff3b30;
+}
+
+.error-container p {
+  margin: 0 0 15px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.error-container button {
+  padding: 8px 16px;
+  background-color: #ff3b30;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.error-container button:hover {
+  background-color: #e0352b;
+}
+
+/* エラーバウンダリ */
+.error-boundary {
+  padding: 20px;
+  margin: 10px 0;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.error-boundary h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: #343a40;
+}
+
+.error-boundary p {
+  margin: 0 0 15px;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.error-boundary button {
+  padding: 8px 16px;
+  background-color: #0066ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.error-boundary button:hover {
+  background-color: #0052cc;
+}
+
+/* ダークモード対応 */
+body.dark-mode .error-container {
+  background-color: rgba(255, 59, 48, 0.2);
+  color: #f8f9fa;
+}
+
+body.dark-mode .error-boundary {
+  background-color: #343a40;
+  border-color: #495057;
+}
+
+body.dark-mode .error-boundary h3 {
+  color: #f8f9fa;
+}
+
+body.dark-mode .error-boundary p {
+  color: #adb5bd;
+}

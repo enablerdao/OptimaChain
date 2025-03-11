@@ -29,12 +29,21 @@ export default defineConfig({
         validator_dashboard: resolve(__dirname, 'validator-dashboard.html'),
         whitepaper: resolve(__dirname, 'whitepaper/OptimaChain_Whitepaper.html'),
       },
+      output: {
+        manualChunks: {
+          vendor: ['three', 'chart.js'],
+          ui: ['./src/js/ui-utils.js', './src/js/components/header.js', './src/js/components/footer.js']
+        }
+      }
     },
     sourcemap: false,
     minify: 'terser',
     terserOptions: {
       format: {
         comments: false
+      },
+      compress: {
+        drop_console: true
       }
     }
   },

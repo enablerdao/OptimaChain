@@ -12,6 +12,7 @@ import '../css/research-papers.css';
 import '../css/use-cases.css';
 import '../css/partners.css';
 import '../css/blog.css';
+import '../css/error-handler.css';
 
 // 外部ライブラリのインポート
 import * as THREE from 'three';
@@ -29,45 +30,106 @@ import { initNavigation } from './navigation.js';
 import { initValidatorSetup } from './validator-setup.js';
 import { initHeader, initNotificationBar, loadHeader } from './header.js';
 import { initRouter } from './router.js';
+import { initErrorHandling, ErrorUtils } from './error-handler.js';
+
+// グローバルエラーハンドリングの設定
+window.addEventListener('error', function(event) {
+  console.error('グローバルエラーが捕捉されました:', event.error);
+  
+  // エラーレポートの送信（本番環境のみ）
+  if (window.OPTIMACHAIN_CONFIG && window.OPTIMACHAIN_CONFIG.environment === 'production') {
+    ErrorUtils.reportError(event.error);
+  }
+  
+  // クリティカルなエラーの場合はユーザーに通知
+  if (ErrorUtils.isCriticalError(event.error)) {
+    ErrorUtils.showErrorNotification('アプリケーションでエラーが発生しました。ページを再読み込みしてください。');
+  }
+});
 
 // ページ読み込み時の初期化
 document.addEventListener('DOMContentLoaded', () => {
   console.log('OptimaChain - アプリケーション初期化');
   
+  // エラーハンドリングの初期化
+  initErrorHandling();
+  
   // ヘッダーとフッターの挿入（index.htmlに直接記述されていない場合）
-  if (!document.querySelector('header')) {
-    // 新しいヘッダーシステムを使用
-    const headerContainer = document.getElementById('header-container');
-    if (headerContainer) {
-      loadHeader('header-container');
+  try {
+    if (!document.querySelector('header')) {
+      // 新しいヘッダーシステムを使用
+      const headerContainer = document.getElementById('header-container');
+      if (headerContainer) {
+        loadHeader('header-container');
+      } else {
+        // 従来のヘッダー挿入を使用
+        insertHeader();
+      }
     } else {
-      // 従来のヘッダー挿入を使用
-      insertHeader();
+      // すでにヘッダーが存在する場合は初期化のみ
+      initHeader();
+      initNotificationBar();
     }
-  } else {
-    // すでにヘッダーが存在する場合は初期化のみ
-    initHeader();
-    initNotificationBar();
+  } catch (error) {
+    console.error('ヘッダーの初期化中にエラーが発生しました:', error);
+    // 致命的ではないのでアプリケーションは続行
   }
   
   if (!document.querySelector('.main-footer')) {
     insertFooter();
   }
   
-  // 各モジュールの初期化
-  initRouter();
-  initNavigation();
-  initLanguageSwitcher();
-  initAnimations();
-  initValidatorSetup();
+  // 各モジュールの初期化 - エラーハンドリング付き
+  try {
+    initRouter();
+  } catch (error) {
+    console.error('ルーターの初期化中にエラーが発生しました:', error);
+  }
+  
+  try {
+    initNavigation();
+  } catch (error) {
+    console.error('ナビゲーションの初期化中にエラーが発生しました:', error);
+  }
+  
+  try {
+    initLanguageSwitcher();
+  } catch (error) {
+    console.error('言語スイッチャーの初期化中にエラーが発生しました:', error);
+  }
+  
+  try {
+    initAnimations();
+  } catch (error) {
+    console.error('アニメーションの初期化中にエラーが発生しました:', error);
+  }
+  
+  try {
+    initValidatorSetup();
+  } catch (error) {
+    console.error('バリデータセットアップの初期化中にエラーが発生しました:', error);
+  }
   
   // OS切り替え機能の初期化
-  initOSSelector();
+  try {
+    initOSSelector();
+  } catch (error) {
+    console.error('OS切り替え機能の初期化中にエラーが発生しました:', error);
+  }
   
   // ブロックチェーンビジュアルの初期化（存在する場合）
   const blockchainCanvas = document.getElementById('blockchain-canvas');
   if (blockchainCanvas) {
-    initBlockchainVisual(blockchainCanvas);
+    try {
+      initBlockchainVisual(blockchainCanvas);
+    } catch (error) {
+      console.error('ブロックチェーンビジュアルの初期化中にエラーが発生しました:', error);
+      // フォールバック: エラーメッセージを表示
+      const container = blockchainCanvas.parentElement;
+      if (container) {
+        container.innerHTML = '<div class="error-container"><p>ビジュアライゼーションの読み込みに失敗しました。</p></div>';
+      }
+    }
   }
   
   // CTAのクリック率を計測
@@ -127,59 +189,68 @@ function initThemeToggle() {
   });
 }
 
+// パフォーマンス最適化モジュールのインポート
+import { initPerformanceOptimizations } from './performance.js';
+
 // パフォーマンス最適化関数
 function optimizePerformance() {
-  // 画像の遅延読み込み
-  const lazyImages = document.querySelectorAll('img[data-src]');
-  if (lazyImages.length > 0) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.removeAttribute('data-src');
-          imageObserver.unobserve(img);
-        }
+  // 新しいパフォーマンス最適化モジュールを使用
+  if (typeof initPerformanceOptimizations === 'function') {
+    initPerformanceOptimizations();
+  } else {
+    // フォールバック: 従来のパフォーマンス最適化
+    // 画像の遅延読み込み
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    if (lazyImages.length > 0) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            imageObserver.unobserve(img);
+          }
+        });
       });
-    });
-    
-    lazyImages.forEach(img => {
-      imageObserver.observe(img);
-    });
-  }
-  
-  // スクロールアニメーションの最適化
-  const animatedElements = document.querySelectorAll('.animate-on-scroll');
-  if (animatedElements.length > 0) {
-    const animationObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+      
+      lazyImages.forEach(img => {
+        imageObserver.observe(img);
       });
-    }, { threshold: 0.1 });
+    }
     
-    animatedElements.forEach(element => {
-      animationObserver.observe(element);
-    });
+    // スクロールアニメーションの最適化
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    if (animatedElements.length > 0) {
+      const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      animatedElements.forEach(element => {
+        animationObserver.observe(element);
+      });
+    }
+    
+    // スクリプトの遅延読み込み
+    setTimeout(() => {
+      // 重いスクリプトを遅延読み込み
+      const heavyScripts = [
+        { src: '/js/analytics.js', async: true, defer: true },
+        { src: '/js/advanced-features.js', async: true, defer: true }
+      ];
+      
+      heavyScripts.forEach(script => {
+        const scriptEl = document.createElement('script');
+        scriptEl.src = script.src;
+        if (script.async) scriptEl.async = true;
+        if (script.defer) scriptEl.defer = true;
+        document.body.appendChild(scriptEl);
+      });
+    }, 2000);
   }
-  
-  // スクリプトの遅延読み込み
-  setTimeout(() => {
-    // 重いスクリプトを遅延読み込み
-    const heavyScripts = [
-      { src: '/js/analytics.js', async: true, defer: true },
-      { src: '/js/advanced-features.js', async: true, defer: true }
-    ];
-    
-    heavyScripts.forEach(script => {
-      const scriptEl = document.createElement('script');
-      scriptEl.src = script.src;
-      if (script.async) scriptEl.async = true;
-      if (script.defer) scriptEl.defer = true;
-      document.body.appendChild(scriptEl);
-    });
-  }, 2000);
 }
 
 // OS切り替え機能
