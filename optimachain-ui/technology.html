@@ -822,6 +822,59 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.min.js"></script>
     <script type="module" src="/src/js/main.js"></script>
     
+    <!-- Add network stats section for visualization -->
+    <section id="network-stats-section" class="network-stats-section" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <h2>ネットワーク統計</h2>
+                <p>OptimaChainネットワークのリアルタイム統計情報</p>
+            </div>
+            <div class="network-stats-container">
+                <div class="stats-cards">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm1-8h4v2h-6V7h2v5z" fill="currentColor"/></svg>
+                        </div>
+                        <div class="stats-info">
+                            <h3>ブロック高</h3>
+                            <div class="stats-value" id="block-height">12,345,678</div>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M6.75 2.5A4.25 4.25 0 0 1 11 6.75V11H6.75a4.25 4.25 0 1 1 0-8.5zM9 9V6.75A2.25 2.25 0 1 0 6.75 9H9zm-2.25 2H11v4.25A4.25 4.25 0 1 1 6.75 11zm0 2A2.25 2.25 0 1 0 9 15.25V13H6.75zM13 13.75v-2.5h2.25V9h2v2.25H19.5v2.5H17.25V16h-2v-2.25H13z" fill="currentColor"/></svg>
+                        </div>
+                        <div class="stats-info">
+                            <h3>トランザクション数</h3>
+                            <div class="stats-value" id="transaction-count">98,765,432</div>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v14h16V5H4zm8 10h6v2h-6v-2zm-3.333-3L5.838 9.172l1.415-1.415L11.495 12l-4.242 4.243-1.415-1.415L8.667 12z" fill="currentColor"/></svg>
+                        </div>
+                        <div class="stats-info">
+                            <h3>TPS</h3>
+                            <div class="stats-value" id="tps">5,432</div>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 11a5 5 0 0 1 5 5v6h-2v-6a3 3 0 0 0-2.824-2.995L12 13a3 3 0 0 0-2.995 2.824L9 16v6H7v-6a5 5 0 0 1 5-5zm-6.5 3c.279 0 .55.033.81.094a5.947 5.947 0 0 0-.301 1.575L6 16v.086a1.492 1.492 0 0 0-.356-.08L5.5 16a1.5 1.5 0 0 0-1.493 1.356L4 17.5V22H2v-4.5A3.5 3.5 0 0 1 5.5 14zm13 0a3.5 3.5 0 0 1 3.5 3.5V22h-2v-4.5a1.5 1.5 0 0 0-1.356-1.493L18.5 16c-.175 0-.343.03-.5.085V16c0-.666-.108-1.306-.309-1.904.259-.063.53-.096.809-.096zm-13-6a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zm13 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zm-13 2a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1zm13 0a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1zM12 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" fill="currentColor"/></svg>
+                        </div>
+                        <div class="stats-info">
+                            <h3>バリデーター数</h3>
+                            <div class="stats-value" id="validator-count">1,024</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="network-visualization">
+                    <canvas id="network-visualization-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <script type="module">
         import { initSimulation, initSimulationControls } from '/src/js/simulation.js';
         

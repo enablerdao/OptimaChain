@@ -11,9 +11,6 @@ import { initBlockchainVisual } from './blockchain-visual.js';
 import { initErrorHandler } from './error-handler.js';
 import { initNetworkStatsVisualization } from './network-stats.js';
 
-// Log initialization
-console.log('OptimaChain application initializing...');
-
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
   console.log('OptimaChain application initializing...');
