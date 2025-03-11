@@ -65,10 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initOSSelector();
   
   // ブロックチェーンビジュアルの初期化（存在する場合）
-  const blockchainCanvas = document.getElementById('blockchain-canvas');
-  if (blockchainCanvas) {
-    initBlockchainVisual(blockchainCanvas);
-  }
+  initBlockchainVisualization();
   
   // CTAのクリック率を計測
   document.querySelectorAll('.cta-btn, .primary-btn, .feature-cta-btn').forEach(button => {

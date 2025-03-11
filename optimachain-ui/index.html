@@ -60,6 +60,12 @@
     <link rel="stylesheet" href="/styles/main.css">
     
     <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.min.js"></script>
+    <script src="/js/blockchain-3d.js" defer></script>
     <script src="/js/main.js" defer></script>
     <script src="/src/js/router.js" type="module" defer></script>
     <script>
@@ -331,87 +337,6 @@
                     <span>技術詳細ページへ</span>
                     <span class="button-icon">→</span>
                 </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- バリデータセットアップセクション -->
-    <section class="validator-setup-section" id="validator-setup-section">
-        <div class="wrapper">
-            <div class="section-header">
-                <div class="section-tag">VALIDATOR</div>
-                <h2 class="section-title">バリデータになる</h2>
-                <p class="section-subtitle">OptimaChainのバリデータノードを実行して、ネットワークの分散化と安全性に貢献しましょう。</p>
-            </div>
-            
-            <div class="validator-setup-hero">
-                <h2>バリデータのセットアップ</h2>
-                <p>以下のコマンドを使用して、お使いのプラットフォームにバリデータをセットアップできます。</p>
-                
-                <div class="os-tabs">
-                    <div class="os-tab active" data-os="linux">Linux</div>
-                    <div class="os-tab" data-os="macos">macOS</div>
-                    <div class="os-tab" data-os="windows">Windows</div>
-                </div>
-                
-                <div class="os-content active" data-os="linux">
-                    <div class="validator-commands">
-                        <div class="command-header">
-                            <h4>Linux用セットアップコマンド</h4>
-                            <button class="copy-btn">コピー</button>
-                        </div>
-                        <pre># OptimaChainバリデータノードのセットアップ (Linux)
-curl -sSL https://raw.githubusercontent.com/enablerdao/OptimaChain/main/scripts/validator-setup.sh | bash
-
-# ノードの起動
-cd optimachain
-./optimachain-node --validator --name YOUR_VALIDATOR_NAME</pre>
-                    </div>
-                </div>
-                
-                <div class="os-content" data-os="macos">
-                    <div class="validator-commands">
-                        <div class="command-header">
-                            <h4>macOS用セットアップコマンド</h4>
-                            <button class="copy-btn">コピー</button>
-                        </div>
-                        <pre># OptimaChainバリデータノードのセットアップ (macOS)
-curl -sSL https://raw.githubusercontent.com/enablerdao/OptimaChain/main/scripts/validator-setup-mac.sh | bash
-
-# ノードの起動
-cd optimachain
-./optimachain-node --validator --name YOUR_VALIDATOR_NAME</pre>
-                    </div>
-                </div>
-                
-                <div class="os-content" data-os="windows">
-                    <div class="validator-commands">
-                        <div class="command-header">
-                            <h4>Windows用セットアップコマンド</h4>
-                            <button class="copy-btn">コピー</button>
-                        </div>
-                        <pre># OptimaChainバリデータノードのセットアップ (Windows)
-# PowerShellを管理者として実行
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/enablerdao/OptimaChain/main/scripts/validator-setup.ps1 -OutFile validator-setup.ps1
-Set-ExecutionPolicy Bypass -Scope Process -Force
-./validator-setup.ps1
-
-# ノードの起動
-cd optimachain
-.\optimachain-node.exe --validator --name YOUR_VALIDATOR_NAME</pre>
-                    </div>
-                </div>
-                
-                <div class="validator-cta">
-                    <a href="/validator-dashboard" class="primary-btn">
-                        <span>バリデータダッシュボード</span>
-                        <span class="button-icon">→</span>
-                    </a>
-                    <a href="/whitepaper#21-コンセンサスメカニズム-adaptive-proof-of-stake-apos" class="secondary-btn">
-                        <span>コンセンサスメカニズムの詳細</span>
-                        <span class="button-icon">→</span>
-                    </a>
-                </div>
             </div>
         </div>
     </section>

@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
       Auth.setUser(data.user);
       
       // Redirect to wallet page
-      window.location.href = 'wallet/index.html';
+      window.location.href = 'wallet';
     } catch (error) {
       errorContainer.innerHTML = `<div class="error-message">${error.message}</div>`;
     } finally {
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
       Auth.setUser(data.user);
       
       // Redirect to wallet page
-      window.location.href = 'wallet/index.html';
+      window.location.href = 'wallet';
     } catch (error) {
       errorContainer.innerHTML = `<div class="error-message">${error.message}</div>`;
     } finally {
@@ -123,6 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Check if user is already logged in
   if (Auth.isAuthenticated()) {
-    window.location.href = 'wallet/index.html';
+    window.location.href = 'wallet';
   }
 });
