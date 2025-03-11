@@ -1,166 +1,105 @@
-/* OptimaChain Error Handler Styles */
-
-/* エラー通知 */
-.error-notification {
+/* Error Handler Styles */
+.error-container {
   position: fixed;
-  bottom: 20px;
+  top: 20px;
   right: 20px;
-  display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  background-color: #ff3b30;
-  color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 10000;
+  z-index: 9999;
   max-width: 400px;
-  transform: translateY(100px);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.error-notification.show {
-  transform: translateY(0);
-  opacity: 1;
+.error-message {
+  background-color: #fff;
+  border-left: 4px solid #e74c3c;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 16px;
+  position: relative;
+  animation: slideIn 0.3s ease-out forwards;
+  display: flex;
+  align-items: flex-start;
 }
 
-.error-notification .error-icon {
-  margin-right: 12px;
-  font-size: 20px;
-}
-
-.error-notification .error-message {
+.error-content {
   flex: 1;
+}
+
+.error-message h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #e74c3c;
+}
+
+.error-message p {
+  margin: 0;
   font-size: 14px;
+  color: #333;
   line-height: 1.4;
 }
 
-.error-notification .reload-btn {
-  margin-left: 12px;
-  padding: 6px 12px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 4px;
-  color: white;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.error-notification .reload-btn:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
-.error-notification .close-btn {
-  margin-left: 8px;
+.error-close {
   background: none;
   border: none;
-  color: white;
-  font-size: 18px;
+  color: #999;
   cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s;
+  font-size: 18px;
+  padding: 0;
+  margin-left: 10px;
+  line-height: 1;
 }
 
-.error-notification .close-btn:hover {
-  opacity: 1;
-}
-
-/* エラーコンテナ（コンポーネントエラー用） */
-.error-container {
-  padding: 20px;
-  margin: 10px 0;
-  background-color: rgba(255, 59, 48, 0.1);
-  border-left: 4px solid #ff3b30;
-  border-radius: 4px;
+.error-close:hover {
   color: #333;
-  text-align: center;
 }
 
-.error-container .error-icon {
-  font-size: 32px;
-  margin-bottom: 10px;
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.error-container h3 {
-  margin: 0 0 10px;
-  font-size: 18px;
-  color: #ff3b30;
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 }
 
-.error-container p {
-  margin: 0 0 15px;
-  font-size: 14px;
-  line-height: 1.5;
+.error-message.removing {
+  animation: slideOut 0.3s ease-in forwards;
 }
 
-.error-container button {
-  padding: 8px 16px;
-  background-color: #ff3b30;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.error-container button:hover {
-  background-color: #e0352b;
-}
-
-/* エラーバウンダリ */
-.error-boundary {
-  padding: 20px;
-  margin: 10px 0;
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.error-boundary h3 {
-  margin: 0 0 10px;
-  font-size: 18px;
-  color: #343a40;
-}
-
-.error-boundary p {
-  margin: 0 0 15px;
-  font-size: 14px;
-  color: #6c757d;
-}
-
-.error-boundary button {
-  padding: 8px 16px;
-  background-color: #0066ff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.error-boundary button:hover {
-  background-color: #0052cc;
-}
-
-/* ダークモード対応 */
-body.dark-mode .error-container {
-  background-color: rgba(255, 59, 48, 0.2);
-  color: #f8f9fa;
-}
-
-body.dark-mode .error-boundary {
-  background-color: #343a40;
-  border-color: #495057;
-}
-
-body.dark-mode .error-boundary h3 {
-  color: #f8f9fa;
-}
-
-body.dark-mode .error-boundary p {
-  color: #adb5bd;
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .error-message {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .error-message h3 {
+    color: #ff6b6b;
+  }
+  
+  .error-message p {
+    color: #e0e0e0;
+  }
+  
+  .error-close {
+    color: #777;
+  }
+  
+  .error-close:hover {
+    color: #ccc;
+  }
 }

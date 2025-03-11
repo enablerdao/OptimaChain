@@ -1,5 +1,5 @@
 // Validator setup component for homepage
-export function initValidatorSetup() {
+export function setupValidatorUI() {
   const validatorSetupSection = document.getElementById('validator-setup-section');
   if (!validatorSetupSection) return;
   

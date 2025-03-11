@@ -147,12 +147,8 @@ function updateActiveNavLink(path) {
   });
 }
 
-// Create router object
-const router = {
-  initRouter,
-  navigate,
-  updateActiveNavLink
-};
+// Export the router functions
+export { initRouter, navigate, updateActiveNavLink };
 
 // Make router available globally
-window.router = router;
+window.router = { initRouter, navigate, updateActiveNavLink };

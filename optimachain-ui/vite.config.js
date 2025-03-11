@@ -17,6 +17,9 @@ export default defineConfig(({ mode }) => {
       cors: true,
     },
     build: {
+      // Fix for Netlify deployment
+      outDir: 'dist',
+      emptyOutDir: true,
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'index.html'),
@@ -37,7 +40,8 @@ export default defineConfig(({ mode }) => {
             vendor: ['three', 'chart.js'],
             ui: ['./src/js/ui-utils.js', './src/js/components/header.js', './src/js/components/footer.js'],
             blockchain: ['./src/js/blockchain-visual.js', './src/js/blockchain-utils.js'],
-            validators: ['./src/js/validator-setup.js']
+            validators: ['./src/js/validator-setup.js'],
+            error: ['./src/js/error-handler.js']
           },
           // Ensure CSP compatibility by avoiding inline scripts
           inlineDynamicImports: false,
@@ -74,6 +78,20 @@ export default defineConfig(({ mode }) => {
       'process.env.NODE_ENV': JSON.stringify(mode),
       'process.env.VITE_APP_VERSION': JSON.stringify(process.env.npm_package_version),
       'process.env.VITE_APP_BUILD_TIME': JSON.stringify(new Date().toISOString())
+    },
+    // Resolve aliases for better imports
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src'),
+        '@components': resolve(__dirname, 'src/js/components'),
+        '@utils': resolve(__dirname, 'src/js/utils'),
+        '@styles': resolve(__dirname, 'src/css')
+      }
+    },
+    // Optimize dependencies
+    optimizeDeps: {
+      include: ['three', 'chart.js'],
+      exclude: []
     }
   };
 });
