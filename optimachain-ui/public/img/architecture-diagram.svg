@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="500" rx="12" fill="#1A1D2E"/>
+  
+  <!-- レイヤー背景 -->
+  <rect x="100" y="50" width="600" height="400" rx="8" fill="#232738"/>
+  
+  <!-- レイヤー1: AI最適化レイヤー -->
+  <rect x="150" y="80" width="500" height="50" rx="8" fill="#6C5CE7" fill-opacity="0.8"/>
+  <text x="400" y="110" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">AI最適化レイヤー</text>
+  
+  <!-- レイヤー2: コンセンサスレイヤー -->
+  <rect x="150" y="140" width="500" height="50" rx="8" fill="#FF7675" fill-opacity="0.8"/>
+  <text x="400" y="170" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">コンセンサスレイヤー (Adaptive Proof-of-Stake)</text>
+  
+  <!-- レイヤー3: シャーディングレイヤー -->
+  <rect x="150" y="200" width="500" height="50" rx="8" fill="#74B9FF" fill-opacity="0.8"/>
+  <text x="400" y="230" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">シャーディングレイヤー</text>
+  
+  <!-- レイヤー4: 実行レイヤー -->
+  <rect x="150" y="260" width="500" height="50" rx="8" fill="#55EFC4" fill-opacity="0.8"/>
+  <text x="400" y="290" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">実行レイヤー (スマートコントラクト、並列処理)</text>
+  
+  <!-- レイヤー5: ストレージレイヤー -->
+  <rect x="150" y="320" width="500" height="50" rx="8" fill="#FDCB6E" fill-opacity="0.8"/>
+  <text x="400" y="350" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">ストレージレイヤー</text>
+  
+  <!-- レイヤー6: ネットワークレイヤー -->
+  <rect x="150" y="380" width="500" height="50" rx="8" fill="#E17055" fill-opacity="0.8"/>
+  <text x="400" y="410" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">ネットワークレイヤー</text>
+  
+  <!-- 接続線 -->
+  <line x1="400" y1="130" x2="400" y2="140" stroke="white" stroke-width="2" stroke-dasharray="4 4"/>
+  <line x1="400" y1="190" x2="400" y2="200" stroke="white" stroke-width="2" stroke-dasharray="4 4"/>
+  <line x1="400" y1="250" x2="400" y2="260" stroke="white" stroke-width="2" stroke-dasharray="4 4"/>
+  <line x1="400" y1="310" x2="400" y2="320" stroke="white" stroke-width="2" stroke-dasharray="4 4"/>
+  <line x1="400" y1="370" x2="400" y2="380" stroke="white" stroke-width="2" stroke-dasharray="4 4"/>
+  
+  <!-- 左側の説明 -->
+  <line x1="150" y1="105" x2="120" y2="105" stroke="white" stroke-width="1"/>
+  <text x="115" y="110" font-family="Arial, sans-serif" font-size="12" fill="#8A94A7" text-anchor="end">ネットワーク最適化</text>
+  
+  <line x1="150" y1="165" x2="120" y2="165" stroke="white" stroke-width="1"/>
+  <text x="115" y="170" font-family="Arial, sans-serif" font-size="12" fill="#8A94A7" text-anchor="end">高速合意形成</text>
+  
+  <line x1="150" y1="225" x2="120" y2="225" stroke="white" stroke-width="1"/>
+  <text x="115" y="230" font-family="Arial, sans-serif" font-size="12" fill="#8A94A7" text-anchor="end">スケーラビリティ</text>
+  
+  <line x1="150" y1="285" x2="120" y2="285" stroke="white" stroke-width="1"/>
+  <text x="115" y="290" font-family="Arial, sans-serif" font-size="12" fill="#8A94A7" text-anchor="end">高速トランザクション</text>
+  
+  <line x1="150" y1="345" x2="120" y2="345" stroke="white" stroke-width="1"/>
+  <text x="115" y="350" font-family="Arial, sans-serif" font-size="12" fill="#8A94A7" text-anchor="end">効率的データ管理</text>
+  
+  <line x1="150" y1="405" x2="120" y2="405" stroke="white" stroke-width="1"/>
+  <text x="115" y="410" font-family="Arial, sans-serif" font-size="12" fill="#8A94A7" text-anchor="end">P2P通信</text>
+  
+  <!-- 右側の説明 -->
+  <line x1="650" y1="105" x2="680" y2="105" stroke="white" stroke-width="1"/>
+  <text x="685" y="110" font-family="Arial, sans-serif" font-size="12" fill="#8A94A7">機械学習アルゴリズム</text>
+  
+  <line x1="650" y1="165" x2="680" y2="165" stroke="white" stroke-width="1"/>
+  <text x="685" y="170" font-family="Arial, sans-serif" font-size="12" fill="#8A94A7">即時ファイナリティ</text>
+  
+  <line x1="650" y1="225" x2="680" y2="225" stroke="white" stroke-width="1"/>
+  <text x="685" y="230" font-family="Arial, sans-serif" font-size="12" fill="#8A94A7">動的シャード調整</text>
+  
+  <line x1="650" y1="285" x2="680" y2="285" stroke="white" stroke-width="1"/>
+  <text x="685" y="290" font-family="Arial, sans-serif" font-size="12" fill="#8A94A7">WASM実行環境</text>
+  
+  <line x1="650" y1="345" x2="680" y2="345" stroke="white" stroke-width="1"/>
+  <text x="685" y="350" font-family="Arial, sans-serif" font-size="12" fill="#8A94A7">分散ストレージ</text>
+  
+  <line x1="650" y1="405" x2="680" y2="405" stroke="white" stroke-width="1"/>
+  <text x="685" y="410" font-family="Arial, sans-serif" font-size="12" fill="#8A94A7">最適化P2Pプロトコル</text>
+  
+  <!-- タイトル -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">OptimaChain アーキテクチャ</text>
+</svg>

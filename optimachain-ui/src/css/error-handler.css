@@ -1,0 +1,105 @@
+/* Error Handler Styles */
+.error-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  max-width: 400px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.error-message {
+  background-color: #fff;
+  border-left: 4px solid #e74c3c;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 16px;
+  position: relative;
+  animation: slideIn 0.3s ease-out forwards;
+  display: flex;
+  align-items: flex-start;
+}
+
+.error-content {
+  flex: 1;
+}
+
+.error-message h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #e74c3c;
+}
+
+.error-message p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.4;
+}
+
+.error-close {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0;
+  margin-left: 10px;
+  line-height: 1;
+}
+
+.error-close:hover {
+  color: #333;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.error-message.removing {
+  animation: slideOut 0.3s ease-in forwards;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .error-message {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .error-message h3 {
+    color: #ff6b6b;
+  }
+  
+  .error-message p {
+    color: #e0e0e0;
+  }
+  
+  .error-close {
+    color: #777;
+  }
+  
+  .error-close:hover {
+    color: #ccc;
+  }
+}

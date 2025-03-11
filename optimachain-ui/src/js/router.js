@@ -20,7 +20,7 @@ const routes = {
 };
 
 // Initialize the router
-export function initRouter() {
+function initRouter() {
   // Handle clicks on links
   document.addEventListener('click', (e) => {
     // Find closest anchor tag
@@ -60,7 +60,7 @@ export function initRouter() {
 }
 
 // Navigate to a URL
-export function navigate(url) {
+function navigate(url) {
   // Remove .html extension if present
   url = url.replace(/\.html$/, '');
   
@@ -120,7 +120,7 @@ function getFilePath(url) {
 }
 
 // Update the active link in the navigation
-export function updateActiveNavLink(path) {
+function updateActiveNavLink(path) {
   // Remove leading slash if present
   path = path.startsWith('/') ? path : '/' + path;
   
@@ -148,8 +148,7 @@ export function updateActiveNavLink(path) {
 }
 
 // Export the router functions
-export default {
-  initRouter,
-  navigate,
-  updateActiveNavLink
-};
+export { initRouter, navigate, updateActiveNavLink };
+
+// Make router available globally
+window.router = { initRouter, navigate, updateActiveNavLink };
