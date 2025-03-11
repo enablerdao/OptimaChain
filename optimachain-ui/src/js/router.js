@@ -153,7 +153,7 @@ function updateActiveNavLink(path) {
 }
 
 // Load content for a route
-export async function loadRouteContent(url) {
+async function loadRouteContent(url) {
   // Get the file path for the route
   const filePath = getFilePath(url);
   

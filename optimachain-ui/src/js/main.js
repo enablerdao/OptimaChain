@@ -11,6 +11,9 @@ import { initBlockchainVisual } from './blockchain-visual.js';
 import { initErrorHandler } from './error-handler.js';
 import { initNetworkStatsVisualization } from './network-stats.js';
 
+// Log initialization
+console.log('OptimaChain application initializing...');
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
   console.log('OptimaChain application initializing...');
@@ -30,8 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initBlockchainVisual(blockchainCanvas);
   }
   
-  // Initialize network statistics visualization
-  initNetworkStatsVisualization();
+  // Initialize network statistics visualization if we're on a page that has it
+  if (document.getElementById('network-stats-section')) {
+    initNetworkStatsVisualization();
+  }
   
   // Initialize performance monitoring
   if (window.performance && window.performance.mark) {
