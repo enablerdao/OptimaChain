@@ -58,9 +58,9 @@
   left: 0;
   width: 100%;
   padding: var(--space-4) 0;
-  background-color: rgba(245, 245, 247, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(245, 245, 247, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   z-index: var(--z-40);
   transition: all var(--transition-normal);
 }
@@ -87,12 +87,13 @@
   color: var(--text-color);
   font-weight: 700;
   font-size: var(--text-xl);
-  transition: transform var(--transition-fast);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+  letter-spacing: -0.5px;
 }
 
 .logo:hover {
   transform: translateY(-2px);
-  color: var(--text-color);
+  color: var(--primary-color);
 }
 
 .logo-mark {
