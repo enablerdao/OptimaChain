@@ -102,7 +102,7 @@ impl Database {
         }
         
         if let Some(memory_budget) = self.config.memory_budget {
-            options.optimize_for_point_lookup(memory_budget);
+            options.optimize_for_point_lookup(memory_budget as u64);
         }
         
         // Create column family descriptors
@@ -219,9 +219,9 @@ impl Database {
         read_options.set_prefix_same_as_start(true);
         
         let rocks_mode = match mode {
-            IteratorMode::Start => RocksIteratorMode::From(prefix_bytes.clone(), rocksdb::Direction::Forward),
-            IteratorMode::End => RocksIteratorMode::From(prefix_bytes.clone(), rocksdb::Direction::Reverse),
-            IteratorMode::From(ref key) => RocksIteratorMode::From(key.clone(), rocksdb::Direction::Forward),
+            IteratorMode::Start => RocksIteratorMode::From(&prefix_bytes, rocksdb::Direction::Forward),
+            IteratorMode::End => RocksIteratorMode::From(&prefix_bytes, rocksdb::Direction::Reverse),
+            IteratorMode::From(ref key) => RocksIteratorMode::From(&key, rocksdb::Direction::Forward),
         };
         
         let iter = db.iterator_cf_opt(cf, read_options, rocks_mode);

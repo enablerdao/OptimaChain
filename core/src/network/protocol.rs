@@ -1,10 +1,7 @@
 use crate::network::{Message, MessageId, MessageType};
 use crate::types::{Block, Transaction};
 use libp2p::{
-    request_response::{
-        ProtocolSupport, RequestResponse, RequestResponseConfig, RequestResponseEvent,
-        RequestResponseMessage,
-    },
+    request_response,
     PeerId,
 };
 use serde::{Serialize, Deserialize};

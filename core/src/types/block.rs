@@ -1,8 +1,8 @@
 use crate::types::{TransactionId, StateRoot};
-use crate::utils::crypto::Signature;
 use ed25519_dalek::VerifyingKey;
+use crate::utils::crypto::Signature;
 use serde::{Serialize, Deserialize, Serializer, Deserializer};
-use serde::de::{Visitor, Error as DeError};
+use serde::de::Error as DeError;
 use sha3::{Sha3_256, Digest};
 use std::time::{SystemTime, UNIX_EPOCH};
 
@@ -125,7 +125,7 @@ impl Block {
             transactions_root,
             state_root,
             validator,
-            signature: Signature::from_bytes([0; 64]), // Placeholder, to be signed
+            signature: Signature::from_bytes(&[0; 64]), // Placeholder, to be signed
         };
         
         Block {
