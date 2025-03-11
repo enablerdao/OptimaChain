@@ -31,7 +31,7 @@ OptimaChainは現在、初期開発段階にあります。以下のロードマ
 - **2025年 Q3**: メインネット公開とトークン生成イベント
 - **2025年 Q4以降**: エコシステム拡大とクロスチェーン相互運用性強化
 
-詳細なロードマップは[こちら](/whitepaper/OptimaChain_Whitepaper.html#roadmap)をご覧ください。
+詳細なロードマップは[こちら](optimachain-ui/whitepaper/OptimaChain_Whitepaper.html#roadmap)をご覧ください。
 
 ## インストール方法
 
@@ -111,13 +111,13 @@ OptimaChainプロジェクトは以下のコンポーネントで構成されて
 
 OptimaChainの主要な技術コンポーネントについては、以下のドキュメントをご参照ください：
 
-- [コンセンサスメカニズム](/technology.html#consensus)
-- [動的シャーディング](/technology.html#sharding)
-- [並列実行エンジン](/technology.html#execution)
-- [プライバシー保護](/technology.html#privacy)
-- [AI最適化](/technology.html#ai-adaptive)
+- [コンセンサスメカニズム](optimachain-ui/technology.html#consensus)
+- [動的シャーディング](optimachain-ui/technology.html#sharding)
+- [並列実行エンジン](optimachain-ui/technology.html#execution)
+- [プライバシー保護](optimachain-ui/technology.html#privacy)
+- [AI最適化](optimachain-ui/technology.html#ai-adaptive)
 
-詳細な技術仕様については、[ホワイトペーパー](/whitepaper/OptimaChain_Whitepaper.html)をご覧ください。
+詳細な技術仕様については、[ホワイトペーパー](optimachain-ui/whitepaper/OptimaChain_Whitepaper.html)をご覧ください。
 
 ## 貢献方法
 
