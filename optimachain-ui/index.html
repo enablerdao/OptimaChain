@@ -120,7 +120,13 @@
     <link rel="preload" href="/src/js/config.js" as="script">
     <link rel="preload" href="/js/main.js" as="script">
     <link rel="preload" href="/src/js/router.js" as="script" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.min.js"></script>
     <script src="/src/js/config.js" type="module"></script>
+    <script src="/js/blockchain-3d.js" defer></script>
     <script src="/js/main.js" type="module" defer></script>
     <script src="/src/js/router.js" type="module" defer></script>
     <script>
@@ -161,11 +167,7 @@
                     <ul>
                         <li><a href="#features" data-i18n="nav.features">特徴</a></li>
                         <li><a href="/technology" data-i18n="nav.technology">技術</a></li>
-                        <li><a href="/ecosystem" data-i18n="nav.ecosystem">エコシステム</a></li>
-                        <li><a href="/developers" data-i18n="nav.developers">開発者</a></li>
-                        <li><a href="/community" data-i18n="nav.community">コミュニティ</a></li>
-                        <li><a href="/token" data-i18n="nav.token">トークン</a></li>
-                        <li><a href="/roadmap">ロードマップ</a></li>
+                        <li><a href="/validator-dashboard" data-i18n="nav.validator">バリデータ</a></li>
                         <li><a href="/whitepaper" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
                     </ul>
                 </nav>
@@ -204,11 +206,7 @@
             <ul>
                 <li><a href="#features" data-i18n="nav.features">特徴</a></li>
                 <li><a href="/technology" data-i18n="nav.technology">技術</a></li>
-                <li><a href="/ecosystem" data-i18n="nav.ecosystem">エコシステム</a></li>
-                <li><a href="/developers" data-i18n="nav.developers">開発者</a></li>
-                <li><a href="/community" data-i18n="nav.community">コミュニティ</a></li>
-                <li><a href="/token" data-i18n="nav.token">トークン</a></li>
-                <li><a href="/roadmap">ロードマップ</a></li>
+                <li><a href="/validator-dashboard" data-i18n="nav.validator">バリデータ</a></li>
                 <li><a href="/whitepaper" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
             </ul>
         </nav>
@@ -268,17 +266,17 @@
                 </div>
                 
                 <div class="hero-cta animate-fade-in delay-3">
-                    <a href="#testnet" class="cta-btn large">
+                    <a href="/validator-dashboard" class="cta-btn large">
+                        <span>バリデータになる</span>
+                        <span class="button-icon">→</span>
+                    </a>
+                    <a href="#testnet" class="secondary-btn large">
                         <span data-i18n="hero.cta">テストネットに参加する</span>
                         <span class="button-icon">→</span>
                     </a>
-                    <a href="/wallet" class="secondary-btn large">
+                    <a href="/wallet" class="tertiary-btn large">
                         <span data-i18n="hero.wallet">ウォレット接続</span>
                         <span class="button-icon">↓</span>
-                    </a>
-                    <a href="/validator-dashboard" class="tertiary-btn large">
-                        <span>バリデータダッシュボード</span>
-                        <span class="button-icon">→</span>
                     </a>
                     <a href="/whitepaper/OptimaChain_Whitepaper.html" class="quaternary-btn large">
                         <span>ホワイトペーパー</span>
@@ -318,6 +316,55 @@
         <div class="scroll-indicator">
             <div class="mouse-icon"></div>
             <span data-i18n="buttons.showMore">スクロールして詳細を見る</span>
+        </div>
+    </section>
+    
+    <!-- ネットワーク統計セクション -->
+    <section class="network-stats-section" id="network-stats">
+        <div class="wrapper">
+            <div class="section-header">
+                <div class="section-tag">NETWORK</div>
+                <h2 class="section-title">ネットワーク統計</h2>
+                <p class="section-subtitle">
+                    OptimaChainネットワークのリアルタイム統計情報
+                </p>
+            </div>
+            
+            <div class="network-tabs">
+                <div class="tab active" data-tab="apos">AI-Adaptive PoS</div>
+                <div class="tab" data-tab="sharding">自己最適化シャーディング</div>
+                <div class="tab" data-tab="smart-contract">AI予測型スマートコントラクト</div>
+            </div>
+            
+            <div class="network-stats-container" id="network-stats-container">
+                <div class="network-stats-info">
+                    <div class="stats-item">
+                        <div class="stats-label">エポック:</div>
+                        <div class="stats-value" id="epoch-value">12</div>
+                    </div>
+                    <div class="stats-item">
+                        <div class="stats-label">バリデータ数:</div>
+                        <div class="stats-value" id="validator-count">5</div>
+                    </div>
+                    <div class="stats-item">
+                        <div class="stats-label">ネットワーク負荷:</div>
+                        <div class="stats-value" id="network-load">50%</div>
+                    </div>
+                </div>
+                
+                <div class="network-visual">
+                    <canvas id="network-canvas" width="600" height="400"></canvas>
+                </div>
+                
+                <div class="network-controls">
+                    <div class="load-slider-container">
+                        <span class="slider-label">ネットワーク負荷:</span>
+                        <input type="range" id="load-slider" min="0" max="100" value="50" class="load-slider">
+                        <span class="slider-value">50%</span>
+                        <button id="apply-load" class="apply-button">適用</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     
@@ -472,87 +519,6 @@ cd optimachain
                     <span>技術詳細ページへ</span>
                     <span class="button-icon">→</span>
                 </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- バリデータセットアップセクション -->
-    <section class="validator-setup-section" id="validator-setup-section">
-        <div class="wrapper">
-            <div class="section-header">
-                <div class="section-tag">VALIDATOR</div>
-                <h2 class="section-title">バリデータになる</h2>
-                <p class="section-subtitle">OptimaChainのバリデータノードを実行して、ネットワークの分散化と安全性に貢献しましょう。</p>
-            </div>
-            
-            <div class="validator-setup-hero">
-                <h2>バリデータのセットアップ</h2>
-                <p>以下のコマンドを使用して、お使いのプラットフォームにバリデータをセットアップできます。</p>
-                
-                <div class="os-tabs">
-                    <div class="os-tab active" data-os="linux">Linux</div>
-                    <div class="os-tab" data-os="macos">macOS</div>
-                    <div class="os-tab" data-os="windows">Windows</div>
-                </div>
-                
-                <div class="os-content active" data-os="linux">
-                    <div class="validator-commands">
-                        <div class="command-header">
-                            <h4>Linux用セットアップコマンド</h4>
-                            <button class="copy-btn">コピー</button>
-                        </div>
-                        <pre># OptimaChainバリデータノードのセットアップ (Linux)
-curl -sSL https://raw.githubusercontent.com/enablerdao/OptimaChain/main/scripts/validator-setup.sh | bash
-
-# ノードの起動
-cd optimachain
-./optimachain-node --validator --name YOUR_VALIDATOR_NAME</pre>
-                    </div>
-                </div>
-                
-                <div class="os-content" data-os="macos">
-                    <div class="validator-commands">
-                        <div class="command-header">
-                            <h4>macOS用セットアップコマンド</h4>
-                            <button class="copy-btn">コピー</button>
-                        </div>
-                        <pre># OptimaChainバリデータノードのセットアップ (macOS)
-curl -sSL https://raw.githubusercontent.com/enablerdao/OptimaChain/main/scripts/validator-setup-mac.sh | bash
-
-# ノードの起動
-cd optimachain
-./optimachain-node --validator --name YOUR_VALIDATOR_NAME</pre>
-                    </div>
-                </div>
-                
-                <div class="os-content" data-os="windows">
-                    <div class="validator-commands">
-                        <div class="command-header">
-                            <h4>Windows用セットアップコマンド</h4>
-                            <button class="copy-btn">コピー</button>
-                        </div>
-                        <pre># OptimaChainバリデータノードのセットアップ (Windows)
-# PowerShellを管理者として実行
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/enablerdao/OptimaChain/main/scripts/validator-setup.ps1 -OutFile validator-setup.ps1
-Set-ExecutionPolicy Bypass -Scope Process -Force
-./validator-setup.ps1
-
-# ノードの起動
-cd optimachain
-.\optimachain-node.exe --validator --name YOUR_VALIDATOR_NAME</pre>
-                    </div>
-                </div>
-                
-                <div class="validator-cta">
-                    <a href="/validator-dashboard" class="primary-btn">
-                        <span>バリデータダッシュボード</span>
-                        <span class="button-icon">→</span>
-                    </a>
-                    <a href="/whitepaper#21-コンセンサスメカニズム-adaptive-proof-of-stake-apos" class="secondary-btn">
-                        <span>コンセンサスメカニズムの詳細</span>
-                        <span class="button-icon">→</span>
-                    </a>
-                </div>
             </div>
         </div>
     </section>

@@ -242,3 +242,24 @@ impl From<serde_json::Error> for Error {
         }
     }
 }
+
+// Add conversion from StorageError
+impl From<crate::storage::StorageError> for Error {
+    fn from(err: crate::storage::StorageError) -> Self {
+        Error::database(err.to_string())
+    }
+}
+
+// Add conversion from String
+impl From<String> for Error {
+    fn from(err: String) -> Self {
+        Error::other(err)
+    }
+}
+
+// Add conversion from &str
+impl From<&str> for Error {
+    fn from(err: &str) -> Self {
+        Error::other(err.to_string())
+    }
+}

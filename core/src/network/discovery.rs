@@ -1,12 +1,10 @@
-use crate::network::{PeerInfo, TransportConfig};
+use crate::network::TransportConfig;
 use libp2p::{
     core::Multiaddr,
-    identity::PublicKey,
-    kad::{Kademlia, KademliaConfig, KademliaEvent, QueryId, QueryResult},
-    swarm::NetworkBehaviour,
+    kad::{self, store::MemoryStore, QueryId},
 };
 use serde::{Serialize, Deserialize};
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::time::{Duration, Instant};
 
 /// Configuration for the discovery mechanism
@@ -43,8 +41,6 @@ pub struct PeerInfo {
     pub peer_id: String,
     /// Peer addresses
     pub addresses: Vec<Multiaddr>,
-    /// Peer public key
-    pub public_key: Option<PublicKey>,
     /// When the peer was last seen
     pub last_seen: u64,
     /// Peer protocol version
@@ -66,15 +62,11 @@ pub struct Discovery {
     /// Last discovery time
     last_discovery: Instant,
     /// Kademlia DHT for peer discovery
-    kademlia: Option<Kademlia<MemoryStore>>,
+    kademlia: Option<kad::Behaviour<MemoryStore>>,
 }
 
-/// Simple in-memory store for Kademlia
-#[derive(Default)]
-pub struct MemoryStore {
-    /// Storage for key-value pairs
-    storage: HashMap<Vec<u8>, Vec<u8>>,
-}
+// Using libp2p's MemoryStore instead of defining our own
+// This was causing a name conflict with the imported MemoryStore
 
 impl Discovery {
     /// Create a new discovery mechanism
@@ -155,29 +147,36 @@ impl Discovery {
         
         // If we still have too many peers, remove the oldest ones
         if self.peers.len() > self.config.max_peers {
+            // Collect peer IDs to remove
             let mut peers: Vec<_> = self.peers.iter().collect();
             peers.sort_by_key(|(_, info)| info.last_seen);
             
             let to_remove = peers.len() - self.config.max_peers;
-            for (peer_id, _) in peers.iter().take(to_remove) {
-                self.peers.remove(*peer_id);
+            let peers_to_remove: Vec<String> = peers.iter()
+                .take(to_remove)
+                .map(|(peer_id, _)| (*peer_id).clone())
+                .collect();
+            
+            // Remove the peers in a separate step
+            for peer_id in peers_to_remove {
+                self.peers.remove(&peer_id);
             }
         }
     }
     
     /// Handle a Kademlia event
-    pub fn handle_kademlia_event(&mut self, event: KademliaEvent) {
+    pub fn handle_kademlia_event(&mut self, event: kad::Event) {
         match event {
-            KademliaEvent::QueryResult { id, result, .. } => {
+            kad::Event::OutboundQueryProgressed { id, result, .. } => {
                 self.active_queries.remove(&id);
                 
                 match result {
-                    QueryResult::GetClosestPeers(Ok(peers)) => {
-                        log::info!("Found {} closest peers", peers.len());
+                    kad::QueryResult::GetClosestPeers(Ok(peers)) => {
+                        log::info!("Found {} closest peers", peers.peers.len());
                         
                         // In a real implementation, we would add these peers to our known peers
                     }
-                    QueryResult::GetClosestPeers(Err(err)) => {
+                    kad::QueryResult::GetClosestPeers(Err(err)) => {
                         log::error!("Failed to get closest peers: {:?}", err);
                     }
                     _ => {}

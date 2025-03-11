@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 const path = require('path');
 const http = require('http');
 const socketIo = require('socket.io');
+const connectDB = require('./config/db');
+const seedData = require('./config/seedData');
 
 // Load environment variables
 dotenv.config();
@@ -100,15 +102,24 @@ io.on('connection', (socket) => {
 // Set port and start server
 const PORT = process.env.PORT || 3000;
 
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV}`);
-  
-  // バリデータネットワークの初期化（まだ初期化されていない場合）
-  if (!network.validators.length) {
-    network.initialize();
-    console.log('Validator network initialized');
+// Connect to database before starting server
+connectDB().then(() => {
+  // Seed data if in development mode
+  if (process.env.NODE_ENV === 'development') {
+    seedData();
   }
+  
+  server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV}`);
+    
+    // バリデータネットワークの初期化（まだ初期化されていない場合）
+    if (!network.validators.length) {
+      network.initialize();
+      console.log('Validator network initialized');
+    }
+  });
+
 });
 
 // Handle unhandled promise rejections

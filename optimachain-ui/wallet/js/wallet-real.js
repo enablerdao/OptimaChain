@@ -44,7 +44,7 @@ async function initWallet() {
     try {
         // Check if user is authenticated
         if (!Auth.isAuthenticated()) {
-            window.location.href = '../login.html';
+            window.location.href = '../login';
             return;
         }
         

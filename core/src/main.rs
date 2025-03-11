@@ -3,92 +3,94 @@
 //! This is the entry point for the OptimaChain blockchain node.
 //! It parses command-line arguments and starts the blockchain node.
 
-use clap::{App, Arg, SubCommand};
+use clap::{Command, Arg};
 use optimachain::{init, utils, VERSION};
 use std::path::PathBuf;
 use std::process;
 
 fn main() {
     // Parse command-line arguments
-    let matches = App::new("OptimaChain")
+    let matches = Command::new("OptimaChain")
         .version(VERSION)
         .author("OptimaChain Team")
         .about("Next-generation blockchain platform with AI-driven adaptive technologies")
         .arg(
-            Arg::with_name("config")
-                .short("c")
+            Arg::new("config")
+                .short('c')
                 .long("config")
                 .value_name("FILE")
                 .help("Sets a custom config file")
-                .takes_value(true),
+                .action(clap::ArgAction::Set),
         )
         .arg(
-            Arg::with_name("data-dir")
-                .short("d")
+            Arg::new("data-dir")
+                .short('d')
                 .long("data-dir")
                 .value_name("DIR")
                 .help("Sets the data directory")
-                .takes_value(true),
+                .action(clap::ArgAction::Set),
         )
         .arg(
-            Arg::with_name("log-level")
-                .short("l")
+            Arg::new("log-level")
+                .short('l')
                 .long("log-level")
                 .value_name("LEVEL")
                 .help("Sets the log level (error, warn, info, debug, trace)")
-                .takes_value(true),
+                .action(clap::ArgAction::Set),
         )
         .subcommand(
-            SubCommand::with_name("init")
+            Command::new("init")
                 .about("Initialize the blockchain")
                 .arg(
-                    Arg::with_name("force")
-                        .short("f")
+                    Arg::new("force")
+                        .short('f')
                         .long("force")
-                        .help("Force initialization even if data already exists"),
+                        .help("Force initialization even if data already exists")
+                        .action(clap::ArgAction::SetTrue),
                 ),
         )
         .subcommand(
-            SubCommand::with_name("run")
+            Command::new("run")
                 .about("Run the blockchain node")
                 .arg(
-                    Arg::with_name("validator")
-                        .short("v")
+                    Arg::new("validator")
+                        .short('v')
                         .long("validator")
-                        .help("Run as a validator node"),
+                        .help("Run as a validator node")
+                        .action(clap::ArgAction::SetTrue),
                 ),
         )
         .subcommand(
-            SubCommand::with_name("export-genesis")
+            Command::new("export-genesis")
                 .about("Export the genesis block")
                 .arg(
-                    Arg::with_name("output")
-                        .short("o")
+                    Arg::new("output")
+                        .short('o')
                         .long("output")
                         .value_name("FILE")
                         .help("Output file")
-                        .takes_value(true),
+                        .action(clap::ArgAction::Set),
                 ),
         )
         .subcommand(
-            SubCommand::with_name("import-genesis")
+            Command::new("import-genesis")
                 .about("Import a genesis block")
                 .arg(
-                    Arg::with_name("input")
-                        .short("i")
+                    Arg::new("input")
+                        .short('i')
                         .long("input")
                         .value_name("FILE")
                         .help("Input file")
-                        .takes_value(true)
+                        .action(clap::ArgAction::Set)
                         .required(true),
                 ),
         )
         .get_matches();
 
     // Load configuration
-    let config_path = matches.value_of("config").map(|s| s.to_string());
-    let data_dir = matches.value_of("data-dir").map(|s| PathBuf::from(s));
-    let log_level = matches.value_of("log-level").map(|s| s.to_string());
+    let config_path = matches.get_one::<String>("config").map(|s| s.to_string());
+    let data_dir = matches.get_one::<String>("data-dir").map(|s| PathBuf::from(s));
+    let log_level = matches.get_one::<String>("log-level").map(|s| s.to_string());
 
     let mut config = match load_config(config_path.as_deref()) {
         Ok(config) => config,
@@ -109,13 +111,13 @@ fn main() {
 
     // Process subcommands
     if let Some(matches) = matches.subcommand_matches("init") {
-        let force = matches.is_present("force");
+        let force = matches.get_flag("force");
         if let Err(err) = initialize_blockchain(&config, force) {
             eprintln!("Error initializing blockchain: {}", err);
             process::exit(1);
         }
     } else if let Some(matches) = matches.subcommand_matches("run") {
-        let validator = matches.is_present("validator");
+        let validator = matches.get_flag("validator");
         if validator {
             config.node.role = "validator".to_string();
         }
@@ -125,13 +127,13 @@ fn main() {
             process::exit(1);
         }
     } else if let Some(matches) = matches.subcommand_matches("export-genesis") {
-        let output = matches.value_of("output").map(|s| PathBuf::from(s));
+        let output = matches.get_one::<String>("output").map(|s| PathBuf::from(s));
         if let Err(err) = export_genesis(&config, output) {
             eprintln!("Error exporting genesis block: {}", err);
             process::exit(1);
         }
     } else if let Some(matches) = matches.subcommand_matches("import-genesis") {
-        let input = PathBuf::from(matches.value_of("input").unwrap());
+        let input = PathBuf::from(matches.get_one::<String>("input").unwrap());
         if let Err(err) = import_genesis(&config, &input) {
             eprintln!("Error importing genesis block: {}", err);
             process::exit(1);

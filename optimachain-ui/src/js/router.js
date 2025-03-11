@@ -53,10 +53,18 @@ function initRouter() {
     
     // Update the active link in the navigation
     updateActiveNavLink(path);
+    
+    // Load content for the path if state exists
+    if (e.state && e.state.path) {
+      loadRouteContent(e.state.path);
+    } else {
+      loadRouteContent(path);
+    }
   });
   
   // Initialize on page load
   updateActiveNavLink(window.location.pathname);
+  // Initial content load not needed as the page already has content
 }
 
 // Navigate to a URL
@@ -73,7 +81,7 @@ function navigate(url) {
   }
   
   // Update browser history
-  history.pushState(null, '', url);
+  history.pushState({path: url}, '', url);
   
   // Update the active link in the navigation
   updateActiveNavLink(url);
@@ -82,20 +90,17 @@ function navigate(url) {
   if (requiresPageLoad(url)) {
     const filePath = getFilePath(url);
     window.location.href = filePath;
+  } else {
+    // Load content for the new route
+    loadRouteContent(url);
   }
 }
 
 // Check if a route requires a full page load
 function requiresPageLoad(url) {
-  // Get the current path
-  const currentPath = window.location.pathname;
-  
-  // If we're navigating between different sections (e.g., from /wallet to /dex),
-  // we need a full page load
-  const currentSection = currentPath.split('/')[1];
-  const targetSection = url.split('/')[1];
-  
-  return currentSection !== targetSection;
+  // We'll implement client-side navigation for all routes
+  // Only external links should require page loads
+  return false;
 }
 
 // Get the file path for a route
@@ -147,8 +152,74 @@ function updateActiveNavLink(path) {
   });
 }
 
+// Load content for a route
+export async function loadRouteContent(url) {
+  // Get the file path for the route
+  const filePath = getFilePath(url);
+  
+  try {
+    // Fetch the HTML content
+    const response = await fetch(filePath);
+    if (!response.ok) {
+      throw new Error(`Failed to load ${filePath}: ${response.status} ${response.statusText}`);
+    }
+    
+    const html = await response.text();
+    
+    // Create a temporary element to parse the HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    
+    // Extract the main content
+    const mainContent = tempDiv.querySelector('main') || 
+                        tempDiv.querySelector('.main-content') || 
+                        tempDiv.querySelector('.content');
+    
+    if (!mainContent) {
+      console.error('Could not find main content in the loaded page');
+      return;
+    }
+    
+    // Replace the current main content
+    const currentMain = document.querySelector('main') || 
+                        document.querySelector('.main-content') || 
+                        document.querySelector('.content');
+    
+    if (currentMain) {
+      currentMain.innerHTML = mainContent.innerHTML;
+      
+      // Initialize any scripts for the new content
+      initPageScripts(url);
+    } else {
+      console.error('Could not find main content container in the current page');
+    }
+  } catch (error) {
+    console.error('Error loading route content:', error);
+  }
+}
+
+// Initialize page-specific scripts
+function initPageScripts(url) {
+  // Re-initialize components based on the current page
+  if (url === '/' || url === '/index') {
+    // Homepage scripts
+    const blockchainCanvas = document.getElementById('blockchain-canvas');
+    if (blockchainCanvas && typeof initBlockchainVisual === 'function') {
+      initBlockchainVisual(blockchainCanvas);
+    }
+    
+    if (typeof initAnimations === 'function') {
+      initAnimations();
+    }
+    
+    if (typeof initOSSelector === 'function') {
+      initOSSelector();
+    }
+  }
+}
+
 // Export the router functions
-export { initRouter, navigate, updateActiveNavLink };
+export { initRouter, navigate, updateActiveNavLink, loadRouteContent };
 
 // Make router available globally
-window.router = { initRouter, navigate, updateActiveNavLink };
+window.router = { initRouter, navigate, updateActiveNavLink, loadRouteContent };

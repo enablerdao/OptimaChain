@@ -17,14 +17,14 @@ export function createHeader() {
         <nav class="main-nav">
           <ul>
             <li><a href="#features" data-i18n="nav.features">特徴</a></li>
-            <li><a href="/technology.html" data-i18n="nav.technology">技術</a></li>
-            <li><a href="/ecosystem.html" data-i18n="nav.ecosystem">エコシステム</a></li>
-            <li><a href="/developers.html" data-i18n="nav.developers">開発者</a></li>
-            <li><a href="/community.html" data-i18n="nav.community">コミュニティ</a></li>
-            <li><a href="/token.html" data-i18n="nav.token">トークン</a></li>
-            <li><a href="/roadmap.html">ロードマップ</a></li>
-            <li><a href="/pages/blog.html">技術ブログ</a></li>
-            <li><a href="/whitepaper/OptimaChain_Whitepaper.html" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
+            <li><a href="/technology" data-i18n="nav.technology">技術</a></li>
+            <li><a href="/ecosystem" data-i18n="nav.ecosystem">エコシステム</a></li>
+            <li><a href="/developers" data-i18n="nav.developers">開発者</a></li>
+            <li><a href="/community" data-i18n="nav.community">コミュニティ</a></li>
+            <li><a href="/token" data-i18n="nav.token">トークン</a></li>
+            <li><a href="/roadmap">ロードマップ</a></li>
+            <li><a href="/pages/blog">技術ブログ</a></li>
+            <li><a href="/whitepaper" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
           </ul>
         </nav>
         
@@ -44,7 +44,7 @@ export function createHeader() {
             </div>
           </div>
           
-          <a href="/wallet.html" class="wallet-button" data-i18n="wallet.connect">ウォレット接続</a>
+          <a href="/wallet" class="wallet-button" data-i18n="wallet.connect">ウォレット接続</a>
           
           <button class="mobile-menu-toggle" aria-label="メニュー">
             <span></span>
@@ -101,13 +101,13 @@ export function insertHeader() {
     <nav>
       <ul>
         <li><a href="#features" data-i18n="nav.features">特徴</a></li>
-        <li><a href="/technology.html" data-i18n="nav.technology">技術</a></li>
-        <li><a href="/ecosystem.html" data-i18n="nav.ecosystem">エコシステム</a></li>
-        <li><a href="/developers.html" data-i18n="nav.developers">開発者</a></li>
-        <li><a href="/community.html" data-i18n="nav.community">コミュニティ</a></li>
-        <li><a href="/token.html" data-i18n="nav.token">トークン</a></li>
-        <li><a href="/roadmap.html">ロードマップ</a></li>
-        <li><a href="/whitepaper/OptimaChain_Whitepaper.html" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
+        <li><a href="/technology" data-i18n="nav.technology">技術</a></li>
+        <li><a href="/ecosystem" data-i18n="nav.ecosystem">エコシステム</a></li>
+        <li><a href="/developers" data-i18n="nav.developers">開発者</a></li>
+        <li><a href="/community" data-i18n="nav.community">コミュニティ</a></li>
+        <li><a href="/token" data-i18n="nav.token">トークン</a></li>
+        <li><a href="/roadmap">ロードマップ</a></li>
+        <li><a href="/whitepaper" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
       </ul>
     </nav>
   `;

@@ -9,6 +9,7 @@ import { initRouter } from './router.js';
 import { setupValidatorUI } from './validator-setup.js';
 import { initBlockchainVisual } from './blockchain-visual.js';
 import { initErrorHandler } from './error-handler.js';
+import { initNetworkStatsVisualization } from './network-stats.js';
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,6 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (blockchainCanvas) {
     initBlockchainVisual(blockchainCanvas);
   }
+  
+  // Initialize network statistics visualization
+  initNetworkStatsVisualization();
   
   // Initialize performance monitoring
   if (window.performance && window.performance.mark) {
