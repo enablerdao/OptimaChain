@@ -30,7 +30,6 @@ import { initValidatorSetup } from './validator-setup.js';
 import { initHeader, initNotificationBar, loadHeader } from './header.js';
 import { initRouter } from './router.js';
 import { initNetworkStatsVisualization } from './network-stats.js';
-import { initNetworkStatsVisualization } from './network-stats.js';
 
 // ページ読み込み時の初期化
 document.addEventListener('DOMContentLoaded', () => {
@@ -68,9 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // ブロックチェーンビジュアルの初期化（存在する場合）
   initBlockchainVisualization();
-  
-  // ネットワーク統計ビジュアルの初期化
-  initNetworkStatsVisualization();
   
   // ネットワーク統計ビジュアルの初期化
   initNetworkStatsVisualization();
