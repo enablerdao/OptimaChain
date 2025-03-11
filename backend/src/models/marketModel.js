@@ -51,8 +51,8 @@ const marketSchema = mongoose.Schema(
   }
 );
 
-// For development purposes, we'll create a mock Market model
-// In a real application, you would use mongoose.model
+// Comment out mock Market model
+/*
 const Market = {
   findById: (id) => {
     // Mock market data
@@ -149,8 +149,9 @@ function getMarkets() {
     },
   ];
 }
+*/
 
-// Uncomment the following line to use the real mongoose model
-// const Market = mongoose.model('Market', marketSchema);
+// Use real mongoose model
+const Market = mongoose.model('Market', marketSchema);
 
 module.exports = Market;

@@ -21,6 +21,6 @@ router.get('/:id/chart', getMarketChartData);
 
 // Admin routes
 router.route('/')
-  .post(mockProtect, admin, createMarket); // Use mockProtect for development
+  .post(protect, admin, createMarket);
 
 module.exports = router;

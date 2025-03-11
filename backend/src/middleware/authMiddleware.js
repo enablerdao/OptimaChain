@@ -42,8 +42,10 @@ const admin = (req, res, next) => {
 };
 
 // For development purposes, we'll create a mock authentication middleware
-// This will bypass actual authentication for testing
+// This is now deprecated as we're using real authentication
 const mockProtect = async (req, res, next) => {
+  console.warn('Warning: Using mockProtect middleware which is deprecated. Use real protect middleware instead.');
+  
   // Set a mock user
   req.user = {
     _id: 'user1',

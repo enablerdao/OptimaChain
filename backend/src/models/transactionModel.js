@@ -57,8 +57,8 @@ const transactionSchema = mongoose.Schema(
   }
 );
 
-// For development purposes, we'll create a mock Transaction model
-// In a real application, you would use mongoose.model
+// Comment out mock Transaction model
+/*
 const Transaction = {
   findById: (id) => {
     // Mock transaction data
@@ -124,8 +124,9 @@ const Transaction = {
     });
   },
 };
+*/
 
-// Uncomment the following line to use the real mongoose model
-// const Transaction = mongoose.model('Transaction', transactionSchema);
+// Use real mongoose model
+const Transaction = mongoose.model('Transaction', transactionSchema);
 
 module.exports = Transaction;
