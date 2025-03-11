@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
 import legacy from '@vitejs/plugin-legacy';
 import { resolve } from 'path';
+import { VitePWA } from 'vite-plugin-pwa';
+import autoprefixer from 'autoprefixer';
 
 export default defineConfig(({ mode }) => {
   const isProd = mode === 'production';
@@ -9,6 +11,44 @@ export default defineConfig(({ mode }) => {
     plugins: [
       legacy({
         targets: ['defaults', 'not IE 11'],
+      }),
+      VitePWA({
+        registerType: 'autoUpdate',
+        includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png'],
+        manifest: {
+          name: 'OptimaChain',
+          short_name: 'OptimaChain',
+          description: '革新的なスケーリング技術と高度なセキュリティを統合した次世代型分散型ブロックチェーンプラットフォーム',
+          theme_color: '#0066ff',
+          icons: [
+            {
+              src: 'favicons/favicon-16x16.png',
+              sizes: '16x16',
+              type: 'image/png'
+            },
+            {
+              src: 'favicons/favicon-32x32.png',
+              sizes: '32x32',
+              type: 'image/png'
+            },
+            {
+              src: 'favicons/android-chrome-192x192.png',
+              sizes: '192x192',
+              type: 'image/png'
+            },
+            {
+              src: 'favicons/android-chrome-512x512.png',
+              sizes: '512x512',
+              type: 'image/png'
+            },
+            {
+              src: 'favicons/safari-pinned-tab.svg',
+              sizes: 'any',
+              type: 'image/svg+xml',
+              purpose: 'maskable'
+            }
+          ]
+        }
       }),
     ],
     server: {
