@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 24px sans-serif; text-anchor: middle; }
+    .subtitle { font: 18px sans-serif; text-anchor: middle; }
+    .legend-title { font: bold 16px sans-serif; text-anchor: middle; }
+    .legend-item { font: 14px sans-serif; text-anchor: start; }
+    .percentage { font: bold 16px sans-serif; text-anchor: middle; fill: white; }
+    .details-title { font: bold 16px sans-serif; }
+    .details-item { font: 14px sans-serif; }
+  </style>
+
+  <!-- Title -->
+  <text x="400" y="50" class="title">OPTトークン分配（総供給量: 10億トークン）</text>
+
+  <!-- Donut chart -->
+  <!-- We'll create a donut chart using SVG paths -->
+  <!-- Ecosystem Fund (30%) -->
+  <path d="M 400 250 L 400 100 A 150 150 0 0 1 529.9 175 L 400 250 Z" fill="#3498DB" />
+  <text x="465" y="160" class="percentage">30%</text>
+
+  <!-- Team & Advisors (15%) -->
+  <path d="M 400 250 L 529.9 175 A 150 150 0 0 1 529.9 325 L 400 250 Z" fill="#2ECC71" />
+  <text x="500" y="250" class="percentage">15%</text>
+
+  <!-- Private Sale (10%) -->
+  <path d="M 400 250 L 529.9 325 A 150 150 0 0 1 465 379.9 L 400 250 Z" fill="#9B59B6" />
+  <text x="480" y="330" class="percentage">10%</text>
+
+  <!-- Public Sale (5%) -->
+  <path d="M 400 250 L 465 379.9 A 150 150 0 0 1 400 400 L 400 250 Z" fill="#F1C40F" />
+  <text x="430" y="370" class="percentage">5%</text>
+
+  <!-- Community Incentives (20%) -->
+  <path d="M 400 250 L 400 400 A 150 150 0 0 1 270.1 325 L 400 250 Z" fill="#E74C3C" />
+  <text x="335" y="350" class="percentage">20%</text>
+
+  <!-- Staking Rewards (20%) -->
+  <path d="M 400 250 L 270.1 325 A 150 150 0 0 1 270.1 175 A 150 150 0 0 1 400 100 L 400 250 Z" fill="#1ABC9C" />
+  <text x="310" y="200" class="percentage">20%</text>
+
+  <!-- Center circle to create donut effect -->
+  <circle cx="400" cy="250" r="80" fill="white" />
+
+  <!-- Legend -->
+  <text x="400" y="250" class="legend-title">トークン分配</text>
+
+  <!-- Legend items -->
+  <rect x="550" y="150" width="20" height="20" fill="#3498DB" />
+  <text x="580" y="165" class="legend-item">エコシステム基金 (30%)</text>
+
+  <rect x="550" y="180" width="20" height="20" fill="#2ECC71" />
+  <text x="580" y="195" class="legend-item">チームとアドバイザー (15%)</text>
+
+  <rect x="550" y="210" width="20" height="20" fill="#9B59B6" />
+  <text x="580" y="225" class="legend-item">プライベートセール (10%)</text>
+
+  <rect x="550" y="240" width="20" height="20" fill="#F1C40F" />
+  <text x="580" y="255" class="legend-item">パブリックセール (5%)</text>
+
+  <rect x="550" y="270" width="20" height="20" fill="#E74C3C" />
+  <text x="580" y="285" class="legend-item">コミュニティインセンティブ (20%)</text>
+
+  <rect x="550" y="300" width="20" height="20" fill="#1ABC9C" />
+  <text x="580" y="315" class="legend-item">ステーキング報酬 (20%)</text>
+
+  <!-- Details -->
+  <rect x="100" y="430" width="600" height="150" rx="10" ry="10" fill="#f8f9fa" stroke="#ddd" />
+  <text x="120" y="460" class="details-title">詳細情報:</text>
+  <text x="120" y="490" class="details-item">• エコシステム基金 (30%): DeFiリクイディティ、開発者助成金、マーケティング</text>
+  <text x="120" y="515" class="details-item">• チームとアドバイザー (15%): 4年間のベスティング、6ヶ月のクリフ</text>
+  <text x="120" y="540" class="details-item">• プライベートセール (10%): 2年間のベスティング、3ヶ月のクリフ</text>
+  <text x="120" y="565" class="details-item">• パブリックセール (5%): 1年間のベスティング、1ヶ月のクリフ</text>
+  <text x="120" y="590" class="details-item">• コミュニティインセンティブ (20%): エアドロップ、報奨金、イベント</text>
+  <text x="120" y="615" class="details-item">• ステーキング報酬 (20%): 10年間にわたって徐々に解放</text>
+</svg>

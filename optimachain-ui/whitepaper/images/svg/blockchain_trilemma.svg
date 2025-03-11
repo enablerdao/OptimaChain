@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 24px sans-serif; text-anchor: middle; }
+    .subtitle { font: 18px sans-serif; text-anchor: middle; }
+    .label { font: bold 18px sans-serif; text-anchor: middle; }
+    .node-label { font: bold 14px sans-serif; text-anchor: middle; }
+    .description { font: 14px sans-serif; text-anchor: middle; }
+    .legend { font: 14px sans-serif; }
+    .triangle { fill: none; stroke: #3498db; stroke-width: 3; }
+    .optimachain { fill: #e74c3c; }
+    .other-blockchain { fill: #2ecc71; }
+  </style>
+
+  <!-- Title -->
+  <text x="400" y="50" class="title">ブロックチェーントリレンマとOptimaChainの位置づけ</text>
+
+  <!-- Triangle -->
+  <polygon points="400,150 150,450 650,450" class="triangle" />
+
+  <!-- Labels for triangle corners -->
+  <text x="400" y="130" class="label">スケーラビリティ</text>
+  <text x="130" y="470" class="label">セキュリティ</text>
+  <text x="670" y="470" class="label">分散化</text>
+
+  <!-- OptimaChain node (center of triangle, slightly towards scalability) -->
+  <circle cx="400" cy="300" r="15" class="optimachain" />
+  <text x="400" y="280" class="node-label">OptimaChain</text>
+
+  <!-- Other blockchain nodes -->
+  <!-- Bitcoin (high security, high decentralization, low scalability) -->
+  <circle cx="400" cy="400" r="10" class="other-blockchain" />
+  <text x="400" y="425" class="node-label">Bitcoin</text>
+
+  <!-- Ethereum (balanced but with scalability challenges) -->
+  <circle cx="350" cy="350" r="10" class="other-blockchain" />
+  <text x="350" y="375" class="node-label">Ethereum</text>
+
+  <!-- Centralized blockchain (high scalability, high security, low decentralization) -->
+  <circle cx="250" cy="300" r="10" class="other-blockchain" />
+  <text x="250" y="325" class="node-label">中央集権的ブロックチェーン</text>
+
+  <!-- Legend -->
+  <circle cx="150" cy="520" r="10" class="optimachain" />
+  <text x="170" y="525" class="legend" dx="10">OptimaChain: トリレンマを解決</text>
+
+  <circle cx="150" cy="550" r="8" class="other-blockchain" />
+  <text x="170" y="555" class="legend" dx="10">従来のブロックチェーン: 2つの要素のみ最適化</text>
+
+  <!-- Description -->
+  <rect x="150" y="200" width="500" height="80" rx="10" ry="10" fill="#f8f9fa" stroke="#ddd" />
+  <text x="400" y="230" class="description">OptimaChainは革新的な技術アプローチにより</text>
+  <text x="400" y="255" class="description">スケーラビリティ、セキュリティ、分散化の</text>
+  <text x="400" y="280" class="description">トリレンマを同時に解決します</text>
+</svg>
