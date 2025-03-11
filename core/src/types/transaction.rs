@@ -95,14 +95,48 @@ impl<'de> Deserialize<'de> for Transaction {
     where
         D: Deserializer<'de>,
     {
-        #[derive(Deserialize)]
         struct TransactionHelper {
             transaction_type: TransactionType,
             sender: [u8; 32],
             nonce: u64,
             gas_limit: u64,
             gas_price: u64,
-            signature: [u8; 64],
+            signature: Vec<u8>,
+        }
+        
+        impl<'de> Deserialize<'de> for TransactionHelper {
+            fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+            where
+                D: Deserializer<'de>,
+            {
+                #[derive(Deserialize)]
+                struct Helper {
+                    transaction_type: TransactionType,
+                    sender: [u8; 32],
+                    nonce: u64,
+                    gas_limit: u64,
+                    gas_price: u64,
+                    signature: Vec<u8>,
+                }
+                
+                let helper = Helper::deserialize(deserializer)?;
+                
+                if helper.signature.len() != 64 {
+                    return Err(serde::de::Error::custom(format!(
+                        "Expected signature of length 64, got {}",
+                        helper.signature.len()
+                    )));
+                }
+                
+                Ok(TransactionHelper {
+                    transaction_type: helper.transaction_type,
+                    sender: helper.sender,
+                    nonce: helper.nonce,
+                    gas_limit: helper.gas_limit,
+                    gas_price: helper.gas_price,
+                    signature: helper.signature,
+                })
+            }
         }
 
         let helper = TransactionHelper::deserialize(deserializer)?;
@@ -110,7 +144,9 @@ impl<'de> Deserialize<'de> for Transaction {
         let sender = VerifyingKey::from_bytes(&helper.sender)
             .map_err(|e| serde::de::Error::custom(format!("Invalid sender key: {}", e)))?;
         
-        let signature = Signature { bytes: helper.signature };
+        let mut signature_bytes = [0u8; 64];
+        signature_bytes.copy_from_slice(&helper.signature);
+        let signature = Signature { bytes: signature_bytes };
         
         Ok(Transaction {
             transaction_type: helper.transaction_type,

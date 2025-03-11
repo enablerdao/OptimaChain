@@ -57,7 +57,6 @@ impl<'de> Deserialize<'de> for BlockHeader {
     where
         D: Deserializer<'de>,
     {
-        #[derive(Deserialize)]
         struct BlockHeaderHelper {
             version: u32,
             height: u64,
@@ -66,13 +65,56 @@ impl<'de> Deserialize<'de> for BlockHeader {
             transactions_root: [u8; 32],
             state_root: StateRoot,
             validator: [u8; 32],
-            signature: Signature,
+            signature: Vec<u8>,
+        }
+        
+        impl<'de> Deserialize<'de> for BlockHeaderHelper {
+            fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+            where
+                D: Deserializer<'de>,
+            {
+                #[derive(Deserialize)]
+                struct Helper {
+                    version: u32,
+                    height: u64,
+                    timestamp: u64,
+                    prev_block: BlockId,
+                    transactions_root: [u8; 32],
+                    state_root: StateRoot,
+                    validator: [u8; 32],
+                    signature: Vec<u8>,
+                }
+                
+                let helper = Helper::deserialize(deserializer)?;
+                
+                if helper.signature.len() != 64 {
+                    return Err(DeError::custom(format!(
+                        "Expected signature of length 64, got {}",
+                        helper.signature.len()
+                    )));
+                }
+                
+                Ok(BlockHeaderHelper {
+                    version: helper.version,
+                    height: helper.height,
+                    timestamp: helper.timestamp,
+                    prev_block: helper.prev_block,
+                    transactions_root: helper.transactions_root,
+                    state_root: helper.state_root,
+                    validator: helper.validator,
+                    signature: helper.signature,
+                })
+            }
         }
 
         let helper = BlockHeaderHelper::deserialize(deserializer)?;
         
         let validator = VerifyingKey::from_bytes(&helper.validator)
             .map_err(|e| DeError::custom(format!("Invalid validator key: {}", e)))?;
+        
+        let mut signature_bytes = [0u8; 64];
+        signature_bytes.copy_from_slice(&helper.signature);
+        let signature = Signature { bytes: signature_bytes };
         
         Ok(BlockHeader {
             version: helper.version,
@@ -82,7 +124,7 @@ impl<'de> Deserialize<'de> for BlockHeader {
             transactions_root: helper.transactions_root,
             state_root: helper.state_root,
             validator,
-            signature: helper.signature,
+            signature,
         })
     }
 }
