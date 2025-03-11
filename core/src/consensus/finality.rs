@@ -189,7 +189,7 @@ impl FinalityProvider {
                 // Add signatures to proof (in a real implementation, we would have actual signatures)
                 for validator in signatures {
                     // Create a dummy signature for now
-                    let signature = Signature::from_bytes(&[0; 64]);
+                    let signature = Signature { bytes: [0; 64] };
                     proof.add_signature(*validator, signature);
                 }
                 

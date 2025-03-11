@@ -131,14 +131,15 @@ impl<'de> Deserialize<'de> for Signature {
 
         deserializer.deserialize_bytes(SignatureVisitor)
     }
-}</old_str>
-
+}
 
 impl Signature {
     /// Create a signature from bytes
-    pub fn from_bytes(bytes: [u8; 64]) -> Self {
+    pub fn from_bytes(bytes: &[u8; 64]) -> Self {
+        let mut signature_bytes = [0u8; 64];
+        signature_bytes.copy_from_slice(bytes);
         Signature {
-            bytes,
+            bytes: signature_bytes,
         }
     }
     

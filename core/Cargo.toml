@@ -8,7 +8,7 @@ license = "MIT"
 
 [dependencies]
 # Networking
-libp2p = { version = "0.52.4", features = ["tcp", "dns", "noise", "request-response", "identify", "ping", "kad", "yamux"] }
+libp2p = { version = "0.52.4", features = ["tcp", "dns", "noise", "request-response", "identify", "ping", "kad", "yamux", "async-std"] }
 
 # Async Runtime
 tokio = { version = "1.44.0", features = ["full"] }

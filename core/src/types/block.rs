@@ -125,7 +125,7 @@ impl Block {
             transactions_root,
             state_root,
             validator,
-            signature: Signature::from_bytes(&[0; 64]), // Placeholder, to be signed
+            signature: Signature { bytes: [0; 64] }, // Placeholder, to be signed
         };
         
         Block {

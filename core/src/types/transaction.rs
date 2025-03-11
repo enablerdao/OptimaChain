@@ -138,7 +138,7 @@ impl Transaction {
             nonce,
             gas_limit,
             gas_price,
-            signature: Signature::from_bytes(&[0; 64]), // Placeholder, to be signed
+            signature: Signature { bytes: [0; 64] }, // Placeholder, to be signed
         }
     }
     
