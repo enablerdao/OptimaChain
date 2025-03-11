@@ -3,6 +3,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const path = require('path');
+const http = require('http');
+const socketIo = require('socket.io');
 const connectDB = require('./config/db');
 const seedData = require('./config/seedData');
 
@@ -15,9 +17,20 @@ const walletRoutes = require('./routes/walletRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
 const tokenRoutes = require('./routes/tokenRoutes');
 const marketRoutes = require('./routes/marketRoutes');
+const validatorRoutes = require('./routes/validatorRoutes');
+
+// Import validator network
+const { network } = require('../../core/validator');
 
 // Initialize express app
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST']
+  }
+});
 
 // Middleware
 app.use(cors());
@@ -30,6 +43,7 @@ app.use('/api/wallets', walletRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/tokens', tokenRoutes);
 app.use('/api/market', marketRoutes);
+app.use('/api/validators', validatorRoutes);
 
 // Root route
 app.get('/', (req, res) => {
@@ -43,7 +57,7 @@ app.get('/', (req, res) => {
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../../')));
-  
+
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../../', 'index.html'));
   });
@@ -58,6 +72,33 @@ app.use((err, req, res, next) => {
   });
 });
 
+// Socket.io setup
+io.on('connection', (socket) => {
+  console.log('New client connected');
+  
+  // 初期データを送信
+  socket.emit('network:metrics', network.getNetworkMetrics());
+  socket.emit('validators:list', network.getValidators(true));
+  
+  // バリデータネットワークのイベントをリッスン
+  network.on('metrics', (metrics) => {
+    socket.emit('network:metrics', metrics);
+  });
+  
+  network.on('block', (blockData) => {
+    socket.emit('network:block', blockData);
+  });
+  
+  network.on('validator:metrics', (validatorMetrics) => {
+    socket.emit('validator:metrics', validatorMetrics);
+  });
+  
+  // クライアント切断時
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
+
 // Set port and start server
 const PORT = process.env.PORT || 3000;
 
@@ -68,10 +109,17 @@ connectDB().then(() => {
     seedData();
   }
   
-  app.listen(PORT, () => {
+  server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
     console.log(`Environment: ${process.env.NODE_ENV}`);
+    
+    // バリデータネットワークの初期化（まだ初期化されていない場合）
+    if (!network.validators.length) {
+      network.initialize();
+      console.log('Validator network initialized');
+    }
   });
+
 });
 
 // Handle unhandled promise rejections

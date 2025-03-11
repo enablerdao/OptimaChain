@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaChain ホワイトペーパー</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="../src/css/styles.css">
+    <link rel="stylesheet" href="../src/css/whitepaper.css">
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <div class="logo-icon"></div>
+                    OptimaChain
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="../index.html">ホーム</a></li>
+                        <li><a href="../technology.html">技術</a></li>
+                        <li><a href="../developers.html">開発者</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle">リソース</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html">ホワイトペーパー</a></li>
+                                <li><a href="../roadmap.html">ロードマップ</a></li>
+                                <li><a href="../token.html">トークン</a></li>
+                                <li><a href="../faq.html">よくある質問</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../community.html">コミュニティ</a></li>
+                    </ul>
+                </nav>
+                <a href="../wallet.html" class="wallet-button">ウォレット接続</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="whitepaper-container">
+        <div class="whitepaper-sidebar">
+            <div class="sidebar-header">
+                <h3>目次</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#introduction">1. はじめに</a></li>
+                    <li>
+                        <a href="#technical-architecture">2. 技術アーキテクチャ</a>
+                        <ul>
+                            <li><a href="#consensus-mechanism">2.1 コンセンサスメカニズム</a></li>
+                            <li><a href="#dynamic-sharding">2.2 ダイナミックシャーディング</a></li>
+                            <li><a href="#cross-shard-communication">2.3 クロスシャードコミュニケーション</a></li>
+                            <li><a href="#state-management">2.4 ステートマネジメント</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#security-privacy">3. セキュリティとプライバシー</a>
+                        <ul>
+                            <li><a href="#zk-stark">3.1 zk-STARK技術</a></li>
+                            <li><a href="#ai-security">3.2 AI駆動セキュリティシステム</a></li>
+                            <li><a href="#quantum-resistance">3.3 量子耐性暗号</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#smart-contracts">4. スマートコントラクト</a>
+                        <ul>
+                            <li><a href="#wasm-environment">4.1 WASMベースの実行環境</a></li>
+                            <li><a href="#multi-language">4.2 多言語サポート</a></li>
+                            <li><a href="#formal-verification">4.3 形式検証</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#cross-chain">5. クロスチェーン相互運用性</a>
+                        <ul>
+                            <li><a href="#bridge-protocol">5.1 ブリッジプロトコル</a></li>
+                            <li><a href="#asset-transfer">5.2 アセット転送</a></li>
+                            <li><a href="#cross-chain-contracts">5.3 クロスチェーンスマートコントラクト</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#governance">6. ガバナンスモデル</a>
+                        <ul>
+                            <li><a href="#dao">6.1 分散型自律組織（DAO）</a></li>
+                            <li><a href="#proposal-voting">6.2 提案と投票メカニズム</a></li>
+                            <li><a href="#treasury">6.3 トレジャリー管理</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#tokenomics">7. トークノミクス</a>
+                        <ul>
+                            <li><a href="#opt-token">7.1 OPTトークン</a></li>
+                            <li><a href="#supply-distribution">7.2 供給と分配</a></li>
+                            <li><a href="#inflation">7.3 インフレーションモデル</a></li>
+                            <li><a href="#fee-structure">7.4 手数料構造</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#use-cases">8. ユースケースと応用</a>
+                        <ul>
+                            <li><a href="#defi">8.1 分散型金融（DeFi）</a></li>
+                            <li><a href="#nft-metaverse">8.2 NFTとメタバース</a></li>
+                            <li><a href="#enterprise">8.3 エンタープライズソリューション</a></li>
+                            <li><a href="#data-marketplace">8.4 データマーケットプレイス</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#roadmap">9. ロードマップ</a></li>
+                    <li><a href="#conclusion">10. 結論</a></li>
+                    <li><a href="#references">11. 参考文献</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="OptimaChain_Whitepaper.pdf" class="download-btn">完全版PDFをダウンロード</a>
+            </div>
+        </div>
+
+        <div class="whitepaper-content">
+            <div class="whitepaper-header">
+                <h1>OptimaChain ホワイトペーパー</h1>
+                <p class="whitepaper-subtitle">革新的なスケーリング技術と高度なセキュリティを統合した次世代型分散型ブロックチェーンプラットフォーム</p>
+                <p class="whitepaper-version">バージョン 1.0.0</p>
+            </div>
+
+            <div class="whitepaper-summary">
+                <h2>要約</h2>
+                <p>OptimaChainは、ブロックチェーン技術の主要な課題であるスケーラビリティ、セキュリティ、分散化のトリレンマを解決するために設計された革新的なブロックチェーンプラットフォームです。AI駆動の適応型シャーディング技術と高度なセキュリティメカニズムを組み合わせることで、高スループット、低レイテンシー、強固なセキュリティを実現します。本ホワイトペーパーでは、OptimaChainのアーキテクチャ、技術的特徴、およびエコシステムについて詳細に説明します。</p>
+            </div>
+
+            <section id="introduction" class="whitepaper-section">
+                <h2>1. はじめに</h2>
+                <div class="section-content" id="introduction-content">
+                    <p>ブロックチェーン技術は、分散型台帳技術（DLT）の革新として登場して以来、金融、サプライチェーン、ヘルスケアなど多くの産業に変革をもたらしてきました。しかし、既存のブロックチェーンプラットフォームは、スケーラビリティ、セキュリティ、分散化のトリレンマに直面しています。これらの課題を同時に解決することは、ブロックチェーン技術の大規模採用に向けた重要なステップです。</p>
+                    
+                    <p>OptimaChainは、このトリレンマを解決するために設計された次世代ブロックチェーンプラットフォームです。AI駆動の適応型シャーディング技術と革新的なコンセンサスメカニズムを組み合わせることで、高スループット、低レイテンシー、強固なセキュリティを実現します。また、WASMベースのスマートコントラクト実行環境と多言語サポートにより、開発者にとって使いやすいプラットフォームを提供します。</p>
+                    
+                    <h3>ブロックチェーントリレンマの解決</h3>
+                    
+                    <div class="image-container">
+                        <img src="images/svg/blockchain_trilemma.svg" alt="ブロックチェーントリレンマ" class="whitepaper-image">
+                    </div>
+                    
+                    <p>ブロックチェーントリレンマとは、スケーラビリティ、セキュリティ、分散化の3つの要素を同時に最適化することが困難であるという課題です。従来のブロックチェーンは、これらの要素のうち2つを最適化する代わりに、残りの1つを犠牲にする傾向がありました。</p>
+                    
+                    <p>OptimaChainは、革新的な技術アプローチによってこのトリレンマを解決します：</p>
+                    
+                    <ol>
+                        <li><strong>スケーラビリティ</strong>: AI駆動の動的シャーディング技術により、ネットワークの負荷に応じて処理能力を自動的に調整します。これにより、理論上は無制限のスケーラビリティを実現します。</li>
+                        <li><strong>セキュリティ</strong>: Adaptive Proof-of-Stake (aPoS)コンセンサスメカニズムとAI駆動のセキュリティシステムにより、高度なセキュリティを確保します。さらに、量子耐性暗号を採用することで、将来的な脅威にも対応します。</li>
+                        <li><strong>分散化</strong>: 低いハードウェア要件と参加インセンティブにより、幅広いバリデータの参加を促進し、真の分散化を実現します。</li>
+                    </ol>
+                    
+                    <h3>OptimaChainのビジョン</h3>
+                    
+                    <p>OptimaChainのビジョンは、ブロックチェーン技術を主流に押し上げ、個人、企業、および社会全体に価値をもたらすことです。具体的には、以下の目標を掲げています：</p>
+                    
+                    <ul>
+                        <li><strong>高性能なインフラストラクチャの提供</strong>: 50,000 TPS以上のスループットと1秒未満のファイナリティを実現し、従来の中央集権的システムに匹敵するパフォーマンスを提供します。</li>
+                        <li><strong>開発者フレンドリーなエコシステムの構築</strong>: 多言語サポートと包括的な開発ツールにより、開発者がイノベーションを創出しやすい環境を提供します。</li>
+                        <li><strong>相互運用性の促進</strong>: クロスチェーン機能により、異なるブロックチェーンエコシステム間のシームレスな連携を可能にします。</li>
+                        <li><strong>持続可能なガバナンスの確立</strong>: コミュニティ主導の透明なガバナンスモデルにより、長期的な持続可能性と進化を確保します。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="technical-architecture" class="whitepaper-section">
+                <h2>2. 技術アーキテクチャ</h2>
+                <div class="section-content" id="technical-architecture-content">
+                    <p>OptimaChainは、スケーラビリティ、セキュリティ、分散化を同時に実現するために、革新的な技術アーキテクチャを採用しています。このセクションでは、OptimaChainの主要な技術コンポーネントについて概要を説明します。</p>
+                    
+                    <h3>OptimaChainアーキテクチャの概要</h3>
+                    
+                    <div class="image-container">
+                        <img src="images/svg/optimachain_architecture.svg" alt="OptimaChainアーキテクチャ" class="whitepaper-image">
+                    </div>
+                    
+                    <p>OptimaChainのアーキテクチャは、以下の主要コンポーネントで構成されています：</p>
+                    
+                    <ol>
+                        <li><strong>コンセンサスレイヤー</strong>: Adaptive Proof-of-Stake (aPoS)コンセンサスメカニズムを実装し、ネットワークの合意形成を担当します。</li>
+                        <li><strong>シャーディングレイヤー</strong>: ネットワークを複数のシャードに分割し、並行処理を可能にします。AI駆動のアルゴリズムにより、最適なシャード構成を動的に決定します。</li>
+                        <li><strong>実行レイヤー</strong>: WASMベースのスマートコントラクト実行環境を提供し、多様なプログラミング言語をサポートします。</li>
+                        <li><strong>ステートレイヤー</strong>: システム全体の状態を管理し、効率的なステート更新と検証を可能にします。</li>
+                        <li><strong>クロスチェーンレイヤー</strong>: 異なるブロックチェーンとの相互運用性を提供し、アセットとデータの転送を可能にします。</li>
+                        <li><strong>セキュリティレイヤー</strong>: zk-STARK技術、AI駆動セキュリティシステム、量子耐性暗号などの高度なセキュリティ機能を実装します。</li>
+                    </ol>
+                    
+                    <p>これらのレイヤーが連携することで、OptimaChainは高性能で安全な分散型プラットフォームを実現しています。</p>
+                    
+                    <h3>主要技術コンポーネント</h3>
+                    
+                    <p>OptimaChainの主要な技術コンポーネントは以下の通りです：</p>
+                    
+                    <ul>
+                        <li><a href="#consensus-mechanism"><strong>2.1 コンセンサスメカニズム: Adaptive Proof-of-Stake (aPoS)</strong></a>: ネットワークの状態に応じて動的にパラメータを調整し、最適なパフォーマンスとセキュリティを実現します。</li>
+                        <li><a href="#dynamic-sharding"><strong>2.2 ダイナミックシャーディング</strong></a>: AIアルゴリズムを使用して動的にシャードを割り当てるシャーディング技術により、ネットワークの負荷に応じてスケーラビリティを最適化します。</li>
+                        <li><a href="#cross-shard-communication"><strong>2.3 クロスシャードコミュニケーション</strong></a>: シャード間の効率的な通信を可能にする革新的なプロトコルにより、複数のシャードにまたがるトランザクションの原子性を保証します。</li>
+                        <li><a href="#state-management"><strong>2.4 ステートマネジメント</strong></a>: 効率的なステート管理技術により、高速なトランザクション処理と効率的なストレージ利用を実現します。</li>
+                    </ul>
+                </div>
+
+                <section id="consensus-mechanism" class="whitepaper-subsection">
+                    <h3>2.1 コンセンサスメカニズム: Adaptive Proof-of-Stake (aPoS)</h3>
+                    <div class="section-content" id="consensus-mechanism-content">
+                        <p>OptimaChainは、Adaptive Proof-of-Stake（aPoS）と呼ばれる革新的なコンセンサスメカニズムを採用しています。aPoSは従来のPoSメカニズムを拡張し、ネットワークの状態に応じて動的にパラメータを調整する機能を追加しています。</p>
+                        
+                        <h4>aPoSの概要</h4>
+                        
+                        <div class="image-container">
+                            <img src="images/svg/apos_overview.svg" alt="Adaptive Proof-of-Stake" class="whitepaper-image">
+                        </div>
+                        
+                        <p>aPoSは、以下の主要な特徴を持つコンセンサスメカニズムです：</p>
+                        
+                        <ol>
+                            <li><strong>多次元バリデータ評価</strong>: ステーキング量だけでなく、過去のパフォーマンス、ネットワーク貢献度、信頼性スコアなど複数の要素に基づいてバリデータを評価します。</li>
+                            <li><strong>動的パラメータ調整</strong>: ネットワークの状態（負荷、セキュリティ脅威など）に応じてコンセンサスパラメータを自動的に調整します。</li>
+                            <li><strong>即時ファイナリティ</strong>: BFTスタイルのコンセンサスアルゴリズムにより、トランザクションの即時ファイナリティ（1秒未満）を実現します。</li>
+                            <li><strong>エネルギー効率</strong>: PoWと比較して非常に少ないエネルギー消費で動作し、環境に優しいブロックチェーンを実現します。</li>
+                        </ol>
+                        
+                        <h4>バリデータ選出</h4>
+                        
+                        <p>aPoSでは、バリデータはステーキングされたOPTトークンの量だけでなく、過去のパフォーマンス、ネットワーク貢献度、および信頼性スコアに基づいて選出されます。この多次元評価システムにより、単に多くのトークンを保有しているだけでなく、ネットワークに積極的に貢献するバリデータが選出されます。</p>
+                        
+                        <p>バリデータ選出の確率は以下の式で計算されます：</p>
+                        
+                        <pre><code>P(v) = S(v) × R(v) × C(v)</code></pre>
+                        
+                        <p>ここで：</p>
+                        <ul>
+                            <li>P(v)はバリデータvが選出される確率</li>
+                            <li>S(v)はバリデータvのステーキング量の正規化スコア</li>
+                            <li>R(v)はバリデータvの信頼性スコア（過去のパフォーマンスに基づく）</li>
+                            <li>C(v)はバリデータvのネットワーク貢献度スコア</li>
+                        </ul>
+                        
+                        <h4>ブロック生成とファイナリティ</h4>
+                        
+                        <p>aPoSでは、選出されたバリデータがブロックを提案し、他のバリデータがそれを検証します。ブロックがファイナライズされるためには、バリデータの総ステーキング量の2/3以上の承認が必要です。</p>
+                        
+                        <p>OptimaChainは、即時ファイナリティを実現するために、BFT（Byzantine Fault Tolerance）スタイルのコンセンサスアルゴリズムを採用しています。これにより、トランザクションは1秒以内にファイナライズされ、高速な取引確認が可能になります。</p>
+                        
+                        <p>ブロック生成プロセスは以下のステップで行われます：</p>
+                        
+                        <ol>
+                            <li><strong>バリデータ選出</strong>: aPoSアルゴリズムに基づいて、次のブロック提案者が選出されます。</li>
+                            <li><strong>ブロック提案</strong>: 選出されたバリデータが新しいブロックを提案します。</li>
+                            <li><strong>検証</strong>: 他のバリデータがブロックの有効性を検証します。</li>
+                            <li><strong>投票</strong>: バリデータがブロックに対して投票します。</li>
+                            <li><strong>ファイナリティ</strong>: 2/3以上の承認を得たブロックがファイナライズされます。</li>
+                        </ol>
+                        
+                        <h4>適応型パラメータ調整</h4>
+                        
+                        <p>aPoSの革新的な特徴は、ネットワークの状態に応じてコンセンサスパラメータを動的に調整する能力です。例えば、ネットワークの負荷が高い場合、バリデータの数を増やしてスループットを向上させることができます。また、セキュリティ脅威が検出された場合、検証要件を厳格化してセキュリティを強化することができます。</p>
+                        
+                        <p>この適応型パラメータ調整は、AIアルゴリズムによって制御されており、ネットワークのパフォーマンス、セキュリティ、および分散化のバランスを常に最適化します。</p>
+                        
+                        <p>主な調整可能パラメータには以下が含まれます：</p>
+                        
+                        <ul>
+                            <li><strong>バリデータセットサイズ</strong>: アクティブバリデータの数</li>
+                            <li><strong>ブロック生成時間</strong>: ブロック間の目標時間間隔</li>
+                            <li><strong>検証要件</strong>: ファイナリティに必要な承認の閾値</li>
+                            <li><strong>報酬分配</strong>: バリデータへの報酬分配率</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="dynamic-sharding" class="whitepaper-subsection">
+                    <h3>2.2 ダイナミックシャーディング</h3>
+                    <div class="section-content" id="dynamic-sharding-content">
+                        <p>OptimaChainは、スケーラビリティを実現するために、ダイナミックシャーディング技術を採用しています。シャーディングとは、ブロックチェーンネットワークを複数の小さなパーティション（シャード）に分割し、各シャードが並行してトランザクションを処理する技術です。</p>
+                        
+                        <h4>シャーディングの基本概念</h4>
+                        
+                        <div class="image-container">
+                            <img src="images/svg/sharding_basics.svg" alt="シャーディングの基本概念" class="whitepaper-image">
+                        </div>
+                        
+                        <p>従来のブロックチェーンでは、すべてのノードがすべてのトランザクションを処理する必要がありました。これはセキュリティと分散化には有利ですが、スケーラビリティの制約となります。シャーディングでは、ネットワークを複数のシャードに分割し、各シャードが独立してトランザクションのサブセットを処理します。これにより、ネットワーク全体のスループットが大幅に向上します。</p>
+                        
+                        <p>OptimaChainのシャーディングは、以下の特徴を持ちます：</p>
+                        
+                        <ol>
+                            <li><strong>水平スケーラビリティ</strong>: シャードの数を増やすことで、ネットワークの処理能力を線形に拡張できます。</li>
+                            <li><strong>動的シャード割り当て</strong>: AIアルゴリズムを使用して、ネットワークの負荷に応じて最適なシャード構成を動的に決定します。</li>
+                            <li><strong>クロスシャード通信</strong>: 効率的なクロスシャード通信プロトコルにより、シャード間のデータ交換とトランザクション実行を可能にします。</li>
+                            <li><strong>セキュリティ保証</strong>: ランダムなバリデータ割り当てと頻繁な再シャッフリングにより、シャードの乗っ取りを防止します。</li>
+                        </ol>
+                        
+                        <h4>シャード構造</h4>
+                        
+                        <p>OptimaChainのシャード構造は以下の3つのレイヤーで構成されています：</p>
+                        
+                        <ol>
+                            <li><strong>ビーコンチェーン</strong>：全体のコーディネーションを担当し、シャード間の通信を管理します。ビーコンチェーンは、バリデータの割り当て、シャード構成の変更、クロスシャードトランザクションの調整などを行います。</li>
+                            <li><strong>シャードチェーン</strong>：実際のトランザクション処理を行います。各シャードチェーンは独自のバリデータセットを持ち、独立してトランザクションを処理します。</li>
+                            <li><strong>ステートチェーン</strong>：システム全体の状態を管理します。ステートチェーンは、各シャードの状態ルートを集約し、グローバルな状態の整合性を確保します。</li>
+                        </ol>
+                        
+                        <p>各シャードは独自のバリデータセットを持ち、独立してトランザクションを処理します。これにより、システム全体のスループットが大幅に向上します。</p>
+                        
+                        <h4>動的シャード割り当て</h4>
+                        
+                        <p>OptimaChainの革新的な特徴は、AIアルゴリズムを使用して動的にシャードを割り当てる能力です。このアルゴリズムは、トランザクションの種類、ネットワークの負荷、地理的分布などの要因を考慮して、最適なシャード構成を決定します。</p>
+                        
+                        <p>動的シャード割り当てのプロセスは以下の通りです：</p>
+                        
+                        <ol>
+                            <li><strong>データ収集</strong>: ネットワークの負荷、トランザクションパターン、地理的分布などのデータを収集します。</li>
+                            <li><strong>分析</strong>: AIアルゴリズムがデータを分析し、最適なシャード構成を決定します。</li>
+                            <li><strong>シャード割り当て</strong>: バリデータを各シャードに割り当てます。</li>
+                            <li><strong>モニタリング</strong>: シャード構成のパフォーマンスを継続的にモニタリングします。</li>
+                            <li><strong>再構成</strong>: 必要に応じてシャード構成を再評価し、調整します。</li>
+                        </ol>
+                        
+                        <p>例えば、特定のDAppのトラフィックが急増した場合、システムは自動的にそのDApp専用のシャードを作成し、リソースを効率的に割り当てることができます。また、地理的に近いノード間でシャードを形成することで、レイテンシーを最小化することも可能です。</p>
+                        
+                        <h4>シャードの再構成</h4>
+                        
+                        <p>ネットワークの状態が変化すると、OptimaChainは自動的にシャード構成を再評価し、必要に応じて再構成します。この再構成プロセスは、ユーザーエクスペリエンスに影響を与えることなく、バックグラウンドで行われます。</p>
+                        
+                        <p>シャードの再構成は、以下のステップで行われます：</p>
+                        
+                        <ol>
+                            <li><strong>再構成の必要性をAIアルゴリズムが評価</strong>: ネットワークの負荷、トランザクションパターン、シャードのパフォーマンスなどを分析し、再構成の必要性を判断します。</li>
+                            <li><strong>新しいシャード構成の計画</strong>: 最適な新しいシャード構成を計画します。</li>
+                            <li><strong>バリデータの再割り当て</strong>: バリデータを新しいシャードに再割り当てします。</li>
+                            <li><strong>状態の移行</strong>: 古いシャード構成から新しいシャード構成に状態を移行します。</li>
+                            <li><strong>新しい構成でのオペレーション開始</strong>: 新しいシャード構成での運用を開始します。</li>
+                        </ol>
+                        
+                        <p>このプロセス全体は、ネットワークのセキュリティとパフォーマンスを維持しながら、シームレスに実行されます。</p>
+                    </div>
+                </section>
+
+                <section id="cross-shard-communication" class="whitepaper-subsection">
+                    <h3>2.3 クロスシャードコミュニケーション</h3>
+                    <div class="section-content" id="cross-shard-communication-content">
+                        <p>複数のシャードで構成されるシステムでは、シャード間の効率的な通信が不可欠です。OptimaChainは、低レイテンシーで安全なクロスシャードコミュニケーションを実現するために、革新的なプロトコルを採用しています。</p>
+                        
+                        <h4>クロスシャード通信の概要</h4>
+                        
+                        <div class="image-container">
+                            <img src="images/svg/cross_shard_communication.svg" alt="クロスシャード通信" class="whitepaper-image">
+                        </div>
+                        
+                        <p>クロスシャード通信は、異なるシャード間でデータやメッセージを交換するためのメカニズムです。これにより、複数のシャードにまたがるトランザクションの実行や、シャード間の状態の同期が可能になります。</p>
+                        
+                        <p>OptimaChainのクロスシャード通信は、以下の特徴を持ちます：</p>
+                        
+                        <ol>
+                            <li><strong>低レイテンシー</strong>: 最適化されたルーティングアルゴリズムにより、シャード間の通信を最小限のレイテンシーで実行します。</li>
+                            <li><strong>高スループット</strong>: 非同期メッセージパッシングにより、多数のクロスシャードトランザクションを効率的に処理します。</li>
+                            <li><strong>原子性保証</strong>: 2フェーズコミットプロトコルの拡張により、クロスシャードトランザクションの原子性を保証します。</li>
+                            <li><strong>セキュリティ</strong>: 暗号学的に検証可能なメッセージにより、シャード間通信のセキュリティを確保します。</li>
+                        </ol>
+                        
+                        <h4>非同期メッセージパッシング</h4>
+                        
+                        <p>OptimaChainは、シャード間の通信に非同期メッセージパッシングプロトコルを使用しています。このプロトコルにより、あるシャードから別のシャードにメッセージを送信し、トランザクションの実行を調整することができます。</p>
+                        
+                        <p>メッセージは以下の形式で構造化されています：</p>
+                        
+                        <pre><code>Message {
+    source_shard: ShardID,
+    destination_shard: ShardID,
+    message_type: MessageType,
+    payload: Bytes,
+    nonce: u64,
+    signature: Signature
+}</code></pre>
+                        
+                        <p>各フィールドの説明：</p>
+                        <ul>
+                            <li><code>source_shard</code>: メッセージの送信元シャードのID</li>
+                            <li><code>destination_shard</code>: メッセージの送信先シャードのID</li>
+                            <li><code>message_type</code>: メッセージのタイプ（例：トランザクション、状態更新、クエリなど）</li>
+                            <li><code>payload</code>: メッセージの本体（シリアライズされたデータ）</li>
+                            <li><code>nonce</code>: リプレイ攻撃を防止するための一意の値</li>
+                            <li><code>signature</code>: メッセージの整合性と認証を保証するための署名</li>
+                        </ul>
+                        
+                        <p>非同期メッセージパッシングの処理フローは以下の通りです：</p>
+                        
+                        <ol>
+                            <li><strong>メッセージ生成</strong>: 送信元シャードがメッセージを生成し、署名します。</li>
+                            <li><strong>メッセージルーティング</strong>: ビーコンチェーンがメッセージを適切な宛先シャードにルーティングします。</li>
+                            <li><strong>メッセージ検証</strong>: 宛先シャードがメッセージの署名と内容を検証します。</li>
+                            <li><strong>メッセージ処理</strong>: 宛先シャードがメッセージを処理し、必要に応じて応答を生成します。</li>
+                            <li><strong>応答ルーティング</strong>: 応答が送信元シャードにルーティングされます（必要な場合）。</li>
+                        </ol>
+                        
+                        <h4>アトミッククロスシャードトランザクション</h4>
+                        
+                        <p>複数のシャードにまたがるトランザクションの原子性を保証するために、OptimaChainは2フェーズコミットプロトコルを拡張した独自のプロトコルを実装しています。このプロトコルにより、クロスシャードトランザクションが全てのシャードで成功するか、全てのシャードで失敗するかのいずれかになることが保証されます。</p>
+                        
+                        <p>アトミッククロスシャードトランザクションのプロセスは以下の通りです：</p>
+                        
+                        <ol>
+                            <li><strong>準備フェーズ</strong>:
+                                <ul>
+                                    <li>トランザクションが全てのターゲットシャードに送信されます。</li>
+                                    <li>各シャードはトランザクションを検証し、実行可能かどうかを判断します。</li>
+                                    <li>各シャードは準備完了または中止のメッセージをコーディネーターに送信します。</li>
+                                </ul>
+                            </li>
+                            <li><strong>コミットフェーズ</strong>:
+                                <ul>
+                                    <li>全てのシャードが準備完了を報告した場合、コーディネーターはコミットメッセージを送信します。</li>
+                                    <li>いずれかのシャードが中止を報告した場合、コーディネーターは中止メッセージを送信します。</li>
+                                    <li>各シャードはコミットメッセージを受け取ると、トランザクションをコミットします。</li>
+                                    <li>各シャードは中止メッセージを受け取ると、トランザクションをロールバックします。</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        
+                        <p>このプロトコルは、ビザンチン障害耐性（BFT）を持つように拡張されており、一部のシャードが悪意を持って行動しても、システム全体の整合性が保たれます。</p>
+                        
+                        <h4>シャードルーティング</h4>
+                        
+                        <p>効率的なクロスシャードコミュニケーションのために、OptimaChainは最適なルーティングパスを動的に決定するAI駆動のルーティングアルゴリズムを採用しています。このアルゴリズムは、ネットワークの混雑状況、レイテンシー、およびシャード間の依存関係を考慮して、最適な通信パスを選択します。</p>
+                        
+                        <p>シャードルーティングの主な特徴は以下の通りです：</p>
+                        
+                        <ol>
+                            <li><strong>動的ルート最適化</strong>: ネットワークの状態に基づいて、最適なルーティングパスを動的に計算します。</li>
+                            <li><strong>負荷分散</strong>: 複数のルートにトラフィックを分散させ、特定のパスの過負荷を防止します。</li>
+                            <li><strong>障害耐性</strong>: ノードやリンクの障害を検出し、代替ルートを迅速に確立します。</li>
+                            <li><strong>優先順位付け</strong>: 重要なメッセージに高い優先順位を割り当て、処理を加速します。</li>
+                        </ol>
+                        
+                        <p>AI駆動のルーティングアルゴリズムは、過去のパフォーマンスデータを学習し、将来のネットワーク状態を予測することで、ルーティング決定を継続的に改善します。</p>
+                    </div>
+                </section>
+
+                <section id="state-management" class="whitepaper-subsection">
+                    <h3>2.4 ステートマネジメント</h3>
+                    <div class="section-content" id="state-management-content">
+                        <p>ブロックチェーンシステムのスケーラビリティとパフォーマンスにおいて、効率的なステート（状態）管理は重要な要素です。OptimaChainは、革新的なステート管理技術を採用して、高速なトランザクション処理と効率的なストレージ利用を実現しています。</p>
+                        
+                        <h4>ステート管理の概要</h4>
+                        
+                        <p>ブロックチェーンのステートとは、アカウント残高、スマートコントラクトのストレージ、その他のシステム変数など、ネットワークの現在の状態を表すデータの集合です。効率的なステート管理は、以下の課題に対処する必要があります：</p>
+                        
+                        <ol>
+                            <li><strong>スケーラビリティ</strong>: ステートサイズの増大に伴う処理とストレージの要件の増加</li>
+                            <li><strong>アクセス速度</strong>: ステートデータへの高速なアクセスと更新</li>
+                            <li><strong>整合性</strong>: 分散環境での一貫したステート表現の維持</li>
+                            <li><strong>検証可能性</strong>: ステート変更の効率的な検証</li>
+                        </ol>
+                        
+                        <p>OptimaChainのステート管理システムは、これらの課題に対処するために、以下の主要コンポーネントで構成されています：</p>
+                        
+                        <ol>
+                            <li><strong>データ構造</strong>: 効率的なステート表現と更新のためのマークル-パトリシア-トライ</li>
+                            <li><strong>ステートプルーニング</strong>: 古いステートデータの効率的な管理</li>
+                            <li><strong>ステートチャネル</strong>: オフチェーントランザクションによるスケーラビリティの向上</li>
+                            <li><strong>シャード間ステート同期</strong>: 複数のシャード間でのステートの一貫性の維持</li>
+                        </ol>
+                        
+                        <h4>マークル-パトリシア-トライ</h4>
+                        
+                        <p>OptimaChainは、ステート管理にマークル-パトリシア-トライ（MPT）データ構造の拡張版を使用しています。この構造により、効率的なステートの更新と検証が可能になります。</p>
+                        
+                        <p>マークル-パトリシア-トライは、以下の特性を持つデータ構造です：</p>
+                        
+                        <ol>
+                            <li><strong>効率的な検索</strong>: キーに基づいて値を効率的に検索できます（O(log n)の時間複雑性）。</li>
+                            <li><strong>暗号学的検証</strong>: トライのルートハッシュにより、ステート全体の整合性を効率的に検証できます。</li>
+                            <li><strong>差分更新</strong>: ステートの変更は、トライの一部のみを更新するだけで済みます。</li>
+                            <li><strong>マークルプルーフ</strong>: 特定のキーと値のペアがステートに含まれることを証明する効率的な方法を提供します。</li>
+                        </ol>
+                        
+                        <p>OptimaChainは、標準的なMPTに以下の拡張を加えています：</p>
+                        
+                        <ol>
+                            <li><strong>圧縮技術</strong>: 共通のプレフィックスを持つノードを圧縮して、トライのサイズを最小化します。</li>
+                            <li><strong>キャッシング</strong>: 頻繁にアクセスされるノードをメモリにキャッシュして、アクセス速度を向上させます。</li>
+                            <li><strong>バッチ更新</strong>: 複数の更新を単一のバッチで処理して、I/O操作を最小化します。</li>
+                            <li><strong>並列処理</strong>: 独立したトライの部分を並列に処理して、マルチコアCPUを活用します。</li>
+                        </ol>
+                        
+                        <p>これらの拡張により、OptimaChainは大規模なステートでも高速なトランザクション処理を実現しています。</p>
+                        
+                        <h4>ステートプルーニング</h4>
+                        
+                        <p>長期間のブロックチェーン運用では、ステートデータが急速に増加する可能性があります。OptimaChainは、古いステートデータを効率的にプルーニング（剪定）するメカニズムを実装しています。</p>
+                        
+                        <p>ステートプルーニングの主な特徴は以下の通りです：</p>
+                        
+                        <ol>
+                            <li><strong>スナップショットベースのプルーニング</strong>: 定期的にステートのスナップショットを作成し、それ以前の中間ステートを削除します。</li>
+                            <li><strong>アーカイブノード</strong>: 完全なステート履歴を保持する専用のアーカイブノードをサポートします。</li>
+                            <li><strong>選択的プルーニング</strong>: 長期間アクセスされていないデータを優先的にプルーニングします。</li>
+                            <li><strong>プルーニングポリシーのカスタマイズ</strong>: ノード運用者がストレージ要件に応じてプルーニングポリシーをカスタマイズできます。</li>
+                        </ol>
+                        
+                        <p>プルーニングプロセスは、最近のステートへのアクセスを維持しながら、古いステートデータを圧縮または削除します。これにより、ノードのストレージ要件が大幅に削減され、新規ノードの同期時間も短縮されます。</p>
+                        
+                        <h4>ステートチャネル</h4>
+                        
+                        <p>頻繁に相互作用するパーティ間のトランザクションを効率化するために、OptimaChainはステートチャネル技術をネイティブでサポートしています。ステートチャネルを使用すると、パーティはメインチェーンの外部で多数のトランザクションを実行し、最終的な状態のみをメインチェーンに記録することができます。</p>
+                        
+                        <p>ステートチャネルの動作プロセスは以下の通りです：</p>
+                        
+                        <ol>
+                            <li><strong>チャネルオープン</strong>: 参加者がデポジットを行い、メインチェーン上でチャネルを開設します。</li>
+                            <li><strong>オフチェーントランザクション</strong>: 参加者はオフチェーンで多数のトランザクションを実行し、各ステート更新に署名します。</li>
+                            <li><strong>チャネルクローズ</strong>: いずれかの参加者がチャネルを閉じると、最新の署名付きステートがメインチェーンに提出されます。</li>
+                            <li><strong>チャレンジ期間</strong>: 不正行為を防止するために、チャレンジ期間が設けられます。</li>
+                            <li><strong>ファイナライズ</strong>: チャレンジ期間後、最終ステートに基づいてデポジットが分配されます。</li>
+                        </ol>
+                        
+                        <p>ステートチャネルの主な利点は以下の通りです：</p>
+                        
+                        <ol>
+                            <li><strong>高スループット</strong>: メインチェーンの容量に制限されない、ほぼ無制限のトランザクションスループット</li>
+                            <li><strong>低レイテンシー</strong>: オフチェーントランザクションは即時に確認されます</li>
+                            <li><strong>低コスト</strong>: メインチェーンの手数料は、チャネルのオープンとクローズ時のみ発生します</li>
+                            <li><strong>プライバシー</strong>: オフチェーントランザクションの詳細はメインチェーンに公開されません</li>
+                        </ol>
+                        
+                        <p>これにより、高頻度のトランザクションシナリオ（マイクロペイメント、ゲーム内取引など）のスケーラビリティとコスト効率が大幅に向上します。</p>
+                        
+                        <h4>シャード間ステート同期</h4>
+                        
+                        <p>シャーディング環境では、異なるシャード間でステートの一貫性を維持することが重要です。OptimaChainは、効率的なシャード間ステート同期メカニズムを実装しています。</p>
+                        
+                        <p>シャード間ステート同期の主な特徴は以下の通りです：</p>
+                        
+                        <ol>
+                            <li><strong>ステートルート集約</strong>: 各シャードのステートルートがビーコンチェーンに集約され、グローバルなステートルートが計算されます。</li>
+                            <li><strong>クロスシャードステート証明</strong>: あるシャードが別のシャードのステートの一部にアクセスする必要がある場合、マークルプルーフを使用して効率的に検証できます。</li>
+                            <li><strong>増分同期</strong>: シャード間で完全なステートではなく、変更された部分のみを同期します。</li>
+                            <li><strong>バックグラウンド同期</strong>: ステート同期はバックグラウンドで実行され、トランザクション処理に影響を与えません。</li>
+                        </ol>
+                        
+                        <p>このメカニズムにより、OptimaChainは複数のシャードにまたがるステートの一貫性を効率的に維持し、クロスシャードトランザクションの正確な実行を保証します。</p>
+                    </div>
+                </section>
+            </section>
+
+            <section id="security-privacy" class="whitepaper-section">
+                <h2>3. セキュリティとプライバシー</h2>
+                <div class="section-content" id="security-privacy-content">
+                    <p>ブロックチェーンシステムにおいて、セキュリティとプライバシーは最も重要な側面です。OptimaChainは、最先端の暗号技術とAI駆動のセキュリティメカニズムを組み合わせて、強固なセキュリティとプライバシー保護を実現しています。</p>
+                    
+                    <h3>セキュリティとプライバシーの概要</h3>
+                    
+                    <div class="image-container">
+                        <img src="images/svg/security_privacy_overview.svg" alt="セキュリティとプライバシーの概要" class="whitepaper-image">
+                    </div>
+                    
+                    <p>OptimaChainのセキュリティとプライバシーフレームワークは、以下の主要コンポーネントで構成されています：</p>
+                    
+                    <ol>
+                        <li><strong>zk-STARK技術</strong>: ゼロ知識証明を使用したプライバシー保護と効率的な検証</li>
+                        <li><strong>AI駆動セキュリティシステム</strong>: 継続的なモニタリングと脅威検出</li>
+                        <li><strong>量子耐性暗号</strong>: 将来の量子コンピュータの脅威に対する保護</li>
+                        <li><strong>多層防御</strong>: 複数のセキュリティレイヤーによる包括的な保護</li>
+                    </ol>
+                    
+                    <p>これらのコンポーネントが連携することで、OptimaChainは高度なセキュリティとプライバシー保護を提供し、ユーザーとデータの安全を確保します。</p>
+                    
+                    <h3>セキュリティの基本原則</h3>
+                    
+                    <p>OptimaChainのセキュリティアーキテクチャは、以下の基本原則に基づいています：</p>
+                    
+                    <ol>
+                        <li><strong>最小権限の原則</strong>: エンティティには、タスクの実行に必要な最小限の権限のみが付与されます。</li>
+                        <li><strong>深層防御</strong>: 複数の防御層を設けることで、単一の障害点を排除します。</li>
+                        <li><strong>デフォルトでのセキュリティ</strong>: システムはデフォルトで最も安全な構成で動作します。</li>
+                        <li><strong>透明性</strong>: セキュリティメカニズムは透明で検証可能です。</li>
+                        <li><strong>継続的な改善</strong>: セキュリティ対策は継続的に評価され、改善されます。</li>
+                    </ol>
+                    
+                    <p>これらの原則に従うことで、OptimaChainは堅牢なセキュリティフレームワークを構築し、新たな脅威に対しても効果的に対応することができます。</p>
+                    
+                    <h3>プライバシーの基本原則</h3>
+                    
+                    <p>OptimaChainのプライバシーフレームワークは、以下の基本原則に基づいています：</p>
+                    
+                    <ol>
+                        <li><strong>プライバシー・バイ・デザイン</strong>: プライバシー保護はシステム設計の初期段階から組み込まれています。</li>
+                        <li><strong>データ最小化</strong>: 必要最小限のデータのみが収集・保存されます。</li>
+                        <li><strong>ユーザー制御</strong>: ユーザーは自分のデータの共有方法を制御できます。</li>
+                        <li><strong>目的の制限</strong>: データは特定の目的のためにのみ使用されます。</li>
+                        <li><strong>デフォルトでのプライバシー</strong>: システムはデフォルトで最もプライバシーを保護する設定で動作します。</li>
+                    </ol>
+                    
+                    <p>これらの原則により、OptimaChainはユーザーのプライバシーを尊重し、データの機密性を確保しながら、必要な機能を提供することができます。</p>
+                    
+                    <h3>主要セキュリティ機能</h3>
+                    
+                    <p>OptimaChainは、以下の主要セキュリティ機能を提供しています：</p>
+                    
+                    <h4>3.1 zk-STARK技術</h4>
+                    
+                    <p>ゼロ知識証明技術の一つであるzk-STARKを採用し、プライバシー保護トランザクションとスケーラブルな検証を実現します。zk-STARKは、情報を開示することなく、特定の計算が正しく実行されたことを証明することができます。</p>
+                    
+                    <p>主な特徴：</p>
+                    <ul>
+                        <li>量子耐性: 量子コンピュータによる攻撃に対して安全</li>
+                        <li>透明性: 信頼できるセットアップが不要</li>
+                        <li>スケーラビリティ: 大規模な計算の効率的な検証</li>
+                        <li>プライバシー: 機密データを開示せずに計算の正確性を証明</li>
+                    </ul>
+                    
+                    <h4>3.2 AI駆動セキュリティシステム</h4>
+                    
+                    <p>AIアルゴリズムを使用してネットワークを継続的に監視し、異常を検出して自動的に対応します。このシステムは、過去のセキュリティイベントから学習し、新たな脅威パターンを予測することができます。</p>
+                    
+                    <p>主な機能：</p>
+                    <ul>
+                        <li>リアルタイム監視: ネットワークアクティビティの継続的な分析</li>
+                        <li>異常検出: 通常のパターンから逸脱する行動の特定</li>
+                        <li>自動対応: 脅威に対する即時かつ自動的な対応</li>
+                        <li>継続的学習: 新たな脅威パターンへの適応</li>
+                    </ul>
+                    
+                    <h4>3.3 量子耐性暗号</h4>
+                    
+                    <p>将来の量子コンピュータの脅威に対応するために、量子耐性のある暗号プリミティブを採用しています。これにより、量子コンピュータが実用化された後も、OptimaChainのセキュリティは維持されます。</p>
+                    
+                    <p>採用している量子耐性暗号技術：</p>
+                    <ul>
+                        <li>ハッシュベースの署名: SPHINCS+などのハッシュベースの署名スキーム</li>
+                        <li>格子ベースの暗号: CRYSTALS-Kyber、CRYSTALS-Dilithiumなどの格子ベースの暗号システム</li>
+                        <li>暗号アジリティ: 新たな暗号アルゴリズムへの迅速な移行を可能にするフレームワーク</li>
+                    </ul>
+                </div>
+                
+                <!-- 以下、セクション3のサブセクションが続きます -->
+            </section>
+
+            <!-- 以下、セクション4〜11が続きます -->
+
+            <div class="whitepaper-navigation">
+                <a href="#" class="prev-section">前のセクション</a>
+                <a href="#" class="next-section">次のセクション</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="wrapper">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <a href="../index.html" class="logo">
+                        <div class="logo-mark">
+                            <div class="logo-hexagon"></div>
+                            <div class="logo-circle"></div>
+                        </div>
+                        <span class="logo-text">OptimaChain</span>
+                    </a>
+                    <p class="footer-tagline">次世代型分散型ブロックチェーンプラットフォーム</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>リソース</h3>
+                        <ul>
+                            <li><a href="index.html">ホワイトペーパー</a></li>
+                            <li><a href="../roadmap.html">ロードマップ</a></li>
+                            <li><a href="../token.html">トークン</a></li>
+                            <li><a href="../faq.html">よくある質問</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>開発者</h3>
+                        <ul>
+                            <li><a href="../developers.html">開発者ポータル</a></li>
+                            <li><a href="../docs">ドキュメント</a></li>
+                            <li><a href="../developers.html#testnet">テストネット</a></li>
+                            <li><a href="https://github.com/enablerdao/OptimaChain" target="_blank">GitHub</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>コミュニティ</h3>
+                        <ul>
+                            <li><a href="https://twitter.com/OptimaChain" target="_blank">Twitter</a></li>
+                            <li><a href="https://discord.gg/optimachain" target="_blank">Discord</a></li>
+                            <li><a href="https://t.me/optimachain" target="_blank">Telegram</a></li>
+                            <li><a href="https://forum.optimachain.io" target="_blank">フォーラム</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 OptimaChain by Enabler DAO. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://twitter.com/OptimaChain" target="_blank" aria-label="Twitter">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 4.01C21 4.5 20.02 4.69 19 5C18.39 4.41 17.59 4.04 16.71 3.97C15.83 3.9 14.95 4.15 14.22 4.66C13.49 5.17 12.95 5.93 12.68 6.8C12.4 7.67 12.41 8.62 12.71 9.48C11.03 9.39 9.39 8.96 7.89 8.2C6.4 7.45 5.09 6.39 4.05 5.09C3.5 6.02 3.4 7.14 3.78 8.16C4.16 9.17 4.98 9.98 6.04 10.4C5.26 10.38 4.5 10.17 3.81 9.8V9.85C3.81 10.85 4.15 11.82 4.77 12.59C5.4 13.37 6.27 13.89 7.25 14.09C6.53 14.28 5.77 14.3 5.04 14.14C5.31 15.01 5.84 15.77 6.55 16.33C7.26 16.88 8.11 17.19 9 17.22C7.49 18.39 5.64 19.02 3.74 19.02C3.37 19.02 3.01 19 2.65 18.96C4.58 20.2 6.83 20.85 9.13 20.85C16.5 20.85 20.54 14.86 20.54 9.73C20.54 9.53 20.54 9.33 20.53 9.13C21.5 8.42 22.34 7.54 23 6.52C22.12 6.9 21.18 7.14 20.22 7.24C21.25 6.63 22.02 5.66 22.38 4.52L22 4.01Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/enablerdao/OptimaChain" target="_blank" aria-label="GitHub">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12C2 16.418 4.865 20.166 8.839 21.489C9.339 21.581 9.521 21.278 9.521 21.017C9.521 20.782 9.512 20.082 9.508 19.272C6.726 19.859 6.139 17.967 6.139 17.967C5.685 16.812 5.029 16.51 5.029 16.51C4.121 15.889 5.098 15.901 5.098 15.901C6.101 15.971 6.629 16.926 6.629 16.926C7.521 18.455 8.97 18.014 9.539 17.763C9.631 17.112 9.889 16.671 10.175 16.419C7.955 16.164 5.62 15.307 5.62 11.47C5.62 10.387 6.01 9.507 6.649 8.825C6.546 8.576 6.203 7.54 6.747 6.16C6.747 6.16 7.587 5.896 9.497 7.195C10.3 6.975 11.15 6.865 12 6.861C12.85 6.865 13.7 6.975 14.503 7.195C16.413 5.896 17.253 6.16 17.253 6.16C17.797 7.54 17.454 8.576 17.351 8.825C17.99 9.507 18.38 10.387 18.38 11.47C18.38 15.317 16.042 16.161 13.817 16.412C14.172 16.721 14.491 17.331 14.491 18.264C14.491 19.6 14.479 20.691 14.479 21.017C14.479 21.28 14.659 21.586 15.167 21.487C19.138 20.162 22 16.417 22 12C22 6.477 17.523 2 12 2Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <a href="https://discord.gg/optimachain" target="_blank" aria-label="Discord">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.317 4.37C18.7873 3.68 17.147 3.2 15.4319 3C15.1989 3.4 14.9159 4 14.7209 4.47C12.8609 4.28 11.0159 4.28 9.20787 4.47C9.01287 4 8.70787 3.4 8.46787 3C6.74987 3.2 5.10987 3.68 3.57987 4.37C1.48787 7.5 0.795866 10.57 1.13987 13.58C3.18787 15.14 5.17187 16.13 7.12187 16.77C7.58787 16.13 8.00087 15.45 8.33987 14.74C7.74987 14.51 7.18787 14.24 6.65987 13.92C6.83987 13.79 7.01287 13.66 7.17987 13.52C10.9129 15.24 14.9999 15.24 18.6799 13.52C18.8469 13.66 19.0199 13.79 19.1999 13.92C18.6699 14.24 18.1069 14.51 17.5169 14.74C17.8559 15.45 18.2689 16.13 18.7349 16.77C20.6849 16.13 22.6689 15.14 24.7169 13.58C25.1209 10.05 24.0149 7.01 22.0149 4.37H20.317ZM8.65987 11.93C7.58787 11.93 6.69987 10.94 6.69987 9.73C6.69987 8.52 7.55987 7.53 8.65987 7.53C9.75987 7.53 10.6199 8.52 10.5999 9.73C10.6019 10.94 9.75987 11.93 8.65987 11.93ZM15.3399 11.93C14.2679 11.93 13.3799 10.94 13.3799 9.73C13.3799 8.52 14.2399 7.53 15.3399 7.53C16.4399 7.53 17.2999 8.52 17.2799 9.73C17.2799 10.94 16.4399 11.93 15.3399 11.93Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <a href="https://t.me/optimachain" target="_blank" aria-label="Telegram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.0717 3.32C21.7517 3.05 21.2717 2.92 20.6017 2.92C19.9917 2.92 19.2717 3.03 18.4417 3.24C17.6117 3.45 16.7217 3.74 15.7717 4.11C14.8217 4.48 13.8617 4.9 12.8917 5.37C11.9217 5.84 10.9917 6.34 10.0917 6.87C9.19172 7.4 8.36172 7.93 7.60172 8.46C6.84172 8.99 6.20172 9.49 5.68172 9.96C5.16172 10.43 4.80172 10.84 4.60172 11.19C4.40172 11.54 4.30172 11.77 4.30172 11.88C4.30172 11.99 4.40172 12.22 4.60172 12.57C4.80172 12.92 5.16172 13.33 5.68172 13.8C6.20172 14.27 6.84172 14.77 7.60172 15.3C8.36172 15.83 9.19172 16.36 10.0917 16.89C10.9917 17.42 11.9217 17.92 12.8917 18.39C13.8617 18.86 14.8217 19.28 15.7717 19.65C16.7217 20.02 17.6117 20.31 18.4417 20.52C19.2717 20.73 19.9917 20.84 20.6017 20.84C21.2717 20.84 21.7517 20.71 22.0417 20.44C22.3317 20.17 22.4717 19.77 22.4717 19.24V4.52C22.5017 3.99 22.3617 3.59 22.0717 3.32ZM19.5017 17.46C19.5017 17.57 19.4717 17.65 19.4117 17.7C19.3517 17.75 19.2717 17.78 19.1617 17.78C19.0517 17.78 18.9117 17.75 18.7417 17.7C18.5717 17.65 18.3717 17.57 18.1417 17.49C17.9117 17.41 17.6517 17.3 17.3617 17.17C17.0717 17.04 16.7517 16.89 16.4017 16.71C16.0517 16.53 15.6717 16.34 15.2617 16.13C14.8517 15.92 14.4117 15.69 13.9417 15.43C13.4717 15.17 12.9917 14.9 12.5017 14.61C12.0117 14.32 11.5217 14.01 11.0317 13.69C10.5417 13.37 10.0717 13.04 9.62172 12.7C9.17172 12.36 8.75172 12.03 8.36172 11.7C7.97172 11.37 7.63172 11.06 7.34172 10.77C7.05172 10.48 6.83172 10.22 6.68172 9.99C6.53172 9.76 6.45172 9.57 6.45172 9.42C6.45172 9.27 6.53172 9.08 6.68172 8.85C6.83172 8.62 7.05172 8.36 7.34172 8.07C7.63172 7.78 7.97172 7.47 8.36172 7.14C8.75172 6.81 9.17172 6.48 9.62172 6.14C10.0717 5.8 10.5417 5.47 11.0317 5.15C11.5217 4.83 12.0117 4.52 12.5017 4.23C12.9917 3.94 13.4717 3.67 13.9417 3.41C14.4117 3.15 14.8517 2.92 15.2617 2.71C15.6717 2.5 16.0517 2.31 16.4017 2.13C16.7517 1.95 17.0717 1.8 17.3617 1.67C17.6517 1.54 17.9117 1.43 18.1417 1.35C18.3717 1.27 18.5717 1.19 18.7417 1.14C18.9117 1.09 19.0517 1.06 19.1617 1.06C19.2717 1.06 19.3517 1.09 19.4117 1.14C19.4717 1.19 19.5017 1.27 19.5017 1.38V17.46Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // マークダウンファイルを読み込んでHTMLに変換する関数
+        async function loadMarkdownContent(sectionId, filePath) {
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const markdown = await response.text();
+                
+                // 簡易的なマークダウンからHTMLへの変換（実際の実装ではより堅牢なライブラリを使用することをお勧めします）
+                let html = markdown
+                    // 見出し
+                    .replace(/^# (.*$)/gm, '<h2>$1</h2>')
+                    .replace(/^## (.*$)/gm, '<h3>$1</h3>')
+                    .replace(/^### (.*$)/gm, '<h4>$1</h4>')
+                    
+                    // 太字
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    
+                    // イタリック
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    
+                    // リンク
+                    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+                    
+                    // 画像
+                    .replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" class="whitepaper-image">')
+                    
+                    // コードブロック
+                    .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+                    
+                    // 段落
+                    .replace(/^(?!<[h|p|u|o]|$)(.*$)/gm, '<p>$1</p>')
+                    
+                    // 空行を削除
+                    .replace(/<p><\/p>/g, '');
+                
+                document.getElementById(`${sectionId}-content`).innerHTML = html;
+            } catch (error) {
+                console.error('Error loading markdown content:', error);
+                document.getElementById(`${sectionId}-content`).innerHTML = `<p>コンテンツの読み込みに失敗しました。</p>`;
+            }
+        }
+
+        // ページ読み込み時に各セクションのコンテンツを読み込む
+        document.addEventListener('DOMContentLoaded', () => {
+            // 各セクションのマークダウンファイルを読み込む
+            // コンテンツはHTMLに直接埋め込まれています
+            // 他のセクションも同様に読み込む
+            
+            // サイドバーのナビゲーション機能
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // デフォルトのスクロール動作を維持
+                    // ただし、必要に応じてカスタムスクロール動作を実装できます
+                });
+            });
+            
+            // 前後のセクションへのナビゲーション
+            updateNavigationLinks();
+        });
+
+        // 前後のセクションへのナビゲーションリンクを更新する関数
+        function updateNavigationLinks() {
+            const sections = document.querySelectorAll('.whitepaper-section');
+            const currentSection = getCurrentSection();
+            const prevLink = document.querySelector('.prev-section');
+            const nextLink = document.querySelector('.next-section');
+            
+            // 現在のセクションのインデックスを取得
+            let currentIndex = -1;
+            sections.forEach((section, index) => {
+                if (section.id === currentSection) {
+                    currentIndex = index;
+                }
+            });
+            
+            // 前のセクションへのリンクを更新
+            if (currentIndex > 0) {
+                const prevSection = sections[currentIndex - 1];
+                prevLink.href = `#${prevSection.id}`;
+                prevLink.textContent = `← ${prevSection.querySelector('h2').textContent}`;
+                prevLink.style.display = 'block';
+            } else {
+                prevLink.style.display = 'none';
+            }
+            
+            // 次のセクションへのリンクを更新
+            if (currentIndex < sections.length - 1) {
+                const nextSection = sections[currentIndex + 1];
+                nextLink.href = `#${nextSection.id}`;
+                nextLink.textContent = `${nextSection.querySelector('h2').textContent} →`;
+                nextLink.style.display = 'block';
+            } else {
+                nextLink.style.display = 'none';
+            }
+        }
+
+        // 現在表示されているセクションのIDを取得する関数
+        function getCurrentSection() {
+            const sections = document.querySelectorAll('.whitepaper-section');
+            let currentSection = sections[0].id;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    currentSection = section.id;
+                }
+            });
+            
+            return currentSection;
+        }
+
+        // スクロール時にナビゲーションリンクを更新
+        window.addEventListener('scroll', () => {
+            updateNavigationLinks();
+        });
+    </script>
+</body>
+</html>

@@ -14,49 +14,22 @@ export function createFooter() {
             </div>
             <span class="logo-text">OptimaChain</span>
           </a>
-          <p class="footer-tagline">革新的なスケーリング技術と高度なセキュリティを統合した次世代型分散型ブロックチェーンプラットフォーム</p>
-          
-          <div class="enabler-branding footer-enabler">
-            <span class="powered-by">A project by</span>
-            <a href="https://enabler.dao" target="_blank" class="enabler-logo">
-              <svg id="logo-svg-2025-footer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 70" class="w-full h-full" preserveAspectRatio="xMidYMid meet">
-                <defs>
-                  <linearGradient id="modernGradient-2025-footer" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#22B6FF"/>
-                    <stop offset="100%" stop-color="#2BBCFF"/>
-                  </linearGradient>
-                  <linearGradient id="reverseGradient-2025-footer" x1="100%" y1="0%" x2="0%" y2="0%">
-                    <stop offset="0%" stop-color="#2BBCFF"/>
-                    <stop offset="100%" stop-color="#22B6FF"/>
-                  </linearGradient>
-                  <linearGradient id="middleLineGradient-2025-footer" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#22B6FF"/>
-                    <stop offset="100%" stop-color="#4CAF50"/>
-                  </linearGradient>
-                </defs>
-                <rect width="200" height="70" fill="#fff" fill-opacity="0"/>
-                <rect x="15" y="25" width="60" height="3" rx="1.5" fill="url(#modernGradient-2025-footer)"/>
-                <rect x="15" y="33" width="37" height="3" rx="1.5" fill="url(#middleLineGradient-2025-footer)"/>
-                <rect x="15" y="41" width="60" height="3" rx="1.5" fill="url(#reverseGradient-2025-footer)"/>
-                <text x="90" y="40" font-family="Consolas, monospace" font-size="18" letter-spacing="0.5" font-weight="bold" fill="url(#modernGradient-2025-footer)">ENABLER</text>
-              </svg>
-            </a>
-          </div>
+          <p class="footer-tagline">次世代型分散型ブロックチェーンプラットフォーム</p>
         </div>
         
         <div class="footer-links">
           <div class="footer-column">
-            <h3 data-i18n="footer.resources">リソース</h3>
+            <h3>リソース</h3>
             <ul>
-              <li><a href="/whitepaper/OptimaChain_Whitepaper.html">ホワイトペーパー</a></li>
+              <li><a href="/whitepaper/index.html">ホワイトペーパー</a></li>
               <li><a href="/roadmap.html">ロードマップ</a></li>
+              <li><a href="/token.html">トークン</a></li>
               <li><a href="/faq.html">よくある質問</a></li>
-              <li><a href="/blog">ブログ</a></li>
             </ul>
           </div>
           
           <div class="footer-column">
-            <h3 data-i18n="footer.developers">開発者</h3>
+            <h3>開発者</h3>
             <ul>
               <li><a href="/developers.html">開発者ポータル</a></li>
               <li><a href="/docs">ドキュメント</a></li>
@@ -66,7 +39,7 @@ export function createFooter() {
           </div>
           
           <div class="footer-column">
-            <h3 data-i18n="footer.community">コミュニティ</h3>
+            <h3>コミュニティ</h3>
             <ul>
               <li><a href="https://twitter.com/OptimaChain" target="_blank">Twitter</a></li>
               <li><a href="https://discord.gg/optimachain" target="_blank">Discord</a></li>
@@ -74,21 +47,11 @@ export function createFooter() {
               <li><a href="https://forum.optimachain.io" target="_blank">フォーラム</a></li>
             </ul>
           </div>
-          
-          <div class="footer-column">
-            <h3 data-i18n="footer.about">会社情報</h3>
-            <ul>
-              <li><a href="/about.html">私たちについて</a></li>
-              <li><a href="/careers.html">採用情報</a></li>
-              <li><a href="/press.html">プレスキット</a></li>
-              <li><a href="/contact.html">お問い合わせ</a></li>
-            </ul>
-          </div>
         </div>
       </div>
       
       <div class="footer-bottom">
-        <p class="copyright" data-i18n="footer.copyright">© 2025 OptimaChain by Enabler DAO. All rights reserved.</p>
+        <p class="copyright">© 2025 OptimaChain by Enabler DAO. All rights reserved.</p>
         <div class="footer-social">
           <a href="https://twitter.com/OptimaChain" target="_blank" aria-label="Twitter">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

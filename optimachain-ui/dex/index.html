@@ -16,13 +16,13 @@
     <header>
         <div class="wrapper">
             <div class="header-content">
-                <a href="../index.html" class="logo">
+                <a href="../" class="logo">
                     <div class="logo-icon"></div>
                     OptimaDEX
                 </a>
                 <nav>
                     <ul>
-                        <li><a href="../wallet/index.html">ウォレット</a></li>
+                        <li><a href="../wallet">ウォレット</a></li>
                         <li><a href="#" class="active">取引所</a></li>
                         <li><a href="#">流動性提供</a></li>
                         <li><a href="#">ファーム</a></li>
@@ -295,7 +295,18 @@
     </footer>
 
     <script src="js/chart.min.js"></script>
+    <script src="../src/js/auth.js"></script>
+    <script src="../src/js/ui-utils.js"></script>
     <script src="js/api.js"></script>
-    <script src="js/dex.js"></script>
+    <script src="js/dex-real.js"></script>
+    <script src="../src/js/router.js" type="module"></script>
+    <script>
+        // Initialize router when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof initRouter === 'function') {
+                initRouter();
+            }
+        });
+    </script>
 </body>
 </html>

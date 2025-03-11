@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 24px sans-serif; text-anchor: middle; }
+    .phase-title { font: bold 18px sans-serif; text-anchor: middle; }
+    .phase-period { font: bold 16px sans-serif; text-anchor: middle; }
+    .phase-item { font: 14px sans-serif; text-anchor: middle; }
+    .current-marker { font: bold 14px sans-serif; text-anchor: middle; fill: red; }
+    .timeline { stroke: #333; stroke-width: 3; }
+    .timeline-arrow { fill: none; stroke: #666; stroke-width: 2; marker-end: url(#arrowhead); }
+    .phase-point { stroke-width: 2; }
+  </style>
+
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="50" class="title">OptimaChain開発ロードマップ</text>
+
+  <!-- Timeline -->
+  <line x1="100" y1="300" x2="700" y2="300" class="timeline" />
+
+  <!-- Phase 1: Testnet Launch -->
+  <circle cx="200" cy="300" r="15" class="phase-point" fill="#3498DB" stroke="#2980B9" />
+  <text x="200" y="250" class="phase-period">2024 Q4</text>
+  <text x="200" y="280" class="phase-title">テストネット立ち上げ</text>
+  <text x="200" y="330" class="phase-item">• コアプロトコルの開発</text>
+  <text x="200" y="350" class="phase-item">• 基本的なコンセンサスメカニズムの実装</text>
+  <text x="200" y="370" class="phase-item">• 開発者ドキュメントの公開</text>
+
+  <!-- Phase 2: Mainnet Preparation -->
+  <circle cx="350" cy="300" r="15" class="phase-point" fill="#2ECC71" stroke="#27AE60" />
+  <text x="350" y="250" class="phase-period">2025 Q1-Q2</text>
+  <text x="350" y="280" class="phase-title">メインネット準備</text>
+  <text x="350" y="330" class="phase-item">• AI予測型スマートコントラクトの実装</text>
+  <text x="350" y="350" class="phase-item">• 自己最適化型シャーディングの開発</text>
+  <text x="350" y="370" class="phase-item">• 外部セキュリティ監査の実施</text>
+
+  <!-- Phase 3: Mainnet Launch -->
+  <circle cx="500" cy="300" r="15" class="phase-point" fill="#9B59B6" stroke="#8E44AD" />
+  <text x="500" y="250" class="phase-period">2025 Q3</text>
+  <text x="500" y="280" class="phase-title">メインネット公開</text>
+  <text x="500" y="330" class="phase-item">• トークン生成イベント</text>
+  <text x="500" y="350" class="phase-item">• バリデーターネットワークの展開</text>
+  <text x="500" y="370" class="phase-item">• エコシステム拡大プログラムの開始</text>
+
+  <!-- Phase 4: Ecosystem Expansion -->
+  <circle cx="650" cy="300" r="15" class="phase-point" fill="#E74C3C" stroke="#C0392B" />
+  <text x="650" y="250" class="phase-period">2025 Q4以降</text>
+  <text x="650" y="280" class="phase-title">エコシステム拡大</text>
+  <text x="650" y="330" class="phase-item">• zk-STARKを活用したオンチェーンAIの実装</text>
+  <text x="650" y="350" class="phase-item">• リアルワールド資産統合フレームワークの展開</text>
+  <text x="650" y="370" class="phase-item">• クロスチェーン相互運用性の強化</text>
+
+  <!-- Arrows between phases -->
+  <path d="M 215 300 L 335 300" class="timeline-arrow" />
+  <path d="M 365 300 L 485 300" class="timeline-arrow" />
+  <path d="M 515 300 L 635 300" class="timeline-arrow" />
+
+  <!-- Current position marker -->
+  <circle cx="250" cy="300" r="10" fill="red" />
+  <text x="250" y="400" class="current-marker">現在地点</text>
+  <line x1="250" y1="310" x2="250" y2="390" stroke="red" stroke-width="1" stroke-dasharray="3,3" />
+
+  <!-- Additional information -->
+  <rect x="150" y="450" width="500" height="100" rx="10" ry="10" fill="#f8f9fa" stroke="#ddd" />
+  <text x="400" y="480" class="phase-title">主要マイルストーン</text>
+  <text x="400" y="510" class="phase-item">• 2024 Q4: テストネットの公開とコミュニティテスト開始</text>
+  <text x="400" y="530" class="phase-item">• 2025 Q2: メインネットのリリース候補版の公開</text>
+  <text x="400" y="550" class="phase-item">• 2025 Q3: メインネット正式リリースとトークン配布</text>
+</svg>

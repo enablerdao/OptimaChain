@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaChain - ログイン</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/auth.css">
+    <link rel="stylesheet" href="src/css/ui-utils.css">
+</head>
+<body>
+    <div class="notification-bar">
+        OptimaChain はプロトタイプ版です。実際の資産は使用しないでください。
+        <button class="notification-close">×</button>
+    </div>
+
+    <header>
+        <div class="wrapper">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon"></div>
+                    OptimaChain
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="/">ホーム</a></li>
+                        <li><a href="wallet">ウォレット</a></li>
+                        <li><a href="dex">取引所</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <div class="auth-container">
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">ログイン</button>
+                <button class="auth-tab" data-tab="register">新規登録</button>
+            </div>
+            
+            <div class="auth-content active" id="login-panel">
+                <div class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">メールアドレス</label>
+                        <input type="email" id="login-email" placeholder="example@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">パスワード</label>
+                        <input type="password" id="login-password" placeholder="********">
+                    </div>
+                    <div id="login-error" class="error-container"></div>
+                    <button class="primary-btn" id="login-button">ログイン</button>
+                </div>
+            </div>
+            
+            <div class="auth-content" id="register-panel">
+                <div class="auth-form">
+                    <div class="form-group">
+                        <label for="register-username">ユーザー名</label>
+                        <input type="text" id="register-username" placeholder="ユーザー名">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">メールアドレス</label>
+                        <input type="email" id="register-email" placeholder="example@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">パスワード</label>
+                        <input type="password" id="register-password" placeholder="********">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm-password">パスワード（確認）</label>
+                        <input type="password" id="register-confirm-password" placeholder="********">
+                    </div>
+                    <div id="register-error" class="error-container"></div>
+                    <button class="primary-btn" id="register-button">登録</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="wrapper">
+            <p>© 2023 OptimaChain - プロトタイプ版 - 実際の資産は使用しないでください</p>
+        </div>
+    </footer>
+
+    <script src="src/js/auth.js"></script>
+    <script src="src/js/ui-utils.js"></script>
+    <script src="login.js"></script>
+    <script src="src/js/router.js" type="module"></script>
+    <script>
+        // Initialize router when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof initRouter === 'function') {
+                initRouter();
+            }
+        });
+    </script>
+</body>
+</html>

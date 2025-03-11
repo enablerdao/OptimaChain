@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaChain バリデータダッシュボード</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/validator-dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="notification-bar">
+        OptimaChain バリデータダッシュボードはプロトタイプ版です。実際のネットワークデータではありません。
+        <button class="notification-close">×</button>
+    </div>
+
+    <header>
+        <div class="wrapper">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"></div>
+                    OptimaChain
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">ホーム</a></li>
+                        <li><a href="technology.html">技術</a></li>
+                        <li><a href="ecosystem.html">エコシステム</a></li>
+                        <li><a href="developers.html">開発者</a></li>
+                        <li><a href="community.html">コミュニティ</a></li>
+                        <li><a href="token.html">トークン</a></li>
+                        <li><a href="roadmap.html">ロードマップ</a></li>
+                    </ul>
+                </nav>
+                <a href="wallet.html" class="wallet-btn">ウォレット接続</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <div class="validator-dashboard">
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">バリデータダッシュボード</h1>
+                <p class="dashboard-subtitle">OptimaChainネットワークのリアルタイムメトリクスとバリデータ情報</p>
+            </div>
+
+            <!-- メトリクスカード -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-title">アクティブバリデータ</div>
+                    <div class="metric-value" id="active-validators">0</div>
+                    <div class="metric-unit">/ <span id="total-validators">0</span></div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">ブロック高</div>
+                    <div class="metric-value" id="block-height">0</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">平均ブロック時間</div>
+                    <div class="metric-value" id="avg-block-time">0</div>
+                    <div class="metric-unit">ms</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">ネットワークアップタイム</div>
+                    <div class="metric-value" id="network-uptime">0</div>
+                    <div class="metric-unit">%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">トランザクション/秒</div>
+                    <div class="metric-value" id="tps-value">0</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">総トランザクション数</div>
+                    <div class="metric-value" id="total-transactions">0</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">総ステーク量</div>
+                    <div class="metric-value" id="total-stake">0</div>
+                    <div class="metric-unit">OPT</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">ネットワーク稼働時間</div>
+                    <div class="metric-value" id="network-running-time">00:00:00</div>
+                </div>
+            </div>
+
+            <!-- チャート -->
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3 class="chart-title">ネットワークメトリクス</h3>
+                    <canvas id="network-metrics-chart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">ブロック生成時間</h3>
+                    <canvas id="block-time-chart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">トランザクション/秒</h3>
+                    <canvas id="tps-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- データテーブル -->
+            <div class="data-tables">
+                <div class="data-table">
+                    <h3 class="data-table-title">トップバリデータ</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>バリデータ名</th>
+                                <th>パワー</th>
+                                <th>コミッション</th>
+                                <th>アップタイム</th>
+                                <th>提案ブロック</th>
+                                <th>検証ブロック</th>
+                                <th>ステータス</th>
+                            </tr>
+                        </thead>
+                        <tbody id="validators-table-body">
+                            <!-- バリデータデータがここに挿入されます -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="data-table">
+                    <h3 class="data-table-title">最新ブロック</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>高さ</th>
+                                <th>ハッシュ</th>
+                                <th>トランザクション</th>
+                                <th>タイムスタンプ</th>
+                                <th>提案者</th>
+                            </tr>
+                        </thead>
+                        <tbody id="blocks-table-body">
+                            <!-- ブロックデータがここに挿入されます -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- バリデータセットアップガイド -->
+            <div class="validator-setup">
+                <h2 class="setup-title">バリデータのセットアップ</h2>
+                <p class="setup-description">
+                    OptimaChainのバリデータノードを実行して、ネットワークの分散化と安全性に貢献しましょう。
+                    以下のコマンドを使用して、お使いのプラットフォームにバリデータをセットアップできます。
+                </p>
+
+                <div class="os-tabs">
+                    <div class="os-tab active" data-os="linux">Linux</div>
+                    <div class="os-tab" data-os="macos">macOS</div>
+                    <div class="os-tab" data-os="windows">Windows</div>
+                    <div class="os-tab" data-os="cloud">クラウド</div>
+                </div>
+
+                <div class="os-content active" data-os="linux" id="linux-commands">
+                    <!-- Linuxコマンドがここに挿入されます -->
+                </div>
+                <div class="os-content" data-os="macos" id="macos-commands">
+                    <!-- macOSコマンドがここに挿入されます -->
+                </div>
+                <div class="os-content" data-os="windows" id="windows-commands">
+                    <!-- Windowsコマンドがここに挿入されます -->
+                </div>
+                <div class="os-content" data-os="cloud" id="cloud-commands">
+                    <!-- クラウドコマンドがここに挿入されます -->
+                </div>
+            </div>
+
+            <!-- 詳細ドキュメントへのリンク -->
+            <div class="cta-section">
+                <h2>詳細なバリデータガイド</h2>
+                <p>バリデータのセットアップと運用に関する詳細なドキュメントは、公式ドキュメントをご覧ください。</p>
+                <a href="https://docs.optimachain.network/validators" class="primary-btn">バリデータドキュメント</a>
+                <a href="https://discord.gg/optimachain" class="secondary-btn">Discordに参加</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="wrapper">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon"></div>
+                        OptimaChain
+                    </a>
+                    <p>革新的なスケーリング技術と高度なセキュリティを統合した次世代型分散型ブロックチェーンプラットフォーム</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-links-column">
+                        <h3>リソース</h3>
+                        <ul>
+                            <li><a href="whitepaper/OptimaChain_Whitepaper.html">ホワイトペーパー</a></li>
+                            <li><a href="roadmap.html">ロードマップ</a></li>
+                            <li><a href="faq.html">よくある質問</a></li>
+                            <li><a href="blog">ブログ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-column">
+                        <h3>開発者</h3>
+                        <ul>
+                            <li><a href="developers.html">開発者ポータル</a></li>
+                            <li><a href="docs">ドキュメント</a></li>
+                            <li><a href="developers.html#testnet">テストネット</a></li>
+                            <li><a href="https://github.com/enablerdao/OptimaChain">GitHub</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-column">
+                        <h3>コミュニティ</h3>
+                        <ul>
+                            <li><a href="https://twitter.com/OptimaChain">Twitter</a></li>
+                            <li><a href="https://discord.gg/optimachain">Discord</a></li>
+                            <li><a href="https://t.me/optimachain">Telegram</a></li>
+                            <li><a href="https://forum.optimachain.io">フォーラム</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-column">
+                        <h3>会社情報</h3>
+                        <ul>
+                            <li><a href="https://github.com/enablerdao/OptimaChain">私たちについて</a></li>
+                            <li><a href="https://github.com/enablerdao/OptimaChain/issues">採用情報</a></li>
+                            <li><a href="https://github.com/enablerdao/OptimaChain/blob/main/README.md">プレスキット</a></li>
+                            <li><a href="https://discord.gg/optimachain">お問い合わせ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OptimaChain by Enabler DAO. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="https://twitter.com/OptimaChain"><i class="icon-twitter"></i></a>
+                    <a href="https://github.com/enablerdao/OptimaChain"><i class="icon-github"></i></a>
+                    <a href="https://discord.gg/optimachain"><i class="icon-discord"></i></a>
+                    <a href="https://t.me/optimachain"><i class="icon-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="src/js/validator-dashboard.js"></script>
+    <script>
+        // 通知バーの閉じるボタン
+        document.querySelector('.notification-close').addEventListener('click', function() {
+            document.querySelector('.notification-bar').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
