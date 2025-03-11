@@ -8,14 +8,14 @@ import './config.js';
 import { initRouter } from './router.js';
 import { setupValidatorUI } from './validator-setup.js';
 import { initBlockchainVisual } from './blockchain-visual.js';
-import { initErrorHandler } from './error-handler.js';
+import { initErrorHandling } from './error-handler.js';
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
   console.log('OptimaChain - アプリケーション初期化');
   
   // Initialize error handling
-  initErrorHandler();
+  initErrorHandling();
   
   // Initialize router
   if (typeof initRouter === 'function') {
