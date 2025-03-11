@@ -3,9 +3,26 @@ import legacy from '@vitejs/plugin-legacy';
 import { resolve } from 'path';
 import { VitePWA } from 'vite-plugin-pwa';
 import autoprefixer from 'autoprefixer';
+import fs from 'fs';
 
 export default defineConfig(({ mode }) => {
   const isProd = mode === 'production';
+  
+  // Create necessary directories if they don't exist
+  const requiredDirs = [
+    'src/js/components',
+    'src/js/utils',
+    'public/favicons',
+    'public/icons'
+  ];
+  
+  requiredDirs.forEach(dir => {
+    const fullPath = resolve(__dirname, dir);
+    if (!fs.existsSync(fullPath)) {
+      fs.mkdirSync(fullPath, { recursive: true });
+      console.log(`Created directory: ${fullPath}`);
+    }
+  });
   
   return {
     plugins: [
@@ -14,7 +31,7 @@ export default defineConfig(({ mode }) => {
       }),
       VitePWA({
         registerType: 'autoUpdate',
-        includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png'],
+        includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
         manifest: {
           name: 'OptimaChain',
           short_name: 'OptimaChain',
@@ -40,12 +57,6 @@ export default defineConfig(({ mode }) => {
               src: 'favicons/android-chrome-512x512.png',
               sizes: '512x512',
               type: 'image/png'
-            },
-            {
-              src: 'favicons/safari-pinned-tab.svg',
-              sizes: 'any',
-              type: 'image/svg+xml',
-              purpose: 'maskable'
             }
           ]
         }
@@ -78,7 +89,7 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks: {
             vendor: ['three', 'chart.js'],
-            ui: ['./src/js/ui-utils.js', './src/js/components/header.js', './src/js/components/footer.js'],
+            ui: ['./src/js/ui-utils.js'],
             blockchain: ['./src/js/blockchain-visual.js', './src/js/blockchain-utils.js'],
             validators: ['./src/js/validator-setup.js'],
             error: ['./src/js/error-handler.js']
