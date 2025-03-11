@@ -28,6 +28,7 @@ import { initAnimations } from './animations.js';
 import { initNavigation } from './navigation.js';
 import { initValidatorSetup } from './validator-setup.js';
 import { initHeader, initNotificationBar, loadHeader } from './header.js';
+import { initRouter } from './router.js';
 
 // ページ読み込み時の初期化
 document.addEventListener('DOMContentLoaded', () => {
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // 各モジュールの初期化
+  initRouter();
   initNavigation();
   initLanguageSwitcher();
   initAnimations();

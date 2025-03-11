@@ -61,6 +61,15 @@
     
     <!-- JavaScript -->
     <script src="/js/main.js" defer></script>
+    <script src="/src/js/router.js" type="module" defer></script>
+    <script>
+        // Initialize router when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof initRouter === 'function') {
+                initRouter();
+            }
+        });
+    </script>
 </head>
 <body>
     <!-- 通知バー -->
@@ -90,13 +99,13 @@
                 <nav class="main-nav">
                     <ul>
                         <li><a href="#features" data-i18n="nav.features">特徴</a></li>
-                        <li><a href="/technology.html" data-i18n="nav.technology">技術</a></li>
-                        <li><a href="/ecosystem.html" data-i18n="nav.ecosystem">エコシステム</a></li>
-                        <li><a href="/developers.html" data-i18n="nav.developers">開発者</a></li>
-                        <li><a href="/community.html" data-i18n="nav.community">コミュニティ</a></li>
-                        <li><a href="/token.html" data-i18n="nav.token">トークン</a></li>
-                        <li><a href="/roadmap.html">ロードマップ</a></li>
-                        <li><a href="/whitepaper/OptimaChain_Whitepaper.html" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
+                        <li><a href="/technology" data-i18n="nav.technology">技術</a></li>
+                        <li><a href="/ecosystem" data-i18n="nav.ecosystem">エコシステム</a></li>
+                        <li><a href="/developers" data-i18n="nav.developers">開発者</a></li>
+                        <li><a href="/community" data-i18n="nav.community">コミュニティ</a></li>
+                        <li><a href="/token" data-i18n="nav.token">トークン</a></li>
+                        <li><a href="/roadmap">ロードマップ</a></li>
+                        <li><a href="/whitepaper" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
                     </ul>
                 </nav>
                 
@@ -116,7 +125,7 @@
                         </div>
                     </div>
                     
-                    <a href="/wallet.html" class="wallet-button" data-i18n="wallet.connect">ウォレット接続 ↓</a>
+                    <a href="/wallet" class="wallet-button" data-i18n="wallet.connect">ウォレット接続 ↓</a>
                     
                     <button class="mobile-menu-toggle" aria-label="メニュー">
                         <span></span>
@@ -133,13 +142,13 @@
         <nav>
             <ul>
                 <li><a href="#features" data-i18n="nav.features">特徴</a></li>
-                <li><a href="/technology.html" data-i18n="nav.technology">技術</a></li>
-                <li><a href="/ecosystem.html" data-i18n="nav.ecosystem">エコシステム</a></li>
-                <li><a href="/developers.html" data-i18n="nav.developers">開発者</a></li>
-                <li><a href="/community.html" data-i18n="nav.community">コミュニティ</a></li>
-                <li><a href="/token.html" data-i18n="nav.token">トークン</a></li>
-                <li><a href="/roadmap.html">ロードマップ</a></li>
-                <li><a href="/whitepaper/OptimaChain_Whitepaper.html" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
+                <li><a href="/technology" data-i18n="nav.technology">技術</a></li>
+                <li><a href="/ecosystem" data-i18n="nav.ecosystem">エコシステム</a></li>
+                <li><a href="/developers" data-i18n="nav.developers">開発者</a></li>
+                <li><a href="/community" data-i18n="nav.community">コミュニティ</a></li>
+                <li><a href="/token" data-i18n="nav.token">トークン</a></li>
+                <li><a href="/roadmap">ロードマップ</a></li>
+                <li><a href="/whitepaper" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
             </ul>
         </nav>
     </div>
@@ -202,15 +211,15 @@
                         <span data-i18n="hero.cta">テストネットに参加する</span>
                         <span class="button-icon">→</span>
                     </a>
-                    <a href="/wallet.html" class="secondary-btn large">
+                    <a href="/wallet" class="secondary-btn large">
                         <span data-i18n="hero.wallet">ウォレット接続</span>
                         <span class="button-icon">↓</span>
                     </a>
-                    <a href="/validator-dashboard.html" class="tertiary-btn large">
+                    <a href="/validator-dashboard" class="tertiary-btn large">
                         <span>バリデータダッシュボード</span>
                         <span class="button-icon">→</span>
                     </a>
-                    <a href="/whitepaper/index.html" class="quaternary-btn large">
+                    <a href="/whitepaper" class="quaternary-btn large">
                         <span>ホワイトペーパー</span>
                         <span class="button-icon">→</span>
                     </a>
@@ -273,7 +282,7 @@
                         <li>自動パラメータ調整</li>
                         <li>エネルギー効率最適化</li>
                     </ul>
-                    <a href="/whitepaper/OptimaChain_Whitepaper.html#adaptive-proof-of-stake" class="learn-more">詳細を見る →</a>
+                    <a href="/whitepaper#adaptive-proof-of-stake" class="learn-more">詳細を見る →</a>
                 </div>
                 
                 <div class="tech-spec-card">
@@ -285,7 +294,7 @@
                         <li>クロスシャード通信の最適化</li>
                         <li>シャード再構成アルゴリズム</li>
                     </ul>
-                    <a href="/whitepaper/OptimaChain_Whitepaper.html#dynamic-sharding" class="learn-more">詳細を見る →</a>
+                    <a href="/whitepaper#dynamic-sharding" class="learn-more">詳細を見る →</a>
                 </div>
                 
                 <div class="tech-spec-card">
@@ -297,7 +306,7 @@
                         <li>スマートコントラクト並列実行</li>
                         <li>最適化されたメモリプール</li>
                     </ul>
-                    <a href="/whitepaper/OptimaChain_Whitepaper.html#parallel-execution" class="learn-more">詳細を見る →</a>
+                    <a href="/whitepaper#parallel-execution" class="learn-more">詳細を見る →</a>
                 </div>
                 
                 <div class="tech-spec-card">
@@ -309,16 +318,16 @@
                         <li>ゼロ知識証明の実装</li>
                         <li>プライバシー保護トランザクション</li>
                     </ul>
-                    <a href="/whitepaper/OptimaChain_Whitepaper.html#privacy-features" class="learn-more">詳細を見る →</a>
+                    <a href="/whitepaper#privacy-features" class="learn-more">詳細を見る →</a>
                 </div>
             </div>
             
             <div class="tech-cta">
-                <a href="/whitepaper/OptimaChain_Whitepaper.html" class="primary-btn">
+                <a href="/whitepaper" class="primary-btn">
                     <span>ホワイトペーパーを読む</span>
                     <span class="button-icon">→</span>
                 </a>
-                <a href="/technology.html" class="secondary-btn">
+                <a href="/technology" class="secondary-btn">
                     <span>技術詳細ページへ</span>
                     <span class="button-icon">→</span>
                 </a>
@@ -394,11 +403,11 @@ cd optimachain
                 </div>
                 
                 <div class="validator-cta">
-                    <a href="/validator-dashboard.html" class="primary-btn">
+                    <a href="/validator-dashboard" class="primary-btn">
                         <span>バリデータダッシュボード</span>
                         <span class="button-icon">→</span>
                     </a>
-                    <a href="/whitepaper/OptimaChain_Whitepaper.html#21-コンセンサスメカニズム-adaptive-proof-of-stake-apos" class="secondary-btn">
+                    <a href="/whitepaper#21-コンセンサスメカニズム-adaptive-proof-of-stake-apos" class="secondary-btn">
                         <span>コンセンサスメカニズムの詳細</span>
                         <span class="button-icon">→</span>
                     </a>

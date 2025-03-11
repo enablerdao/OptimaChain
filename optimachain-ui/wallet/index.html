@@ -16,14 +16,14 @@
     <header>
         <div class="wrapper">
             <div class="header-content">
-                <a href="../index.html" class="logo">
+                <a href="../" class="logo">
                     <div class="logo-icon"></div>
                     OptimaWallet
                 </a>
                 <nav>
                     <ul>
                         <li><a href="#" class="active">ウォレット</a></li>
-                        <li><a href="../dex/index.html">取引所</a></li>
+                        <li><a href="../dex">取引所</a></li>
                         <li><a href="#">ステーキング</a></li>
                         <li><a href="#">設定</a></li>
                     </ul>
@@ -218,5 +218,14 @@
     <script src="../src/js/ui-utils.js"></script>
     <script src="js/api.js"></script>
     <script src="js/wallet-real.js"></script>
+    <script src="../src/js/router.js" type="module"></script>
+    <script>
+        // Initialize router when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof initRouter === 'function') {
+                initRouter();
+            }
+        });
+    </script>
 </body>
 </html>

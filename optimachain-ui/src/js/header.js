@@ -4,6 +4,8 @@
  * このスクリプトはサイト全体で一貫したヘッダーを提供します。
  */
 
+import { updateActiveNavLink } from './router.js';
+
 // ヘッダーの初期化
 export function initHeader() {
   // モバイルメニュートグルの設定
@@ -120,35 +122,7 @@ export function initHeader() {
   }
   
   // 現在のページをハイライト
-  highlightCurrentPage();
-}
-
-// 現在のページをナビゲーションでハイライト
-function highlightCurrentPage() {
-  const currentPath = window.location.pathname;
-  const navLinks = document.querySelectorAll('header nav a, .mobile-menu nav a');
-  
-  navLinks.forEach(link => {
-    const linkPath = link.getAttribute('href');
-    
-    // 完全一致または現在のパスがリンクパスで始まる場合（サブページの場合）
-    if (linkPath === currentPath || 
-        (linkPath !== '/' && currentPath.startsWith(linkPath)) ||
-        (currentPath === '/' && linkPath === '/index.html')) {
-      link.classList.add('active');
-      
-      // 親要素がドロップダウンの場合、親リンクもアクティブに
-      const parentLi = link.closest('li');
-      if (parentLi && parentLi.parentElement.classList.contains('dropdown-menu')) {
-        const parentDropdown = parentLi.parentElement.previousElementSibling;
-        if (parentDropdown) {
-          parentDropdown.classList.add('active');
-        }
-      }
-    } else {
-      link.classList.remove('active');
-    }
-  });
+  updateActiveNavLink(window.location.pathname);
 }
 
 // 通知バーの設定
