@@ -110,8 +110,7 @@ impl<'de> Deserialize<'de> for Transaction {
         let sender = VerifyingKey::from_bytes(&helper.sender)
             .map_err(|e| serde::de::Error::custom(format!("Invalid sender key: {}", e)))?;
         
-        let signature = Signature::from_bytes(&helper.signature)
-            .map_err(|e| serde::de::Error::custom(format!("Invalid signature: {}", e)))?;
+        let signature = Signature { bytes: helper.signature };
         
         Ok(Transaction {
             transaction_type: helper.transaction_type,
