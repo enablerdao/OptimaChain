@@ -1,14 +1,9 @@
 use libp2p::{
-    core::{muxing::StreamMuxerBox, transport::Boxed, upgrade::Version},
-    dns::DnsConfig,
+    core::{muxing::StreamMuxerBox, transport::Boxed},
     identity::Keypair,
-    mplex::MplexConfig,
-    noise::{NoiseConfig, X25519Spec},
-    tcp::TcpConfig,
-    Transport as LibP2PTransport,
     PeerId,
 };
-use serde::{Serialize, Deserialize};
+// Removed unused imports
 use std::time::Duration;
 
 /// Configuration for the network transport

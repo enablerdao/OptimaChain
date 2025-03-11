@@ -33,10 +33,8 @@ impl KeyPair {
             return Err("Invalid secret key length".to_string());
         }
         
-        let keypair = match SigningKey::from_bytes(secret_key_bytes.try_into().map_err(|_| "Invalid secret key bytes".to_string())?) {
-            Ok(k) => k,
-            Err(e) => return Err(format!("Invalid secret key: {}", e)),
-        };
+        let keypair = SigningKey::from_bytes(secret_key_bytes.try_into().map_err(|_| "Invalid secret key bytes".to_string())?);
+
         
         let public_key = VerifyingKey::from(&keypair);
         

@@ -84,7 +84,7 @@ impl Serialize for Transaction {
         state.serialize_field("nonce", &self.nonce)?;
         state.serialize_field("gas_limit", &self.gas_limit)?;
         state.serialize_field("gas_price", &self.gas_price)?;
-        state.serialize_field("signature", &self.signature.bytes)?;
+        state.serialize_field("signature", &hex::encode(&self.signature.bytes))?;
         state.end()
     }
 }

@@ -46,7 +46,7 @@ impl Serialize for BlockHeader {
         state.serialize_field("transactions_root", &self.transactions_root)?;
         state.serialize_field("state_root", &self.state_root)?;
         state.serialize_field("validator", &self.validator.to_bytes())?;
-        state.serialize_field("signature", &self.signature)?;
+        state.serialize_field("signature", &hex::encode(&self.signature.bytes))?;
         state.end()
     }
 }
