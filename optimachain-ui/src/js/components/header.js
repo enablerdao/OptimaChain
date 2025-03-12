@@ -35,7 +35,7 @@ export function createHeader() {
             <li><a href="/community" data-i18n="nav.community">コミュニティ</a></li>
             <li><a href="/token" data-i18n="nav.token">トークン</a></li>
             <li><a href="/roadmap">ロードマップ</a></li>
-            <li><a href="/validator-dashboard.html" class="validator-link">バリデータ</a></li>
+            <li><a href="/validator-dashboard.html" class="validator-link highlight">バリデータになる</a></li>
             <li><a href="/whitepaper" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
           </ul>
         </nav>
@@ -122,7 +122,7 @@ export function insertHeader() {
         <li><a href="/community" data-i18n="nav.community">コミュニティ</a></li>
         <li><a href="/token" data-i18n="nav.token">トークン</a></li>
         <li><a href="/roadmap">ロードマップ</a></li>
-        <li><a href="/validator-dashboard.html" class="validator-link">バリデータ</a></li>
+        <li><a href="/validator-dashboard.html" class="validator-link highlight">バリデータになる</a></li>
         <li><a href="/whitepaper" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
       </ul>
     </nav>
@@ -145,6 +145,19 @@ export function insertHeader() {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
+    }
+    
+    // Highlight validator link in mobile menu
+    const validatorLink = mobileMenu.querySelector('.validator-link');
+    if (validatorLink) {
+      validatorLink.classList.add('highlight');
+      // Add subtle animation to draw attention
+      setTimeout(() => {
+        validatorLink.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+          validatorLink.style.transform = '';
+        }, 300);
+      }, 300);
     }
   });
   
