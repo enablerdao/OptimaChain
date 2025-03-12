@@ -1,4 +1,16 @@
-// ヘッダーコンポーネント
+/**
+ * Header Component
+ * Handles the site header functionality including navigation, language switching, and mobile menu
+ */
+
+// Import dependencies
+import { initLanguageSwitcher } from '../language-switcher.js';
+import { initThemeManager } from '../theme-manager.js';
+
+/**
+ * Create header element
+ * @returns {HTMLElement} Header element
+ */
 export function createHeader() {
   const header = document.createElement('header');
   header.className = 'main-header';
@@ -23,7 +35,7 @@ export function createHeader() {
             <li><a href="/community" data-i18n="nav.community">コミュニティ</a></li>
             <li><a href="/token" data-i18n="nav.token">トークン</a></li>
             <li><a href="/roadmap">ロードマップ</a></li>
-            <li><a href="/pages/blog">技術ブログ</a></li>
+            <li><a href="/validator-dashboard.html" class="validator-link">バリデータ</a></li>
             <li><a href="/whitepaper" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
           </ul>
         </nav>
@@ -46,7 +58,7 @@ export function createHeader() {
           
           <a href="/wallet" class="wallet-button" data-i18n="wallet.connect">ウォレット接続</a>
           
-          <button class="mobile-menu-toggle" aria-label="メニュー">
+          <button class="mobile-menu-toggle" aria-label="メニュー" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
@@ -56,7 +68,7 @@ export function createHeader() {
       
       <div class="enabler-branding">
         <span class="powered-by">Powered by</span>
-        <a href="https://enabler.dao" target="_blank" class="enabler-logo">
+        <a href="https://enabler.dao" target="_blank" class="enabler-logo" rel="noopener">
           <svg id="logo-svg-2025" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 70" class="w-full h-full" preserveAspectRatio="xMidYMid meet">
             <defs>
               <linearGradient id="modernGradient-2025" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -86,7 +98,9 @@ export function createHeader() {
   return header;
 }
 
-// ヘッダーをDOMに挿入する関数
+/**
+ * Insert header into DOM
+ */
 export function insertHeader() {
   const body = document.body;
   const firstChild = body.firstChild;
@@ -94,9 +108,10 @@ export function insertHeader() {
   const header = createHeader();
   body.insertBefore(header, firstChild);
   
-  // モバイルメニューも追加
+  // Add mobile menu
   const mobileMenu = document.createElement('div');
   mobileMenu.className = 'mobile-menu';
+  mobileMenu.setAttribute('aria-hidden', 'true');
   mobileMenu.innerHTML = `
     <nav>
       <ul>
@@ -107,6 +122,7 @@ export function insertHeader() {
         <li><a href="/community" data-i18n="nav.community">コミュニティ</a></li>
         <li><a href="/token" data-i18n="nav.token">トークン</a></li>
         <li><a href="/roadmap">ロードマップ</a></li>
+        <li><a href="/validator-dashboard.html" class="validator-link">バリデータ</a></li>
         <li><a href="/whitepaper" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
       </ul>
     </nav>
@@ -114,12 +130,63 @@ export function insertHeader() {
   
   body.insertBefore(mobileMenu, header.nextSibling);
   
-  // モバイルメニュートグルの機能を追加
+  // Add mobile menu toggle functionality
   const menuToggle = header.querySelector('.mobile-menu-toggle');
   menuToggle.addEventListener('click', () => {
     mobileMenu.classList.toggle('active');
     menuToggle.classList.toggle('active');
+    
+    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', !isExpanded);
+    mobileMenu.setAttribute('aria-hidden', isExpanded);
+    
+    // Toggle body scroll
+    if (!isExpanded) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  });
+  
+  // Initialize language switcher
+  if (typeof initLanguageSwitcher === 'function') {
+    initLanguageSwitcher();
+  }
+  
+  // Initialize theme manager
+  if (typeof initThemeManager === 'function') {
+    initThemeManager();
+  }
+  
+  // Handle scroll effects
+  let lastScrollTop = 0;
+  
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Add shadow and background when scrolled
+    if (scrollTop > 10) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+    
+    // Hide header when scrolling down, show when scrolling up
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+      header.classList.add('header-hidden');
+    } else {
+      header.classList.remove('header-hidden');
+    }
+    
+    lastScrollTop = scrollTop;
   });
 }
 
-export default { createHeader, insertHeader };
+/**
+ * Initialize the header component
+ */
+export function initHeader() {
+  document.addEventListener('DOMContentLoaded', insertHeader);
+}
+
+export default { createHeader, insertHeader, initHeader };
