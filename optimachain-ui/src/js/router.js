@@ -1,26 +1,12 @@
 // OptimaChain Router Utility
 // This module provides client-side routing functionality without .html extensions
 
-// Map of routes to their corresponding file paths
-const routes = {
-  '/': '/index.html',
-  '/wallet': '/wallet/index.html',
-  '/dex': '/dex/index.html',
-  '/login': '/login.html',
-  '/technology': '/technology.html',
-  '/ecosystem': '/ecosystem.html',
-  '/developers': '/developers.html',
-  '/community': '/community.html',
-  '/token': '/token.html',
-  '/roadmap': '/roadmap.html',
-  '/whitepaper': '/whitepaper/index.html',
-  '/validator-dashboard': '/validator-dashboard.html',
-  '/faq': '/faq.html',
-  '/blog': '/blog/index.html'
-};
+import { loadRouteContent, getFilePath } from './content-loader.js';
 
 // Initialize the router
 function initRouter() {
+  console.log('Initializing router...');
+  
   // Handle clicks on links
   document.addEventListener('click', (e) => {
     // Find closest anchor tag
@@ -53,14 +39,25 @@ function initRouter() {
     
     // Update the active link in the navigation
     updateActiveNavLink(path);
+    
+    // Load content for the path if state exists
+    if (e.state && e.state.path) {
+      loadRouteContent(e.state.path);
+    } else {
+      loadRouteContent(path);
+    }
   });
   
   // Initialize on page load
   updateActiveNavLink(window.location.pathname);
+  
+  console.log('Router initialized');
 }
 
 // Navigate to a URL
 function navigate(url) {
+  console.log(`Navigating to: ${url}`);
+  
   // Remove .html extension if present
   url = url.replace(/\.html$/, '');
   
@@ -73,7 +70,7 @@ function navigate(url) {
   }
   
   // Update browser history
-  history.pushState(null, '', url);
+  history.pushState({path: url}, '', url);
   
   // Update the active link in the navigation
   updateActiveNavLink(url);
@@ -82,6 +79,9 @@ function navigate(url) {
   if (requiresPageLoad(url)) {
     const filePath = getFilePath(url);
     window.location.href = filePath;
+  } else {
+    // Load content for the new route
+    loadRouteContent(url);
   }
 }
 
@@ -95,28 +95,15 @@ function requiresPageLoad(url) {
   const currentSection = currentPath.split('/')[1];
   const targetSection = url.split('/')[1];
   
+  // Special cases that should always do a full page load
+  const fullPageLoadSections = ['wallet', 'dex', 'validator-dashboard'];
+  
+  if (fullPageLoadSections.includes(targetSection) || 
+      fullPageLoadSections.includes(currentSection)) {
+    return true;
+  }
+  
   return currentSection !== targetSection;
-}
-
-// Get the file path for a route
-function getFilePath(url) {
-  // Remove leading slash if present
-  const path = url.startsWith('/') ? url : '/' + url;
-  
-  // Check if we have a direct mapping
-  if (routes[path]) {
-    return routes[path];
-  }
-  
-  // Handle nested paths
-  for (const route in routes) {
-    if (path.startsWith(route) && route !== '/') {
-      return routes[route].replace('.html', '') + path.substring(route.length) + '.html';
-    }
-  }
-  
-  // Default to adding .html extension
-  return path + '.html';
 }
 
 // Update the active link in the navigation

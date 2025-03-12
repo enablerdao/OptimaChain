@@ -13,7 +13,7 @@
     <meta name="i18n-title" content="hero.title">
     <meta name="i18n-description" content="hero.subtitle">
     <meta name="theme-color" content="#0066ff">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.socket.io/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://api.optimachain.io wss://api.optimachain.io; worker-src 'self' blob:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.socket.io/ https://cdnjs.cloudflare.com/ https://cdn.jsdelivr.net/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; media-src 'self' blob: data:; connect-src 'self' https://api.optimachain.io wss://api.optimachain.io ws://localhost:* http://localhost:* https://optimachain.org/; worker-src 'self' blob:;">
     <meta name="application-name" content="OptimaChain">
     <meta name="apple-mobile-web-app-title" content="OptimaChain">
     <meta name="mobile-web-app-capable" content="yes">
@@ -26,7 +26,7 @@
     <meta property="og:description" content="革新的なスケーリング技術と高度なセキュリティを統合。50,000TPS、即時ファイナリティ、99.9%の稼働率を実現する次世代ブロックチェーン。バリデータ募集中！">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://optimachain.io/">
-    <meta property="og:image" content="https://optimachain.io/img/og-image.png">
+    <meta property="og:image" content="https://optimachain.io/img/og-image.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="OptimaChain - 次世代型分散型ブロックチェーンプラットフォーム">
@@ -41,7 +41,7 @@
     <meta name="twitter:creator" content="@OptimaChain">
     <meta name="twitter:title" content="OptimaChain - 次世代型分散型ブロックチェーンプラットフォーム">
     <meta name="twitter:description" content="革新的なスケーリング技術と高度なセキュリティを統合。50,000TPS、即時ファイナリティ、99.9%の稼働率を実現する次世代ブロックチェーン。バリデータ募集中！">
-    <meta name="twitter:image" content="https://optimachain.io/img/twitter-card.png">
+    <meta name="twitter:image" content="https://optimachain.io/img/twitter-card.svg">
     <meta name="twitter:image:alt" content="OptimaChain - 次世代型分散型ブロックチェーンプラットフォーム">
     <meta name="twitter:domain" content="optimachain.io">
     
@@ -102,8 +102,8 @@
     <!-- ファビコン - 強化版 -->
     <link rel="icon" href="/img/favicon.ico" sizes="any">
     <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-    <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#0066ff">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.svg">
+    <link rel="mask-icon" href="/img/favicon.svg" color="#0066ff">
     <link rel="manifest" href="/site.webmanifest">
     <meta name="msapplication-TileColor" content="#0066ff">
     <meta name="msapplication-config" content="/browserconfig.xml">
