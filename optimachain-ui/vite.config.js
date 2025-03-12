@@ -80,7 +80,7 @@ export default defineConfig(({ mode }) => {
           community: resolve(__dirname, 'pages/community.html'),
           token: resolve(__dirname, 'pages/token.html'),
           roadmap: resolve(__dirname, 'pages/roadmap.html'),
-          simulation: resolve(__dirname, 'simulation.html'),
+          // simulation: resolve(__dirname, 'simulation.html'), // Commented out as file doesn't exist
           wallet_index: resolve(__dirname, 'wallet/index.html'),
           dex_index: resolve(__dirname, 'dex/index.html'),
           validator_dashboard: resolve(__dirname, 'validator-dashboard.html'),
