@@ -1,0 +1,79 @@
+/* OptimaChain固有のスタイル */
+:root {
+    --primary-color: #10b981; /* green */
+    --primary-dark: #059669;
+    --primary-light: #34d399;
+    --accent-color: #8b5cf6; /* purple */
+}
+
+.bg-primary {
+    background-color: var(--primary-color);
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+.border-primary {
+    border-color: var(--primary-color);
+}
+
+.hover\:bg-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.hover\:text-primary:hover {
+    color: var(--primary-light);
+}
+
+/* ヒーローセクションの背景 */
+.hero-bg {
+    background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+    background-size: 200% 200%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ロードマップのカスタムスタイル */
+.roadmap-item:nth-child(odd)::before {
+    background-color: var(--primary-color);
+}
+
+.roadmap-item:nth-child(even)::before {
+    background-color: var(--primary-color);
+}
+
+/* フィーチャーカードのカスタムスタイル */
+.feature-card {
+    border-left: 4px solid var(--primary-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-card:hover {
+    border-color: var(--accent-color);
+}
+
+/* アニメーション */
+.animate-bounce {
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}

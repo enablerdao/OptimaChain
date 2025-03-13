@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaChain - 高性能DEXプラットフォーム</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/optimachain.css">
+</head>
+<body class="bg-gray-900 text-white font-inter">
+    <!-- ヘッダー -->
+    <header class="bg-gray-800 shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="images/optimachain-logo.svg" alt="OptimaChain Logo" class="h-10">
+                    <h1 class="ml-4 text-2xl font-bold">OptimaChain</h1>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="#features" class="hover:text-green-400 transition">特徴</a></li>
+                        <li><a href="#technology" class="hover:text-green-400 transition">技術</a></li>
+                        <li><a href="#roadmap" class="hover:text-green-400 transition">ロードマップ</a></li>
+                        <li><a href="#docs" class="hover:text-green-400 transition">ドキュメント</a></li>
+                        <li><a href="#community" class="hover:text-green-400 transition">コミュニティ</a></li>
+                    </ul>
+                </nav>
+                <div class="flex space-x-4">
+                    <select class="bg-gray-700 rounded px-2 py-1">
+                        <option value="ja">日本語</option>
+                        <option value="en">English</option>
+                        <option value="zh">中文</option>
+                        <option value="ko">한국어</option>
+                    </select>
+                    <a href="https://github.com/enablerdao/OptimaChain" class="bg-green-600 hover:bg-green-500 px-4 py-2 rounded transition">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="py-20 bg-gradient-to-br from-gray-800 to-gray-900">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-5xl font-bold mb-6">高性能DEXプラットフォーム</h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">OptimaChainは、高性能な分散型取引所（DEX）を中心とした次世代ブロックチェーンプラットフォームです。ユーザーフレンドリーなインターフェースと高速トランザクション処理を実現します。</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#features" class="bg-green-600 hover:bg-green-500 px-6 py-3 rounded-lg font-medium transition">詳細を見る</a>
+                <a href="https://github.com/enablerdao/OptimaChain" class="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-lg font-medium transition">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特徴セクション -->
+    <section id="features" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center">主な特徴</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <div class="text-green-400 text-4xl mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">高性能DEX</h3>
+                    <p class="text-gray-300">自動マーケットメーカー（AMM）と注文書ベースの取引を組み合わせた革新的なDEXを提供し、低スリッページと高い流動性を実現します。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="text-green-400 text-4xl mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">低ガス費用</h3>
+                    <p class="text-gray-300">最適化されたスマートコントラクトとレイヤー2ソリューションにより、取引コストを大幅に削減します。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="text-green-400 text-4xl mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">高度なセキュリティ</h3>
+                    <p class="text-gray-300">複数の監査を受けたスマートコントラクトと革新的なセキュリティ対策により、資産の安全性を確保します。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="text-green-400 text-4xl mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">直感的なUI/UX</h3>
+                    <p class="text-gray-300">初心者から上級者まで、誰でも簡単に利用できる直感的なユーザーインターフェースを提供します。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="text-green-400 text-4xl mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">高速トランザクション</h3>
+                    <p class="text-gray-300">最適化されたブロックチェーンアーキテクチャにより、ミリ秒単位の取引確定を実現します。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="text-green-400 text-4xl mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">クロスチェーン互換性</h3>
+                    <p class="text-gray-300">複数のブロックチェーンとの互換性を持ち、シームレスな資産移動と取引を可能にします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技術セクション -->
+    <section id="technology" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center">技術詳細</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">ハイブリッドDEXアーキテクチャ</h3>
+                    <p class="text-gray-300 mb-6">OptimaChainのDEXは、自動マーケットメーカー（AMM）と注文書ベースの取引を組み合わせたハイブリッドアーキテクチャを採用しています。AMMは小額取引に最適な流動性を提供し、注文書システムは大口取引のスリッページを最小化します。さらに、独自の流動性集約アルゴリズムにより、複数の流動性プールを効率的に活用して最適な取引ルートを自動的に見つけ出します。これにより、他のDEXと比較して最大30%のスリッページ削減を実現しています。</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">レイヤー2スケーリングソリューション</h3>
+                    <p class="text-gray-300 mb-6">OptimaChainは独自のレイヤー2スケーリングソリューションを実装し、高いスループットと低いガス費用を実現しています。Optimistic Rollupと独自の状態チャネル技術を組み合わせることで、メインチェーンの負荷を軽減しながら、毎秒数千件のトランザクション処理を可能にしています。また、バッチ処理と効率的なデータ圧縮技術により、ガス費用を従来のDEXと比較して最大95%削減することに成功しています。これにより、マイクロトランザクションや高頻度取引も経済的に実行可能になります。</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">マルチレベルセキュリティアーキテクチャ</h3>
+                    <p class="text-gray-300 mb-6">OptimaChainは、複数の独立した監査を受けたスマートコントラクトを基盤としています。さらに、リアルタイム監視システム、自動異常検出、段階的なアップグレードプロセスなど、多層的なセキュリティ対策を実装しています。特に重要なのは、ユーザー資産を保護するための「セキュリティバックストップ」メカニズムで、異常な活動が検出された場合に自動的に緊急停止を行い、資産を保護します。また、オプションの2要素認証と高度な暗号化技術により、ユーザーアカウントのセキュリティも強化されています。</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">ユーザー中心設計とアクセシビリティ</h3>
+                    <p class="text-gray-300 mb-6">OptimaChainのインターフェースは、広範なユーザーテストと反復的な設計プロセスを経て開発されました。初心者向けの「シンプルモード」から上級者向けの「プロモード」まで、ユーザーの経験レベルに合わせた複数のインターフェースオプションを提供しています。また、ワンクリックスワップ、ガス費用の自動最適化、取引シミュレーションなどの機能により、ユーザー体験を大幅に向上させています。さらに、モバイルファーストの設計アプローチにより、スマートフォンやタブレットからも快適に利用できるよう最適化されています。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ロードマップセクション -->
+    <section id="roadmap" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center">開発ロードマップ</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="relative">
+                    <!-- ロードマップの縦線 -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-green-600"></div>
+                    
+                    <!-- ロードマップアイテム -->
+                    <div class="roadmap-item">
+                        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold mb-2">フェーズ1: DEXプロトタイプ</h3>
+                            <p class="text-gray-400 mb-2">2025年Q1-Q2</p>
+                            <p class="text-gray-300">基本的なDEX機能の実装、ウォレット統合、ユーザーインターフェースの開発</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold mb-2">フェーズ2: レイヤー2統合</h3>
+                            <p class="text-gray-400 mb-2">2025年Q3-Q4</p>
+                            <p class="text-gray-300">レイヤー2スケーリングソリューションの実装、ガス最適化、初期テストネットの立ち上げ</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold mb-2">フェーズ3: セキュリティ強化</h3>
+                            <p class="text-gray-400 mb-2">2026年Q1-Q2</p>
+                            <p class="text-gray-300">セキュリティ監査の実施、マルチレベルセキュリティの実装、バグ修正と最適化</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold mb-2">フェーズ4: クロスチェーン機能</h3>
+                            <p class="text-gray-400 mb-2">2026年Q3-Q4</p>
+                            <p class="text-gray-300">クロスチェーンブリッジの実装、複数ブロックチェーンとの互換性強化、公開テストネットのローンチ</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold mb-2">フェーズ5: メインネットとエコシステム</h3>
+                            <p class="text-gray-400 mb-2">2027年以降</p>
+                            <p class="text-gray-300">メインネットのローンチ、パートナーシップの拡大、DeFiエコシステムの構築</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ドキュメントセクション -->
+    <section id="docs" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-8">ドキュメント</h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">OptimaChainの詳細な技術ドキュメントを確認して、プラットフォームの可能性を探求してください。</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="bg-green-600 hover:bg-green-500 px-6 py-3 rounded-lg font-medium transition">技術ドキュメント</a>
+                <a href="#" class="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-lg font-medium transition">開発者ガイド</a>
+                <a href="#" class="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-lg font-medium transition">APIリファレンス</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- コミュニティセクション -->
+    <section id="community" class="py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-8">コミュニティに参加</h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">OptimaChainの成長するコミュニティに参加して、最新情報を入手し、開発に貢献しましょう。</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-lg font-medium transition">Twitter</a>
+                <a href="#" class="bg-purple-600 hover:bg-purple-500 px-6 py-3 rounded-lg font-medium transition">Discord</a>
+                <a href="#" class="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-lg font-medium transition">Telegram</a>
+                <a href="#" class="bg-red-600 hover:bg-red-500 px-6 py-3 rounded-lg font-medium transition">YouTube</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター（共通） -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">株式会社イネブラのブロックチェーンプロジェクト</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://novaledger.enablerhq.com" class="text-gray-400 hover:text-indigo-400 transition">NovaLedger - 究極のブロックチェーン技術</a></li>
+                        <li><a href="https://nexacore.enablerhq.com" class="text-gray-400 hover:text-blue-400 transition">NexaCore - AI統合型ブロックチェーン</a></li>
+                        <li><a href="https://optimachain.enablerhq.com" class="text-gray-400 hover:text-green-400 transition">OptimaChain - 高性能DEXプラットフォーム</a></li>
+                        <li><a href="https://neurachain.enablerhq.com" class="text-gray-400 hover:text-purple-400 transition">NeuraChain - AI駆動型ブロックチェーン</a></li>
+                        <li><a href="https://pulsechain.enablerhq.com" class="text-gray-400 hover:text-red-400 transition">PulseChain - 環境同期型ブロックチェーン</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">リソース</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition">ドキュメント</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition">チュートリアル</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition">APIリファレンス</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition">開発者ガイド</a></li>
+                        <li><a href="https://github.com/enablerdao/OptimaChain" class="text-gray-400 hover:text-green-400 transition">GitHub</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">コミュニティ</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition">Twitter</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition">Discord</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition">Telegram</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition">YouTube</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition">ブログ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">会社情報</h3>
+                    <p class="text-gray-400 mb-4">株式会社イネブラ<br>〒100-0001<br>東京都千代田区1-1-1<br>イネブラビル</p>
+                    <p class="text-gray-400">お問い合わせ: <a href="mailto:info@enablerhq.com" class="text-green-400">info@enablerhq.com</a></p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 株式会社イネブラ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script src="js/optimachain.js"></script>
+</body>
+</html>
