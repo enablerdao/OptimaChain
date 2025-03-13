@@ -4,6 +4,10 @@
 > 
 > OptimaChainは活発な開発段階にあり、ウェブサイト、ウォレットプロトタイプ、DEXプロトタイプが実装されています。バリデータガイドも公開され、テストネットの準備が進行中です。
 
+**このプロジェクトは[株式会社イネブラ](https://enablerhq.com)の実験的ブロックチェーンプロジェクトです。**
+
+[English](README.en.md) | [中文](README.zh-CN.md) | [한국어](README.ko.md)
+
 ```
   ____        _   _                    ____ _           _       
  / __ \      | | (_)                  / ____| |         (_)      
@@ -173,9 +177,21 @@ OptimaChainはMITライセンスの下で公開されています。
 - **Discord**: [discord.gg/optimachain](https://discord.gg/optimachain)
 - **GitHub**: [github.com/enablerdao/OptimaChain](https://github.com/enablerdao/OptimaChain)
 
+## ロードマップ
+
+```
+┌────────────────────┐     ┌────────────────────┐     ┌────────────────────┐     ┌────────────────────┐
+│ 2024 Q3-Q4         │     │ 2025 Q1-Q2         │     │ 2025 Q3            │     │ 2025 Q4以降        │
+│ コアプロトコル開発   │ ──> │ 高度な機能実装      │ ──> │ メインネット公開    │ ──> │ エコシステム拡大    │
+│ テストネット立ち上げ  │     │ セキュリティ監査    │     │ トークン生成イベント │     │ 相互運用性強化      │
+└────────────────────┘     └────────────────────┘     └────────────────────┘     └────────────────────┘
+```
+
+詳細なロードマップは[こちら](optimachain-ui/whitepaper/OptimaChain_Whitepaper.html#roadmap)をご覧ください。
+
 ## 関連プロジェクト
 
-EnablerDAOが開発する他のブロックチェーンプロジェクトもご覧ください：
+株式会社イネブラが開発する他のブロックチェーンプロジェクトもご覧ください：
 
 - [NovaLedger](https://github.com/enablerdao/NovaLedger) - 超高速処理、高スケーラビリティ、量子耐性、AIによる最適化を特徴とする次世代ブロックチェーン技術
 - [NexaCore](https://github.com/enablerdao/NexaCore) - AI統合、シャーディング、zk-SNARKsを特徴とする次世代ブロックチェーンプラットフォーム
