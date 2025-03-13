@@ -1,6 +1,7 @@
 [build]
-  publish = "optimachain-ui/dist"
-  command = "cd optimachain-ui && npm install && npm run build"
+  base = "frontend"
+  publish = "dist"
+  command = "npm run build"
 
 [[redirects]]
   from = "/*"
@@ -9,3 +10,8 @@
 
 [build.environment]
   NODE_VERSION = "18"
+
+[headers]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
