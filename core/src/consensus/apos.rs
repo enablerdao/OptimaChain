@@ -49,6 +49,8 @@ pub struct APoS {
     finality_provider: FinalityProvider,
     /// Performance metrics for validators
     validator_performance: HashMap<VerifyingKey, ValidatorPerformance>,
+    /// Whether the consensus is running
+    running: bool,
 }
 
 /// Performance metrics for a validator
@@ -78,7 +80,43 @@ impl APoS {
             block_producer,
             finality_provider,
             validator_performance: HashMap::new(),
+            running: false,
         }
+    }
+    
+    /// Start the consensus
+    pub fn start(&mut self) -> Result<(), String> {
+        if self.running {
+            return Ok(());
+        }
+        
+        // Initialize block production schedule
+        let timestamp = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("Time went backwards")
+            .as_millis() as u64;
+        
+        self.block_producer.generate_schedule(
+            &self.validators,
+            timestamp,
+            self.config.epoch_length * self.config.block_time_target_ms,
+            self.config.block_time_target_ms
+        );
+        
+        self.running = true;
+        log::info!("APoS consensus started");
+        Ok(())
+    }
+    
+    /// Stop the consensus
+    pub fn stop(&mut self) -> Result<(), String> {
+        if !self.running {
+            return Ok(());
+        }
+        
+        self.running = false;
+        log::info!("APoS consensus stopped");
+        Ok(())
     }
     
     /// Get the current validator set
@@ -106,8 +144,9 @@ impl APoS {
         }
         
         // Add the new validator
+        let public_key = validator.public_key();
         self.validators.add_validator(validator);
-        self.validator_performance.insert(validator.public_key(), ValidatorPerformance::default());
+        self.validator_performance.insert(public_key, ValidatorPerformance::default());
         
         Ok(())
     }

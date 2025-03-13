@@ -48,8 +48,8 @@ const tokenSchema = mongoose.Schema(
   }
 );
 
-// For development purposes, we'll create a mock Token model
-// In a real application, you would use mongoose.model
+// Comment out mock Token model
+/*
 const Token = {
   findById: (id) => {
     // Mock token data
@@ -157,8 +157,9 @@ function getTokens() {
     },
   ];
 }
+*/
 
-// Uncomment the following line to use the real mongoose model
-// const Token = mongoose.model('Token', tokenSchema);
+// Use real mongoose model
+const Token = mongoose.model('Token', tokenSchema);
 
 module.exports = Token;

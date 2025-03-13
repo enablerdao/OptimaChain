@@ -1,4 +1,4 @@
-use rocksdb::{DBIterator, IteratorMode as RocksIteratorMode};
+use rocksdb::{DBIterator, IteratorMode as RocksIteratorMode, DB};
 use std::sync::Arc;
 
 /// Mode for iterating over keys
@@ -13,16 +13,16 @@ pub enum IteratorMode {
 }
 
 /// Iterator over keys and values in the database
-pub struct StorageIterator {
+pub struct StorageIterator<'a> {
     /// RocksDB iterator
-    iter: DBIterator<Arc<rocksdb::DB>>,
+    iter: DBIterator<'a>,
     /// Prefix to filter by
     prefix: Vec<u8>,
 }
 
-impl StorageIterator {
+impl<'a> StorageIterator<'a> {
     /// Create a new storage iterator
-    pub fn new(iter: DBIterator<Arc<rocksdb::DB>>, prefix: Vec<u8>) -> Self {
+    pub fn new(iter: DBIterator<'a>, prefix: Vec<u8>) -> Self {
         StorageIterator {
             iter,
             prefix,
@@ -31,10 +31,18 @@ impl StorageIterator {
     
     /// Get the next key-value pair
     pub fn next(&mut self) -> Option<(Vec<u8>, Vec<u8>)> {
-        if let Some((key, value)) = self.iter.next() {
-            // Check if key has the correct prefix
-            if key.starts_with(&self.prefix) {
-                return Some((key.to_vec(), value.to_vec()));
+        while let Some(result) = self.iter.next() {
+            match result {
+                Ok((key, value)) => {
+                    // Check if key has the correct prefix
+                    if key.starts_with(&self.prefix) {
+                        return Some((key.to_vec(), value.to_vec()));
+                    }
+                },
+                Err(e) => {
+                    log::error!("Error iterating over database: {:?}", e);
+                    return None;
+                }
             }
         }
         

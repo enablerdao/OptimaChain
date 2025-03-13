@@ -13,7 +13,7 @@
     <meta name="i18n-title" content="hero.title">
     <meta name="i18n-description" content="hero.subtitle">
     <meta name="theme-color" content="#0066ff">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.socket.io/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://api.optimachain.io wss://api.optimachain.io; worker-src 'self' blob:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.socket.io/ https://cdnjs.cloudflare.com/ https://cdn.jsdelivr.net/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://api.optimachain.io wss://api.optimachain.io ws://localhost:* http://localhost:*; worker-src 'self' blob:;">
     <meta name="application-name" content="OptimaChain">
     <meta name="apple-mobile-web-app-title" content="OptimaChain">
     <meta name="mobile-web-app-capable" content="yes">
@@ -117,10 +117,23 @@
     <link rel="stylesheet" href="/styles/main.css">
     
     <!-- JavaScript -->
-    <link rel="preload" href="/src/js/config.js" as="script">
-    <link rel="preload" href="/js/main.js" as="script">
+    <link rel="preload" href="/src/js/config.js" as="script" crossorigin="anonymous">
+    <link rel="preload" href="/js/main.js" as="script" crossorigin="anonymous">
     <link rel="preload" href="/src/js/router.js" as="script" crossorigin="anonymous">
+    <!-- Three.js and dependencies with crossorigin attribute -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/Pass.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js" crossorigin="anonymous"></script>
+    <script src="/src/js/shaderpass-fix.js" type="module"></script>
+    <script src="/src/js/luminosity-shader-fix.js" type="module"></script>
     <script src="/src/js/config.js" type="module"></script>
+    <script src="/js/blockchain-3d.js" type="module" defer></script>
     <script src="/js/main.js" type="module" defer></script>
     <script src="/src/js/router.js" type="module" defer></script>
     <script>
@@ -134,12 +147,12 @@
 </head>
 <body>
     <!-- 通知バー -->
-    <div class="notification-bar">
+    <div class="notification-bar validator-recruitment">
         <div class="wrapper">
             <p class="notification-message">
-                <span class="notification-icon">🚀</span>
-                <span data-i18n="notification.testnet">OptimaChainテストネットが公開されました！</span>
-                <a href="#testnet" class="notification-cta" data-i18n="notification.join">今すぐ参加</a>
+                <span class="notification-icon">⭐</span>
+                <span data-i18n="notification.validator">バリデータ募集中！初期バリデータには特別な報酬があります</span>
+                <a href="#validator-setup-section" class="notification-cta" data-i18n="notification.apply">今すぐ応募</a>
             </p>
             <button class="notification-close" aria-label="閉じる" data-i18n="notification.close">閉じる</button>
         </div>
@@ -161,11 +174,7 @@
                     <ul>
                         <li><a href="#features" data-i18n="nav.features">特徴</a></li>
                         <li><a href="/technology" data-i18n="nav.technology">技術</a></li>
-                        <li><a href="/ecosystem" data-i18n="nav.ecosystem">エコシステム</a></li>
-                        <li><a href="/developers" data-i18n="nav.developers">開発者</a></li>
-                        <li><a href="/community" data-i18n="nav.community">コミュニティ</a></li>
-                        <li><a href="/token" data-i18n="nav.token">トークン</a></li>
-                        <li><a href="/roadmap">ロードマップ</a></li>
+                        <li><a href="/validator-dashboard" data-i18n="nav.validator">バリデータ</a></li>
                         <li><a href="/whitepaper" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
                     </ul>
                 </nav>
@@ -188,7 +197,7 @@
                     
                     <a href="/wallet" class="wallet-button" data-i18n="wallet.connect">ウォレット接続 ↓</a>
                     
-                    <button class="mobile-menu-toggle" aria-label="メニュー">
+                    <button class="mobile-menu-toggle" aria-label="メニュー" aria-expanded="false">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -199,7 +208,7 @@
     </header>
     
     <!-- モバイルメニュー -->
-    <div class="mobile-menu">
+    <div class="mobile-menu" aria-hidden="true">
         <nav>
             <ul>
                 <li><a href="#features" data-i18n="nav.features">特徴</a></li>
@@ -209,6 +218,7 @@
                 <li><a href="/community" data-i18n="nav.community">コミュニティ</a></li>
                 <li><a href="/token" data-i18n="nav.token">トークン</a></li>
                 <li><a href="/roadmap">ロードマップ</a></li>
+                <li><a href="/validator-dashboard.html" class="validator-link highlight">バリデータになる</a></li>
                 <li><a href="/whitepaper" data-i18n="dropdown.whitepaper.title">ホワイトペーパー</a></li>
             </ul>
         </nav>
@@ -268,22 +278,33 @@
                 </div>
                 
                 <div class="hero-cta animate-fade-in delay-3">
-                    <a href="#testnet" class="cta-btn large">
+                    <a href="/validator-dashboard" class="cta-btn large validator-highlight">
+                        <span>バリデータになる</span>
+                        <span class="validator-badge">初期報酬率25%</span>
+                        <span class="button-icon">→</span>
+                    </a>
+                    <a href="#testnet" class="secondary-btn large">
                         <span data-i18n="hero.cta">テストネットに参加する</span>
                         <span class="button-icon">→</span>
                     </a>
-                    <a href="/wallet" class="secondary-btn large">
+                    <a href="/wallet" class="tertiary-btn large">
                         <span data-i18n="hero.wallet">ウォレット接続</span>
                         <span class="button-icon">↓</span>
-                    </a>
-                    <a href="/validator-dashboard" class="tertiary-btn large">
-                        <span>バリデータダッシュボード</span>
-                        <span class="button-icon">→</span>
                     </a>
                     <a href="/whitepaper/OptimaChain_Whitepaper.html" class="quaternary-btn large">
                         <span>ホワイトペーパー</span>
                         <span class="button-icon">→</span>
                     </a>
+                </div>
+                <div class="validator-status animate-fade-in delay-4">
+                    <div class="validator-counter">
+                        <span class="validator-count-label">現在のバリデータ数:</span>
+                        <span class="validator-count-value">5</span>
+                        <span class="validator-count-target">/ 100</span>
+                    </div>
+                    <div class="validator-progress">
+                        <div class="validator-progress-bar" style="width: 5%;"></div>
+                    </div>
                 </div>
                 <p class="cta-subtext animate-fade-in delay-4">
                     <span class="users-count">10,000+</span> 人のユーザーが既に参加しています
@@ -318,6 +339,112 @@
         <div class="scroll-indicator">
             <div class="mouse-icon"></div>
             <span data-i18n="buttons.showMore">スクロールして詳細を見る</span>
+        </div>
+    </section>
+    
+    <!-- ネットワーク統計セクション -->
+    <section class="network-stats-section" id="network-stats">
+        <div class="wrapper">
+            <div class="section-header">
+                <div class="section-tag">NETWORK</div>
+                <h2 class="section-title">ネットワーク統計</h2>
+                <p class="section-subtitle">
+                    OptimaChainネットワークのリアルタイム統計情報とバリデータメトリクス
+                </p>
+            </div>
+            
+            <div class="network-tabs">
+                <div class="tab active" data-tab="validators">バリデータ統計</div>
+                <div class="tab" data-tab="apos">AI-Adaptive PoS</div>
+                <div class="tab" data-tab="sharding">自己最適化シャーディング</div>
+                <div class="tab" data-tab="smart-contract">AI予測型スマートコントラクト</div>
+            </div>
+            
+            <div class="network-stats-container" id="network-stats-container">
+                <div class="network-stats-info">
+                    <div class="stats-grid">
+                        <div class="stats-item">
+                            <div class="stats-label">エポック:</div>
+                            <div class="stats-value" id="epoch-value">12</div>
+                        </div>
+                        <div class="stats-item validator-stat">
+                            <div class="stats-label">バリデータ数:</div>
+                            <div class="stats-value" id="validator-count">5</div>
+                            <div class="stats-target">/ 100</div>
+                        </div>
+                        <div class="stats-item">
+                            <div class="stats-label">ネットワーク負荷:</div>
+                            <div class="stats-value" id="network-load">50%</div>
+                        </div>
+                        <div class="stats-item validator-stat">
+                            <div class="stats-label">平均報酬率:</div>
+                            <div class="stats-value" id="reward-rate">25%</div>
+                            <div class="stats-trend positive">↑</div>
+                        </div>
+                        <div class="stats-item">
+                            <div class="stats-label">トランザクション/秒:</div>
+                            <div class="stats-value" id="tps-value">12,450</div>
+                        </div>
+                        <div class="stats-item validator-stat">
+                            <div class="stats-label">バリデータ稼働率:</div>
+                            <div class="stats-value" id="uptime-value">99.8%</div>
+                            <div class="stats-trend positive">↑</div>
+                        </div>
+                    </div>
+                    
+                    <div class="validator-distribution">
+                        <h4>バリデータ地域分布</h4>
+                        <div class="distribution-chart">
+                            <div class="chart-segment" style="width: 35%;" data-region="アジア">
+                                <span class="segment-label">アジア</span>
+                                <span class="segment-value">35%</span>
+                            </div>
+                            <div class="chart-segment" style="width: 30%;" data-region="ヨーロッパ">
+                                <span class="segment-label">ヨーロッパ</span>
+                                <span class="segment-value">30%</span>
+                            </div>
+                            <div class="chart-segment" style="width: 25%;" data-region="北米">
+                                <span class="segment-label">北米</span>
+                                <span class="segment-value">25%</span>
+                            </div>
+                            <div class="chart-segment" style="width: 10%;" data-region="その他">
+                                <span class="segment-label">その他</span>
+                                <span class="segment-value">10%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="network-visual">
+                    <canvas id="network-canvas" width="600" height="400"></canvas>
+                    <div class="visual-overlay">
+                        <div class="validator-node-info">
+                            <div class="node-status active"></div>
+                            <span>アクティブバリデータ</span>
+                        </div>
+                        <div class="validator-node-info">
+                            <div class="node-status pending"></div>
+                            <span>保留中バリデータ</span>
+                        </div>
+                        <div class="validator-node-info">
+                            <div class="node-status available"></div>
+                            <span>利用可能スロット</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="network-controls">
+                    <div class="load-slider-container">
+                        <span class="slider-label">ネットワーク負荷:</span>
+                        <input type="range" id="load-slider" min="0" max="100" value="50" class="load-slider">
+                        <span class="slider-value">50%</span>
+                        <button id="apply-load" class="apply-button">適用</button>
+                    </div>
+                    <div class="validator-cta-small">
+                        <a href="#validator-setup-section" class="validator-link">バリデータになる →</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     
@@ -401,65 +528,194 @@ cd optimachain
             </div>
         </div>
     </section>
+    
+    <!-- バリデータ特典セクション -->
+    <section class="validator-benefits-section" id="validator-benefits">
+        <div class="wrapper">
+            <div class="section-header">
+                <div class="section-tag">VALIDATOR BENEFITS</div>
+                <h2 class="section-title">バリデータになる特典</h2>
+                <p class="section-subtitle">OptimaChainのバリデータとして参加することで得られる特典をご紹介します。</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon" data-icon="rewards"></div>
+                    <h3>高い報酬</h3>
+                    <p>初期バリデータには<strong>25%の高い報酬率</strong>が設定されており、ネットワークの成長とともに価値が向上します。</p>
+                    <div class="benefit-highlight">
+                        <span class="highlight-value">25%</span>
+                        <span class="highlight-label">初期報酬率</span>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon" data-icon="governance"></div>
+                    <h3>ガバナンス参加権</h3>
+                    <p>プロトコルの重要な決定に投票する権利を得て、OptimaChainの未来を形作ることができます。</p>
+                    <div class="benefit-highlight">
+                        <span class="highlight-value">2倍</span>
+                        <span class="highlight-label">投票権重み</span>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon" data-icon="early"></div>
+                    <h3>先行者メリット</h3>
+                    <p>初期バリデータはエコシステムの成長に伴い、様々な特典や機会を優先的に得ることができます。</p>
+                    <div class="benefit-highlight">
+                        <span class="highlight-value">優先</span>
+                        <span class="highlight-label">新機能アクセス</span>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon" data-icon="community"></div>
+                    <h3>コミュニティ</h3>
+                    <p>技術的な知識を持つ開発者や投資家のコミュニティに参加し、貴重なネットワークを構築できます。</p>
+                    <div class="benefit-highlight">
+                        <span class="highlight-value">VIP</span>
+                        <span class="highlight-label">コミュニティアクセス</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="validator-requirements">
+                <h3>バリデータの要件</h3>
+                <div class="requirements-grid">
+                    <div class="requirement-item">
+                        <div class="requirement-icon" data-icon="hardware"></div>
+                        <div class="requirement-content">
+                            <h4>ハードウェア要件</h4>
+                            <p>CPU: 4コア以上、RAM: 8GB以上、ストレージ: 100GB以上（SSD推奨）</p>
+                        </div>
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <div class="requirement-icon" data-icon="stake"></div>
+                        <div class="requirement-content">
+                            <h4>最小ステーク</h4>
+                            <p>10,000 OPT トークン</p>
+                        </div>
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <div class="requirement-icon" data-icon="uptime"></div>
+                        <div class="requirement-content">
+                            <h4>アップタイム</h4>
+                            <p>99%以上の稼働率を維持すること</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="validator-cta">
+                <a href="#validator-setup-section" class="primary-btn">
+                    <span>今すぐバリデータになる</span>
+                    <span class="button-icon">→</span>
+                </a>
+                <a href="/validator-dashboard" class="secondary-btn">
+                    <span>バリデータダッシュボード</span>
+                    <span class="button-icon">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- 技術仕様セクション -->
     <section class="tech-specs-section">
         <div class="wrapper">
             <div class="section-header">
                 <div class="section-tag">TECHNOLOGY</div>
-                <h2 class="section-title">技術仕様の詳細</h2>
+                <h2 class="section-title">技術仕様</h2>
                 <p class="section-subtitle">
-                    OptimaChainの革新的な技術基盤について詳しく解説します。
+                    OptimaChainの革新的な技術基盤
                 </p>
             </div>
             
-            <div class="tech-specs-grid">
-                <div class="tech-spec-card">
-                    <div class="spec-icon" data-icon="consensus"></div>
-                    <h3>Adaptive Proof-of-Stake (aPoS)</h3>
-                    <p>独自のAdaptive Proof-of-Stakeアルゴリズムにより、ネットワーク負荷に応じて自動的にパラメータを調整し、最適なパフォーマンスと安全性を実現します。</p>
-                    <ul class="spec-details">
-                        <li>動的バリデータ選択メカニズム</li>
-                        <li>自動パラメータ調整</li>
-                        <li>エネルギー効率最適化</li>
-                    </ul>
-                    <a href="/whitepaper#adaptive-proof-of-stake" class="learn-more">詳細を見る →</a>
+            <div class="tech-specs-visual">
+                <div class="tech-metrics">
+                    <div class="metric-item">
+                        <div class="metric-value">50,000+</div>
+                        <div class="metric-label">TPS</div>
+                        <div class="metric-desc">トランザクション/秒</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">&lt;1秒</div>
+                        <div class="metric-label">ファイナリティ</div>
+                        <div class="metric-desc">トランザクション確定時間</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">99.9%</div>
+                        <div class="metric-label">アップタイム</div>
+                        <div class="metric-desc">ネットワーク稼働率</div>
+                    </div>
                 </div>
                 
-                <div class="tech-spec-card">
-                    <div class="spec-icon" data-icon="sharding"></div>
-                    <h3>動的シャーディング</h3>
-                    <p>AI駆動の動的シャーディング技術により、ネットワークの負荷に応じてシャードの数と構成を自動的に最適化します。</p>
-                    <ul class="spec-details">
-                        <li>最大1,000シャードのサポート</li>
-                        <li>クロスシャード通信の最適化</li>
-                        <li>シャード再構成アルゴリズム</li>
-                    </ul>
-                    <a href="/whitepaper#dynamic-sharding" class="learn-more">詳細を見る →</a>
+                <div class="tech-comparison">
+                    <h3>他のブロックチェーンとの比較</h3>
+                    <div class="comparison-chart">
+                        <div class="chart-labels">
+                            <div class="chart-label">TPS</div>
+                            <div class="chart-label">ファイナリティ</div>
+                            <div class="chart-label">エネルギー効率</div>
+                            <div class="chart-label">分散化</div>
+                        </div>
+                        <div class="chart-bars">
+                            <div class="chain-bar">
+                                <div class="chain-name">OptimaChain</div>
+                                <div class="bar-container">
+                                    <div class="bar" style="width: 95%"></div>
+                                    <div class="bar" style="width: 90%"></div>
+                                    <div class="bar" style="width: 85%"></div>
+                                    <div class="bar" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="chain-bar">
+                                <div class="chain-name">従来型ブロックチェーン</div>
+                                <div class="bar-container">
+                                    <div class="bar" style="width: 30%"></div>
+                                    <div class="bar" style="width: 40%"></div>
+                                    <div class="bar" style="width: 50%"></div>
+                                    <div class="bar" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tech-features">
+                <div class="tech-feature">
+                    <div class="feature-icon" data-icon="consensus"></div>
+                    <div class="feature-content">
+                        <h3>AI適応型コンセンサス</h3>
+                        <p>ネットワーク負荷に応じて自動的にパラメータを調整し、最適なパフォーマンスと安全性を実現</p>
+                    </div>
                 </div>
                 
-                <div class="tech-spec-card">
-                    <div class="spec-icon" data-icon="execution"></div>
-                    <h3>並列実行エンジン</h3>
-                    <p>独自の並列実行エンジンにより、複数のトランザクションを同時に処理し、スループットを大幅に向上させます。</p>
-                    <ul class="spec-details">
-                        <li>依存関係グラフ分析</li>
-                        <li>スマートコントラクト並列実行</li>
-                        <li>最適化されたメモリプール</li>
-                    </ul>
-                    <a href="/whitepaper#parallel-execution" class="learn-more">詳細を見る →</a>
+                <div class="tech-feature">
+                    <div class="feature-icon" data-icon="sharding"></div>
+                    <div class="feature-content">
+                        <h3>動的シャーディング</h3>
+                        <p>最大1,000シャードをサポートし、ネットワーク負荷に応じて自動最適化</p>
+                    </div>
                 </div>
                 
-                <div class="tech-spec-card">
-                    <div class="spec-icon" data-icon="privacy"></div>
-                    <h3>プライバシー保護機能</h3>
-                    <p>ゼロ知識証明とその他の暗号技術を組み合わせて、プライバシーを保護しながらトランザクションの検証を可能にします。</p>
-                    <ul class="spec-details">
-                        <li>選択的開示メカニズム</li>
-                        <li>ゼロ知識証明の実装</li>
-                        <li>プライバシー保護トランザクション</li>
-                    </ul>
-                    <a href="/whitepaper#privacy-features" class="learn-more">詳細を見る →</a>
+                <div class="tech-feature">
+                    <div class="feature-icon" data-icon="execution"></div>
+                    <div class="feature-content">
+                        <h3>並列実行エンジン</h3>
+                        <p>複数のトランザクションを同時処理し、スループットを大幅に向上</p>
+                    </div>
+                </div>
+                
+                <div class="tech-feature">
+                    <div class="feature-icon" data-icon="privacy"></div>
+                    <div class="feature-content">
+                        <h3>プライバシー保護</h3>
+                        <p>ゼロ知識証明技術によるプライバシー保護と透明性の両立</p>
+                    </div>
                 </div>
             </div>
             
@@ -472,87 +728,6 @@ cd optimachain
                     <span>技術詳細ページへ</span>
                     <span class="button-icon">→</span>
                 </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- バリデータセットアップセクション -->
-    <section class="validator-setup-section" id="validator-setup-section">
-        <div class="wrapper">
-            <div class="section-header">
-                <div class="section-tag">VALIDATOR</div>
-                <h2 class="section-title">バリデータになる</h2>
-                <p class="section-subtitle">OptimaChainのバリデータノードを実行して、ネットワークの分散化と安全性に貢献しましょう。</p>
-            </div>
-            
-            <div class="validator-setup-hero">
-                <h2>バリデータのセットアップ</h2>
-                <p>以下のコマンドを使用して、お使いのプラットフォームにバリデータをセットアップできます。</p>
-                
-                <div class="os-tabs">
-                    <div class="os-tab active" data-os="linux">Linux</div>
-                    <div class="os-tab" data-os="macos">macOS</div>
-                    <div class="os-tab" data-os="windows">Windows</div>
-                </div>
-                
-                <div class="os-content active" data-os="linux">
-                    <div class="validator-commands">
-                        <div class="command-header">
-                            <h4>Linux用セットアップコマンド</h4>
-                            <button class="copy-btn">コピー</button>
-                        </div>
-                        <pre># OptimaChainバリデータノードのセットアップ (Linux)
-curl -sSL https://raw.githubusercontent.com/enablerdao/OptimaChain/main/scripts/validator-setup.sh | bash
-
-# ノードの起動
-cd optimachain
-./optimachain-node --validator --name YOUR_VALIDATOR_NAME</pre>
-                    </div>
-                </div>
-                
-                <div class="os-content" data-os="macos">
-                    <div class="validator-commands">
-                        <div class="command-header">
-                            <h4>macOS用セットアップコマンド</h4>
-                            <button class="copy-btn">コピー</button>
-                        </div>
-                        <pre># OptimaChainバリデータノードのセットアップ (macOS)
-curl -sSL https://raw.githubusercontent.com/enablerdao/OptimaChain/main/scripts/validator-setup-mac.sh | bash
-
-# ノードの起動
-cd optimachain
-./optimachain-node --validator --name YOUR_VALIDATOR_NAME</pre>
-                    </div>
-                </div>
-                
-                <div class="os-content" data-os="windows">
-                    <div class="validator-commands">
-                        <div class="command-header">
-                            <h4>Windows用セットアップコマンド</h4>
-                            <button class="copy-btn">コピー</button>
-                        </div>
-                        <pre># OptimaChainバリデータノードのセットアップ (Windows)
-# PowerShellを管理者として実行
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/enablerdao/OptimaChain/main/scripts/validator-setup.ps1 -OutFile validator-setup.ps1
-Set-ExecutionPolicy Bypass -Scope Process -Force
-./validator-setup.ps1
-
-# ノードの起動
-cd optimachain
-.\optimachain-node.exe --validator --name YOUR_VALIDATOR_NAME</pre>
-                    </div>
-                </div>
-                
-                <div class="validator-cta">
-                    <a href="/validator-dashboard" class="primary-btn">
-                        <span>バリデータダッシュボード</span>
-                        <span class="button-icon">→</span>
-                    </a>
-                    <a href="/whitepaper#21-コンセンサスメカニズム-adaptive-proof-of-stake-apos" class="secondary-btn">
-                        <span>コンセンサスメカニズムの詳細</span>
-                        <span class="button-icon">→</span>
-                    </a>
-                </div>
             </div>
         </div>
     </section>

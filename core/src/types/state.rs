@@ -1,5 +1,6 @@
 use crate::types::Account;
 use serde::{Serialize, Deserialize};
+use sha3::Digest;
 
 /// Root hash of the state
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]

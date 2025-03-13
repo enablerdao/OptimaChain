@@ -1,4 +1,4 @@
-use ed25519_dalek::{Keypair as Ed25519Keypair, PublicKey, SecretKey, Signature as Ed25519Signature, Signer, Verifier};
+use ed25519_dalek::{SigningKey, VerifyingKey, Signature as Ed25519Signature, Signer, Verifier};
 use rand::rngs::OsRng;
 use sha3::{Sha3_256, Digest};
 use hex;
@@ -8,18 +8,22 @@ use std::fmt;
 /// A cryptographic keypair
 #[derive(Clone)]
 pub struct KeyPair {
-    /// Ed25519 keypair
-    keypair: Ed25519Keypair,
+    /// Ed25519 signing key
+    keypair: SigningKey,
+    /// Ed25519 verifying key
+    public_key: VerifyingKey,
 }
 
 impl KeyPair {
     /// Generate a new random keypair
     pub fn generate() -> Self {
         let mut csprng = OsRng;
-        let keypair = Ed25519Keypair::generate(&mut csprng);
+        let keypair = SigningKey::generate(&mut csprng);
+        let public_key = VerifyingKey::from(&keypair);
         
         KeyPair {
             keypair,
+            public_key,
         }
     }
     
@@ -29,29 +33,25 @@ impl KeyPair {
             return Err("Invalid secret key length".to_string());
         }
         
-        let secret_key = SecretKey::from_bytes(secret_key_bytes)
-            .map_err(|e| format!("Invalid secret key: {}", e))?;
+        let keypair = SigningKey::from_bytes(secret_key_bytes.try_into().map_err(|_| "Invalid secret key bytes".to_string())?);
+
         
-        let public_key = PublicKey::from(&secret_key);
-        
-        let keypair = Ed25519Keypair {
-            secret: secret_key,
-            public: public_key,
-        };
+        let public_key = VerifyingKey::from(&keypair);
         
         Ok(KeyPair {
             keypair,
+            public_key,
         })
     }
     
     /// Get the public key
     pub fn public_key(&self) -> [u8; 32] {
-        self.keypair.public.to_bytes()
+        self.public_key.to_bytes()
     }
     
     /// Get the secret key
     pub fn secret_key(&self) -> [u8; 32] {
-        self.keypair.secret.to_bytes()
+        self.keypair.to_bytes()
     }
     
     /// Sign a message
@@ -65,12 +65,12 @@ impl KeyPair {
     
     /// Verify a signature
     pub fn verify(&self, message: &[u8], signature: &Signature) -> bool {
-        let ed_signature = match Ed25519Signature::from_bytes(&signature.bytes) {
+        let ed_signature = match Ed25519Signature::try_from(&signature.bytes[..]) {
             Ok(sig) => sig,
             Err(_) => return false,
         };
         
-        self.keypair.public.verify(message, &ed_signature).is_ok()
+        self.public_key.verify(message, &ed_signature).is_ok()
     }
 }
 
@@ -83,17 +83,63 @@ impl fmt::Debug for KeyPair {
 }
 
 /// A cryptographic signature
-#[derive(Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, PartialEq, Eq)]
 pub struct Signature {
     /// Signature bytes
     pub bytes: [u8; 64],
 }
 
+// Implement custom serialization for Signature
+impl Serialize for Signature {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        // Serialize as a byte array
+        serializer.serialize_bytes(&self.bytes)
+    }
+}
+
+// Implement custom deserialization for Signature
+impl<'de> Deserialize<'de> for Signature {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        struct SignatureVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for SignatureVisitor {
+            type Value = Signature;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
+                formatter.write_str("a byte array of length 64")
+            }
+
+            fn visit_bytes<E>(self, v: &[u8]) -> Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                if v.len() != 64 {
+                    return Err(E::custom(format!("expected 64 bytes, got {}", v.len())));
+                }
+                
+                let mut bytes = [0u8; 64];
+                bytes.copy_from_slice(v);
+                Ok(Signature { bytes })
+            }
+        }
+
+        deserializer.deserialize_bytes(SignatureVisitor)
+    }
+}
+
 impl Signature {
     /// Create a signature from bytes
-    pub fn from_bytes(bytes: [u8; 64]) -> Self {
+    pub fn from_bytes(bytes: &[u8; 64]) -> Self {
+        let mut signature_bytes = [0u8; 64];
+        signature_bytes.copy_from_slice(bytes);
         Signature {
-            bytes,
+            bytes: signature_bytes,
         }
     }
     
@@ -138,12 +184,12 @@ pub fn verify_signature(public_key: &[u8], message: &[u8], signature: &Signature
         return false;
     }
     
-    let public_key = match PublicKey::from_bytes(public_key) {
+    let public_key = match VerifyingKey::from_bytes(public_key.try_into().unwrap_or(&[0; 32])) {
         Ok(pk) => pk,
         Err(_) => return false,
     };
     
-    let ed_signature = match Ed25519Signature::from_bytes(&signature.bytes) {
+    let ed_signature = match Ed25519Signature::try_from(&signature.bytes[..]) {
         Ok(sig) => sig,
         Err(_) => return false,
     };

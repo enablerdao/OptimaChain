@@ -1,10 +1,43 @@
 # OptimaChain プロジェクト
 
-OptimaChainは、革新的なスケーリング技術と高度なセキュリティを統合した次世代型分散型ブロックチェーンプラットフォームです。
+> **開発進捗状況**: 活発な開発段階 | フロントエンド・バックエンド実装中 | 132ファイル | 最終更新: 2025年3月
+> 
+> OptimaChainは活発な開発段階にあり、ウェブサイト、ウォレットプロトタイプ、DEXプロトタイプが実装されています。バリデータガイドも公開され、テストネットの準備が進行中です。
+
+```
+  ____        _   _                    ____ _           _       
+ / __ \      | | (_)                  / ____| |         (_)      
+| |  | |_ __ | |_ _ _ __ ___   __ _  | |    | |__   __ _ _ _ __  
+| |  | | '_ \| __| | '_ ` _ \ / _` | | |    | '_ \ / _` | | '_ \ 
+| |__| | |_) | |_| | | | | | | (_| | | |____| | | | (_| | | | | |
+ \____/| .__/ \__|_|_| |_| |_|\__,_|  \_____|_| |_|\__,_|_|_| |_|
+       | |                                                       
+       |_|                                                       
+```
+
+OptimaChainは、革新的なスケーリング技術と高度なセキュリティを統合した次世代型分散型ブロックチェーンプラットフォームです。高速トランザクション処理、即時ファイナリティ、AI最適化を実現します。
 
 ## プロジェクト概要
 
 OptimaChainは以下の特徴を持つブロックチェーンプラットフォームの開発を目指しています：
+
+```
+┌────────────────────────────────────────────────────────────┐
+│                                                            │
+│  ┌─────────────────┐                  ┌─────────────────┐  │
+│  │ Adaptive PoS    │                  │ 動的シャーディング │  │
+│  └─────────────────┘                  └─────────────────┘  │
+│                                                            │
+│  ┌─────────────────┐                  ┌─────────────────┐  │
+│  │ 50,000+ TPS     │                  │ 即時ファイナリティ │  │
+│  └─────────────────┘                  └─────────────────┘  │
+│                                                            │
+│  ┌─────────────────┐                  ┌─────────────────┐  │
+│  │ AI最適化         │                  │ クロスチェーン連携 │  │
+│  └─────────────────┘                  └─────────────────┘  │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+```
 
 - **Adaptive Proof-of-Stake（APoS）** コンセンサスアルゴリズム
 - **動的シャーディング** によるスケーラビリティの向上
@@ -31,7 +64,7 @@ OptimaChainは現在、初期開発段階にあります。以下のロードマ
 - **2025年 Q3**: メインネット公開とトークン生成イベント
 - **2025年 Q4以降**: エコシステム拡大とクロスチェーン相互運用性強化
 
-詳細なロードマップは[こちら](/whitepaper/OptimaChain_Whitepaper.html#roadmap)をご覧ください。
+詳細なロードマップは[こちら](optimachain-ui/whitepaper/OptimaChain_Whitepaper.html#roadmap)をご覧ください。
 
 ## インストール方法
 
@@ -111,13 +144,13 @@ OptimaChainプロジェクトは以下のコンポーネントで構成されて
 
 OptimaChainの主要な技術コンポーネントについては、以下のドキュメントをご参照ください：
 
-- [コンセンサスメカニズム](/technology.html#consensus)
-- [動的シャーディング](/technology.html#sharding)
-- [並列実行エンジン](/technology.html#execution)
-- [プライバシー保護](/technology.html#privacy)
-- [AI最適化](/technology.html#ai-adaptive)
+- [コンセンサスメカニズム](optimachain-ui/technology.html#consensus)
+- [動的シャーディング](optimachain-ui/technology.html#sharding)
+- [並列実行エンジン](optimachain-ui/technology.html#execution)
+- [プライバシー保護](optimachain-ui/technology.html#privacy)
+- [AI最適化](optimachain-ui/technology.html#ai-adaptive)
 
-詳細な技術仕様については、[ホワイトペーパー](/whitepaper/OptimaChain_Whitepaper.html)をご覧ください。
+詳細な技術仕様については、[ホワイトペーパー](optimachain-ui/whitepaper/OptimaChain_Whitepaper.html)をご覧ください。
 
 ## 貢献方法
 
@@ -139,3 +172,12 @@ OptimaChainはMITライセンスの下で公開されています。
 - **Twitter**: [@OptimaChain](https://twitter.com/OptimaChain)
 - **Discord**: [discord.gg/optimachain](https://discord.gg/optimachain)
 - **GitHub**: [github.com/enablerdao/OptimaChain](https://github.com/enablerdao/OptimaChain)
+
+## 関連プロジェクト
+
+EnablerDAOが開発する他のブロックチェーンプロジェクトもご覧ください：
+
+- [NovaLedger](https://github.com/enablerdao/NovaLedger) - 超高速処理、高スケーラビリティ、量子耐性、AIによる最適化を特徴とする次世代ブロックチェーン技術
+- [NexaCore](https://github.com/enablerdao/NexaCore) - AI統合、シャーディング、zk-SNARKsを特徴とする次世代ブロックチェーンプラットフォーム
+- [NeuraChain](https://github.com/enablerdao/NeuraChain) - AI、量子耐性、スケーラビリティ、完全な分散化、エネルギー効率を統合した次世代ブロックチェーン
+- [PulseChain](https://github.com/enablerdao/PulseChain) - リアルタイム処理、環境融合、人間性を重視した全く新しいレイヤーワンブロックチェーン

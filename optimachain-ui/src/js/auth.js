@@ -46,7 +46,7 @@ const Auth = {
   logout: () => {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
-    window.location.href = '/index.html';
+    window.location.href = '/';
   }
 };
 

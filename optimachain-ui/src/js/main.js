@@ -9,6 +9,11 @@ import { initRouter } from './router.js';
 import { setupValidatorUI } from './validator-setup.js';
 import { initBlockchainVisual } from './blockchain-visual.js';
 import { initErrorHandler } from './error-handler.js';
+import { initNetworkStatsVisualization } from './network-stats-fix.js';
+import { initMobileMenu } from './mobile-menu.js';
+
+// Log initialization
+console.log('OptimaChain application initializing...');
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,10 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Setup validator UI
   setupValidatorUI();
   
+  // Initialize mobile menu
+  initMobileMenu();
+  
   // Initialize blockchain visualization if the canvas exists
   const blockchainCanvas = document.getElementById('blockchain-visual');
   if (blockchainCanvas) {
     initBlockchainVisual(blockchainCanvas);
+  }
+  
+  // Initialize network statistics visualization if we're on a page that has it
+  if (document.getElementById('network-stats-section')) {
+    initNetworkStatsVisualization();
   }
   
   // Initialize performance monitoring

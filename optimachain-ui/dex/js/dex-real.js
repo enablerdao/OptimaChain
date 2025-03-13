@@ -221,7 +221,7 @@ async function placeOrder(type, side) {
   try {
     // Check if user is authenticated
     if (!Auth.isAuthenticated()) {
-      window.location.href = '../login.html';
+      window.location.href = '../login';
       return;
     }
     
@@ -339,7 +339,7 @@ function setupEventListeners() {
         });
       } else {
         // Redirect to login page
-        window.location.href = '../login.html';
+        window.location.href = '../login';
       }
     });
   }

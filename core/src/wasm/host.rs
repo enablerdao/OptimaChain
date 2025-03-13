@@ -90,28 +90,24 @@ impl HostContext {
     pub fn transfer(&mut self, recipient: &AccountId, amount: u64) -> Result<(), WasmError> {
         let mut state = self.state.lock().unwrap();
         
-        // Get sender account
+        // Get sender and recipient indices
         let sender_idx = state.accounts.iter()
             .position(|a| a.id == self.account_id)
             .ok_or_else(|| WasmError::HostError(format!("Sender account not found: {:?}", self.account_id)))?;
         
-        let sender = &mut state.accounts[sender_idx];
-        
-        // Check balance
-        if sender.balance.native < amount {
-            return Err(WasmError::HostError(format!("Insufficient balance: {} < {}", sender.balance.native, amount)));
-        }
-        
-        // Get recipient account
         let recipient_idx = state.accounts.iter()
             .position(|a| a.id == *recipient)
             .ok_or_else(|| WasmError::HostError(format!("Recipient account not found: {:?}", recipient)))?;
         
-        let recipient = &mut state.accounts[recipient_idx];
+        // Check if sender has enough balance
+        if state.accounts[sender_idx].balance.native < amount {
+            return Err(WasmError::HostError(format!("Insufficient balance: {} < {}", 
+                state.accounts[sender_idx].balance.native, amount)));
+        }
         
-        // Transfer tokens
-        sender.balance.native -= amount;
-        recipient.balance.native += amount;
+        // Transfer tokens - handle separately to avoid multiple mutable borrows
+        state.accounts[sender_idx].balance.native -= amount;
+        state.accounts[recipient_idx].balance.native += amount;
         
         Ok(())
     }

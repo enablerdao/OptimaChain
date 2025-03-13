@@ -153,7 +153,7 @@ impl WasmRuntime {
                 let imports = wasmer::imports! {};
                 
                 // Instantiate the module
-                let instance = WasmerInstance::new(&store, &module, &imports)
+                let instance = WasmerInstance::new(store, &module, &imports)
                     .map_err(|e| WasmError::InstantiationError(format!("Failed to instantiate WASM module: {}", e)))?;
                 
                 // Create the contract instance
